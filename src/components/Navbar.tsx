@@ -25,13 +25,13 @@ const Navbar = ({ onContactModalOpen }: NavbarProps) => {
   }, []);
 
   const services = [
-    { name: "Health Systems Strengthening", href: "#services" },
-    { name: "Financial Analysis & Economics", href: "#services"},
-    { name: "Customized Research & Surveys", href: "#services" },
-    { name: "Monitoring & Evaluation (M&E)", href: "#services" },
-    { name: "Human Resource Management & Capacity Building", href: "#services" },
-    { name: "Policy & Advocacy Development", href: "#services"},
-    { name: "Project Management", href: "#services" },
+    { name: "Health Systems Strengthening", href: "#services", icon: "🏥" },
+    { name: "Financial Analysis & Economics", href: "#services", icon: "📊" },
+    { name: "Customized Research & Surveys", href: "#services", icon: "🔍" },
+    { name: "Monitoring & Evaluation (M&E)", href: "#services", icon: "📈" },
+    { name: "Human Resource Management & Capacity Building", href: "#services", icon: "👥" },
+    { name: "Policy & Advocacy Development", href: "#services", icon: "📋" },
+    { name: "Project Management", href: "#services", icon: "⚙️" },
   ];
 
   const navigation = [
@@ -85,6 +85,7 @@ const Navbar = ({ onContactModalOpen }: NavbarProps) => {
                       href={service.href}
                       className="flex items-center px-4 py-3 text-sm hover:bg-muted transition-colors"
                     >
+                      <span className="mr-3 text-lg">{service.icon}</span>
                       {service.name}
                     </a>
                   </DropdownMenuItem>
@@ -138,7 +139,6 @@ const Navbar = ({ onContactModalOpen }: NavbarProps) => {
                   className="flex items-center py-2 text-sm text-foreground hover:text-primary transition-colors"
                   onClick={() => setIsOpen(false)}
                 >
-                  <span className="mr-3">{service.icon}</span>
                   {service.name}
                 </a>
               ))}
