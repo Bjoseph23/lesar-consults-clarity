@@ -122,8 +122,8 @@ const Navbar = ({ onContactModalOpen }: NavbarProps) => {
 
       {/* Mobile Navigation */}
       <div className={`lg:hidden bg-background border-t border-border shadow-card transition-transform duration-300 ${
-        isOpen ? 'translate-x-0' : '-translate-x-full'
-      } fixed top-16 left-0 w-full h-screen overflow-y-auto z-40`}>
+        isOpen ? 'translate-x-0' : 'translate-x-full'
+      } fixed top-16 right-0 w-full h-screen overflow-y-auto z-40`}>
         <div className="px-4 py-4 space-y-4">
           {navigation.map((item) => (
             <a
