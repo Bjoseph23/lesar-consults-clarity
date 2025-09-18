@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import PartnersMarquee from "@/components/PartnersMarquee";
@@ -8,9 +8,11 @@ import FeaturedCase from "@/components/FeaturedCase";
 import ResourcesGrid from "@/components/ResourcesGrid";
 import WhyChoose from "@/components/WhyChoose";
 import Footer from "@/components/Footer";
+import ContactModal from "@/components/ContactModal";
 import ScrollTop from "@/components/ScrollTop";
 
 const Index = () => {
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
 
   // SEO optimization
   useEffect(() => {
@@ -37,12 +39,12 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Navigation */}
-      <Navbar onContactModalOpen={() => {}} />
+      <Navbar onContactModalOpen={() => setIsContactModalOpen(true)} />
 
       {/* Main Content */}
       <main id="main-content" className="relative">
         {/* Hero Section */}
-        <Hero onContactModalOpen={() => {}} />
+        <Hero onContactModalOpen={() => setIsContactModalOpen(true)} />
         
         {/* Partners Marquee */}
         <PartnersMarquee />
@@ -64,7 +66,13 @@ const Index = () => {
       </main>
 
       {/* Footer */}
-      <Footer onContactModalOpen={() => {}} />
+      <Footer onContactModalOpen={() => setIsContactModalOpen(true)} />
+
+      {/* Contact Modal */}
+      <ContactModal
+        isOpen={isContactModalOpen}
+        onClose={() => setIsContactModalOpen(false)}
+      />
 
       {/* Scroll to Top Button */}
       <ScrollTop />
