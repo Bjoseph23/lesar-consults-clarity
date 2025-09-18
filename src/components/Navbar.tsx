@@ -17,13 +17,27 @@ const Navbar = () => {
   const touchStartYRef = useRef<number | null>(null);
   const touchMovedRef = useRef(false);
 
+  // Scroll handler that respects the mobile panel state.
   useEffect(() => {
     const handleScroll = () => {
+      // If mobile menu is open, don't allow scroll to "toggle" the header off.
+      // Keep header in scrolled/blurred state while menu is open for visual consistency.
+      if (isOpen) {
+        setIsScrolled(true);
+        return;
+      }
       setIsScrolled(window.scrollY > 50);
     };
+
+    // Use passive true for performance
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    // call once to initialize
+    handleScroll();
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [isOpen]); // depends on isOpen so it sees latest value
 
   // Close on Escape
   useEffect(() => {
@@ -162,6 +176,7 @@ const Navbar = () => {
             <Button 
               onClick={() => window.location.href = '/contact'} 
               className="btn-primary"
+              aria-expanded={false}
             >
               Request a Proposal
             </Button>
@@ -174,6 +189,7 @@ const Navbar = () => {
               size="icon"
               onClick={() => setIsOpen(true)}
               aria-label="Open menu"
+              aria-expanded={isOpen}
             >
               <Menu className="h-6 w-6" />
             </Button>
@@ -184,7 +200,6 @@ const Navbar = () => {
       {/* Overlay */}
       <div
         aria-hidden={!isOpen}
-        // pointer event handlers to detect scroll vs tap
         onPointerDown={onOverlayPointerDown}
         onPointerMove={onOverlayPointerMove}
         onPointerUp={onOverlayPointerUp}
