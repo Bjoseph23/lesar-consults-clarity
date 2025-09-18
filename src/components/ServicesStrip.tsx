@@ -33,8 +33,23 @@ const ServicesStrip = () => {
   ];
 
   return (
-    <section ref={sectionRef} id="services-preview" className="py-20 bg-background">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section ref={sectionRef} id="services-preview" className="py-20 bg-background relative overflow-hidden">
+      {/* Background Graphics */}
+      <div className="absolute inset-0 opacity-40">
+        <div className="absolute top-10 left-10 w-72 h-72 bg-gradient-to-br from-primary/10 to-transparent rounded-full blur-3xl"></div>
+        <div className="absolute bottom-10 right-10 w-96 h-96 bg-gradient-to-tl from-secondary/10 to-transparent rounded-full blur-3xl"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-r from-accent/5 to-transparent rounded-full blur-2xl"></div>
+      </div>
+      
+      {/* Decorative dots pattern */}
+      <div className="absolute inset-0 opacity-20">
+        <div className="absolute top-20 right-20 w-2 h-2 bg-primary rounded-full animate-pulse"></div>
+        <div className="absolute top-40 left-20 w-1 h-1 bg-secondary rounded-full animate-pulse" style={{ animationDelay: '0.5s' }}></div>
+        <div className="absolute bottom-32 left-1/3 w-1.5 h-1.5 bg-accent rounded-full animate-pulse" style={{ animationDelay: '1s' }}></div>
+        <div className="absolute bottom-20 right-1/3 w-1 h-1 bg-primary rounded-full animate-pulse" style={{ animationDelay: '1.5s' }}></div>
+      </div>
+      
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'animate-fade-in' : 'opacity-0 translate-y-8'}`}>
           <h2 className="text-3xl md:text-4xl font-serif font-bold text-primary mb-4">
             Our Core Services
