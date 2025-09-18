@@ -86,7 +86,7 @@ const Navbar = () => {
           {/* Logo */}
           <div className="flex items-center">
             <a href="#home" className="flex items-center" aria-label="Lesar Consults home">
-              <img src="/logo.png" alt="Lesar Consults" className="h-12 w-auto" />
+              <img src="/lesar-logoo.png" alt="Lesar Consults" className="h-12 w-auto" />
             </a>
           </div>
 
