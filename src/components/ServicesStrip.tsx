@@ -1,6 +1,6 @@
+import { Heart, TrendingUp, Search, BarChart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useStaggeredAnimation } from "@/hooks/useScrollAnimation";
-import { Heart, TrendingUp, BarChart3, Search } from "lucide-react";
 
 const ServicesStrip = () => {
   const { elementRef: sectionRef, isVisible, visibleItems } = useStaggeredAnimation(6, 150);
@@ -19,7 +19,7 @@ const ServicesStrip = () => {
       href: "#services"
     },
     {
-      icon: BarChart3,
+      icon: BarChart,
       title: "Monitoring & Evaluation",
       description: "Program evaluation, quality impact assessments, baseline and end-term evaluations with interactive dashboards.",
       href: "#services"
@@ -46,15 +46,16 @@ const ServicesStrip = () => {
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {services.map((service, index) => {
+            const Icon = service.icon;
             return (
               <div
                 key={service.title}
-                className={`card-service group transition-all duration-1000 flex flex-col h-full ${visibleItems.includes(index) ? 'animate-fade-in' : 'opacity-0 translate-y-8'}`}
+                className={`card-service group transition-all duration-150 ${visibleItems.includes(index) ? 'animate-fade-in' : 'opacity-0 translate-y-8'}`}
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <div className="mb-4">
-                  <div className="w-12 h-12 bg-muted rounded-lg flex items-center justify-center">
-                    <service.icon className="w-6 h-6 text-primary" />
+                  <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                    <Icon className="h-6 w-6 text-primary" />
                   </div>
                 </div>
                 
@@ -62,22 +63,20 @@ const ServicesStrip = () => {
                   {service.title}
                 </h3>
                 
-                <p className="text-muted-foreground text-sm mb-4 leading-relaxed flex-grow">
+                <p className="text-muted-foreground text-sm mb-4 leading-relaxed">
                   {service.description}
                 </p>
                 
-                <div className="mt-auto">
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="text-primary hover:text-white hover:bg-primary px-3 py-2 h-auto font-medium transition-all duration-300"
-                    asChild
-                  >
-                    <a href={service.href}>
-                      Learn more →
-                    </a>
-                  </Button>
-                </div>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="text-primary hover:text-primary/80 p-0 h-auto font-medium"
+                  asChild
+                >
+                  <a href={service.href}>
+                    Learn more →
+                  </a>
+                </Button>
               </div>
             );
           })}
