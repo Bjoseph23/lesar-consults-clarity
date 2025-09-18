@@ -1,8 +1,16 @@
-# Welcome to your Lovable project
+# Lesar Consults - Contact Page
 
 ## Project info
 
 **URL**: https://lovable.dev/projects/347d8fc5-f65c-4639-911e-26a053a35b94
+
+## Contact Page Setup
+
+The contact page features a multi-step wizard form at `/contact`. To configure:
+
+1. **Calendly Integration**: Update `src/components/contact/CalendlyEmbed.tsx` with your Calendly embed code
+2. **Contact Details**: Edit `src/data/contact-seed.ts` for contact info and form options  
+3. **Backend**: Add API calls in `ContactWizard.tsx` handleSubmit function for form processing
 
 ## How can I edit this code?
 

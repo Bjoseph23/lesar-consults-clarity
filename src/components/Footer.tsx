@@ -2,11 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Mail, Phone, MapPin, ExternalLink } from "lucide-react";
 
-interface FooterProps {
-  onContactModalOpen: () => void;
-}
-
-const Footer = ({ onContactModalOpen }: FooterProps) => {
+const Footer = () => {
   const navigation = {
     main: [
       { name: "Home", href: "#home" },
@@ -56,7 +52,7 @@ const Footer = ({ onContactModalOpen }: FooterProps) => {
               +254 710 715 132
             </div>
             <Button
-              onClick={onContactModalOpen}
+              onClick={() => window.location.href = '/contact'}
               variant="secondary"
               className="bg-white text-accent hover:bg-white/90"
             >

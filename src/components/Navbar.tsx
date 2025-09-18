@@ -8,11 +8,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-interface NavbarProps {
-  onContactModalOpen: () => void;
-}
-
-const Navbar = ({ onContactModalOpen }: NavbarProps) => {
+const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const panelRef = useRef<HTMLDivElement | null>(null);
@@ -110,7 +106,10 @@ const Navbar = ({ onContactModalOpen }: NavbarProps) => {
               );
             })}
 
-            <Button onClick={onContactModalOpen} className="btn-primary">
+            <Button 
+              onClick={() => window.location.href = '/contact'} 
+              className="btn-primary"
+            >
               Request a Proposal
             </Button>
           </div>
@@ -194,7 +193,7 @@ const Navbar = ({ onContactModalOpen }: NavbarProps) => {
           <div className="mt-4">
             <Button
               onClick={() => {
-                onContactModalOpen();
+                window.location.href = '/contact';
                 setIsOpen(false);
               }}
               className="btn-primary w-full"

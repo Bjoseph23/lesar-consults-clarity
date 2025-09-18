@@ -2,11 +2,7 @@ import { Button } from "@/components/ui/button";
 import { useEffect, useRef } from "react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
-interface HeroProps {
-  onContactModalOpen: () => void;
-}
-
-const Hero = ({ onContactModalOpen }: HeroProps) => {
+const Hero = () => {
   const imageRef = useRef<HTMLImageElement>(null);
   const { elementRef: heroRef, isVisible } = useScrollAnimation({ threshold: 0.2 });
 
@@ -54,10 +50,10 @@ const Hero = ({ onContactModalOpen }: HeroProps) => {
             {/* Call-to-Action Buttons */}
             <div className={`flex flex-col gap-4 max-w-md transition-all duration-1000 delay-700 ${isVisible ? 'animate-fade-in' : 'opacity-0 translate-y-8'}`}>
               <Button
-                onClick={onContactModalOpen}
+                onClick={() => window.location.href = '/contact'}
                 className="bg-dark-red hover:bg-dark-red/90 text-white text-lg px-8 py-4 w-full sm:w-auto"
                 size="lg"
-                aria-label="Request a proposal - opens contact form"
+                aria-label="Request a proposal - navigates to contact page"
               >
                 Request a Proposal
               </Button>
