@@ -1,6 +1,4 @@
-# Lesar Consults Website
-
-A professional consulting firm website with comprehensive contact page built with React, TypeScript, and Tailwind CSS.
+# Welcome to your Lovable project
 
 ## Project info
 
@@ -73,72 +71,3 @@ Yes, you can!
 To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
 
 Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
-
-## Contact Page Configuration
-
-### Calendly Integration
-
-To add your Calendly booking widget to the contact page:
-
-1. Open `src/components/contact/CalendlyEmbed.tsx`
-2. Find the comment `// TODO: Paste your Calendly embed script or iframe here`
-3. Replace the placeholder with your actual Calendly embed code
-
-Example Calendly embed:
-```tsx
-<div 
-  className="calendly-inline-widget" 
-  data-url="https://calendly.com/your-username/consultation" 
-  style={{minWidth:'320px',height:'630px'}}
-></div>
-<script 
-  type="text/javascript" 
-  src="https://assets.calendly.com/assets/external/widget.js" 
-  async
-></script>
-```
-
-### Contact Information
-
-Update contact details in `src/data/contact-seed.ts`:
-
-- Email address
-- Phone number
-- Office address
-- Office hours
-- Social media links
-
-### Privacy Policy
-
-Update the privacy policy link in the contact form:
-
-1. Open `src/components/contact/ContactForm.tsx`
-2. Find the privacy policy link in the consent checkbox
-3. Replace `href="#"` with your actual privacy policy URL
-
-## Contact Form Features
-
-- **Real-time Validation**: Inline error messages and field validation
-- **File Upload**: Support for PDF and DOCX files up to 20MB
-- **Multi-select Services**: Choose from 7 predefined services
-- **Responsive Design**: Works on all device sizes
-- **Accessibility**: Full keyboard navigation and screen reader support
-- **Success State**: Confirmation page with submission summary
-- **URL Prefilling**: Support for ?service= and ?source= query parameters
-
-## Form Fields
-
-### Required Fields
-- Full Name
-- Organization/Institution
-- Email Address
-- Phone Number
-- Services of Interest
-- Project Description
-- Consent Checkbox
-
-### Optional Fields
-- Role/Job Title
-- Estimated Budget (KSh ranges)
-- Proposed Timeframe
-- File Upload (PDF/DOCX, max 20MB)

@@ -110,8 +110,8 @@ const Navbar = ({ onContactModalOpen }: NavbarProps) => {
               );
             })}
 
-            <Button asChild className="btn-primary">
-              <a href="/contact">Request a Proposal</a>
+            <Button onClick={onContactModalOpen} className="btn-primary">
+              Request a Proposal
             </Button>
           </div>
 
@@ -193,12 +193,13 @@ const Navbar = ({ onContactModalOpen }: NavbarProps) => {
 
           <div className="mt-4">
             <Button
-              asChild
+              onClick={() => {
+                onContactModalOpen();
+                setIsOpen(false);
+              }}
               className="btn-primary w-full"
             >
-              <a href="/contact" onClick={() => setIsOpen(false)}>
-                Request a Proposal
-              </a>
+              Request a Proposal
             </Button>
           </div>
 
