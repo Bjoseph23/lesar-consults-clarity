@@ -21,7 +21,7 @@ const Navbar = ({ onContactModalOpen }: NavbarProps) => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -65,9 +65,9 @@ const Navbar = ({ onContactModalOpen }: NavbarProps) => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-background/95 backdrop-blur-md shadow-card" : "bg-transparent"
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? "bg-background/70 backdrop-blur-lg shadow-card/20" : "bg-transparent"}`}
+      // small inline style to smooth backdrop-filter transitions in supporting browsers
+      style={{ WebkitBackdropFilter: isScrolled ? "saturate(120%) blur(8px)" : undefined, backdropFilter: isScrolled ? "saturate(120%) blur(8px)" : undefined }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
@@ -134,9 +134,7 @@ const Navbar = ({ onContactModalOpen }: NavbarProps) => {
       <div
         aria-hidden={!isOpen}
         onClick={() => setIsOpen(false)}
-        className={`fixed inset-0 bg-black/40 z-40 transition-opacity duration-300 ${
-          isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
-        }`}
+        className={`fixed inset-0 bg-black/40 z-40 transition-opacity duration-300 ${isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
       />
 
       {/* Panel */}
@@ -145,9 +143,7 @@ const Navbar = ({ onContactModalOpen }: NavbarProps) => {
         role="dialog"
         aria-modal="true"
         aria-label="Mobile navigation"
-        className={`fixed top-0 right-0 h-full w-full max-w-xs z-50 bg-background shadow-elevate transform transition-transform duration-300 ${
-          isOpen ? "translate-x-0" : "translate-x-full"
-        }`}
+        className={`fixed top-0 right-0 h-full w-full max-w-xs z-50 bg-background shadow-elevate transform transition-transform duration-300 ${isOpen ? "translate-x-0" : "translate-x-full"}`}
       >
         <div className="flex items-center justify-between px-4 py-4 border-b border-border">
           <img src="/logo.png" alt="Lesar Consults" className="h-8 w-auto" />
