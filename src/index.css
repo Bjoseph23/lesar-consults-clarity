@@ -124,18 +124,11 @@
   
   /* Card Components */
   .card-elevated {
-    @apply bg-card border border-border rounded-xl p-6 shadow-card;
-    transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    @apply bg-card border border-border rounded-xl p-6 shadow-card hover:shadow-elegant transition-all duration-300 hover:-translate-y-1;
   }
   
   .card-service {
     @apply card-elevated hover:border-primary/20 cursor-pointer;
-    transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  
-  .card-service:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-elegant);
   }
   
   /* Gradient Backgrounds */
