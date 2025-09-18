@@ -119,10 +119,10 @@ const Navbar = () => {
             <Button
               variant="ghost"
               size="icon"
-              onClick={() => setIsOpen(true)}
-              aria-label="Open menu"
+              onClick={() => setIsOpen(!isOpen)}
+              aria-label={isOpen ? "Close menu" : "Open menu"}
             >
-              <Menu className="h-6 w-6" />
+              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </Button>
           </div>
         </div>
@@ -156,7 +156,7 @@ const Navbar = () => {
           </Button>
         </div>
 
-        <nav className="px-4 py-6 space-y-6 overflow-y-auto h-[calc(100%-72px)]">
+        <nav className="px-4 py-6 space-y-6 overflow-y-auto h-[calc(100%-72px)]" style={{ touchAction: 'pan-y' }}>
           {navigation.map((item) => {
             if (item.isDropdown) {
               return (
