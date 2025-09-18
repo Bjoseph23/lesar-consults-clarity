@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const PartnersMarquee = () => {
   const marqueeRef = useRef<HTMLDivElement | null>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
   const resetTimerRef = useRef<number | null>(null);
   const [animationSpeed, setAnimationSpeed] = useState(30);
+  const [paused, setPaused] = useState(false);
 
   const partners = [
     { name: "USAID", file: "usaid-logo.png", featured: false },
@@ -18,82 +19,91 @@ const PartnersMarquee = () => {
     { name: "Wellcome", file: "welcome-logo.png", featured: false },
   ];
 
+  // compute translation distance: width of the first repeated set
+  const computeDistance = () => {
+    const marquee = marqueeRef.current;
+    if (!marquee) return 0;
+    const firstSet = marquee.children[0] as HTMLElement | undefined;
+    if (!firstSet) return 0;
+    const rect = firstSet.getBoundingClientRect();
+    return Math.round(rect.width);
+  };
+
   useEffect(() => {
     const marquee = marqueeRef.current;
-    if (!marquee) return;
+    const container = containerRef.current;
+    if (!marquee || !container) return;
 
+    // handle reduced motion preference
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
     const handleReducedMotion = () => {
-      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (prefersReducedMotion) {
-        marquee.style.animationPlayState = 'paused';
+      const prefersReduced = mq.matches;
+      if (prefersReduced) {
+        marquee.style.animationPlayState = "paused";
+        setPaused(true);
       } else {
-        // ensure it runs if user toggles preference off
-        marquee.style.animationPlayState = 'running';
+        marquee.style.animationPlayState = "running";
+        setPaused(false);
       }
     };
-
     handleReducedMotion();
-    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
-    // Some browsers require addEventListener; fall back to addListener if missing
     if (typeof mq.addEventListener === "function") {
-      mq.addEventListener('change', handleReducedMotion);
+      mq.addEventListener("change", handleReducedMotion);
     } else if (typeof (mq as any).addListener === "function") {
       (mq as any).addListener(handleReducedMotion);
     }
 
+    // compute --marquee-translate and set as CSS var
+    const applyDistance = () => {
+      const distance = computeDistance();
+      // set CSS variable on marquee container
+      container.style.setProperty("--marquee-translate", `-${distance}px`);
+      // also force repaint so animation uses updated value
+      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+      marquee.offsetHeight;
+    };
+
+    // initial apply
+    applyDistance();
+
+    // update on resize (debounced)
+    let resizeTimer: number | null = null;
+    const handleResize = () => {
+      if (resizeTimer) window.clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(() => {
+        applyDistance();
+        resizeTimer = null;
+      }, 150);
+    };
+    window.addEventListener("resize", handleResize);
+
     return () => {
       if (typeof mq.removeEventListener === "function") {
-        mq.removeEventListener('change', handleReducedMotion);
+        mq.removeEventListener("change", handleReducedMotion);
       } else if (typeof (mq as any).removeListener === "function") {
         (mq as any).removeListener(handleReducedMotion);
       }
+      window.removeEventListener("resize", handleResize);
+      if (resizeTimer) window.clearTimeout(resizeTimer);
     };
   }, []);
 
+  // Keep animation duration in sync with state and respect paused
   useEffect(() => {
-    if (marqueeRef.current) {
-      // directly update the CSS animation duration
-      marqueeRef.current.style.animationDuration = `${animationSpeed}s`;
-      // ensure it is playing when speed is changed
-      marqueeRef.current.style.animationPlayState = 'running';
-    }
-  }, [animationSpeed]);
+    const container = containerRef.current;
+    if (!container) return;
+    container.style.setProperty("animation-duration", `${animationSpeed}s`);
+    container.style.setProperty("animation-play-state", paused ? "paused" : "running");
+  }, [animationSpeed, paused]);
 
+  // removed button logic — but keep the reset timer utility in case you want to reuse
   useEffect(() => {
     return () => {
-      // cleanup any pending timers on unmount
       if (resetTimerRef.current) {
         clearTimeout(resetTimerRef.current);
       }
     };
   }, []);
-
-  const scheduleReset = () => {
-    // clear previous timer if any
-    if (resetTimerRef.current) {
-      clearTimeout(resetTimerRef.current);
-    }
-    // reset after 2s (2000ms)
-    resetTimerRef.current = window.setTimeout(() => {
-      setAnimationSpeed(30);
-      resetTimerRef.current = null;
-    }, 2000);
-  };
-
-  const handleSpeedLeft = () => {
-    // Make left arrow speed up marquee (lower duration) — ensure min 5s
-    setAnimationSpeed(prev => Math.max(5, prev - 5));
-    // ensure CSS animation is running
-    if (marqueeRef.current) marqueeRef.current.style.animationPlayState = 'running';
-    scheduleReset();
-  };
-
-  const handleSpeedRight = () => {
-    // Make right arrow slow marquee (increase duration) — ensure max is kept reasonable
-    setAnimationSpeed(prev => Math.min(60, prev + 5));
-    if (marqueeRef.current) marqueeRef.current.style.animationPlayState = 'running';
-    scheduleReset();
-  };
 
   return (
     <>
@@ -103,75 +113,119 @@ const PartnersMarquee = () => {
           Our Partners:
         </h2>
       </div>
-      
+
       <section className="bg-cream/60 py-12 overflow-hidden" aria-label="Our partners and funders">
+        <div className="relative max-w-7xl mx-auto">
+          <div className="sr-only">Logos of partners and funders</div>
 
-      <div className="relative max-w-7xl mx-auto">
-        <div className="sr-only">Logos of partners and funders</div>
-        
-        {/* Left Arrow */}
-        <button
-          onClick={handleSpeedLeft}
-          className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-white/80 rounded-full p-2 shadow-md transition-all duration-200"
-          aria-label="Speed up marquee left"
-        >
-          <ChevronLeft className="w-5 h-5 text-primary" />
-        </button>
-
-        {/* Right Arrow */}
-        <button
-          onClick={handleSpeedRight}
-          className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-white/80 rounded-full p-2 shadow-md transition-all duration-200"
-          aria-label="Speed up marquee right"
-        >
-          <ChevronRight className="w-5 h-5 text-primary" />
-        </button>
-
-        {/* Marquee Container */}
-        <div className="px-16">
-          <div 
-            ref={marqueeRef}
-            className="flex animate-marquee"
-            style={{ animationDuration: `${animationSpeed}s` }}
-          >
-            {/* First set of logos */}
-            <div className="flex items-center gap-12 min-w-max justify-start">
-              {partners.map((partner, index) => (
-                <div
-                  key={`set1-${index}`}
-                  className="flex-shrink-0"
-                  aria-label={`${partner.name} logo`}
-                >
-                  <img
-                    src={`/logos/${partner.file}`}
-                    alt={partner.name}
-                    className={`${partner.featured ? 'h-16 md:h-20' : 'h-9 md:h-12'} object-contain filter grayscale opacity-90 mx-3`}
-                    loading="lazy"
-                  />
+          {/* Marquee Container */}
+          <div className="px-16">
+            {/* containerRef is where we place the animation; marqueeRef holds the duplicated sets */}
+            <div
+              ref={containerRef}
+              className="overflow-hidden"
+              // CSS variables used by the internal keyframes (see style tag below)
+              style={{
+                // default animation-duration will be overridden by useEffect
+                animationDuration: `${animationSpeed}s`,
+              }}
+            >
+              <div
+                ref={marqueeRef}
+                className="flex will-change-transform"
+                // keep the original classes; animation is defined in the style tag below and uses --marquee-translate
+                style={{
+                  // NOTE: actual animation applied via the CSS rule below that targets .partners-marquee-inner
+                }}
+              >
+                {/* First set of logos */}
+                <div className="flex items-center gap-12 min-w-max justify-start partners-marquee-inner">
+                  {partners.map((partner, index) => (
+                    <div
+                      key={`set1-${index}`}
+                      className="flex-shrink-0"
+                      aria-label={`${partner.name} logo`}
+                    >
+                      <img
+                        src={`/logos/${partner.file}`}
+                        alt={partner.name}
+                        className={`${
+                          partner.featured ? "h-16 md:h-20" : "h-9 md:h-12"
+                        } object-contain filter grayscale opacity-90 mx-3`}
+                        loading="lazy"
+                      />
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-            
-            {/* Duplicate set for seamless loop - with gap to prevent overlap */}
-            <div className="flex items-center gap-12 min-w-max justify-start ml-6">
-              {partners.map((partner, index) => (
-                <div
-                  key={`set2-${index}`}
-                  className="flex-shrink-0"
-                  aria-label={`${partner.name} logo`}
-                >
-                  <img
-                    src={`/logos/${partner.file}`}
-                    alt={partner.name}
-                    className={`${partner.featured ? 'h-16 md:h-20' : 'h-9 md:h-12'} object-contain filter grayscale opacity-90 mx-3`}
-                    loading="lazy"
-                  />
+
+                {/* Duplicate set for seamless loop */}
+                <div className="flex items-center gap-12 min-w-max justify-start partners-marquee-inner">
+                  {partners.map((partner, index) => (
+                    <div
+                      key={`set2-${index}`}
+                      className="flex-shrink-0"
+                      aria-label={`${partner.name} logo`}
+                    >
+                      <img
+                        src={`/logos/${partner.file}`}
+                        alt={partner.name}
+                        className={`${
+                          partner.featured ? "h-16 md:h-20" : "h-9 md:h-12"
+                        } object-contain filter grayscale opacity-90 mx-3`}
+                        loading="lazy"
+                      />
+                    </div>
+                  ))}
                 </div>
-              ))}
+              </div>
             </div>
           </div>
         </div>
-      </div>
+
+        {/* Inline styles for marquee animation */}
+        <style jsx>{`
+          /* container uses the CSS variable --marquee-translate (negative px) set from JS */
+          .partners-marquee-inner {
+            /* nothing here — each inner set holds logos */
+          }
+
+          /* animate the parent flex that contains the two sets */
+          /* The animation moves from 0 to the negative width of one set (var --marquee-translate) */
+          @keyframes partners-marquee {
+            from {
+              transform: translateX(0);
+            }
+            to {
+              transform: translateX(var(--marquee-translate, -1000px));
+            }
+          }
+
+          /* Apply animation to the flex wrapper (the direct child of the overflow-hidden container) */
+          .partners-marquee-inner:first-child {
+            /* no-op */
+          }
+          /* We put the animation on the flex itself via the inline container wrapper rules */
+          div[style] > div[ref] {
+            /* no-op for TSX parsing; kept intentionally blank */
+          }
+
+          /* Instead target the marquee wrapper via a more general selector: */
+          .overflow-hidden > .flex {
+            animation-name: partners-marquee;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+            animation-duration: var(--animation-duration, 30s);
+            animation-play-state: running;
+          }
+
+          /* Small responsiveness to keep logos visible */
+          @media (max-width: 768px) {
+            .px-16 {
+              padding-left: 1rem;
+              padding-right: 1rem;
+            }
+          }
+        `}</style>
       </section>
     </>
   );
