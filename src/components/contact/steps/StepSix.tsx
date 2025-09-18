@@ -21,7 +21,7 @@ const StepSix = ({ formData, updateFormData }: StepSixProps) => {
       </div>
 
       {/* Privacy Section */}
-      <div className="bg-muted/30 rounded-lg p-6 space-y-4">
+      <div className="bg-muted/60 rounded-lg p-6 space-y-4">
         <div className="flex items-center space-x-3">
           <Shield className="h-6 w-6 text-primary" />
           <h3 className="font-semibold text-navy">Privacy & Consent</h3>
@@ -59,28 +59,6 @@ const StepSix = ({ formData, updateFormData }: StepSixProps) => {
         </div>
       </div>
 
-      {/* Summary */}
-      <div className="bg-cream/30 rounded-lg p-6">
-        <h3 className="font-semibold text-navy mb-3">Request Summary</h3>
-        <div className="space-y-2 text-sm">
-          <div className="flex justify-between">
-            <span className="text-muted-foreground">Name:</span>
-            <span>{formData.fullName}</span>
-          </div>
-          <div className="flex justify-between">
-            <span className="text-muted-foreground">Organization:</span>
-            <span>{formData.organization}</span>
-          </div>
-          <div className="flex justify-between">
-            <span className="text-muted-foreground">Services:</span>
-            <span>{formData.services?.length || 0} selected</span>
-          </div>
-          <div className="flex justify-between">
-            <span className="text-muted-foreground">Timeframe:</span>
-            <span>{formData.timeframe || "Not specified"}</span>
-          </div>
-        </div>
-      </div>
 
       <div className="text-center pt-4">
         <p className="text-sm text-muted-foreground">

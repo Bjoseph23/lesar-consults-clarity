@@ -8,6 +8,7 @@ import StepThree from "./steps/StepThree";
 import StepFour from "./steps/StepFour";
 import StepFive from "./steps/StepFive";
 import StepSix from "./steps/StepSix";
+import { useMobileKeyboard } from "@/hooks/useMobileKeyboard";
 
 interface FormData {
   fullName: string;
@@ -33,6 +34,9 @@ interface ContactWizardProps {
 const ContactWizard = ({ onSubmit }: ContactWizardProps) => {
   const [currentStep, setCurrentStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  
+  // Handle mobile keyboard
+  useMobileKeyboard();
   const [formData, setFormData] = useState<FormData>({
     fullName: "",
     organization: "",
