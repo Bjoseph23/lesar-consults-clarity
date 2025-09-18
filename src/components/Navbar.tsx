@@ -215,7 +215,7 @@ const Navbar = () => {
         role="dialog"
         aria-modal="true"
         aria-label="Mobile navigation"
-        className={`fixed top-0 right-0 h-full w-full max-w-xs z-50 bg-background shadow-elevate transform transition-transform duration-300 ${isOpen ? "translate-x-0" : "translate-x-full"}`}
+        className={`fixed top-0 right-0 h-full w-full z-50 bg-background shadow-elevate transform transition-transform duration-300 ${isOpen ? "translate-x-0" : "translate-x-full"}`}
       >
         <div className="flex items-center justify-between px-4 py-4 border-b border-border">
           <img src="/logo.png" alt="Lesar Consults" className="h-8 w-auto" />
