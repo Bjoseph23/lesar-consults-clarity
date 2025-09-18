@@ -18,6 +18,7 @@ const Navbar = () => {
       setIsScrolled(window.scrollY > 50);
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll(); // initialize
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -71,16 +72,29 @@ const Navbar = () => {
     { name: "Projects", href: "#projects" },
   ];
 
+  // compute nav background class:
+  // - if menu open => strong opaque background
+  // - else if scrolled => semi-transparent with blur
+  // - else transparent
+  const navBgClass = isOpen
+    ? "bg-background/95 backdrop-blur-lg shadow-card/40"
+    : isScrolled
+    ? "bg-background/70 backdrop-blur-lg shadow-card/20"
+    : "bg-transparent";
+
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? "bg-background/70 backdrop-blur-lg shadow-card/20" : "bg-transparent"}`}
-      style={{ WebkitBackdropFilter: isScrolled ? "saturate(120%) blur(8px)" : undefined, backdropFilter: isScrolled ? "saturate(120%) blur(8px)" : undefined }}
+      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${navBgClass}`}
+      style={{
+        WebkitBackdropFilter: (isOpen || isScrolled) ? "saturate(120%) blur(8px)" : undefined,
+        backdropFilter: (isOpen || isScrolled) ? "saturate(120%) blur(8px)" : undefined,
+      }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex items-center">
-            <a href="#home" className="flex items-center">
+            <a href="#home" className="flex items-center" aria-label="Lesar Consults home">
               <img src="/logo.png" alt="Lesar Consults" className="h-12 w-auto" />
             </a>
           </div>
@@ -120,6 +134,7 @@ const Navbar = () => {
             <Button 
               onClick={() => window.location.href = '/contact'} 
               className="btn-primary"
+              aria-expanded={false}
             >
               Request a Proposal
             </Button>
@@ -130,7 +145,7 @@ const Navbar = () => {
             <Button
               variant="ghost"
               size="icon"
-              onClick={() => setIsOpen(prev => !prev)}
+              onClick={() => setIsOpen((prev) => !prev)}
               aria-label={isOpen ? "Close menu" : "Open menu"}
               aria-expanded={isOpen}
             >
@@ -140,24 +155,23 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Overlay (only visible when open) */}
+      {/* Overlay (z-50 so it sits above nav) */}
       <div
         aria-hidden={!isOpen}
         onClick={() => setIsOpen(false)}
-        className={`fixed inset-0 bg-black/40 z-40 transition-opacity duration-300 ${isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
+        className={`fixed inset-0 bg-black/40 z-50 transition-opacity duration-300 ${isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
       />
 
-      {/* Full-screen mobile panel/container */}
+      {/* Full-screen mobile panel/container (z-60 so it's above everything) */}
       <div
         ref={panelRef}
         role="dialog"
         aria-modal="true"
         aria-label="Mobile navigation"
-        className={`fixed inset-0 z-50 pointer-events-none`}
+        className={`fixed inset-0 z-60 pointer-events-none`}
       >
-        {/* Right-side drawer box (we keep it visually as a drawer but the outer container ensures full-screen) */}
         <aside
-          className={`pointer-events-auto absolute top-0 right-0 h-full w-full sm:max-w-md md:max-w-sm bg-white dark:bg-[#FAEED4] shadow-elevate transform transition-transform duration-300 ${isOpen ? "translate-x-0" : "translate-x-full"}`}
+          className={`pointer-events-auto absolute top-0 right-0 h-full w-full sm:max-w-md md:max-w-sm bg-white shadow-elevate transform transition-transform duration-300 ${isOpen ? "translate-x-0" : "translate-x-full"}`}
         >
           <div className="flex items-center justify-between px-4 py-4 border-b border-border">
             <img src="/logo.png" alt="Lesar Consults" className="h-10 w-auto" />
@@ -171,7 +185,6 @@ const Navbar = () => {
             </Button>
           </div>
 
-          {/* Scrollable nav content - full height */}
           <nav className="px-4 py-6 space-y-6 overflow-y-auto h-full min-h-screen">
             {navigation.map((item) => {
               if (item.isDropdown) {
@@ -230,7 +243,7 @@ const Navbar = () => {
       {/* Skip to content link for accessibility */}
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-primary text-primary-foreground px-4 py-2 rounded-md z-50"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-primary text-primary-foreground px-4 py-2 rounded-md z-70"
       >
         Skip to content
       </a>
