@@ -61,7 +61,7 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? "bg-background/70 backdrop-blur-lg shadow-card/20" }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? "bg-background/70 backdrop-blur-lg shadow-card/20" : "bg-white"}`}
       // small inline style to smooth backdrop-filter transitions in supporting browsers
       style={{ WebkitBackdropFilter: isScrolled ? "saturate(120%) blur(8px)" : undefined, backdropFilter: isScrolled ? "saturate(120%) blur(8px)" : undefined }}
     >
