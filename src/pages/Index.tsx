@@ -1,12 +1,77 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState, useEffect } from "react";
+import Navbar from "@/components/Navbar";
+import Hero from "@/components/Hero";
+import ServicesStrip from "@/components/ServicesStrip";
+import Counters from "@/components/Counters";
+import FeaturedCase from "@/components/FeaturedCase";
+import ResourcesGrid from "@/components/ResourcesGrid";
+import WhyChoose from "@/components/WhyChoose";
+import Footer from "@/components/Footer";
+import ContactModal from "@/components/ContactModal";
+import ScrollTop from "@/components/ScrollTop";
 
 const Index = () => {
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+
+  // SEO optimization
+  useEffect(() => {
+    document.title = "Lesar Consults Ltd - Health Systems, Economics & Analytics Consultancy";
+    
+    // Meta description
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', 'Premier data, research and analytics consultancy firm specializing in health systems strengthening, financial analysis, monitoring & evaluation across East Africa. Evidence-based solutions for sustainable impact.');
+    }
+
+    // Open Graph
+    const ogTitle = document.querySelector('meta[property="og:title"]');
+    if (ogTitle) {
+      ogTitle.setAttribute('content', 'Lesar Consults Ltd - Demystifying Opinions in Health Systems & Economics');
+    }
+
+    const ogDescription = document.querySelector('meta[property="og:description"]');
+    if (ogDescription) {
+      ogDescription.setAttribute('content', 'Premier consultancy firm delivering evidence-based solutions in health systems, economics, and analytics across East Africa and beyond.');
+    }
+  }, []);
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen bg-background">
+      {/* Navigation */}
+      <Navbar onContactModalOpen={() => setIsContactModalOpen(true)} />
+
+      {/* Main Content */}
+      <main id="main-content" className="relative">
+        {/* Hero Section */}
+        <Hero onContactModalOpen={() => setIsContactModalOpen(true)} />
+        
+        {/* Services Overview */}
+        <ServicesStrip />
+        
+        {/* Impact Numbers */}
+        <Counters />
+        
+        {/* Featured Case Study */}
+        <FeaturedCase />
+        
+        {/* Resources Section */}
+        <ResourcesGrid />
+        
+        {/* Why Choose Lesar */}
+        <WhyChoose />
+      </main>
+
+      {/* Footer */}
+      <Footer onContactModalOpen={() => setIsContactModalOpen(true)} />
+
+      {/* Contact Modal */}
+      <ContactModal
+        isOpen={isContactModalOpen}
+        onClose={() => setIsContactModalOpen(false)}
+      />
+
+      {/* Scroll to Top Button */}
+      <ScrollTop />
     </div>
   );
 };
