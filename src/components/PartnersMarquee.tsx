@@ -3,7 +3,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const PartnersMarquee = () => {
   const marqueeRef = useRef<HTMLDivElement>(null);
-  const [isPaused, setIsPaused] = useState(false);
+  const [animationSpeed, setAnimationSpeed] = useState(30);
 
   const partners = [
     { name: "USAID", file: "usaid-logo.png", featured: false },
@@ -24,7 +24,7 @@ const PartnersMarquee = () => {
     const handleReducedMotion = () => {
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (prefersReducedMotion) {
-        setIsPaused(true);
+        marquee.style.animationPlayState = 'paused';
       }
     };
 
@@ -36,26 +36,24 @@ const PartnersMarquee = () => {
     };
   }, []);
 
-  const handleScrollLeft = () => {
+  useEffect(() => {
     if (marqueeRef.current) {
-      marqueeRef.current.style.animationDirection = 'reverse';
-      setTimeout(() => {
-        if (marqueeRef.current) {
-          marqueeRef.current.style.animationDirection = 'normal';
-        }
-      }, 1000);
+      marqueeRef.current.style.animationDuration = `${animationSpeed}s`;
     }
+  }, [animationSpeed]);
+
+  const handleSpeedLeft = () => {
+    setAnimationSpeed(prev => Math.max(5, prev - 5)); // Speed up (lower duration)
+    setTimeout(() => {
+      setAnimationSpeed(30); // Reset to normal speed after 2 seconds
+    }, 2000);
   };
 
-  const handleScrollRight = () => {
-    if (marqueeRef.current) {
-      marqueeRef.current.style.animationDuration = '15s';
-      setTimeout(() => {
-        if (marqueeRef.current) {
-          marqueeRef.current.style.animationDuration = '30s';
-        }
-      }, 1000);
-    }
+  const handleSpeedRight = () => {
+    setAnimationSpeed(prev => Math.max(5, prev - 5)); // Speed up (lower duration)
+    setTimeout(() => {
+      setAnimationSpeed(30); // Reset to normal speed after 2 seconds
+    }, 2000);
   };
 
   return (
@@ -72,18 +70,18 @@ const PartnersMarquee = () => {
         
         {/* Left Arrow */}
         <button
-          onClick={handleScrollLeft}
-          className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-white/80 hover:bg-white rounded-full p-2 shadow-md transition-all duration-200 hover:scale-110"
-          aria-label="Scroll partners left"
+          onClick={handleSpeedLeft}
+          className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-white/80 rounded-full p-2 shadow-md transition-all duration-200"
+          aria-label="Speed up marquee left"
         >
           <ChevronLeft className="w-5 h-5 text-primary" />
         </button>
 
         {/* Right Arrow */}
         <button
-          onClick={handleScrollRight}
-          className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-white/80 hover:bg-white rounded-full p-2 shadow-md transition-all duration-200 hover:scale-110"
-          aria-label="Scroll partners right"
+          onClick={handleSpeedRight}
+          className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-white/80 rounded-full p-2 shadow-md transition-all duration-200"
+          aria-label="Speed up marquee right"
         >
           <ChevronRight className="w-5 h-5 text-primary" />
         </button>
@@ -92,26 +90,21 @@ const PartnersMarquee = () => {
         <div className="px-16">
           <div 
             ref={marqueeRef}
-            className={`flex ${isPaused ? '' : 'animate-marquee'} hover:pause-animation focus-within:pause-animation`}
-            onMouseEnter={() => setIsPaused(true)}
-            onMouseLeave={() => setIsPaused(false)}
+            className="flex animate-marquee"
+            style={{ animationDuration: `${animationSpeed}s` }}
           >
             {/* First set of logos */}
             <div className="flex items-center gap-12 min-w-full justify-between">
               {partners.map((partner, index) => (
                 <div
                   key={`set1-${index}`}
-                  className="flex-shrink-0 group cursor-pointer"
-                  tabIndex={0}
-                  title={partner.name}
+                  className="flex-shrink-0"
                   aria-label={`${partner.name} logo`}
                 >
                   <img
                     src={`/logos/${partner.file}`}
                     alt={partner.name}
-                    className={`${partner.featured ? 'h-16 md:h-20' : 'h-9 md:h-12'} object-contain filter grayscale opacity-90 
-                             group-hover:scale-103 group-focus:scale-103 transition-transform duration-200
-                             mx-3`}
+                    className={`${partner.featured ? 'h-16 md:h-20' : 'h-9 md:h-12'} object-contain filter grayscale opacity-90 mx-3`}
                     loading="lazy"
                   />
                 </div>
@@ -123,17 +116,13 @@ const PartnersMarquee = () => {
               {partners.map((partner, index) => (
                 <div
                   key={`set2-${index}`}
-                  className="flex-shrink-0 group cursor-pointer"
-                  tabIndex={0}
-                  title={partner.name}
+                  className="flex-shrink-0"
                   aria-label={`${partner.name} logo`}
                 >
                   <img
                     src={`/logos/${partner.file}`}
                     alt={partner.name}
-                    className={`${partner.featured ? 'h-16 md:h-20' : 'h-9 md:h-12'} object-contain filter grayscale opacity-90 
-                             group-hover:scale-103 group-focus:scale-103 transition-transform duration-200
-                             mx-3`}
+                    className={`${partner.featured ? 'h-16 md:h-20' : 'h-9 md:h-12'} object-contain filter grayscale opacity-90 mx-3`}
                     loading="lazy"
                   />
                 </div>
