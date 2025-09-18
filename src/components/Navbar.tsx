@@ -31,7 +31,7 @@ const Navbar = () => {
     return () => window.removeEventListener("keydown", onKey);
   }, [isOpen]);
 
-  // Trap focus into panel when open (basic)
+  // Trap focus into panel when open
   useEffect(() => {
     if (!isOpen || !panelRef.current) return;
     const firstFocusable = panelRef.current.querySelector<HTMLElement>(
@@ -72,23 +72,12 @@ const Navbar = () => {
     { name: "Projects", href: "#projects" },
   ];
 
-  // compute nav background class:
-  // - if menu open => strong opaque background
-  // - else if scrolled => semi-transparent with blur
-  // - else transparent
-  const navBgClass = isOpen
-    ? "bg-background/95 backdrop-blur-lg shadow-card/40"
-    : isScrolled
-    ? "bg-background/70 backdrop-blur-lg shadow-card/20"
-    : "bg-transparent";
+  // Background logic: solid when scrolled or menu open, else transparent
+  const navBgClass = isOpen || isScrolled ? "bg-white shadow-md" : "bg-transparent";
 
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${navBgClass}`}
-      style={{
-        WebkitBackdropFilter: (isOpen || isScrolled) ? "saturate(120%) blur(8px)" : undefined,
-        backdropFilter: (isOpen || isScrolled) ? "saturate(120%) blur(8px)" : undefined,
-      }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
@@ -108,12 +97,12 @@ const Navbar = () => {
                     <DropdownMenuTrigger className="flex items-center nav-link text-sm font-medium">
                       {item.name} <ChevronDown className="ml-1 h-4 w-4" />
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent className="w-80 bg-popover border border-border shadow-elegant">
+                    <DropdownMenuContent className="w-80 bg-white border border-border shadow-lg">
                       {services.map((service) => (
                         <DropdownMenuItem key={service.name} asChild>
                           <a
                             href={service.href}
-                            className="flex items-center px-4 py-3 text-sm hover:bg-muted transition-colors"
+                            className="flex items-center px-4 py-3 text-sm hover:bg-gray-100 transition-colors"
                           >
                             {service.name}
                           </a>
@@ -134,7 +123,6 @@ const Navbar = () => {
             <Button 
               onClick={() => window.location.href = '/contact'} 
               className="btn-primary"
-              aria-expanded={false}
             >
               Request a Proposal
             </Button>
@@ -155,14 +143,14 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Overlay (z-50 so it sits above nav) */}
+      {/* Overlay */}
       <div
         aria-hidden={!isOpen}
         onClick={() => setIsOpen(false)}
         className={`fixed inset-0 bg-black/40 z-50 transition-opacity duration-300 ${isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
       />
 
-      {/* Full-screen mobile panel/container (z-60 so it's above everything) */}
+      {/* Mobile Panel */}
       <div
         ref={panelRef}
         role="dialog"
@@ -171,9 +159,9 @@ const Navbar = () => {
         className={`fixed inset-0 z-60 pointer-events-none`}
       >
         <aside
-          className={`pointer-events-auto absolute top-0 right-0 h-full w-full sm:max-w-md md:max-w-sm bg-white shadow-elevate transform transition-transform duration-300 ${isOpen ? "translate-x-0" : "translate-x-full"}`}
+          className={`pointer-events-auto absolute top-0 right-0 h-full w-full sm:max-w-md bg-white shadow-lg transform transition-transform duration-300 ${isOpen ? "translate-x-0" : "translate-x-full"}`}
         >
-          <div className="flex items-center justify-between px-4 py-4 border-b border-border">
+          <div className="flex items-center justify-between px-4 py-4 border-b border-gray-200">
             <img src="/logo.png" alt="Lesar Consults" className="h-10 w-auto" />
             <Button
               variant="ghost"
@@ -196,7 +184,7 @@ const Navbar = () => {
                         <a
                           key={service.name}
                           href={service.href}
-                          className="block text-sm text-foreground hover:text-primary transition-colors py-2"
+                          className="block text-sm text-gray-700 hover:text-primary transition-colors py-2"
                           onClick={() => setIsOpen(false)}
                         >
                           {service.name}
@@ -211,7 +199,7 @@ const Navbar = () => {
                 <a
                   key={item.name}
                   href={item.href}
-                  className="block text-base font-medium text-foreground hover:text-primary transition-colors"
+                  className="block text-base font-medium text-gray-900 hover:text-primary transition-colors"
                   onClick={() => setIsOpen(false)}
                 >
                   {item.name}
@@ -231,7 +219,7 @@ const Navbar = () => {
               </Button>
             </div>
 
-            <div className="pt-6 border-t border-border text-sm text-muted-foreground">
+            <div className="pt-6 border-t border-gray-200 text-sm text-gray-500">
               <p className="mb-2">Contact</p>
               <p>lesarconsults@gmail.com</p>
               <p className="mt-2">P.O. Box 43239-80100</p>
@@ -239,14 +227,6 @@ const Navbar = () => {
           </nav>
         </aside>
       </div>
-
-      {/* Skip to content link for accessibility */}
-      <a
-        href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-primary text-primary-foreground px-4 py-2 rounded-md z-70"
-      >
-        Skip to content
-      </a>
     </nav>
   );
 };
