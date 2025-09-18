@@ -160,9 +160,6 @@ const ContactWizard = ({ onSubmit }: ContactWizardProps) => {
         <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
           Tell us about your needs and we'll get back within 2 business days.
         </p>
-        <p className="text-sm text-muted-foreground mt-2">
-          Contact us: lesarconsults@gmail.com | +254 XXX XXX XXX
-        </p>
       </div>
 
       {/* Form Steps Container */}
