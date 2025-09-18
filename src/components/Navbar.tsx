@@ -13,6 +13,10 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const panelRef = useRef<HTMLDivElement | null>(null);
 
+  // Refs to track touch/pointer movement and avoid closing when user scrolls
+  const touchStartYRef = useRef<number | null>(null);
+  const touchMovedRef = useRef(false);
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
@@ -39,6 +43,19 @@ const Navbar = () => {
     firstFocusable?.focus();
   }, [isOpen]);
 
+  // Lock body scroll when panel is open
+  useEffect(() => {
+    const originalStyle = window.getComputedStyle(document.body).overflow;
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = originalStyle || "";
+    }
+    return () => {
+      document.body.style.overflow = originalStyle || "";
+    };
+  }, [isOpen]);
+
   const services = [
     { name: "Health Systems Strengthening", href: "#services" },
     { name: "Financial Analysis & Economics", href: "#services" },
@@ -59,10 +76,46 @@ const Navbar = () => {
     { name: "Projects", href: "#projects" },
   ];
 
+  // Overlay touch/pointer handlers
+  const onOverlayPointerDown = (e: React.PointerEvent) => {
+    touchMovedRef.current = false;
+    touchStartYRef.current = e.clientY;
+  };
+  const onOverlayPointerMove = (e: React.PointerEvent) => {
+    if (touchStartYRef.current === null) return;
+    const delta = Math.abs(e.clientY - touchStartYRef.current);
+    if (delta > 10) touchMovedRef.current = true;
+  };
+  const onOverlayPointerUp = (e: React.PointerEvent) => {
+    // Only close if it was a tap (no movement)
+    if (!touchMovedRef.current) {
+      setIsOpen(false);
+    }
+    touchStartYRef.current = null;
+    touchMovedRef.current = false;
+  };
+
+  // Touch-only fallback (some mobile browsers)
+  const onOverlayTouchStart = (e: React.TouchEvent) => {
+    touchMovedRef.current = false;
+    touchStartYRef.current = e.touches[0]?.clientY ?? null;
+  };
+  const onOverlayTouchMove = (e: React.TouchEvent) => {
+    if (touchStartYRef.current === null) return;
+    const delta = Math.abs((e.touches[0]?.clientY ?? 0) - (touchStartYRef.current ?? 0));
+    if (delta > 10) touchMovedRef.current = true;
+  };
+  const onOverlayTouchEnd = () => {
+    if (!touchMovedRef.current) {
+      setIsOpen(false);
+    }
+    touchStartYRef.current = null;
+    touchMovedRef.current = false;
+  };
+
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? "bg-background/70 backdrop-blur-lg shadow-card/20" : "bg-transparent"}`}
-      // small inline style to smooth backdrop-filter transitions in supporting browsers
       style={{ WebkitBackdropFilter: isScrolled ? "saturate(120%) blur(8px)" : undefined, backdropFilter: isScrolled ? "saturate(120%) blur(8px)" : undefined }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -119,20 +172,25 @@ const Navbar = () => {
             <Button
               variant="ghost"
               size="icon"
-              onClick={() => setIsOpen(!isOpen)}
-              aria-label={isOpen ? "Close menu" : "Open menu"}
+              onClick={() => setIsOpen(true)}
+              aria-label="Open menu"
             >
-              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              <Menu className="h-6 w-6" />
             </Button>
           </div>
         </div>
       </div>
 
-      {/* Slide-in mobile panel + overlay */}
       {/* Overlay */}
       <div
         aria-hidden={!isOpen}
-        onClick={() => setIsOpen(false)}
+        // pointer event handlers to detect scroll vs tap
+        onPointerDown={onOverlayPointerDown}
+        onPointerMove={onOverlayPointerMove}
+        onPointerUp={onOverlayPointerUp}
+        onTouchStart={onOverlayTouchStart}
+        onTouchMove={onOverlayTouchMove}
+        onTouchEnd={onOverlayTouchEnd}
         className={`fixed inset-0 bg-black/40 z-40 transition-opacity duration-300 ${isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
       />
 
@@ -156,7 +214,7 @@ const Navbar = () => {
           </Button>
         </div>
 
-        <nav className="px-4 py-6 space-y-6 overflow-y-auto h-[calc(100%-72px)]" style={{ touchAction: 'pan-y' }}>
+        <nav className="px-4 py-6 space-y-6 overflow-y-auto h-[calc(100%-72px)]">
           {navigation.map((item) => {
             if (item.isDropdown) {
               return (
