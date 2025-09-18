@@ -13,8 +13,8 @@ const PartnersMarquee = () => {
   const userInteractingRef = useRef<boolean>(false);
   const resumeTimerRef = useRef<number | null>(null);
 
-  // speed: seconds per single set width loop (lower = faster)
-  const [loopSeconds] = useState<number>(18);
+  // speed: seconds per single set width loop (lower = faster). Increased to 36s for slower, longer scroll.
+  const [loopSeconds] = useState<number>(36);
 
   const partners = [
     { name: "USAID", file: "usaid-logo.png", featured: false },
@@ -50,7 +50,6 @@ const PartnersMarquee = () => {
     const container = containerRef.current;
     if (!container || !setWidth) return;
     const cur = container.scrollLeft;
-    // keep fractional positions consistent
     const mod = ((cur % setWidth) + setWidth) % setWidth;
     container.scrollLeft = mod;
   };
@@ -77,8 +76,8 @@ const PartnersMarquee = () => {
     userInteractingRef.current = true;
     // smooth scroll by delta px
     container.scrollBy({ left: delta, behavior: "smooth" });
-    // resume auto loop quickly after the smooth scroll
-    scheduleResume(500);
+    // resume auto loop shortly after smooth scroll finishes
+    scheduleResume(600);
   };
 
   useEffect(() => {
@@ -92,55 +91,51 @@ const PartnersMarquee = () => {
     const handleReduced = () => {
       prefersReduced = mq.matches;
       if (prefersReduced) {
-        // pause automatically if user requested reduced motion
         if (rafRef.current) {
           cancelAnimationFrame(rafRef.current);
           rafRef.current = null;
         }
       } else {
-        // we will (re)start below if needed
-        // (no-op here)
+        // reset lastTsRef so RAF delta doesn't jump
+        lastTsRef.current = null;
+        if (!rafRef.current) {
+          rafRef.current = requestAnimationFrame(loop);
+        }
       }
     };
-    handleReduced();
-    if (typeof mq.addEventListener === "function") {
-      mq.addEventListener("change", handleReduced);
-    } else if (typeof (mq as any).addListener === "function") {
-      (mq as any).addListener(handleReduced);
-    }
-
+    // the loop function declared later — hoist via let binding
     // prepare set width and normalize scroll pos
     const applySetWidth = () => {
       const w = computeSetWidth();
       setWidthRef.current = Math.max(1, w);
-      // if the container has been scrolled beyond, normalize to within first set
       normalizeScroll(setWidthRef.current);
     };
 
     applySetWidth();
 
-    // RAF loop driving scrollLeft directly (pixels/ms)
+    // RAF step (declared here so handleReduced can reference it)
     const loop = (ts: number) => {
       if (!lastTsRef.current) lastTsRef.current = ts;
       const dt = ts - lastTsRef.current;
       lastTsRef.current = ts;
 
-      if (!prefersReduced && !userInteractingRef.current) {
-        const setW = setWidthRef.current;
-        if (setW > 0) {
-          // px per ms to complete one set in loopSeconds
-          const pxPerMs = setW / (loopSeconds * 1000);
-          let next = container.scrollLeft + pxPerMs * dt;
+      // safety guard
+      const setW = setWidthRef.current;
+      if (!prefersReduced && !userInteractingRef.current && setW > 0) {
+        // px per ms to complete one set in loopSeconds
+        const pxPerMs = setW / (loopSeconds * 1000);
+        let next = container.scrollLeft + pxPerMs * dt;
 
-          // when we pass TWO set widths (we render 3 sets), subtract ONE set width
-          // this provides a buffer so the wrap isn't visually abrupt
-          const threshold = setW * 2;
-          if (next >= threshold) {
-            next = next - setW;
-          } else if (next < 0) {
-            // wrap backwards if needed
-            next = next + setW;
-          }
+        // when we pass TWO set widths (we render 3 sets), subtract ONE set width
+        const threshold = setW * 2;
+        if (next >= threshold) {
+          next = next - setW;
+        } else if (next < 0) {
+          next = next + setW;
+        }
+
+        // apply
+        if (!Number.isNaN(next) && isFinite(next)) {
           container.scrollLeft = next;
         }
       }
@@ -153,6 +148,25 @@ const PartnersMarquee = () => {
       rafRef.current = requestAnimationFrame(loop);
     }
 
+    // visibilitychange handling: pause when hidden, resume when visible
+    const handleVisibility = () => {
+      if (document.hidden) {
+        if (rafRef.current) {
+          cancelAnimationFrame(rafRef.current);
+          rafRef.current = null;
+        }
+        lastTsRef.current = null;
+      } else {
+        // recalc width (in case layout changed while hidden)
+        applySetWidth();
+        lastTsRef.current = null;
+        if (!prefersReduced && !rafRef.current) {
+          rafRef.current = requestAnimationFrame(loop);
+        }
+      }
+    };
+    document.addEventListener("visibilitychange", handleVisibility);
+
     // handle resize (debounced)
     let resizeTimer: number | null = null;
     const handleResize = () => {
@@ -160,7 +174,6 @@ const PartnersMarquee = () => {
       resizeTimer = window.setTimeout(() => {
         const oldW = setWidthRef.current || 1;
         applySetWidth();
-        // keep relative offset when width changes
         const ratio = container.scrollLeft / oldW;
         container.scrollLeft = ratio * setWidthRef.current;
         resizeTimer = null;
@@ -188,11 +201,19 @@ const PartnersMarquee = () => {
     container.addEventListener("touchstart", onPointerDown, { passive: true });
     container.addEventListener("touchend", onPointerUp);
 
+    // attach mq change listener
+    if (typeof mq.addEventListener === "function") {
+      mq.addEventListener("change", handleReduced);
+    } else if (typeof (mq as any).addListener === "function") {
+      (mq as any).addListener(handleReduced);
+    }
+
     return () => {
       // cleanup RAF and listeners
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
       rafRef.current = null;
       lastTsRef.current = null;
+      document.removeEventListener("visibilitychange", handleVisibility);
       window.removeEventListener("resize", handleResize);
       container.removeEventListener("pointerdown", onPointerDown);
       window.removeEventListener("pointerup", onPointerUp);
@@ -217,7 +238,7 @@ const PartnersMarquee = () => {
       const w = computeSetWidth();
       setWidthRef.current = Math.max(1, w);
       normalizeScroll(setWidthRef.current);
-    }, 180);
+    }, 220);
     return () => clearTimeout(t);
   }, [partners.length]);
 
