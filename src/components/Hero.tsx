@@ -54,12 +54,12 @@ const Hero = ({ onContactModalOpen }: HeroProps) => {
             {/* Call-to-Action Buttons */}
             <div className={`flex flex-col gap-4 max-w-md transition-all duration-1000 delay-700 ${isVisible ? 'animate-fade-in' : 'opacity-0 translate-y-8'}`}>
               <Button
-                asChild
+                onClick={onContactModalOpen}
                 className="bg-dark-red hover:bg-dark-red/90 text-white text-lg px-8 py-4 w-full sm:w-auto"
                 size="lg"
                 aria-label="Request a proposal - opens contact form"
               >
-                <a href="/contact">Request a Proposal</a>
+                Request a Proposal
               </Button>
               <Button
                 onClick={scrollToProjects}

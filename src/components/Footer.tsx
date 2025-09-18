@@ -56,11 +56,11 @@ const Footer = ({ onContactModalOpen }: FooterProps) => {
               +254 710 715 132
             </div>
             <Button
-              asChild
+              onClick={onContactModalOpen}
               variant="secondary"
               className="bg-white text-accent hover:bg-white/90"
             >
-              <a href="/contact">Request a Proposal</a>
+              Request a Proposal
             </Button>
           </div>
           <p className="text-sm mt-4 opacity-75">
