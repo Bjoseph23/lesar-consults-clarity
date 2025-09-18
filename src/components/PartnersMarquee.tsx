@@ -1,13 +1,11 @@
 import { useEffect, useRef, useState } from "react";
-import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const PartnersMarquee = () => {
   const marqueeRef = useRef<HTMLDivElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const resetTimerRef = useRef<number | null>(null);
-  const [animationSpeed, setAnimationSpeed] = useState(30);
+  const [animationSpeed, setAnimationSpeed] = useState(18); // faster default
   const [paused, setPaused] = useState(false);
-  const { elementRef: sectionRef, isVisible } = useScrollAnimation();
 
   const partners = [
     { name: "USAID", file: "usaid-logo.png", featured: false },
@@ -60,7 +58,7 @@ const PartnersMarquee = () => {
       const distance = computeDistance();
       // set CSS variable on marquee container
       container.style.setProperty("--marquee-translate", `-${distance}px`);
-      // also force repaint so animation uses updated value
+      // force repaint so animation uses updated value
       // eslint-disable-next-line @typescript-eslint/no-unused-expressions
       marquee.offsetHeight;
     };
@@ -94,11 +92,11 @@ const PartnersMarquee = () => {
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
-    container.style.setProperty("animation-duration", `${animationSpeed}s`);
+    // set CSS variable used by the CSS rule
+    container.style.setProperty("--animation-duration", `${animationSpeed}s`);
     container.style.setProperty("animation-play-state", paused ? "paused" : "running");
   }, [animationSpeed, paused]);
 
-  // removed button logic — but keep the reset timer utility in case you want to reuse
   useEffect(() => {
     return () => {
       if (resetTimerRef.current) {
@@ -107,16 +105,55 @@ const PartnersMarquee = () => {
     };
   }, []);
 
+  // Interaction handlers for manual scroll/drag
+  const handlePointerDown = () => {
+    // pause animation and allow horizontal scroll
+    setPaused(true);
+    const container = containerRef.current;
+    if (container) {
+      container.style.overflowX = "auto";
+      container.style.cursor = "grabbing";
+    }
+  };
+
+  const handlePointerUp = () => {
+    // resume animation and hide scrollbar
+    setPaused(false);
+    const container = containerRef.current;
+    if (container) {
+      container.style.overflowX = "hidden";
+      container.style.cursor = "grab";
+    }
+  };
+
+  const handleMouseEnter = () => {
+    // hint: pause on hover so desktop users can interact
+    setPaused(true);
+    const container = containerRef.current;
+    if (container) {
+      container.style.cursor = "grab";
+    }
+  };
+
+  const handleMouseLeave = () => {
+    setPaused(false);
+    const container = containerRef.current;
+    if (container) {
+      container.style.overflowX = "hidden";
+      container.style.cursor = "default";
+    }
+  };
+
   return (
     <>
       {/* Section Title */}
-      <div className={`text-center mb-8 transition-all duration-1000 ${isVisible ? 'animate-fade-in' : 'opacity-0 translate-y-8'}`}>
+      <div className="text-center mb-8">
         <h2 className="text-2xl md:text-3xl font-serif font-semibold text-primary">
           Our Partners:
         </h2>
       </div>
 
-      <section ref={sectionRef} className={`bg-cream/60 py-12 overflow-hidden transition-all duration-1000 delay-300 ${isVisible ? 'animate-fade-in' : 'opacity-0'}`} aria-label="Our partners and funders">
+      <section className="bg-cream/60 py-12" aria-label="Our partners and funders">
         <div className="relative max-w-7xl mx-auto">
           <div className="sr-only">Logos of partners and funders</div>
 
@@ -126,19 +163,23 @@ const PartnersMarquee = () => {
             <div
               ref={containerRef}
               className="overflow-hidden"
-              // CSS variables used by the internal keyframes (see style tag below)
               style={{
-                // default animation-duration will be overridden by useEffect
-                animationDuration: `${animationSpeed}s`,
+                // CSS variable defaults; JS will override --animation-duration and --marquee-translate
+                // we keep overflow hidden by default
+                // We are intentionally not setting animation-duration here; CSS uses --animation-duration var
               }}
+              // user interactions
+              onPointerDown={handlePointerDown}
+              onPointerUp={handlePointerUp}
+              onTouchStart={handlePointerDown}
+              onTouchEnd={handlePointerUp}
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
             >
               <div
                 ref={marqueeRef}
                 className="flex will-change-transform"
-                // keep the original classes; animation is defined in the style tag below and uses --marquee-translate
-                style={{
-                  // NOTE: actual animation applied via the CSS rule below that targets .partners-marquee-inner
-                }}
+                // no inline styles here — CSS below uses the variables
               >
                 {/* First set of logos */}
                 <div className="flex items-center gap-12 min-w-max justify-start partners-marquee-inner">
@@ -187,12 +228,6 @@ const PartnersMarquee = () => {
         {/* Inline styles for marquee animation */}
         <style>{`
           /* container uses the CSS variable --marquee-translate (negative px) set from JS */
-          .partners-marquee-inner {
-            /* nothing here — each inner set holds logos */
-          }
-
-          /* animate the parent flex that contains the two sets */
-          /* The animation moves from 0 to the negative width of one set (var --marquee-translate) */
           @keyframes partners-marquee {
             from {
               transform: translateX(0);
@@ -203,21 +238,23 @@ const PartnersMarquee = () => {
           }
 
           /* Apply animation to the flex wrapper (the direct child of the overflow-hidden container) */
-          .partners-marquee-inner:first-child {
-            /* no-op */
-          }
-          /* We put the animation on the flex itself via the inline container wrapper rules */
-          div[style] > div[ref] {
-            /* no-op for TSX parsing; kept intentionally blank */
-          }
-
-          /* Instead target the marquee wrapper via a more general selector: */
           .overflow-hidden > .flex {
             animation-name: partners-marquee;
             animation-timing-function: linear;
             animation-iteration-count: infinite;
-            animation-duration: var(--animation-duration, 30s);
+            animation-duration: var(--animation-duration, 18s);
             animation-play-state: running;
+            will-change: transform;
+            display: flex;
+            align-items: center;
+          }
+
+          /* Show grabbing cursor affordance on desktop; switch to grabbing when pointer active */
+          .overflow-hidden {
+            cursor: grab;
+          }
+          .overflow-hidden:active {
+            cursor: grabbing;
           }
 
           /* Small responsiveness to keep logos visible */
@@ -226,6 +263,15 @@ const PartnersMarquee = () => {
               padding-left: 1rem;
               padding-right: 1rem;
             }
+          }
+
+          /* hide scrollbar while not interacting */
+          .overflow-hidden::-webkit-scrollbar {
+            height: 8px;
+          }
+          /* when overflow is auto (during interaction) show a subtle scrollbar on desktop */
+          .overflow-hidden[style*="overflow-x: auto"]::-webkit-scrollbar {
+            height: 8px;
           }
         `}</style>
       </section>
