@@ -7,6 +7,11 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
 
 interface NavbarProps {
   onContactModalOpen: () => void;
@@ -15,6 +20,7 @@ interface NavbarProps {
 const Navbar = ({ onContactModalOpen }: NavbarProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isServicesOpen, setIsServicesOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -73,10 +79,10 @@ const Navbar = ({ onContactModalOpen }: NavbarProps) => {
               </a>
             ))}
             
-            {/* Services Dropdown */}
+            {/* What We Do Dropdown */}
             <DropdownMenu>
               <DropdownMenuTrigger className="flex items-center nav-link text-sm font-medium">
-                Services <ChevronDown className="ml-1 h-4 w-4" />
+                What We Do <ChevronDown className="ml-1 h-4 w-4" />
               </DropdownMenuTrigger>
               <DropdownMenuContent className="w-80 bg-popover border border-border shadow-elegant">
                 {services.map((service) => (
@@ -115,47 +121,57 @@ const Navbar = ({ onContactModalOpen }: NavbarProps) => {
       </div>
 
       {/* Mobile Navigation */}
-      {isOpen && (
-        <div className="lg:hidden bg-background border-t border-border shadow-card">
-          <div className="px-4 py-4 space-y-4">
-            {navigation.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                className="block nav-link text-base font-medium py-2"
-                onClick={() => setIsOpen(false)}
-              >
-                {item.name}
-              </a>
-            ))}
-            
-            <div className="border-t border-border pt-4">
-              <p className="text-sm font-medium text-muted-foreground mb-2">Services</p>
+      <div className={`lg:hidden bg-background border-t border-border shadow-card transition-transform duration-300 ${
+        isOpen ? 'translate-x-0' : '-translate-x-full'
+      } fixed top-16 left-0 w-full h-screen overflow-y-auto z-40`}>
+        <div className="px-4 py-4 space-y-4">
+          {navigation.map((item) => (
+            <a
+              key={item.name}
+              href={item.href}
+              className="block nav-link text-base font-medium py-2"
+              onClick={() => setIsOpen(false)}
+            >
+              {item.name}
+            </a>
+          ))}
+          
+          {/* Mobile What We Do Dropdown */}
+          <Collapsible open={isServicesOpen} onOpenChange={setIsServicesOpen}>
+            <CollapsibleTrigger className="flex items-center justify-between w-full py-2 text-base font-medium nav-link">
+              What We Do
+              <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${
+                isServicesOpen ? 'rotate-180' : ''
+              }`} />
+            </CollapsibleTrigger>
+            <CollapsibleContent className="pl-4 space-y-2 mt-2">
               {services.map((service) => (
                 <a
                   key={service.name}
                   href={service.href}
-                  className="flex items-center py-2 text-sm text-foreground hover:text-primary transition-colors"
-                  onClick={() => setIsOpen(false)}
+                  className="block py-2 text-sm text-foreground hover:text-primary transition-colors"
+                  onClick={() => {
+                    setIsOpen(false);
+                    setIsServicesOpen(false);
+                  }}
                 >
-                  <span className="mr-3">{service.icon}</span>
                   {service.name}
                 </a>
               ))}
-            </div>
-            
-            <Button
-              onClick={() => {
-                onContactModalOpen();
-                setIsOpen(false);
-              }}
-              className="btn-primary w-full mt-4"
-            >
-              Request a Proposal
-            </Button>
-          </div>
+            </CollapsibleContent>
+          </Collapsible>
+          
+          <Button
+            onClick={() => {
+              onContactModalOpen();
+              setIsOpen(false);
+            }}
+            className="btn-primary w-full mt-4"
+          >
+            Request a Proposal
+          </Button>
         </div>
-      )}
+      </div>
 
       {/* Skip to content link for accessibility */}
       <a
