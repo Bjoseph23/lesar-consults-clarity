@@ -15,6 +15,7 @@ interface FormData {
   role: string;
   email: string;
   phone: string;
+  countryCode: string;
   services: string[];
   otherService: string;
   description: string;
@@ -38,6 +39,7 @@ const ContactWizard = ({ onSubmit }: ContactWizardProps) => {
     role: "",
     email: "",
     phone: "",
+    countryCode: "+254",
     services: [],
     otherService: "",
     description: "",
@@ -68,8 +70,7 @@ const ContactWizard = ({ onSubmit }: ContactWizardProps) => {
                /\S+@\S+\.\S+/.test(formData.email);
       case 4:
         return formData.services.length > 0 && 
-               formData.description.trim().length >= 50 &&
-               formData.description.trim().length <= 600;
+               formData.description.trim().length > 0;
       case 5:
         return formData.timeframe.length > 0;
       case 6:

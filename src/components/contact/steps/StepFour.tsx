@@ -34,7 +34,6 @@ const StepFour = ({ formData, updateFormData }: StepFourProps) => {
   };
 
   const characterCount = formData.description?.length || 0;
-  const isDescriptionValid = characterCount >= 50 && characterCount <= 600;
 
   return (
     <div className="space-y-6">
@@ -93,22 +92,8 @@ const StepFour = ({ formData, updateFormData }: StepFourProps) => {
             onChange={(e) => updateFormData("description", e.target.value)}
             placeholder="Please describe your project needs, objectives, timeline, and any specific requirements..."
             rows={4}
-            maxLength={600}
             className="resize-none"
           />
-          <div className="flex justify-between text-xs">
-            <span className={characterCount < 50 ? "text-destructive" : "text-muted-foreground"}>
-              {characterCount < 50 ? `${50 - characterCount} more characters needed` : ""}
-            </span>
-            <span className={characterCount > 600 ? "text-destructive" : "text-muted-foreground"}>
-              {characterCount}/600 characters
-            </span>
-          </div>
-          {characterCount > 0 && !isDescriptionValid && (
-            <p className="text-sm text-destructive">
-              Description must be between 50-600 characters.
-            </p>
-          )}
         </div>
       </div>
 

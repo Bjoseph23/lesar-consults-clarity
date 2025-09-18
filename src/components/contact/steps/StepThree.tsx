@@ -1,5 +1,7 @@
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { countries, defaultCountry } from "@/data/countries";
 
 interface StepThreeProps {
   formData: any;
@@ -50,14 +52,34 @@ const StepThree = ({ formData, updateFormData }: StepThreeProps) => {
           <Label htmlFor="phone" className="text-sm font-medium">
             Phone Number *
           </Label>
-          <Input
-            id="phone"
-            type="tel"
-            value={formData.phone}
-            onChange={(e) => updateFormData("phone", e.target.value)}
-            placeholder="+254 XXX XXX XXX"
-            className="text-lg py-3"
-          />
+          <div className="flex gap-2">
+            <Select 
+              value={formData.countryCode || defaultCountry.code} 
+              onValueChange={(value) => updateFormData("countryCode", value)}
+            >
+              <SelectTrigger className="w-[180px] text-lg py-3">
+                <SelectValue placeholder="Select country" />
+              </SelectTrigger>
+              <SelectContent className="max-h-[200px] bg-background border border-border">
+                {countries.map((country) => (
+                  <SelectItem key={country.code} value={country.code} className="hover:bg-muted">
+                    <span className="flex items-center gap-2">
+                      <span>{country.flag}</span>
+                      <span>{country.name} ({country.code})</span>
+                    </span>
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            <Input
+              id="phone"
+              type="tel"
+              value={formData.phone}
+              onChange={(e) => updateFormData("phone", e.target.value)}
+              placeholder="XXX XXX XXX"
+              className="text-lg py-3 flex-1"
+            />
+          </div>
           {formData.phone && !isPhoneValid(formData.phone) && (
             <p className="text-sm text-destructive">Please enter a valid phone number.</p>
           )}
