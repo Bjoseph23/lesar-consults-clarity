@@ -67,9 +67,10 @@ const ContactWizard = ({ onSubmit }: ContactWizardProps) => {
                formData.phone.trim().length > 0 &&
                /\S+@\S+\.\S+/.test(formData.email);
       case 4:
+        // Removed the strict length requirement for description.
+        // Now only requires at least one service and a non-empty description.
         return formData.services.length > 0 && 
-               formData.description.trim().length >= 50 &&
-               formData.description.trim().length <= 600;
+               formData.description.trim().length > 0;
       case 5:
         return formData.timeframe.length > 0;
       case 6:
