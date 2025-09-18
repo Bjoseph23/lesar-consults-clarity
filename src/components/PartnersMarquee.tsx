@@ -2,7 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const PartnersMarquee = () => {
-  const marqueeRef = useRef<HTMLDivElement>(null);
+  const marqueeRef = useRef<HTMLDivElement | null>(null);
+  const resetTimerRef = useRef<number | null>(null);
   const [animationSpeed, setAnimationSpeed] = useState(30);
 
   const partners = [
@@ -25,35 +26,73 @@ const PartnersMarquee = () => {
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (prefersReducedMotion) {
         marquee.style.animationPlayState = 'paused';
+      } else {
+        // ensure it runs if user toggles preference off
+        marquee.style.animationPlayState = 'running';
       }
     };
 
     handleReducedMotion();
-    window.matchMedia('(prefers-reduced-motion: reduce)').addEventListener('change', handleReducedMotion);
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    // Some browsers require addEventListener; fall back to addListener if missing
+    if (typeof mq.addEventListener === "function") {
+      mq.addEventListener('change', handleReducedMotion);
+    } else if (typeof (mq as any).addListener === "function") {
+      (mq as any).addListener(handleReducedMotion);
+    }
 
     return () => {
-      window.matchMedia('(prefers-reduced-motion: reduce)').removeEventListener('change', handleReducedMotion);
+      if (typeof mq.removeEventListener === "function") {
+        mq.removeEventListener('change', handleReducedMotion);
+      } else if (typeof (mq as any).removeListener === "function") {
+        (mq as any).removeListener(handleReducedMotion);
+      }
     };
   }, []);
 
   useEffect(() => {
     if (marqueeRef.current) {
+      // directly update the CSS animation duration
       marqueeRef.current.style.animationDuration = `${animationSpeed}s`;
+      // ensure it is playing when speed is changed
+      marqueeRef.current.style.animationPlayState = 'running';
     }
   }, [animationSpeed]);
 
-  const handleSpeedLeft = () => {
-    setAnimationSpeed(prev => Math.max(5, prev - 5)); // Speed up (lower duration)
-    setTimeout(() => {
-      setAnimationSpeed(30); // Reset to normal speed after 2 seconds
+  useEffect(() => {
+    return () => {
+      // cleanup any pending timers on unmount
+      if (resetTimerRef.current) {
+        clearTimeout(resetTimerRef.current);
+      }
+    };
+  }, []);
+
+  const scheduleReset = () => {
+    // clear previous timer if any
+    if (resetTimerRef.current) {
+      clearTimeout(resetTimerRef.current);
+    }
+    // reset after 2s (2000ms)
+    resetTimerRef.current = window.setTimeout(() => {
+      setAnimationSpeed(30);
+      resetTimerRef.current = null;
     }, 2000);
   };
 
+  const handleSpeedLeft = () => {
+    // Make left arrow speed up marquee (lower duration) — ensure min 5s
+    setAnimationSpeed(prev => Math.max(5, prev - 5));
+    // ensure CSS animation is running
+    if (marqueeRef.current) marqueeRef.current.style.animationPlayState = 'running';
+    scheduleReset();
+  };
+
   const handleSpeedRight = () => {
-    setAnimationSpeed(prev => Math.max(5, prev - 5)); // Speed up (lower duration)
-    setTimeout(() => {
-      setAnimationSpeed(30); // Reset to normal speed after 2 seconds
-    }, 2000);
+    // Make right arrow slow marquee (increase duration) — ensure max is kept reasonable
+    setAnimationSpeed(prev => Math.min(60, prev + 5));
+    if (marqueeRef.current) marqueeRef.current.style.animationPlayState = 'running';
+    scheduleReset();
   };
 
   return (
@@ -96,7 +135,7 @@ const PartnersMarquee = () => {
             style={{ animationDuration: `${animationSpeed}s` }}
           >
             {/* First set of logos */}
-            <div className="flex items-center gap-12 min-w-full justify-between">
+            <div className="flex items-center gap-12 min-w-max justify-start">
               {partners.map((partner, index) => (
                 <div
                   key={`set1-${index}`}
@@ -114,7 +153,7 @@ const PartnersMarquee = () => {
             </div>
             
             {/* Duplicate set for seamless loop - with gap to prevent overlap */}
-            <div className="flex items-center gap-12 min-w-full justify-between ml-12">
+            <div className="flex items-center gap-12 min-w-max justify-start ml-6">
               {partners.map((partner, index) => (
                 <div
                   key={`set2-${index}`}
