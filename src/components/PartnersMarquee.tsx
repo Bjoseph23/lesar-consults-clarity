@@ -57,13 +57,15 @@ const PartnersMarquee = () => {
   };
 
   return (
-    <section className="bg-cream/60 py-12 overflow-hidden" aria-label="Our partners and funders">
+    <>
       {/* Section Title */}
       <div className="text-center mb-8">
         <h2 className="text-2xl md:text-3xl font-serif font-semibold text-primary">
           Our Partners:
         </h2>
       </div>
+      
+      <section className="bg-cream/60 py-12 overflow-hidden" aria-label="Our partners and funders">
 
       <div className="relative max-w-7xl mx-auto">
         <div className="sr-only">Logos of partners and funders</div>
@@ -131,7 +133,8 @@ const PartnersMarquee = () => {
           </div>
         </div>
       </div>
-    </section>
+      </section>
+    </>
   );
 };
 
