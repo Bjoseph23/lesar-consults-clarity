@@ -29,7 +29,7 @@ const StepOne = ({ formData, updateFormData }: StepOneProps) => {
           value={formData.fullName}
           onChange={(e) => updateFormData("fullName", e.target.value)}
           placeholder="Enter your full name"
-          className="text-lg py-3"
+          className="text-lg py-3 placeholder:text-sm sm:placeholder:text-base"
           autoFocus
         />
         {formData.fullName && formData.fullName.length < 2 && (

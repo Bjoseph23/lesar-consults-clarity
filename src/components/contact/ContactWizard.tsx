@@ -201,7 +201,7 @@ const ContactWizard = ({ onSubmit }: ContactWizardProps) => {
           <span>Back</span>
         </Button>
 
-        <div className="text-sm text-muted-foreground">
+        <div className="text-xs sm:text-sm text-muted-foreground whitespace-nowrap">
           Step {currentStep} of {totalSteps}
         </div>
 
@@ -218,7 +218,7 @@ const ContactWizard = ({ onSubmit }: ContactWizardProps) => {
           <Button
             onClick={handleSubmit}
             disabled={!isStepValid() || isSubmitting}
-            className="btn-accent flex items-center space-x-2"
+            className="btn-accent flex items-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isSubmitting ? (
               <>

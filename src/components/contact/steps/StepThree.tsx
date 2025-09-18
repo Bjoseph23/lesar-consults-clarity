@@ -40,7 +40,7 @@ const StepThree = ({ formData, updateFormData }: StepThreeProps) => {
             value={formData.email}
             onChange={(e) => updateFormData("email", e.target.value)}
             placeholder="your.email@organization.com"
-            className="text-lg py-3"
+            className="text-lg py-3 placeholder:text-sm sm:placeholder:text-base"
             autoFocus
           />
           {formData.email && !isEmailValid(formData.email) && (
@@ -83,7 +83,7 @@ const StepThree = ({ formData, updateFormData }: StepThreeProps) => {
               value={formData.phone}
               onChange={(e) => updateFormData("phone", e.target.value)}
               placeholder="XXX XXX XXX"
-              className="flex-1 h-12 text-lg"
+              className="flex-1 h-12 text-lg placeholder:text-sm sm:placeholder:text-base"
             />
           </div>
           {formData.phone && !isPhoneValid(formData.phone) && (

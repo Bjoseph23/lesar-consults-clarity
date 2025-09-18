@@ -71,7 +71,7 @@ const StepFour = ({ formData, updateFormData }: StepFourProps) => {
                 placeholder="Please specify other service"
                 value={formData.otherService}
                 onChange={(e) => updateFormData("otherService", e.target.value)}
-                className="ml-6"
+                className="ml-6 placeholder:text-sm sm:placeholder:text-base"
               />
             </div>
           )}
@@ -92,7 +92,7 @@ const StepFour = ({ formData, updateFormData }: StepFourProps) => {
             onChange={(e) => updateFormData("description", e.target.value)}
             placeholder="Please describe your project needs, objectives, timeline, and any specific requirements..."
             rows={4}
-            className="resize-none"
+            className="resize-none placeholder:text-sm sm:placeholder:text-base"
           />
         </div>
       </div>
