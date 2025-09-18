@@ -1,69 +1,87 @@
 import { Button } from "@/components/ui/button";
+import { useEffect, useRef } from "react";
 
 interface HeroProps {
   onContactModalOpen: () => void;
 }
 
 const Hero = ({ onContactModalOpen }: HeroProps) => {
-  const partners = [
-    "USAID", "World Bank", "UNICEF", "WHO", "DFID", "Global Fund"
-  ];
+  const imageRef = useRef<HTMLImageElement>(null);
 
   const scrollToProjects = () => {
     const projectsSection = document.getElementById('projects');
     projectsSection?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  useEffect(() => {
+    const image = imageRef.current;
+    if (!image) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-slide-in-right');
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(image);
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center bg-gradient-subtle pt-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center animate-fade-in">
-        <div className="max-w-4xl mx-auto">
-          {/* Main Headline */}
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-primary mb-6 text-balance">
-            Demystifying opinions in health systems, economics and analytics
-          </h1>
-          
-          {/* Subheadline */}
-          <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto text-balance">
-            Premier data, research and analytics consultancy firm serving as a hub of innovation and excellence to deliver evidence-based solutions across East Africa and beyond.
-          </p>
-          
-          {/* Call-to-Action Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-            <Button
-              onClick={onContactModalOpen}
-              className="btn-primary text-lg px-8 py-4"
-              size="lg"
-            >
-              Request a Proposal
-            </Button>
-            <Button
-              onClick={scrollToProjects}
-              variant="outline"
-              className="btn-secondary text-lg px-8 py-4"
-              size="lg"
-            >
-              View Our Work
-            </Button>
-          </div>
-          
-          {/* Trust Line and Partners */}
-          <div className="animate-slide-up">
-            <p className="text-sm text-muted-foreground mb-6">
-              Trusted by leading international organizations and government agencies
+    <section id="home" className="relative min-h-screen bg-gradient-subtle pt-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid lg:grid-cols-2 gap-12 items-center min-h-screen py-16">
+          {/* Left Column - Content */}
+          <div className="flex flex-col justify-center lg:order-1 order-2">
+            {/* Main Headline */}
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-primary mb-6 text-balance">
+              Demystifying opinions in health systems, economics and analytics
+            </h1>
+            
+            {/* Subheadline */}
+            <p className="text-xl md:text-2xl text-muted-foreground mb-8 text-balance">
+              Lesar Consults: Evidence-based research, analytics and advisory for health systems, finance, and development across Kenya and East Africa.
             </p>
             
-            {/* Partner Logos Row */}
-            <div className="flex flex-wrap justify-center items-center gap-8 opacity-70">
-              {partners.map((partner, index) => (
-                <div
-                  key={partner}
-                  className="text-sm font-medium text-muted-foreground bg-card px-4 py-2 rounded-lg border border-border hover:border-primary/20 transition-colors"
-                  style={{ animationDelay: `${index * 0.1}s` }}
-                >
-                  {partner}
-                </div>
-              ))}
+            {/* Call-to-Action Buttons */}
+            <div className="flex flex-col gap-4 max-w-md">
+              <Button
+                onClick={onContactModalOpen}
+                className="bg-dark-red hover:bg-dark-red/90 text-white text-lg px-8 py-4 w-full sm:w-auto"
+                size="lg"
+                aria-label="Request a proposal - opens contact form"
+              >
+                Request a Proposal
+              </Button>
+              <Button
+                onClick={scrollToProjects}
+                variant="outline"
+                className="border-navy text-navy hover:bg-navy hover:text-white text-lg px-8 py-4 w-full sm:w-auto"
+                size="lg"
+                aria-label="View our work - scrolls to projects section"
+              >
+                View Our Work
+              </Button>
+            </div>
+          </div>
+
+          {/* Right Column - Hero Image */}
+          <div className="flex justify-center lg:order-2 order-1">
+            <div className="relative max-w-lg w-full">
+              <img
+                ref={imageRef}
+                src="/placeholder.svg"
+                alt="Lesar Consults team working on health systems research and analytics"
+                className="w-full h-auto object-contain opacity-0 transition-all duration-700"
+                style={{ maxWidth: '560px' }}
+                loading="lazy"
+              />
             </div>
           </div>
         </div>

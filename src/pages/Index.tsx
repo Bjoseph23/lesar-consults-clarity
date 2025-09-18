@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
+import PartnersMarquee from "@/components/PartnersMarquee";
 import ServicesStrip from "@/components/ServicesStrip";
 import Counters from "@/components/Counters";
 import FeaturedCase from "@/components/FeaturedCase";
@@ -44,6 +45,9 @@ const Index = () => {
       <main id="main-content" className="relative">
         {/* Hero Section */}
         <Hero onContactModalOpen={() => setIsContactModalOpen(true)} />
+        
+        {/* Partners Marquee */}
+        <PartnersMarquee />
         
         {/* Services Overview */}
         <ServicesStrip />
