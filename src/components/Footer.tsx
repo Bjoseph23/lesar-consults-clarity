@@ -177,7 +177,7 @@ const Footer = ({ onContactModalOpen }: FooterProps) => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-sm text-primary-foreground/60 mb-4 md:mb-0">
-              © 2024 Lesar Consults Ltd. All rights reserved. | Reg. No: BN-AZCYB8QG
+              © 2025 Lesar Consults Ltd. All rights reserved.
             </p>
             
             <div className="flex space-x-6">
