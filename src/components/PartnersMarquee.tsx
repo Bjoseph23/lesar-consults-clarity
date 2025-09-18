@@ -13,8 +13,8 @@ const PartnersMarquee = () => {
   const userInteractingRef = useRef<boolean>(false);
   const resumeTimerRef = useRef<number | null>(null);
 
-  // speed: seconds per single set width loop (lower = faster). Increased to 36s for slower, longer scroll.
-  const [loopSeconds] = useState<number>(36);
+  // speed: seconds per single set width loop (lower = faster). Reduced slightly to 28s for a bit faster scroll.
+  const [loopSeconds] = useState<number>(28);
 
   const partners = [
     { name: "USAID", file: "usaid-logo.png", featured: false },
@@ -287,7 +287,7 @@ const PartnersMarquee = () => {
                         <img
                           src={`/logos/${partner.file}`}
                           alt={partner.name}
-                          className={`${partner.featured ? "h-16 md:h-20" : "h-9 md:h-12"} object-contain filter grayscale opacity-90 mx-3`}
+                          className={`${partner.featured ? "h-20 md:h-24" : "h-12 md:h-16"} object-contain filter grayscale opacity-90 mx-3`}
                           loading="lazy"
                           decoding="async"
                         />
