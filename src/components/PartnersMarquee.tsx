@@ -4,16 +4,16 @@ const PartnersMarquee = () => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const marqueeRef = useRef<HTMLDivElement | null>(null);
 
-  // refs for animation loop
+  // refs for RAF loop
   const rafRef = useRef<number | null>(null);
   const lastTsRef = useRef<number | null>(null);
-  const distanceRef = useRef<number>(0);
+  const setWidthRef = useRef<number>(0);
 
-  // user interaction / pause control
+  // user interaction flags
   const userInteractingRef = useRef<boolean>(false);
   const resumeTimerRef = useRef<number | null>(null);
 
-  // speed: seconds per full loop (lower = faster)
+  // speed: seconds per single set width loop (lower = faster)
   const [loopSeconds] = useState<number>(18);
 
   const partners = [
@@ -28,8 +28,16 @@ const PartnersMarquee = () => {
     { name: "Wellcome", file: "welcome-logo.png", featured: false },
   ];
 
-  // compute width of first repeated set (distance to scroll)
-  const computeDistance = () => {
+  // Preload images (first renders) so next logos are ready when arrows scroll
+  useEffect(() => {
+    partners.forEach(p => {
+      const img = new Image();
+      img.src = `/logos/${p.file}`;
+    });
+  }, [partners]);
+
+  // compute width of a single repeated set
+  const computeSetWidth = () => {
     const marquee = marqueeRef.current;
     if (!marquee) return 0;
     const firstSet = marquee.children[0] as HTMLElement | undefined;
@@ -37,39 +45,42 @@ const PartnersMarquee = () => {
     return Math.round(firstSet.getBoundingClientRect().width);
   };
 
-  // normalize scrollLeft to within [0, distance)
-  const normalizeScrollLeft = (distance: number) => {
+  // normalize scrollLeft into [0, setWidth)
+  const normalizeScroll = (setWidth: number) => {
     const container = containerRef.current;
-    if (!container || !distance) return;
+    if (!container || !setWidth) return;
     const cur = container.scrollLeft;
-    const mod = ((cur % distance) + distance) % distance; // safe modulo
+    // keep fractional positions consistent
+    const mod = ((cur % setWidth) + setWidth) % setWidth;
     container.scrollLeft = mod;
   };
 
-  // schedule resume (short delay after user interaction)
-  const scheduleResume = (delay = 900) => {
+  // schedule resume auto-loop shortly after interaction
+  const scheduleResume = (delay = 300) => {
     if (resumeTimerRef.current) {
       clearTimeout(resumeTimerRef.current);
       resumeTimerRef.current = null;
     }
     resumeTimerRef.current = window.setTimeout(() => {
       userInteractingRef.current = false;
-      resumeTimerRef.current && clearTimeout(resumeTimerRef.current);
-      resumeTimerRef.current = null;
+      if (resumeTimerRef.current) {
+        clearTimeout(resumeTimerRef.current);
+        resumeTimerRef.current = null;
+      }
     }, delay);
   };
 
-  // arrow-driven scroll: perform smooth scroll and briefly mark user interaction
+  // arrow scroll helper — uses smooth scroll and prevents long stall
   const scrollByAmount = (delta: number) => {
     const container = containerRef.current;
     if (!container) return;
-    // flag user interaction to avoid auto-scroll fighting the smooth scroll
     userInteractingRef.current = true;
+    // smooth scroll by delta px
     container.scrollBy({ left: delta, behavior: "smooth" });
-    scheduleResume(900); // resume auto-scroll shortly after smooth scroll finishes
+    // resume auto loop quickly after the smooth scroll
+    scheduleResume(500);
   };
 
-  // animation loop: updates container.scrollLeft using pixels per ms
   useEffect(() => {
     const container = containerRef.current;
     const marquee = marqueeRef.current;
@@ -77,62 +88,87 @@ const PartnersMarquee = () => {
 
     // respect reduced motion preference
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const prefersReduced = mq.matches;
-
-    // compute distance initially
-    const applyDistance = () => {
-      const distance = computeDistance();
-      distanceRef.current = Math.max(1, distance); // avoid division by zero
-      // ensure scrollLeft is in range
-      normalizeScrollLeft(distanceRef.current);
+    let prefersReduced = mq.matches;
+    const handleReduced = () => {
+      prefersReduced = mq.matches;
+      if (prefersReduced) {
+        // pause automatically if user requested reduced motion
+        if (rafRef.current) {
+          cancelAnimationFrame(rafRef.current);
+          rafRef.current = null;
+        }
+      } else {
+        // we will (re)start below if needed
+        // (no-op here)
+      }
     };
-    applyDistance();
+    handleReduced();
+    if (typeof mq.addEventListener === "function") {
+      mq.addEventListener("change", handleReduced);
+    } else if (typeof (mq as any).addListener === "function") {
+      (mq as any).addListener(handleReduced);
+    }
 
-    // RAF step
-    const step = (ts: number) => {
+    // prepare set width and normalize scroll pos
+    const applySetWidth = () => {
+      const w = computeSetWidth();
+      setWidthRef.current = Math.max(1, w);
+      // if the container has been scrolled beyond, normalize to within first set
+      normalizeScroll(setWidthRef.current);
+    };
+
+    applySetWidth();
+
+    // RAF loop driving scrollLeft directly (pixels/ms)
+    const loop = (ts: number) => {
       if (!lastTsRef.current) lastTsRef.current = ts;
       const dt = ts - lastTsRef.current;
       lastTsRef.current = ts;
 
       if (!prefersReduced && !userInteractingRef.current) {
-        const distance = distanceRef.current;
-        if (distance > 0) {
-          // pixels per ms to complete one loop in loopSeconds
-          const pxPerMs = distance / (loopSeconds * 1000);
+        const setW = setWidthRef.current;
+        if (setW > 0) {
+          // px per ms to complete one set in loopSeconds
+          const pxPerMs = setW / (loopSeconds * 1000);
           let next = container.scrollLeft + pxPerMs * dt;
 
-          // wrap-around seamlessly using duplicate set
-          if (next >= distance) {
-            next = next - distance;
+          // when we pass TWO set widths (we render 3 sets), subtract ONE set width
+          // this provides a buffer so the wrap isn't visually abrupt
+          const threshold = setW * 2;
+          if (next >= threshold) {
+            next = next - setW;
           } else if (next < 0) {
-            next = next + distance;
+            // wrap backwards if needed
+            next = next + setW;
           }
           container.scrollLeft = next;
         }
       }
 
-      rafRef.current = requestAnimationFrame(step);
+      rafRef.current = requestAnimationFrame(loop);
     };
 
-    rafRef.current = requestAnimationFrame(step);
+    // start RAF if not reduced motion
+    if (!prefersReduced && !rafRef.current) {
+      rafRef.current = requestAnimationFrame(loop);
+    }
 
-    // handle resize: recompute distance and adjust scrollLeft proportionally
+    // handle resize (debounced)
     let resizeTimer: number | null = null;
     const handleResize = () => {
       if (resizeTimer) window.clearTimeout(resizeTimer);
       resizeTimer = window.setTimeout(() => {
-        const oldDistance = distanceRef.current || 1;
-        applyDistance();
-        // preserve relative position
-        const containerCur = container.scrollLeft;
-        const ratio = (oldDistance ? containerCur / oldDistance : 0);
-        container.scrollLeft = ratio * distanceRef.current;
+        const oldW = setWidthRef.current || 1;
+        applySetWidth();
+        // keep relative offset when width changes
+        const ratio = container.scrollLeft / oldW;
+        container.scrollLeft = ratio * setWidthRef.current;
         resizeTimer = null;
       }, 120);
     };
     window.addEventListener("resize", handleResize);
 
-    // pointer/touch/wheel interactions: mark as userInteracting and schedule resume
+    // interactions: pointer/touch/wheel set userInteracting and schedule resume
     const onPointerDown = () => {
       userInteractingRef.current = true;
       if (resumeTimerRef.current) {
@@ -140,12 +176,10 @@ const PartnersMarquee = () => {
         resumeTimerRef.current = null;
       }
     };
-    const onPointerUp = () => {
-      scheduleResume(800);
-    };
+    const onPointerUp = () => scheduleResume(400);
     const onWheel = () => {
       userInteractingRef.current = true;
-      scheduleResume(800);
+      scheduleResume(400);
     };
 
     container.addEventListener("pointerdown", onPointerDown);
@@ -155,8 +189,9 @@ const PartnersMarquee = () => {
     container.addEventListener("touchend", onPointerUp);
 
     return () => {
-      // cleanup
+      // cleanup RAF and listeners
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      rafRef.current = null;
       lastTsRef.current = null;
       window.removeEventListener("resize", handleResize);
       container.removeEventListener("pointerdown", onPointerDown);
@@ -166,19 +201,23 @@ const PartnersMarquee = () => {
       container.removeEventListener("touchend", onPointerUp);
       if (resizeTimer) window.clearTimeout(resizeTimer);
       if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current);
+
+      if (typeof mq.removeEventListener === "function") {
+        mq.removeEventListener("change", handleReduced);
+      } else if (typeof (mq as any).removeListener === "function") {
+        (mq as any).removeListener(handleReduced);
+      }
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loopSeconds]);
 
-  // recompute distance on mount and when partner list changes
+  // ensure set width is computed after images load (give small delay)
   useEffect(() => {
-    const applyDistanceOnce = () => {
-      const distance = computeDistance();
-      distanceRef.current = Math.max(1, distance);
-      normalizeScrollLeft(distanceRef.current);
-    };
-    // small delay to allow images to load & layout to settle
-    const t = window.setTimeout(applyDistanceOnce, 120);
+    const t = window.setTimeout(() => {
+      const w = computeSetWidth();
+      setWidthRef.current = Math.max(1, w);
+      normalizeScroll(setWidthRef.current);
+    }, 180);
     return () => clearTimeout(t);
   }, [partners.length]);
 
@@ -217,39 +256,24 @@ const PartnersMarquee = () => {
           </button>
 
           <div className="px-16">
-            <div
-              ref={containerRef}
-              className="overflow-x-auto overflow-y-hidden -mx-4 px-4"
-              // container is always scrollable by user; scrollbar is hidden by CSS below
-            >
+            <div ref={containerRef} className="overflow-x-auto overflow-y-hidden -mx-4 px-4">
               <div ref={marqueeRef} className="flex will-change-transform">
-                {/* first set */}
-                <div className="flex items-center gap-12 min-w-max justify-start">
-                  {partners.map((partner, i) => (
-                    <div key={`s1-${i}`} className="flex-shrink-0" aria-label={`${partner.name} logo`}>
-                      <img
-                        src={`/logos/${partner.file}`}
-                        alt={partner.name}
-                        className={`${partner.featured ? "h-16 md:h-20" : "h-9 md:h-12"} object-contain filter grayscale opacity-90 mx-3`}
-                        loading="lazy"
-                      />
-                    </div>
-                  ))}
-                </div>
-
-                {/* duplicated set */}
-                <div className="flex items-center gap-12 min-w-max justify-start">
-                  {partners.map((partner, i) => (
-                    <div key={`s2-${i}`} className="flex-shrink-0" aria-label={`${partner.name} logo`}>
-                      <img
-                        src={`/logos/${partner.file}`}
-                        alt={partner.name}
-                        className={`${partner.featured ? "h-16 md:h-20" : "h-9 md:h-12"} object-contain filter grayscale opacity-90 mx-3`}
-                        loading="lazy"
-                      />
-                    </div>
-                  ))}
-                </div>
+                {/* render three sets to provide buffer for seamless wrap */}
+                {[0, 1, 2].map(setIndex => (
+                  <div key={setIndex} className="flex items-center gap-12 min-w-max justify-start">
+                    {partners.map((partner, i) => (
+                      <div key={`s${setIndex}-${i}`} className="flex-shrink-0" aria-label={`${partner.name} logo`}>
+                        <img
+                          src={`/logos/${partner.file}`}
+                          alt={partner.name}
+                          className={`${partner.featured ? "h-16 md:h-20" : "h-9 md:h-12"} object-contain filter grayscale opacity-90 mx-3`}
+                          loading="lazy"
+                          decoding="async"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                ))}
               </div>
             </div>
           </div>
@@ -265,7 +289,6 @@ const PartnersMarquee = () => {
             display: none; /* Safari/WebKit */
           }
           
-          /* small responsive padding */
           @media (max-width: 768px) {
             .px-16 {
               padding-left: 1rem;
