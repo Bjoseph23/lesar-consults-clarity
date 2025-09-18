@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const PartnersMarquee = () => {
   const marqueeRef = useRef<HTMLDivElement | null>(null);
@@ -6,6 +7,7 @@ const PartnersMarquee = () => {
   const resetTimerRef = useRef<number | null>(null);
   const [animationSpeed, setAnimationSpeed] = useState(30);
   const [paused, setPaused] = useState(false);
+  const { elementRef: sectionRef, isVisible } = useScrollAnimation();
 
   const partners = [
     { name: "USAID", file: "usaid-logo.png", featured: false },
@@ -108,13 +110,13 @@ const PartnersMarquee = () => {
   return (
     <>
       {/* Section Title */}
-      <div className="text-center mb-8">
+      <div className={`text-center mb-8 transition-all duration-1000 ${isVisible ? 'animate-fade-in' : 'opacity-0 translate-y-8'}`}>
         <h2 className="text-2xl md:text-3xl font-serif font-semibold text-primary">
           Our Partners:
         </h2>
       </div>
 
-      <section className="bg-cream/60 py-12 overflow-hidden" aria-label="Our partners and funders">
+      <section ref={sectionRef} className={`bg-cream/60 py-12 overflow-hidden transition-all duration-1000 delay-300 ${isVisible ? 'animate-fade-in' : 'opacity-0'}`} aria-label="Our partners and funders">
         <div className="relative max-w-7xl mx-auto">
           <div className="sr-only">Logos of partners and funders</div>
 
@@ -183,7 +185,7 @@ const PartnersMarquee = () => {
         </div>
 
         {/* Inline styles for marquee animation */}
-        <style jsx>{`
+        <style>{`
           /* container uses the CSS variable --marquee-translate (negative px) set from JS */
           .partners-marquee-inner {
             /* nothing here — each inner set holds logos */

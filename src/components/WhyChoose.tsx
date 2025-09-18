@@ -1,6 +1,10 @@
 import { CheckCircle, Users, Award, Globe } from "lucide-react";
+import { useScrollAnimation, useStaggeredAnimation } from "@/hooks/useScrollAnimation";
 
 const WhyChoose = () => {
+  const { elementRef: sectionRef, isVisible } = useScrollAnimation();
+  const { elementRef: featuresRef, visibleItems } = useStaggeredAnimation(4, 150);
+  
   const features = [
     {
       icon: CheckCircle,
@@ -25,9 +29,9 @@ const WhyChoose = () => {
   ];
 
   return (
-    <section id="why-choose" className="py-20 bg-card">
+    <section ref={sectionRef} id="why-choose" className={`py-20 bg-card transition-all duration-1000 ${isVisible ? 'animate-fade-in' : 'opacity-0'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
+        <div className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'animate-fade-in' : 'opacity-0 translate-y-8'}`}>
           <h2 className="text-3xl md:text-4xl font-serif font-bold text-primary mb-4">
             Why Choose Lesar Consults
           </h2>
@@ -36,14 +40,13 @@ const WhyChoose = () => {
           </p>
         </div>
         
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div ref={featuresRef as React.RefObject<HTMLDivElement>} className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {features.map((feature, index) => {
             const Icon = feature.icon;
             return (
               <div
                 key={feature.title}
-                className="text-center animate-fade-in"
-                style={{ animationDelay: `${index * 0.1}s` }}
+                className={`text-center transition-all duration-1000 ${visibleItems.includes(index) ? 'animate-fade-in' : 'opacity-0 translate-y-8'}`}
               >
                 <div className="mb-6">
                   <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto hover:bg-primary/20 transition-colors">

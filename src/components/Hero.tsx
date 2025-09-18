@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { useEffect, useRef } from "react";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 interface HeroProps {
   onContactModalOpen: () => void;
@@ -7,6 +8,7 @@ interface HeroProps {
 
 const Hero = ({ onContactModalOpen }: HeroProps) => {
   const imageRef = useRef<HTMLImageElement>(null);
+  const { elementRef: heroRef, isVisible } = useScrollAnimation({ threshold: 0.2 });
 
   const scrollToProjects = () => {
     const projectsSection = document.getElementById('projects');
@@ -34,23 +36,23 @@ const Hero = ({ onContactModalOpen }: HeroProps) => {
   }, []);
 
   return (
-    <section id="home" className="relative min-h-screen bg-gradient-subtle pt-16">
+    <section ref={heroRef} id="home" className={`relative min-h-screen bg-gradient-subtle pt-16 transition-all duration-1000 ${isVisible ? 'animate-fade-in' : 'opacity-0'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 items-center min-h-screen py-16">
           {/* Left Column - Content */}
           <div className="flex flex-col justify-center lg:order-1 order-2">
             {/* Main Headline */}
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-primary mb-6 text-balance">
+            <h1 className={`text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-primary mb-6 text-balance transition-all duration-1000 delay-300 ${isVisible ? 'animate-fade-in' : 'opacity-0 translate-y-8'}`}>
               Demystifying opinions in health systems, economics and analytics
             </h1>
             
             {/* Subheadline */}
-            <p className="text-xl md:text-2xl text-muted-foreground mb-8 text-balance">
+            <p className={`text-xl md:text-2xl text-muted-foreground mb-8 text-balance transition-all duration-1000 delay-500 ${isVisible ? 'animate-fade-in' : 'opacity-0 translate-y-8'}`}>
               Lesar Consults: Evidence-based research, analytics and advisory for health systems, finance, and development across Kenya and East Africa.
             </p>
             
             {/* Call-to-Action Buttons */}
-            <div className="flex flex-col gap-4 max-w-md">
+            <div className={`flex flex-col gap-4 max-w-md transition-all duration-1000 delay-700 ${isVisible ? 'animate-fade-in' : 'opacity-0 translate-y-8'}`}>
               <Button
                 onClick={onContactModalOpen}
                 className="bg-dark-red hover:bg-dark-red/90 text-white text-lg px-8 py-4 w-full sm:w-auto"

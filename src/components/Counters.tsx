@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from "react";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const Counters = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [hasAnimated, setHasAnimated] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
+  const { elementRef: titleRef, isVisible: titleVisible } = useScrollAnimation();
 
   const stats = [
     { label: "Years Experience", value: 8, suffix: "+" },
@@ -73,14 +75,14 @@ const Counters = () => {
   };
 
   return (
-    <section ref={sectionRef} className="py-20 bg-primary text-primary-foreground">
+    <section ref={sectionRef} className={`py-20 bg-primary text-primary-foreground transition-all duration-1000 ${titleVisible ? 'animate-fade-in' : 'opacity-0'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div ref={titleRef as React.RefObject<HTMLDivElement>} className="grid grid-cols-2 md:grid-cols-4 gap-8">
           {stats.map((stat, index) => (
             <div
               key={stat.label}
-              className="text-center animate-fade-in"
-              style={{ animationDelay: `${index * 0.1}s` }}
+              className={`text-center transition-all duration-1000 ${titleVisible ? 'animate-fade-in' : 'opacity-0 translate-y-8'}`}
+              style={{ animationDelay: titleVisible ? `${index * 0.2}s` : '0s' }}
             >
               <div className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold mb-2">
                 <AnimatedCounter value={stat.value} suffix={stat.suffix} />

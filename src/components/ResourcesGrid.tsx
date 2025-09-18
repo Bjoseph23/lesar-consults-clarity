@@ -1,7 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Calendar, ArrowRight } from "lucide-react";
+import { useScrollAnimation, useStaggeredAnimation } from "@/hooks/useScrollAnimation";
 
 const ResourcesGrid = () => {
+  const { elementRef: sectionRef, isVisible } = useScrollAnimation();
+  const { elementRef: gridRef, visibleItems } = useStaggeredAnimation(3, 150);
+  
   const resources = [
     {
       category: "Case Study",
@@ -40,9 +44,9 @@ const ResourcesGrid = () => {
   };
 
   return (
-    <section id="resources" className="py-20 bg-background">
+    <section ref={sectionRef} id="resources" className={`py-20 bg-background transition-all duration-1000 ${isVisible ? 'animate-fade-in' : 'opacity-0'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
+        <div className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'animate-fade-in' : 'opacity-0 translate-y-8'}`}>
           <h2 className="text-3xl md:text-4xl font-serif font-bold text-primary mb-4">
             Latest Resources
           </h2>
@@ -51,12 +55,11 @@ const ResourcesGrid = () => {
           </p>
         </div>
         
-        <div className="grid md:grid-cols-3 gap-8 mb-12">
+        <div ref={gridRef as React.RefObject<HTMLDivElement>} className="grid md:grid-cols-3 gap-8 mb-12">
           {resources.map((resource, index) => (
             <article
               key={resource.title}
-              className="card-elevated group animate-fade-in"
-              style={{ animationDelay: `${index * 0.1}s` }}
+              className={`card-elevated group transition-all duration-1000 ${visibleItems.includes(index) ? 'animate-fade-in' : 'opacity-0 translate-y-8'}`}
             >
               <div className="mb-4">
                 <span className={`text-xs font-medium px-2 py-1 rounded-full ${getCategoryColor(resource.category)}`}>

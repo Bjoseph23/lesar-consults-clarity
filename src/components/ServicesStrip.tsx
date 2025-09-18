@@ -1,7 +1,10 @@
 import { Heart, TrendingUp, Search, BarChart } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useStaggeredAnimation } from "@/hooks/useScrollAnimation";
 
 const ServicesStrip = () => {
+  const { elementRef: sectionRef, isVisible, visibleItems } = useStaggeredAnimation(6, 150);
+  
   const services = [
     {
       icon: Heart,
@@ -30,9 +33,9 @@ const ServicesStrip = () => {
   ];
 
   return (
-    <section id="services-preview" className="py-20 bg-background">
+    <section ref={sectionRef} id="services-preview" className="py-20 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
+        <div className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'animate-fade-in' : 'opacity-0 translate-y-8'}`}>
           <h2 className="text-3xl md:text-4xl font-serif font-bold text-primary mb-4">
             Our Core Services
           </h2>
@@ -47,7 +50,7 @@ const ServicesStrip = () => {
             return (
               <div
                 key={service.title}
-                className="card-service group animate-fade-in"
+                className={`card-service group transition-all duration-1000 ${visibleItems.includes(index) ? 'animate-fade-in' : 'opacity-0 translate-y-8'}`}
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <div className="mb-4">

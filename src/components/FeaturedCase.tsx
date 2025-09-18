@@ -1,13 +1,17 @@
 import { Button } from "@/components/ui/button";
 import { ExternalLink } from "lucide-react";
+import { useScrollAnimation, useStaggeredAnimation } from "@/hooks/useScrollAnimation";
 
 const FeaturedCase = () => {
+  const { elementRef: sectionRef, isVisible } = useScrollAnimation();
+  const { elementRef: contentRef, visibleItems } = useStaggeredAnimation(4, 200);
+  
   return (
-    <section id="featured-case" className="py-20 bg-card">
+    <section ref={sectionRef} id="featured-case" className={`py-20 bg-card transition-all duration-1000 ${isVisible ? 'animate-fade-in' : 'opacity-0'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Content */}
-          <div className="animate-fade-in">
+          <div ref={contentRef as React.RefObject<HTMLDivElement>} className={`transition-all duration-1000 ${isVisible ? 'animate-fade-in' : 'opacity-0 translate-y-8'}`}>
             <div className="mb-6">
               <span className="text-sm font-medium text-accent bg-accent/10 px-3 py-1 rounded-full">
                 Featured Case Study
