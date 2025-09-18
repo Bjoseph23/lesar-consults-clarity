@@ -128,7 +128,7 @@ const ContactWizard = ({ onSubmit }: ContactWizardProps) => {
       case 6:
         return <StepSix {...stepProps} />;
       default:
-        return null;
+        return <StepOne {...stepProps} />;
     }
   };
 
@@ -147,37 +147,50 @@ const ContactWizard = ({ onSubmit }: ContactWizardProps) => {
 
   return (
     <div className="relative">
+      {/* Back to Home Button */}
+      <div className="flex justify-start mb-6">
+        <Button
+          variant="ghost"
+          onClick={() => window.location.href = '/'}
+          className="flex items-center space-x-2 text-muted-foreground hover:text-primary"
+        >
+          <ArrowLeft className="h-4 w-4" />
+          <span>Back to Home</span>
+        </Button>
+      </div>
+
       {/* Progress Bar */}
       <div className="mb-8">
         <ProgressBar currentStep={currentStep} totalSteps={totalSteps} />
       </div>
 
-      {/* Hero Section */}
-      <div className="text-center mb-12">
-        <h1 className="text-4xl sm:text-5xl font-serif font-bold text-navy mb-4">
-          Let's discuss your project
-        </h1>
-        <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-          Tell us about your needs and we'll get back within 2 business days.
-        </p>
-      </div>
+      {/* Main Form Container */}
+      <div className="border border-border rounded-2xl bg-background shadow-card p-8 mb-8">
+        {/* Hero Section */}
+        <div className="text-center mb-12">
+          <h1 className="text-4xl sm:text-5xl font-serif font-bold text-navy mb-4">
+            Let's discuss your project
+          </h1>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Tell us about your needs and we'll get back within 2 business days.
+          </p>
+        </div>
 
-      {/* Form Steps Container */}
-      <div className="relative overflow-hidden">
-        <div 
-          className="flex transition-transform duration-300 ease-in-out"
-          style={{ transform: `translateX(-${(currentStep - 1) * 100}%)` }}
-        >
-          {/* Each step takes full width */}
-          {[1, 2, 3, 4, 5, 6].map(step => (
-            <div key={step} className="w-full flex-shrink-0">
-              {currentStep === step && (
-                <div className="bg-white rounded-2xl shadow-card p-8 max-w-2xl mx-auto">
-                  {renderStep()}
+        {/* Form Steps Container */}
+        <div className="relative overflow-hidden">
+          <div 
+            className="flex transition-transform duration-300 ease-in-out"
+            style={{ transform: `translateX(-${(currentStep - 1) * 100}%)` }}
+          >
+            {/* Each step takes full width */}
+            {[1, 2, 3, 4, 5, 6].map(step => (
+              <div key={step} className="w-full flex-shrink-0">
+                <div className="max-w-2xl mx-auto">
+                  {currentStep === step && renderStep()}
                 </div>
-              )}
-            </div>
-          ))}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 

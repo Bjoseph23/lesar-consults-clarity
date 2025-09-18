@@ -9,7 +9,7 @@ const ProgressBar = ({ currentStep, totalSteps }: ProgressBarProps) => {
   return (
     <div className="flex items-center space-x-4">
       <span className="text-sm font-medium text-muted-foreground">
-        {currentStep}/{totalSteps}
+        Step {currentStep}/{totalSteps}
       </span>
       <div className="w-32 h-2 bg-muted rounded-full overflow-hidden">
         <div 
