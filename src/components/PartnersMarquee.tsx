@@ -26,6 +26,7 @@ const PartnersMarquee = () => {
     { name: "Kenya Red Cross", file: "redcross-logo.png", featured: true },
     { name: "DFID", file: "dfid-logo.png", featured: false },
     { name: "Wellcome", file: "welcome-logo.png", featured: false },
+    { name: "University of Nairobi", file: "uon-logo.png", featured: true },
   ];
 
   // Preload images (first renders) so next logos are ready when arrows scroll
