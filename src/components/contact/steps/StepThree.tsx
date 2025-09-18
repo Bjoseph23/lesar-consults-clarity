@@ -52,32 +52,38 @@ const StepThree = ({ formData, updateFormData }: StepThreeProps) => {
           <Label htmlFor="phone" className="text-sm font-medium">
             Phone Number *
           </Label>
-          <div className="flex gap-2">
-            <Select 
-              value={formData.countryCode || defaultCountry.code} 
-              onValueChange={(value) => updateFormData("countryCode", value)}
-            >
-              <SelectTrigger className="w-[180px] text-lg py-3">
-                <SelectValue placeholder="Select country" />
-              </SelectTrigger>
-              <SelectContent className="max-h-[200px] bg-background border border-border">
-                {countries.map((country) => (
-                  <SelectItem key={country.code} value={country.code} className="hover:bg-muted">
-                    <span className="flex items-center gap-2">
-                      <span>{country.flag}</span>
-                      <span>{country.name} ({country.code})</span>
-                    </span>
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+          <div className="flex flex-col sm:flex-row gap-3">
+            <div className="w-full sm:w-auto">
+              <Select 
+                value={formData.countryCode || defaultCountry.code} 
+                onValueChange={(value) => updateFormData("countryCode", value)}
+              >
+                <SelectTrigger className="w-full sm:w-[200px] h-12 text-sm">
+                  <SelectValue placeholder="Select country" />
+                </SelectTrigger>
+                <SelectContent className="max-h-[300px] bg-background border border-border z-50">
+                  {countries.map((country) => (
+                    <SelectItem 
+                      key={country.code} 
+                      value={country.code} 
+                      className="hover:bg-muted cursor-pointer text-sm py-2"
+                    >
+                      <div className="flex items-center gap-2">
+                        <span className="text-base">{country.flag}</span>
+                        <span className="truncate">{country.name} ({country.code})</span>
+                      </div>
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
             <Input
               id="phone"
               type="tel"
               value={formData.phone}
               onChange={(e) => updateFormData("phone", e.target.value)}
               placeholder="XXX XXX XXX"
-              className="text-lg py-3 flex-1"
+              className="flex-1 h-12 text-lg"
             />
           </div>
           {formData.phone && !isPhoneValid(formData.phone) && (
