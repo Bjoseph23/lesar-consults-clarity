@@ -49,31 +49,35 @@ const ServicesStrip = () => {
             return (
               <div
                 key={service.title}
-                className={`card-service group transition-all duration-1000 ${visibleItems.includes(index) ? 'animate-fade-in' : 'opacity-0 translate-y-8'}`}
+                className={`card-service group transition-all duration-1000 flex flex-col h-full ${visibleItems.includes(index) ? 'animate-fade-in' : 'opacity-0 translate-y-8'}`}
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <div className="mb-4">
-                  <service.icon className="w-8 h-8 text-primary" />
+                  <div className="w-12 h-12 bg-muted rounded-lg flex items-center justify-center">
+                    <service.icon className="w-6 h-6 text-primary" />
+                  </div>
                 </div>
                 
                 <h3 className="text-lg font-serif font-semibold text-primary mb-3">
                   {service.title}
                 </h3>
                 
-                <p className="text-muted-foreground text-sm mb-4 leading-relaxed">
+                <p className="text-muted-foreground text-sm mb-4 leading-relaxed flex-grow">
                   {service.description}
                 </p>
                 
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="text-primary hover:text-white hover:bg-primary px-3 py-2 h-auto font-medium transition-all duration-300"
-                  asChild
-                >
-                  <a href={service.href}>
-                    Learn more →
-                  </a>
-                </Button>
+                <div className="mt-auto">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="text-primary hover:text-white hover:bg-primary px-3 py-2 h-auto font-medium transition-all duration-300"
+                    asChild
+                  >
+                    <a href={service.href}>
+                      Learn more →
+                    </a>
+                  </Button>
+                </div>
               </div>
             );
           })}
