@@ -73,7 +73,9 @@ const Navbar = ({ onContactModalOpen }: NavbarProps) => {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex items-center">
-            <img src="/logo.png" alt="Lesar Consults" className="h-8 w-auto" />
+            <a href="#home" className="flex items-center">
+              <img src="/logo.png" alt="Lesar Consults" className="h-12 w-auto" />
+            </a>
           </div>
 
           {/* Desktop Navigation */}
