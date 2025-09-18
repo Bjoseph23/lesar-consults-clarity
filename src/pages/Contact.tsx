@@ -29,15 +29,9 @@ const Contact = () => {
       <header className="relative z-10 px-4 sm:px-6 lg:px-8 py-6">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           {/* Logo */}
-          <div className="flex flex-col items-start space-y-4">
+          <div className="flex items-center space-x-4">
             <img src="/logo.png" alt="Lesar Consults" className="h-12 sm:h-16 w-auto" />
-            <button 
-              onClick={() => navigate('/')}
-              className="btn-primary flex items-center space-x-2 text-sm"
-            >
-              <ArrowLeft className="h-4 w-4 text-black" />
-              <span>Back to home</span>
-            </button>
+            
           </div>
           
           {/* Progress bar placeholder - will be controlled by ContactWizard */}
