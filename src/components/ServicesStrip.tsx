@@ -1,4 +1,3 @@
-import { Heart, TrendingUp, Search, BarChart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useStaggeredAnimation } from "@/hooks/useScrollAnimation";
 
@@ -7,25 +6,21 @@ const ServicesStrip = () => {
   
   const services = [
     {
-      icon: Heart,
       title: "Health Systems Strengthening",
       description: "Comprehensive health workforce development, care financing strategies, and universal health care service delivery consultancies.",
       href: "#services"
     },
     {
-      icon: TrendingUp,
       title: "Financial Analysis & Economics",
       description: "Corporate financial modeling, capital raising, investment case development, and program-based budgeting solutions.",
       href: "#services"
     },
     {
-      icon: BarChart,
       title: "Monitoring & Evaluation",
       description: "Program evaluation, quality impact assessments, baseline and end-term evaluations with interactive dashboards.",
       href: "#services"
     },
     {
-      icon: Search,
       title: "Customized Research & Surveys",
       description: "Epidemiological studies, risk analysis, household surveys, and publications in peer-reviewed journals.",
       href: "#services"
@@ -46,18 +41,12 @@ const ServicesStrip = () => {
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {services.map((service, index) => {
-            const Icon = service.icon;
             return (
               <div
                 key={service.title}
                 className={`card-service group transition-all duration-1000 ${visibleItems.includes(index) ? 'animate-fade-in' : 'opacity-0 translate-y-8'}`}
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
-                <div className="mb-4">
-                  <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                    <Icon className="h-6 w-6 text-primary" />
-                  </div>
-                </div>
                 
                 <h3 className="text-lg font-serif font-semibold text-primary mb-3">
                   {service.title}
