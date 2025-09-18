@@ -70,7 +70,7 @@ const ServicesStrip = () => {
                   <Button
                     variant="ghost"
                     size="sm"
-                    className="text-primary hover:text-white hover:bg-primary px-3 py-2 h-auto font-medium transition-all duration-300"
+                    className=" btn-secondary duration-300"
                     asChild
                   >
                     <a href={service.href}>
