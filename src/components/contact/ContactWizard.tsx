@@ -177,19 +177,11 @@ const ContactWizard = ({ onSubmit }: ContactWizardProps) => {
         </div>
 
         {/* Form Steps Container */}
-        <div className="relative overflow-hidden">
-          <div 
-            className="flex transition-transform duration-300 ease-in-out"
-            style={{ transform: `translateX(-${(currentStep - 1) * 100}%)` }}
-          >
-            {/* Each step takes full width */}
-            {[1, 2, 3, 4, 5, 6].map(step => (
-              <div key={step} className="w-full flex-shrink-0">
-                <div className="max-w-2xl mx-auto">
-                  {currentStep === step && renderStep()}
-                </div>
-              </div>
-            ))}
+        <div className="relative">
+          <div className="max-w-2xl mx-auto w-full">
+            <div key={currentStep} className="animate-fade-in">
+              {renderStep()}
+            </div>
           </div>
         </div>
       </div>
