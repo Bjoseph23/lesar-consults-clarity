@@ -34,6 +34,7 @@ interface ContactWizardProps {
 const ContactWizard = ({ onSubmit }: ContactWizardProps) => {
   const [currentStep, setCurrentStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
   
   const [formData, setFormData] = useState<FormData>({
     fullName: "",
@@ -98,15 +99,16 @@ const ContactWizard = ({ onSubmit }: ContactWizardProps) => {
 
   // Handle form submission
   const handleSubmit = async () => {
-    if (!isStepValid()) return;
+    if (!isStepValid() || isSubmitted) return;
     
     setIsSubmitting(true);
     
     // Simulate submission delay
     await new Promise(resolve => setTimeout(resolve, 1500));
     
+    setIsSubmitted(true);
     onSubmit(formData);
-    setIsSubmitting(false);
+    // Keep isSubmitting true and don't reset it
   };
 
   // Render current step
@@ -217,18 +219,18 @@ const ContactWizard = ({ onSubmit }: ContactWizardProps) => {
         ) : (
           <Button
             onClick={handleSubmit}
-            disabled={!isStepValid() || isSubmitting}
+            disabled={!isStepValid() || isSubmitting || isSubmitted}
             className="btn-accent flex items-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {isSubmitting ? (
+            {isSubmitting || isSubmitted ? (
               <>
                 <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                <span>Submitting...</span>
+                <span>{isSubmitted ? 'Submitted' : 'Submitting...'}</span>
               </>
             ) : (
               <>
                 <span>Submit Request</span>
-                <Plane className={`h-4 w-4 transition-transform duration-300 ${isSubmitting ? 'translate-x-2 scale-110' : ''}`} />
+                <Plane className="h-4 w-4" />
               </>
             )}
           </Button>
