@@ -4,15 +4,10 @@ import { Button } from "@/components/ui/button";
 
 const CalendlyEmbed = () => {
   useEffect(() => {
-    // TODO: Paste your Calendly embed script here
-    // Example:
-    // const script = document.createElement('script');
-    // script.src = 'https://assets.calendly.com/assets/external/widget.js';
-    // script.async = true;
-    // document.body.appendChild(script);
-    
-    // For now, we'll show a placeholder
-    console.log("Calendly embed would be initialized here");
+    const script = document.createElement('script');
+    script.src = 'https://assets.calendly.com/assets/external/widget.js';
+    script.async = true;
+    document.body.appendChild(script);
   }, []);
 
   return (
@@ -20,29 +15,15 @@ const CalendlyEmbed = () => {
       {/* Calendly Inline Widget Container */}
       <div 
         className="calendly-inline-widget" 
-        data-url="https://calendly.com/YOUR_CALENDLY_LINK"
+        data-url="https://calendly.com/momondi9773-stu/30min"
         style={{ minWidth: '320px', height: '400px' }}
       >
-        {/* 
-          TODO: Replace with your actual Calendly embed
-          1. Sign up for Calendly and create an event
-          2. Get your embed code from Calendly
-          3. Replace the data-url above with your actual Calendly link
-          4. Add the Calendly widget script to the useEffect above
-          
-          Example embed script:
-          <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
-        */}
-        
         {/* Placeholder Content */}
         <div className="bg-muted/50 rounded-lg p-8 text-center h-full flex flex-col justify-center">
           <Calendar className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-          <h4 className="font-semibold text-navy mb-2">Calendly Integration</h4>
+          <h4 className="font-semibold text-navy mb-2">Schedule a Meeting</h4>
           <p className="text-sm text-muted-foreground mb-4">
-            Calendar widget will appear here once Calendly is configured.
-          </p>
-          <p className="text-xs text-muted-foreground mb-4">
-            See README.md for setup instructions.
+            Loading calendar widget...
           </p>
         </div>
       </div>
@@ -52,11 +33,11 @@ const CalendlyEmbed = () => {
         <Button 
           variant="outline" 
           size="sm"
-          onClick={() => window.open('https://calendly.com/YOUR_CALENDLY_LINK', '_blank')}
+          onClick={() => window.open('https://calendly.com/momondi9773-stu/30min', '_blank')}
           className="flex items-center space-x-2"
         >
           <ExternalLink className="h-4 w-4" />
-          <span>Open Calendar</span>
+          <span>Book a demo Meeting/ Talk with us</span>
         </Button>
         <p className="text-xs text-muted-foreground mt-2">
           Opens in a new tab if embed is unavailable
