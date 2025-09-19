@@ -8,7 +8,7 @@ const CalendlyEmbed = () => {
         variant="destructive" 
         size="lg"
         onClick={() => window.open('https://calendly.com/momondi9773-stu/30min', '_blank')}
-        className="flex items-center space-x-2 hover-scale transition-all duration-300 hover:shadow-lg"
+        className="btn-primary w-full hover-scale text-sm sm:text-base"
       >
         <ExternalLink className="h-4 w-4" />
         <span>Lets Talk- Book a meeting</span>
