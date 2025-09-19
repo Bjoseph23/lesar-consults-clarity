@@ -25,7 +25,7 @@ const PartnersMarquee = () => {
     { name: "AMREF", file: "amref-logo.png", featured: true },
     { name: "Kenya Red Cross", file: "redcross-logo.png", featured: true },
     { name: "DFID", file: "dfid-logo.png", featured: false },
-    { name: "Wellcome", file: "welcome-logo.png", featured: false },
+    { name: "Global Fund", file: "globalfund-logo.png", featured: false },
     { name: "University of Nairobi", file: "uon-logo.png", featured: true },
   ];
 
