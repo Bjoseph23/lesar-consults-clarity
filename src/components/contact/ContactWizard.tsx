@@ -159,7 +159,7 @@ const ContactWizard = ({ onSubmit }: ContactWizardProps) => {
           onClick={() => window.location.href = '/'}
           className="flex items-center space-x-2 text-muted-foreground hover:text-primary"
         >
-          <ArrowLeft className="h-4 w-4" />
+          <ArrowLeft className="h-4 w-4" bt-primary />
           <span>Back to Home</span>
         </Button>
       </div>
