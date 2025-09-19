@@ -69,8 +69,14 @@ const Contact = () => {
 
       {/* Background Elements */}
       <div className="absolute inset-0 bg-gradient-subtle opacity-50"></div>
-      <div className="absolute top-1/4 right-0 w-64 h-64 bg-cream/20 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-1/4 left-0 w-48 h-48 bg-navy/10 rounded-full blur-3xl"></div>
+      
+      {/* Animated Background Blobs */}
+      <div className="absolute top-1/4 right-0 w-64 h-64 bg-navy/20 rounded-full blur-3xl animate-pulse"></div>
+      <div className="absolute bottom-1/4 left-0 w-48 h-48 bg-destructive/15 rounded-full blur-3xl animate-pulse delay-700"></div>
+      <div className="absolute top-1/2 left-1/4 w-32 h-32 bg-primary/20 rounded-full blur-2xl animate-pulse delay-300"></div>
+      <div className="absolute bottom-1/3 right-1/3 w-40 h-40 bg-accent/25 rounded-full blur-3xl animate-pulse delay-1000"></div>
+      <div className="absolute top-3/4 right-1/4 w-56 h-56 bg-navy/15 rounded-full blur-3xl animate-pulse delay-500"></div>
+      <div className="absolute top-1/6 left-1/2 w-36 h-36 bg-destructive/20 rounded-full blur-2xl animate-pulse delay-1200"></div>
     </div>;
 };
 export default Contact;
