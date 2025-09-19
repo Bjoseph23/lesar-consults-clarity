@@ -151,7 +151,7 @@ const Navbar = () => {
         {/* Right-side drawer box but container is full viewport */}
         <aside className={`pointer-events-auto absolute top-0 right-0 h-full w-full sm:max-w-md bg-white transform transition-transform duration-300 ${isOpen ? "translate-x-0" : "translate-x-full"}`}>
           <div className="flex items-center justify-between px-4 py-4 border-b border-gray-200">
-            <img src="/logo.png" alt="Lesar Consults" className="h-10 w-auto" />
+            <img src="/lesar-logoo.png" alt="Lesar Consults" className="h-10 w-auto" />
             <Button variant="ghost" size="icon" onClick={() => setIsOpen(false)} aria-label="Close menu">
               <X className="h-6 w-6" />
             </Button>

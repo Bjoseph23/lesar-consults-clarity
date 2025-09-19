@@ -30,7 +30,7 @@ const Contact = () => {
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center space-x-4">
-            <img src="/logo.png" alt="Lesar Consults" className="h-12 sm:h-16 w-auto" />
+            <img src="/lesar-logoo.png" alt="Lesar Consults" className="h-12 sm:h-16 w-auto" />
             
           </div>
           

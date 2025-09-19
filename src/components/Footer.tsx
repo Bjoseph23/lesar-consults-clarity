@@ -72,7 +72,7 @@ const Footer = () => {
             {/* Company Info */}
             <div className="lg:col-span-1">
               <img
-                src="/logo.png"
+                src="/lesar-logoo.png"
                 alt="Lesar Consults"
                 className="h-8 w-auto mb-4 brightness-0 invert"
               />
