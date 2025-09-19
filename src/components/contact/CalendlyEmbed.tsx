@@ -3,9 +3,9 @@ import { Button } from "@/components/ui/button";
 
 const CalendlyEmbed = () => {
   return (
-    <div className="flex flex-col items-center justify-center space-y-3">
+    <div className="flex justify-center">
       <Button 
-        variant="destructive" 
+        variant="secondary" 
         size="lg"
         onClick={() => window.open('https://calendly.com/momondi9773-stu/30min', '_blank')}
         className="flex items-center space-x-2 hover-scale transition-all duration-300 hover:shadow-lg"
@@ -13,7 +13,7 @@ const CalendlyEmbed = () => {
         <ExternalLink className="h-4 w-4" />
         <span>Lets- Talk- Book a Meeting</span>
       </Button>
-      <p className="text-xs text-muted-foreground">
+      <p className="text-xs text-muted-foreground text-center mt-2">
         Opens in a new tab if embed is unavailable
       </p>
     </div>
