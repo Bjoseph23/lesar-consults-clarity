@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { FileText, Calendar, RotateCcw } from "lucide-react";
+import { FileText, Calendar, RotateCcw, ArrowLeft } from "lucide-react";
 import CalendlyEmbed from "./CalendlyEmbed";
 
 interface SuccessOptionsProps {
@@ -9,6 +9,20 @@ interface SuccessOptionsProps {
 const SuccessOptions = ({ onNewRequest }: SuccessOptionsProps) => {
   return (
     <div className="animate-fade-in">
+      {/* Back to Home Button */}
+      <div className="flex justify-start mb-6">
+        <Button
+          variant="ghost"
+          onClick={() => (window.location.href = "/")}
+          className="group flex items-center space-x-2 text-muted-foreground"
+        >
+          <ArrowLeft className="h-4 w-4 text-muted-foreground group-hover:text-white transition-colors" />
+          <span className="group-hover:text-white transition-colors">
+            Back to Home
+          </span>
+        </Button>
+      </div>
+
       {/* Header */}
       <div className="text-center mb-8 sm:mb-12 px-4">
         <h1 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-bold text-navy mb-3 sm:mb-4">
@@ -34,7 +48,7 @@ const SuccessOptions = ({ onNewRequest }: SuccessOptionsProps) => {
               Book a time that works for you to discuss your project in detail.
             </p>
           </div>
-          
+
           <CalendlyEmbed />
         </div>
 
@@ -48,12 +62,13 @@ const SuccessOptions = ({ onNewRequest }: SuccessOptionsProps) => {
               Explore More Resources
             </h3>
             <p className="text-sm sm:text-base text-muted-foreground mb-4 sm:mb-6">
-              Learn more about our services, case studies, and insights while you wait for our response.
+              Learn more about our services, case studies, and insights while you
+              wait for our response.
             </p>
-            <Button 
-              size="lg" 
+            <Button
+              size="lg"
               className="btn-primary w-full hover-scale text-sm sm:text-base"
-              onClick={() => window.location.href = '/#resources'}
+              onClick={() => (window.location.href = "/#resources")}
             >
               Go to Resources
             </Button>
