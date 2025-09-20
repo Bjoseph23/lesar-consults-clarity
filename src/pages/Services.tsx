@@ -85,59 +85,61 @@ const Services = () => {
                 
                 return (
                   <AnimatedSection key={service.id}>
-                    <div className={`${bgClass} -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 py-16`}>
-                      <div className={`grid lg:grid-cols-2 gap-12 items-center ${isEven ? '' : 'lg:grid-flow-col-dense'}`}>
-                        {/* Image */}
-                        <div className={`${isEven ? '' : 'lg:col-start-2'} group`}>
-                          <div className="relative bg-gradient-subtle rounded-lg h-80 flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
-                            <div className="text-center">
-                              <IconComponent className="w-16 h-16 text-navy mx-auto mb-4" />
-                              <div className="text-navy text-sm font-medium">Service Visualization</div>
-                            </div>
-                          </div>
-                        </div>
-                        
-                        {/* Content */}
-                        <div className={`${isEven ? '' : 'lg:col-start-1 lg:row-start-1'}`}>
-                          <h2 className="text-3xl md:text-4xl font-serif font-bold text-navy mb-6">
-                            {service.title}
-                          </h2>
-                          
-                          <p className="text-navy text-lg leading-relaxed mb-6">
-                            {service.overview}
-                          </p>
-                          
-                          <div className="mb-6">
-                            <h3 className="text-xl font-serif font-semibold text-navy mb-4">Key Services:</h3>
-                            <ul className="grid md:grid-cols-2 gap-2">
-                              {service.miniServices.slice(0, 6).map((item, itemIndex) => (
-                                <li key={itemIndex} className="flex items-start text-navy">
-                                  <span className="w-2 h-2 bg-dark-red rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                                  <span className="text-sm">{item}</span>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                          
-                          {/* Metrics */}
-                          <div className="bg-white rounded-lg p-4 mb-6 border border-navy/10">
-                            <div className="text-2xl font-bold text-green-600 mb-1">
-                              {service.metrics.value}
-                            </div>
-                            <div className="text-sm text-navy">
-                              {service.metrics.description}
+                    <div className={`${bgClass} py-16`}>
+                      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div className={`grid lg:grid-cols-2 gap-12 items-center ${isEven ? '' : 'lg:grid-flow-col-dense'}`}>
+                          {/* Image */}
+                          <div className={`${isEven ? '' : 'lg:col-start-2'} group`}>
+                            <div className="relative bg-gradient-subtle rounded-lg h-80 flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
+                              <div className="text-center">
+                                <IconComponent className="w-16 h-16 text-navy mx-auto mb-4" />
+                                <div className="text-navy text-sm font-medium">Service Visualization</div>
+                              </div>
                             </div>
                           </div>
                           
-                          <Button 
-                            className="bg-dark-red hover:bg-dark-red/90 text-white"
-                            asChild
-                          >
-                            <Link to={`/services/${service.slug}`} className="inline-flex items-center gap-2">
-                              Learn more
-                              <ArrowRight className="w-4 h-4" />
-                            </Link>
-                          </Button>
+                          {/* Content */}
+                          <div className={`${isEven ? '' : 'lg:col-start-1 lg:row-start-1'}`}>
+                            <h2 className="text-3xl md:text-4xl font-serif font-bold text-navy mb-6">
+                              {service.title}
+                            </h2>
+                            
+                            <p className="text-navy text-lg leading-relaxed mb-6">
+                              {service.overview}
+                            </p>
+                            
+                            <div className="mb-6">
+                              <h3 className="text-xl font-serif font-semibold text-navy mb-4">Key Services:</h3>
+                              <ul className="grid md:grid-cols-2 gap-2">
+                                {service.miniServices.slice(0, 6).map((item, itemIndex) => (
+                                  <li key={itemIndex} className="flex items-start text-navy">
+                                    <span className="w-2 h-2 bg-dark-red rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                    <span className="text-sm">{item}</span>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                            
+                            {/* Metrics */}
+                            <div className="bg-white rounded-lg p-4 mb-6 border border-navy/10">
+                              <div className="text-2xl font-bold text-green-600 mb-1">
+                                {service.metrics.value}
+                              </div>
+                              <div className="text-sm text-navy">
+                                {service.metrics.description}
+                              </div>
+                            </div>
+                            
+                            <Button 
+                              className="bg-dark-red hover:bg-dark-red/90 text-white"
+                              asChild
+                            >
+                              <Link to={`/services/${service.slug}`} className="inline-flex items-center gap-2">
+                                Learn more
+                                <ArrowRight className="w-4 h-4" />
+                              </Link>
+                            </Button>
+                          </div>
                         </div>
                       </div>
                     </div>
