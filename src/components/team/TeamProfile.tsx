@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import QuickFacts from "./QuickFacts";
+import { Link } from "react-router-dom"; // <-- added Link
 
 interface TeamMember {
   slug: string;
@@ -89,8 +90,8 @@ const TeamProfile = ({ member }: TeamProfileProps) => {
             <div className="flex items-center gap-3 mb-6">
               <Button 
                 asChild
-              variant="outline"
-              className="bg-blue-800 hover:bg-blue-900 text-white border-blue-800 hover:border-blue-900 cta-glisten"
+                variant="outline"
+                className="bg-blue-800 hover:bg-blue-900 text-white border-blue-800 hover:border-blue-900 cta-glisten"
               >
                 <a 
                   href={member.linkedin}
@@ -216,6 +217,16 @@ const TeamProfile = ({ member }: TeamProfileProps) => {
                       <p className="text-sm text-muted-foreground">
                         {project.impact}
                       </p>
+
+                      {/* See more link aligned right */}
+                      <div className="mt-3 flex justify-end">
+                        <Link
+                          to={`/projects#${project.slug}`}
+                          className="text-sm font-medium text-dark-red hover:underline"
+                        >
+                          See more →
+                        </Link>
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -356,6 +367,16 @@ const TeamProfile = ({ member }: TeamProfileProps) => {
                   <p className="text-xs text-muted-foreground">
                     {project.impact}
                   </p>
+
+                  {/* See more link for mobile */}
+                  <div className="mt-3 flex justify-end">
+                    <Link
+                      to={`/projects#${project.slug}`}
+                      className="text-sm font-medium text-dark-red hover:underline"
+                    >
+                      See more →
+                    </Link>
+                  </div>
                 </div>
               ))}
             </div>
