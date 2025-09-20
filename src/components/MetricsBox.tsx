@@ -122,9 +122,9 @@ const MetricsBox = ({
         
         {hasEstimatedMetrics && (
           <div className="mt-4 pt-3 border-t border-navy/10">
-            <p className="text-xs text-navy/60 text-center">
+            {/* <p className="text-xs text-navy/60 text-center">
               Metrics marked 'Estimated' are conservative projections for display and are editable in data/projects.json.
-            </p>
+            </p> */}
           </div>
         )}
       </div>
