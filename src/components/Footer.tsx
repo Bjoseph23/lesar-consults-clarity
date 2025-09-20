@@ -5,18 +5,18 @@ import { Mail, Phone, MapPin, ExternalLink } from "lucide-react";
 const Footer = () => {
   const navigation = {
     main: [
-      { name: "Home", href: "#home" },
-      { name: "About", href: "#about" },
-      { name: "Team", href: "#team" },
-      { name: "Services", href: "#services" },
+      { name: "Home", href: "/home" },
+      { name: "About", href: "/about" },
+      { name: "Team", href: "/team" },
+      { name: "Services", href: "/services" },
       { name: "Resources", href: "#resources" },
-      { name: "Projects", href: "#projects" },
+      { name: "Projects", href: "/projects" },
     ],
     services: [
-      { name: "Health Systems Strengthening", href: "#services" },
-      { name: "Financial Analysis & Economics", href: "#services" },
-      { name: "Monitoring & Evaluation", href: "#services" },
-      { name: "Research & Surveys", href: "#services" },
+      { name: "Health Systems Strengthening", href: "/services" },
+      { name: "Financial Analysis & Economics", href: "/services" },
+      { name: "Monitoring & Evaluation", href: "/services" },
+      { name: "Research & Surveys", href: "/services" },
     ],
     legal: [
       { name: "Privacy Policy", href: "#privacy" },
