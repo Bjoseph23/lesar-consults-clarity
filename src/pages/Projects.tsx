@@ -142,20 +142,20 @@ const Projects = () => {
                       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <div className={`grid lg:grid-cols-2 gap-12 items-center ${isEven ? '' : 'lg:grid-flow-col-dense'}`}>
                           {/* Image */}
-                          <div className={`${isEven ? '' : 'lg:col-start-2'} group`}>
-                            <div className="relative">
+                          <div className={`${isEven ? '' : 'lg:col-start-2'} group min-w-0`}>
+                            <div className="relative overflow-hidden rounded-lg">
                               <img 
                                 src={project.image} 
                                 alt={project.title}
                                 className="w-full h-80 object-cover rounded-lg shadow-elegant transition-transform duration-300 group-hover:scale-105"
                               />
-                              <div className="absolute inset-0 bg-navy/10 rounded-lg"></div>
+                              <div className="absolute inset-0 bg-navy/10 rounded-lg pointer-events-none"></div>
                             </div>
                           </div>
                           
                           {/* Content */}
-                          <div className={`${isEven ? '' : 'lg:col-start-1 lg:row-start-1'}`}>
-                            <div className="flex items-center gap-2 mb-4">
+                          <div className={`${isEven ? '' : 'lg:col-start-1 lg:row-start-1'} min-w-0`}>
+                            <div className="flex items-center gap-2 mb-4 min-w-0">
                               <Calendar className="w-4 h-4 text-navy" />
                               <span className="text-sm font-medium text-navy">{project.date_range}</span>
                               <span className={`px-2 py-1 rounded-full text-xs font-medium ${
@@ -167,11 +167,11 @@ const Projects = () => {
                               </span>
                             </div>
                             
-                            <h3 className="text-2xl md:text-3xl font-serif font-bold text-navy mb-4">
+                            <h3 className="text-2xl md:text-3xl font-serif font-bold text-navy mb-4 break-words">
                               {project.title}
                             </h3>
                             
-                            <p className="text-navy text-lg leading-relaxed mb-6">
+                            <p className="text-navy text-lg leading-relaxed mb-6 whitespace-normal break-words">
                               {project.summary}
                             </p>
                             
@@ -195,7 +195,7 @@ const Projects = () => {
                               <h4 className="text-lg font-serif font-semibold text-navy mb-3">Key Achievements:</h4>
                               <ul className="space-y-2">
                                 {project.key_achievements.map((achievement, idx) => (
-                                  <li key={idx} className="flex items-start text-navy">
+                                  <li key={idx} className="flex items-start text-navy break-words">
                                     <span className="w-2 h-2 bg-dark-red rounded-full mt-2 mr-3 flex-shrink-0"></span>
                                     <span className="text-sm">{achievement}</span>
                                   </li>
@@ -214,7 +214,7 @@ const Projects = () => {
                               className="mb-6"
                             />
                             
-                            <div className="flex flex-col sm:flex-row gap-4">
+                            <div className="flex flex-wrap sm:flex-nowrap gap-4">
                               <Button 
                                 className="bg-dark-red hover:bg-dark-red/90 text-white"
                                 asChild
@@ -263,17 +263,20 @@ const Projects = () => {
               
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {otherProjects.map((project) => (
-                  <div key={project.id} className="bg-white rounded-lg p-6 shadow-card group hover:shadow-elegant transition-all duration-300">
+                  <div
+                    key={project.id}
+                    className="bg-white rounded-lg p-6 shadow-card group hover:shadow-elegant transition-all duration-300 overflow-hidden min-w-0"
+                  >
                     <div className="flex items-center gap-2 mb-3">
                       <Calendar className="w-4 h-4 text-navy" />
                       <span className="text-sm font-medium text-navy">{project.date_range}</span>
                     </div>
                     
-                    <h3 className="text-lg font-serif font-semibold text-navy mb-3 group-hover:text-navy/80 transition-colors">
+                    <h3 className="text-lg font-serif font-semibold text-navy mb-3 group-hover:text-navy/80 transition-colors break-words">
                       {project.title}
                     </h3>
                     
-                    <p className="text-navy/70 text-sm mb-4 leading-relaxed">
+                    <p className="text-navy/70 text-sm mb-4 leading-relaxed whitespace-normal break-words">
                       {project.summary}
                     </p>
                     
