@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,6 +13,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const panelRef = useRef<HTMLDivElement | null>(null);
+  const location = useLocation();
 
   // Scroll handler: **do not** update isScrolled while menu is open
   useEffect(() => {
@@ -113,12 +114,15 @@ const Navbar = () => {
                 );
               }
 
+              const isActive = item.href.startsWith('/') && location.pathname === item.href;
+              const linkClasses = `navbar-link text-sm font-medium transition-all duration-200 ${isActive ? 'navbar-link-active' : ''}`;
+              
               return item.href.startsWith('/') ? (
-                <Link key={item.name} to={item.href} className="nav-link text-sm font-medium">
+                <Link key={item.name} to={item.href} className={linkClasses}>
                   {item.name}
                 </Link>
               ) : (
-                <a key={item.name} href={item.href} className="nav-link text-sm font-medium">
+                <a key={item.name} href={item.href} className={linkClasses}>
                   {item.name}
                 </a>
               );
@@ -179,12 +183,15 @@ const Navbar = () => {
                 );
               }
 
+              const isActive = item.href.startsWith('/') && location.pathname === item.href;
+              const mobileLinkClasses = `block text-base font-medium transition-colors navbar-link ${isActive ? 'navbar-link-active text-primary' : 'text-gray-900 hover:text-primary'}`;
+              
               return item.href.startsWith('/') ? (
-                <Link key={item.name} to={item.href} className="block text-base font-medium text-gray-900 hover:text-primary transition-colors" onClick={() => setIsOpen(false)}>
+                <Link key={item.name} to={item.href} className={mobileLinkClasses} onClick={() => setIsOpen(false)}>
                   {item.name}
                 </Link>
               ) : (
-                <a key={item.name} href={item.href} className="block text-base font-medium text-gray-900 hover:text-primary transition-colors" onClick={() => setIsOpen(false)}>
+                <a key={item.name} href={item.href} className={mobileLinkClasses} onClick={() => setIsOpen(false)}>
                   {item.name}
                 </a>
               );
