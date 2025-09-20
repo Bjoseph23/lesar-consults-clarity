@@ -101,12 +101,16 @@ const Image3DCarousel = ({ slides, autoPlayInterval = 4000 }: Image3DCarouselPro
             transform: 'translateX(0%) scale(1)',
             zIndex: 30,
             opacity: 1,
+            pointerEvents: 'auto' as const,
+            cursor: 'default',
           };
         default:
           return {
             transform: 'translateX(100%) scale(0.8)',
             zIndex: 0,
             opacity: 0,
+            pointerEvents: 'none' as const,
+            cursor: 'default',
           };
       }
     }
@@ -117,24 +121,32 @@ const Image3DCarousel = ({ slides, autoPlayInterval = 4000 }: Image3DCarouselPro
           transform: 'translateX(0%) scale(1)',
           zIndex: 30,
           opacity: 1,
+          pointerEvents: 'auto' as const,
+          cursor: 'default',
         };
       case 'right':
         return {
-          transform: 'translateX(50%) scale(0.85)',
-          zIndex: 10,
-          opacity: 0.7,
+          transform: 'translateX(48%) scale(0.85)',
+          zIndex: 20,
+          opacity: 0.9,
+          pointerEvents: 'auto' as const,
+          cursor: 'pointer',
         };
       case 'left':
         return {
-          transform: 'translateX(-50%) scale(0.85)',
-          zIndex: 10,
-          opacity: 0.7,
+          transform: 'translateX(-48%) scale(0.85)',
+          zIndex: 20,
+          opacity: 0.9,
+          pointerEvents: 'auto' as const,
+          cursor: 'pointer',
         };
       default:
         return {
           transform: 'translateX(100%) scale(0.8)',
           zIndex: 0,
           opacity: 0,
+          pointerEvents: 'none' as const,
+          cursor: 'default',
         };
     }
   };
@@ -186,7 +198,7 @@ const Image3DCarousel = ({ slides, autoPlayInterval = 4000 }: Image3DCarouselPro
 
           {/* Carousel content */}
           <div 
-            className="relative max-w-4xl mx-auto overflow-hidden px-12"
+            className="relative max-w-4xl mx-auto overflow-visible px-12" // <-- overflow-visible so side peeks show
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             onFocus={handleMouseEnter}
@@ -201,33 +213,38 @@ const Image3DCarousel = ({ slides, autoPlayInterval = 4000 }: Image3DCarouselPro
                   const position = getSlidePosition(index);
                   const slideStyle = getSlideStyle(position, isMobile);
                   
+                  // decide whether this slide should be interactive (left/right) on desktop
+                  const isInteractive = !isMobile && (position === 'left' || position === 'right');
+
                   return (
                     <div
                       key={slide.id}
-                      className={`absolute transition-all duration-700 ease-out ${
-                        isMobile ? 'w-full max-w-sm' : 'w-full max-w-lg'
-                      } h-full`}
+                      className={`absolute transition-all duration-700 ease-out ${isMobile ? 'w-full max-w-sm' : 'w-3/4 max-w-2xl'} h-full`}
                       style={{
                         ...slideStyle,
                         willChange: 'transform, opacity',
                       }}
                     >
                       <div 
-                        className={`relative w-full h-full rounded-2xl overflow-hidden ${
-                          position === 'center' ? 'shadow-2xl' : 'shadow-lg'
-                        }`}
+                        // make the whole slide clickable if it's a side slide
+                        onClick={() => { if (isInteractive) goToSlide(index); }}
+                        onKeyDown={(e) => { if (isInteractive && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); goToSlide(index); } }}
+                        role={isInteractive ? 'button' : undefined}
+                        tabIndex={isInteractive ? 0 : -1}
+                        aria-label={isInteractive ? `Activate slide ${index + 1}` : undefined}
+                        className={`relative w-full h-full rounded-2xl overflow-hidden ${position === 'center' ? 'shadow-2xl' : 'shadow-lg'} ${isInteractive ? 'cursor-pointer' : ''}`}
                         style={{
-                          filter: position !== 'center' ? 'brightness(0.8) saturate(0.8)' : 'none',
+                          filter: position !== 'center' ? 'brightness(0.85) saturate(0.9)' : 'none',
                         }}
                       >
                         <img
-                          src="/placeholder.svg"
+                          src={slide.image || "/placeholder.svg"}
                           alt={slide.title}
                           className="w-full h-full object-cover"
                           loading="lazy"
                           decoding="async"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent"></div>
                         {position === 'center' && (
                           <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
                             <h3 className="text-xl md:text-2xl font-serif font-bold mb-2">
