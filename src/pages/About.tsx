@@ -9,6 +9,7 @@ import Image3DCarousel from "@/components/Image3DCarousel";
 import PartnersMarquee from "@/components/PartnersMarquee";
 import CTAInline from "@/components/CTAInline";
 import Footer from "@/components/Footer";
+import AnimatedSection from "@/components/AnimatedSection";
 import aboutData from "@/data/about.json";
 
 const About = () => {
@@ -95,13 +96,21 @@ const About = () => {
 
       <main>
         {/* Hero Section */}
-        <AboutHero {...aboutData.hero} />
+        <div className="relative overflow-hidden">
+          {/* Blurred background graphics */}
+          <div className="absolute inset-0 opacity-10">
+            <div className="absolute top-20 left-10 w-64 h-64 bg-gradient-to-br from-primary to-accent rounded-full blur-3xl"></div>
+            <div className="absolute top-40 right-20 w-48 h-48 bg-gradient-to-br from-accent to-secondary rounded-full blur-2xl"></div>
+            <div className="absolute bottom-20 left-1/3 w-56 h-56 bg-gradient-to-br from-secondary to-primary rounded-full blur-3xl"></div>
+          </div>
+          <AboutHero {...aboutData.hero} />
+        </div>
 
         {/* Who We Are Section */}
         <section className="py-16 bg-background">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <div className="space-y-6">
+              <AnimatedSection className="space-y-6">
                 <h2 className="text-3xl md:text-4xl font-serif font-bold text-primary">
                   {whoWeAreData.title}
                 </h2>
@@ -112,46 +121,61 @@ const About = () => {
                     </p>
                   ))}
                 </div>
-              </div>
+              </AnimatedSection>
               
-              <div className="relative">
+              <AnimatedSection 
+                delay={200} 
+                className="relative transition-all duration-1000 animate-fade-in-right"
+              >
                 <div className="aspect-square bg-placeholder-200 rounded-2xl p-8 flex items-center justify-center">
                   <div className="w-32 h-32 bg-placeholder-400 rounded-xl animate-pulse"></div>
                 </div>
-              </div>
+              </AnimatedSection>
             </div>
           </div>
         </section>
 
         {/* Values Section */}
-        <ValuesGrid values={aboutData.values} />
+        <AnimatedSection>
+          <ValuesGrid values={aboutData.values} />
+        </AnimatedSection>
 
         {/* Approach Section */}
-        <ApproachTimeline {...aboutData.approach} />
+        <AnimatedSection delay={100}>
+          <ApproachTimeline {...aboutData.approach} />
+        </AnimatedSection>
 
         {/* 3D Carousel Section */}
-        <Image3DCarousel slides={aboutData.carousel} />
+        <AnimatedSection delay={200}>
+          <Image3DCarousel slides={aboutData.carousel} />
+        </AnimatedSection>
 
         {/* Quality Assurance Section */}
-        <QASection {...aboutData.qualityAssurance} />
+        <AnimatedSection>
+          <QASection {...aboutData.qualityAssurance} />
+        </AnimatedSection>
 
         {/* CTA Section */}
-        <CTAInline variant="accent" />
+        <AnimatedSection delay={100}>
+          <CTAInline variant="accent" />
+        </AnimatedSection>
 
         {/* Partners Section */}
-        <section id="partners" className="py-16">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-serif font-bold text-primary mb-4">
-                Our Partners & Collaborators
-              </h2>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Working together with leading organizations to drive meaningful change across East Africa
-              </p>
+        <AnimatedSection>
+          <section id="partners" className="py-16">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="text-center mb-12">
+                <h2 className="text-3xl md:text-4xl font-serif font-bold text-primary mb-4">
+                  Our Partners & Collaborators
+                </h2>
+                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                  Working together with leading organizations to drive meaningful change across East Africa
+                </p>
+              </div>
             </div>
-          </div>
-          <PartnersMarquee />
-        </section>
+            <PartnersMarquee />
+          </section>
+        </AnimatedSection>
       </main>
 
       {/* Footer */}
