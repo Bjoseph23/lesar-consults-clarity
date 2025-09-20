@@ -48,19 +48,55 @@
     ],
     "projects": [
       {
-        "title": "Healthcare Economic Impact Study",
-        "year": "2024",
-        "slug": "healthcare-impact-study",
-        "impact": "Informed policy decisions affecting 2M+ beneficiaries"
+        "title": "Kenya National Surgical Services Strategic Plan 2025–2030",
+        "year": "July 2025 – Present",
+        "slug": "kenya-surgical-services-plan-2025-2030",
+        "impact": "Led costing and economic analysis informing a multisectoral, costed roadmap; direct technical inputs to validation stage."
       },
       {
-        "title": "Statistical Framework Development",
-        "year": "2023",
-        "slug": "statistical-framework",
-        "impact": "Standardized evaluation methodologies across 15+ projects"
+        "title": "Nairobi County Mental Health Strategic Plan 2025–2030",
+        "year": "June 2024 – May 2025",
+        "slug": "nairobi-mental-health-strategic-plan-2025-2030",
+        "impact": "Economic and costing inputs; supported launch and budget optimisation for county-level implementation."
+      },
+      {
+        "title": "Cost-Benefit & Cost-Effectiveness Analysis – Free State Hospitals Tender (South Africa)",
+        "year": "Apr–May 2024",
+        "slug": "free-state-hospitals-cba-2024",
+        "impact": "Provided financial modelling & CBA that supported a ZAR 10.8B tender application."
+      },
+      {
+        "title": "Mid-term Review: National Supply Chain Strategy 2020–2025",
+        "year": "July 2022 – Feb 2023",
+        "slug": "supply-chain-strategy-mtr-2022",
+        "impact": "Led economic evaluation components and contributed to recommendations for supply chain efficiency improvements."
+      },
+      {
+        "title": "Kenya COVID-19 CHERP 7th KAP Survey (World Bank)",
+        "year": "Jan 2023 – May 2023",
+        "slug": "kenya-covid-cherp-kap-2023",
+        "impact": "Oversaw survey data analysis that informed national pandemic response and policy briefs."
+      },
+      {
+        "title": "Costed National Ear & Hearing Care Strategic Plan 2023–2028 (WHO)",
+        "year": "Oct 2022 – Feb 2023",
+        "slug": "ear-hearing-care-strategic-plan-2023-2028",
+        "impact": "Contributed costing and economic planning for national policy and M&E framework."
+      },
+      {
+        "title": "UNICEF Nutrition Improvement Project (Nairobi County)",
+        "year": "Apr 2022 – Dec 2022",
+        "slug": "unicef-nutrition-improvement-2022",
+        "impact": "Economic analysis and monitoring inputs supporting county nutrition interventions."
+      },
+      {
+        "title": "DFID HIV/AIDS Prevention Project (Monitoring & Evaluation component)",
+        "year": "Mar 2018 – Jun 2019",
+        "slug": "dfid-hivaids-prevention-2018-2019",
+        "impact": "Led economic impact assessments and evaluation design informing program scale-up."
       }
     ],
-    "linkedin": "https://linkedin.com/in/eliud-kayo-0357614a",
+    "linkedin": "https://linkedin.com/in/eliud-khayo-0357614a",
     "cv": "/cv/eliud-khayo.pdf"
   },
   {
@@ -108,16 +144,46 @@
     ],
     "projects": [
       {
-        "title": "National Health Financing Strategy",
-        "year": "2024",
-        "slug": "health-financing-strategy",
-        "impact": "Designed sustainable financing model for national health system"
+        "title": "Nairobi County Mental Health Strategic Plan 2025–2030",
+        "year": "June 2024 – May 2025",
+        "slug": "nairobi-mental-health-2024-2025",
+        "impact": "Led health systems design, stakeholder engagement and strategic planning for county mental health services."
       },
       {
-        "title": "Multi-Country Health Systems Assessment",
-        "year": "2023",
-        "slug": "health-systems-assessment",
-        "impact": "Evaluated health systems across 8 African countries"
+        "title": "Kenya National Surgical Services Strategic Plan 2025–2030 (Technical Lead)",
+        "year": "July 2025 – Present",
+        "slug": "national-surgical-plan-2025-2030",
+        "impact": "Provided leadership on systems strengthening, financing options and stakeholder validation."
+      },
+      {
+        "title": "R4D Health Systems Strengthening Project (USAID Ghana)",
+        "year": "Nov 2023 & Mar 2024",
+        "slug": "r4d-health-systems-ghana-2023-2024",
+        "impact": "Designed modalities for strengthening preventive and promotive service delivery across districts."
+      },
+      {
+        "title": "Kenya COVID-19 CHERP 7th KAP Survey (World Bank)",
+        "year": "Jan 2023 – May 2023",
+        "slug": "cherp-kap-survey-2023",
+        "impact": "Coordinated survey leadership and translated findings into decision-ready policy briefs."
+      },
+      {
+        "title": "iCCM Implementation Framework & Plan of Action (Ministry of Health Kenya)",
+        "year": "2022–2023 FY",
+        "slug": "iccm-implementation-framework-2022-2023",
+        "impact": "Led multi-stakeholder coordination and systematic review shaping community case management rollout."
+      },
+      {
+        "title": "AMR Surveillance Data Analysis Manual (Wellcome Trust)",
+        "year": "Apr 2022 – Jul 2022",
+        "slug": "amr-surveillance-manual-2022",
+        "impact": "Contributed to training manual development and led training for multi-country teams on AMR data analysis."
+      },
+      {
+        "title": "Maternal and Child Health Initiative Project (World Bank)",
+        "year": "Aug 2021 – Feb 2022",
+        "slug": "maternal-child-health-2021-2022",
+        "impact": "Technical leadership on program design contributing to measurable reductions in maternal mortality."
       }
     ],
     "linkedin": "https://linkedin.com/in/japheth-athanasio-8792a640",
@@ -174,14 +240,38 @@
       {
         "title": "Regional Disease Surveillance System",
         "year": "2024",
-        "slug": "surveillance-system",
-        "impact": "Enhanced early warning capabilities across 12 health facilities"
+        "slug": "regional-disease-surveillance-2024",
+        "impact": "Enhanced early warning and surveillance capabilities across 12 health facilities."
       },
       {
-        "title": "COVID-19 Epidemiological Assessment",
-        "year": "2022-2023",
-        "slug": "covid-assessment",
-        "impact": "Informed national pandemic response strategies"
+        "title": "COVID-19 Epidemiological Assessment (Kenya)",
+        "year": "2022–2023",
+        "slug": "covid-epidemiological-assessment-2022-2023",
+        "impact": "Provided epidemiological analysis informing national pandemic response strategies."
+      },
+      {
+        "title": "Kenya COVID-19 CHERP 7th KAP Survey (Field epidemiology lead)",
+        "year": "Jan 2023 – May 2023",
+        "slug": "cherp-kap-field-epidemiology-2023",
+        "impact": "Led field epidemiology teams and ensured data quality for a nationwide KAP survey."
+      },
+      {
+        "title": "R4D Health Systems Strengthening Project (Ghana) – Surveillance component",
+        "year": "Nov 2023 & Mar 2024",
+        "slug": "r4d-surveillance-ghana-2023-2024",
+        "impact": "Designed surveillance improvements and integrated community-level reporting modalities."
+      },
+      {
+        "title": "Mid-term Review: National Supply Chain Strategy (health commodities) – data & monitoring inputs",
+        "year": "July 2022 – Feb 2023",
+        "slug": "supply-chain-data-mtr-2022",
+        "impact": "Provided surveillance-linked monitoring inputs to assess strategy performance."
+      },
+      {
+        "title": "DFID HIV/AIDS Prevention Project (Epidemiology & Monitoring)",
+        "year": "Mar 2018 – Jun 2019",
+        "slug": "dfid-hiv-epidemiology-2018-2019",
+        "impact": "Led surveillance and monitoring activities reaching >100,000 individuals."
       }
     ],
     "linkedin": "https://linkedin.com/in/jamlick-karumbi-3a4106117",
@@ -236,16 +326,46 @@
     ],
     "projects": [
       {
-        "title": "Infrastructure Economic Impact Study",
-        "year": "2024",
-        "slug": "infrastructure-impact",
-        "impact": "Guided $50M+ infrastructure investment decisions"
+        "title": "Free State Hospitals Cost-Benefit & Cost-Effectiveness Analysis (South Africa Tender)",
+        "year": "Apr–May 2024",
+        "slug": "free-state-cba-2024",
+        "impact": "Financial and cost-effectiveness analysis supporting a ZAR 10.8B tender application."
       },
       {
-        "title": "Economic Policy Reform Analysis",
-        "year": "2023",
-        "slug": "policy-reform-analysis",
-        "impact": "Informed national economic policy reforms"
+        "title": "Infrastructure Economic Impact Study",
+        "year": "2024",
+        "slug": "infrastructure-impact-2024",
+        "impact": "Guided investment decision-making for large infrastructure projects and advised on financing structures."
+      },
+      {
+        "title": "Kenya National Surgical Services Strategic Plan 2025–2030 (Costing & Financial Analysis)",
+        "year": "July 2025 – Present",
+        "slug": "surgical-plan-costing-2025-20230",
+        "impact": "Led project costing, financial modelling and budget optimisation for strategic plan."
+      },
+      {
+        "title": "Nairobi County Mental Health Strategic Plan 2025–2030 (Financial planning)",
+        "year": "June 2024 – May 2025",
+        "slug": "nairobi-mental-health-financials-2024-2025",
+        "impact": "Prepared costing, resource optimisation and financial plans for county adoption."
+      },
+      {
+        "title": "Costed National Ear & Hearing Care Strategic Plan 2023–2028 (WHO)",
+        "year": "Oct 2022 – Feb 2023",
+        "slug": "ear-hearing-care-costing-2023-2028",
+        "impact": "Led costing and financial planning inputs to the strategic plan and policy."
+      },
+      {
+        "title": "UNICEF Nutrition Improvement Project (financial planning & M&E)",
+        "year": "Apr 2022 – Dec 2022",
+        "slug": "unicef-nutrition-financials-2022",
+        "impact": "Provided economic modelling and M&E frameworks for nutrition program investments."
+      },
+      {
+        "title": "Kenya COVID-19 CHERP 7th KAP Survey (Economic analysis inputs)",
+        "year": "Jan 2023 – May 2023",
+        "slug": "cherp-kap-economic-inputs-2023",
+        "impact": "Economic interpretation of survey results and cost implications for interventions."
       }
     ],
     "linkedin": "https://linkedin.com/in/wairimu-maina",
@@ -302,14 +422,38 @@
       {
         "title": "Health Facility Catchment Analysis",
         "year": "2024",
-        "slug": "facility-catchment-analysis",
-        "impact": "Optimized healthcare access for 500K+ population"
+        "slug": "health-facility-catchment-2024",
+        "impact": "Optimized healthcare access modelling benefiting 500K+ population."
       },
       {
         "title": "Disease Risk Mapping Platform",
         "year": "2023",
-        "slug": "disease-risk-mapping",
-        "impact": "Enhanced surveillance and response planning capabilities"
+        "slug": "disease-risk-mapping-2023",
+        "impact": "Built spatial risk maps that enhanced surveillance and planning capabilities."
+      },
+      {
+        "title": "Kenya Integrated Community Case Management (iCCM) Implementation Framework – spatial & data inputs",
+        "year": "2022–2023 FY",
+        "slug": "iccm-spatial-inputs-2022-2023",
+        "impact": "Mapped service coverage and informed community case management deployment."
+      },
+      {
+        "title": "AMR Surveillance Data Analysis & Training (Wellcome Trust)",
+        "year": "Apr 2022 – Jul 2022",
+        "slug": "amr-gis-analysis-2022",
+        "impact": "Developed spatial analysis protocols for AMR surveillance and trained multi-country teams."
+      },
+      {
+        "title": "Maternal and Child Health Initiative Project – GIS & planning inputs",
+        "year": "Aug 2021 – Feb 2022",
+        "slug": "maternal-child-gis-2021-2022",
+        "impact": "Provided facility mapping and catchment analysis to optimize service delivery."
+      },
+      {
+        "title": "Kenya National Surgical Services Strategic Plan 2025–2030 – spatial planning",
+        "year": "July 2025 – Present",
+        "slug": "surgical-plan-spatial-2025-2030",
+        "impact": "Provided geospatial inputs for service distribution and access modelling."
       }
     ],
     "linkedin": "https://linkedin.com/in/benjamin-mutuku",
