@@ -9,6 +9,7 @@ import Image3DCarousel from "@/components/Image3DCarousel";
 import PartnersMarquee from "@/components/PartnersMarquee";
 import CTAInline from "@/components/CTAInline";
 import Footer from "@/components/Footer";
+import ScrollTop from "@/components/ScrollTop";
 import AnimatedSection from "@/components/AnimatedSection";
 import aboutData from "@/data/about.json";
 
@@ -182,6 +183,9 @@ const About = () => {
 
       {/* Footer */}
       <Footer />
+      
+      {/* Scroll to Top Button */}
+      <ScrollTop />
     </div>
   );
 };
