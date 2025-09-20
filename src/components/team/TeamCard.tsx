@@ -20,7 +20,10 @@ interface TeamCardProps {
 
 const TeamCard = ({ member }: TeamCardProps) => {
   return (
-    <div className="bg-[#FAEED4] rounded-2xl shadow-sm overflow-hidden h-full transition-all duration-300 hover:-translate-y-1 hover:shadow-md group">
+    <Link 
+      to={`/team/${member.slug}`}
+      className="block bg-[#FAEED4] rounded-2xl shadow-sm overflow-hidden h-full transition-all duration-300 hover:-translate-y-1 hover:shadow-md group cursor-pointer"
+    >
       {/* Profile Image - Full width, 70% of card height */}
       <div className="relative w-full h-80 overflow-hidden">
         <img 
@@ -45,15 +48,12 @@ const TeamCard = ({ member }: TeamCardProps) => {
         </div>
         
         <div className="flex justify-end">
-          <Link 
-            to={`/team/${member.slug}`}
-            className="text-sm text-[#162356] hover:underline focus:outline-none focus:ring-2 focus:ring-[#162356] focus:ring-opacity-50 rounded transition-colors duration-200"
-          >
+          <span className="text-sm text-[#162356] transition-colors duration-200">
             View Profile →
-          </Link>
+          </span>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
