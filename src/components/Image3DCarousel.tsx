@@ -80,6 +80,35 @@ const Image3DCarousel = ({ slides, autoPlayInterval = 4000 }: Image3DCarouselPro
     return 'hidden';
   };
 
+  const getSlideStyle = (position: string) => {
+    switch (position) {
+      case 'center':
+        return {
+          transform: 'translateX(0%) scale(1)',
+          zIndex: 30,
+          opacity: 1,
+        };
+      case 'right':
+        return {
+          transform: 'translateX(60%) scale(0.85)',
+          zIndex: 10,
+          opacity: 0.7,
+        };
+      case 'left':
+        return {
+          transform: 'translateX(-60%) scale(0.85)',
+          zIndex: 10,
+          opacity: 0.7,
+        };
+      default:
+        return {
+          transform: 'translateX(100%) scale(0.8)',
+          zIndex: 0,
+          opacity: 0,
+        };
+    }
+  };
+
   return (
     <section className="py-16 bg-secondary/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -113,47 +142,52 @@ const Image3DCarousel = ({ slides, autoPlayInterval = 4000 }: Image3DCarouselPro
           aria-label="Image carousel"
           aria-live="polite"
         >
-          <div className="relative h-80 md:h-96 overflow-hidden rounded-2xl">
-            {slides.map((slide, index) => {
-              const position = getSlidePosition(index);
-              
-              return (
-                <div
-                  key={slide.id}
-                  className={`absolute inset-0 transition-all duration-700 ease-in-out ${
-                    position === 'center' 
-                      ? 'opacity-100 scale-100 z-30 transform translate-x-0' 
-                      : position === 'right'
-                      ? 'opacity-40 scale-90 z-20 transform translate-x-20 rotate-3'
-                      : position === 'left'
-                      ? 'opacity-40 scale-90 z-20 transform -translate-x-20 -rotate-3'
-                      : 'opacity-0 scale-75 z-10'
-                  }`}
-                  style={{
-                    filter: position !== 'center' ? 'grayscale(50%) blur(1px)' : 'none',
-                  }}
-                >
-                  <div className="relative w-full h-full rounded-2xl overflow-hidden shadow-elegant">
-                    <img
-                      src={slide.image}
-                      alt={slide.title}
-                      className="w-full h-full object-cover"
-                      loading="lazy"
-                      decoding="async"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-                    <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                      <h3 className="text-xl md:text-2xl font-serif font-bold mb-2">
-                        {slide.title}
-                      </h3>
-                      <p className="text-sm md:text-base opacity-90">
-                        {slide.caption}
-                      </p>
+          <div className="relative h-80 md:h-96 overflow-visible">
+            <div className="relative w-full h-full flex items-center justify-center">
+              {slides.map((slide, index) => {
+                const position = getSlidePosition(index);
+                const slideStyle = getSlideStyle(position);
+                
+                return (
+                  <div
+                    key={slide.id}
+                    className="absolute w-full h-full transition-all duration-700 ease-out"
+                    style={{
+                      ...slideStyle,
+                      willChange: 'transform, opacity',
+                    }}
+                  >
+                    <div 
+                      className={`relative w-full h-full rounded-2xl overflow-hidden ${
+                        position === 'center' ? 'shadow-2xl' : 'shadow-lg'
+                      }`}
+                      style={{
+                        filter: position !== 'center' ? 'brightness(0.8) saturate(0.8)' : 'none',
+                      }}
+                    >
+                      <img
+                        src={slide.image}
+                        alt={slide.title}
+                        className="w-full h-full object-cover"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                      {position === 'center' && (
+                        <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                          <h3 className="text-xl md:text-2xl font-serif font-bold mb-2">
+                            {slide.title}
+                          </h3>
+                          <p className="text-sm md:text-base opacity-90">
+                            {slide.caption}
+                          </p>
+                        </div>
+                      )}
                     </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
 
           {/* Navigation arrows */}
