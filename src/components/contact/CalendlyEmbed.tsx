@@ -13,9 +13,6 @@ const CalendlyEmbed = () => {
         <ExternalLink className="h-4 w-4" />
         <span>Lets Talk- Book a meeting</span>
       </Button>
-      <p className="text-xs text-muted-foreground text-center mt-2">
-        Opens in a new tab if embed is unavailable
-      </p>
     </div>
   );
 };
