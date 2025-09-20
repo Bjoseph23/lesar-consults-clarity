@@ -14,6 +14,8 @@ const Team = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
+    // Scroll to top when component mounts
+    window.scrollTo({ top: 0, behavior: 'instant' });
     setIsVisible(true);
   }, []);
 
