@@ -54,7 +54,7 @@ const Footer = () => {
             <Button
               onClick={() => window.location.href = '/contact'}
               variant="secondary"
-              className="bg-white text-accent hover:bg-white/90"
+              className="bg-white text-accent hover:bg-white/90 cta-glisten"
             >
               Request a Proposal
             </Button>

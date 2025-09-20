@@ -114,6 +114,35 @@
     @apply bg-primary text-primary-foreground hover:bg-primary/90 px-6 py-3 rounded-lg font-medium transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-0.5;
   }
   
+  /* CTA Glisten Effect for any button */
+  .cta-glisten {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  @media (prefers-reduced-motion: no-preference) {
+    .cta-glisten::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        45deg,
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        rgba(255, 255, 255, 0.2),
+        rgba(255, 255, 255, 0.1),
+        transparent
+      );
+      transform: translateX(-100%) translateY(-100%) rotate(45deg);
+      animation: glisten 5s infinite;
+      pointer-events: none;
+      z-index: 1;
+    }
+  }
+  
   .btn-secondary {
     @apply bg-secondary text-secondary-foreground hover:bg-secondary/80 border border-border px-6 py-3 rounded-lg font-medium transition-all duration-300 hover:shadow-md hover:-translate-y-0.5;
   }
@@ -282,5 +311,18 @@
 @media (prefers-reduced-motion: no-preference) {
   html {
     scroll-behavior: smooth;
+  }
+}
+
+/* Glisten Animation for CTA Buttons */
+@keyframes glisten {
+  0% {
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+  }
+  20% {
+    transform: translateX(100%) translateY(100%) rotate(45deg);
+  }
+  100% {
+    transform: translateX(100%) translateY(100%) rotate(45deg);
   }
 }

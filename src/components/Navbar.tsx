@@ -124,7 +124,7 @@ const Navbar = () => {
               );
             })}
 
-            <Button onClick={() => (window.location.href = "/contact")} className="btn-primary">
+            <Button onClick={() => (window.location.href = "/contact")} className="btn-primary cta-glisten">
               Request a Proposal
             </Button>
           </div>
@@ -191,9 +191,9 @@ const Navbar = () => {
             })}
 
             <div className="mt-4">
-              <Button onClick={() => { window.location.href = "/contact"; setIsOpen(false); }} className="btn-primary w-full">
-                Request a Proposal
-              </Button>
+            <Button onClick={() => { window.location.href = "/contact"; setIsOpen(false); }} className="btn-primary cta-glisten w-full">
+              Request a Proposal
+            </Button>
             </div>
 
             <div className="pt-6 border-t border-gray-200 text-sm text-gray-500">

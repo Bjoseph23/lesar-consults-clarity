@@ -52,12 +52,12 @@ const Hero = () => {
             <div className={`flex flex-col gap-4 max-w-md transition-all duration-1000 delay-700 ${isVisible ? 'animate-fade-in' : 'opacity-0 translate-y-8'}`}>
               <Button
                 onClick={() => window.location.href = '/contact'}
-                className="bg-dark-red hover:bg-dark-red/90 text-white text-lg px-8 py-4 w-full sm:w-auto group overflow-hidden"
+                className="bg-dark-red hover:bg-dark-red/90 text-white text-lg px-8 py-4 w-full sm:w-auto group relative overflow-hidden cta-glisten"
                 size="lg"
                 aria-label="Request a proposal - navigates to contact page"
               >
-                <span>Request a Proposal</span>
-                <ArrowRight className="h-5 w-5 ml-2 transition-transform duration-300 group-hover:translate-x-1" />
+                <span className="relative z-10">Request a Proposal</span>
+                <ArrowRight className="h-5 w-5 ml-2 transition-transform duration-300 group-hover:translate-x-1 relative z-10" />
               </Button>
               <Button
                 onClick={scrollToProjects}
