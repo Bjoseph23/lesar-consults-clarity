@@ -335,7 +335,7 @@ const Projects = () => {
                         asChild
                       >
                         <Link to={`/services/${project.services[0]}`} className="flex items-center">
-                          View details
+                          Our Approach
                           <ExternalLink className="ml-1 h-3 w-3 group-hover:translate-x-1 transition-transform" />
                         </Link>
                       </Button>
