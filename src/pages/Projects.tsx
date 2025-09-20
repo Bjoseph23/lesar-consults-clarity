@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { ArrowRight, ExternalLink, Calendar, MapPin, Users, DollarSign } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -9,7 +10,9 @@ import AnimatedSection from "@/components/AnimatedSection";
 import ScrollTop from "@/components/ScrollTop";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import PartnersMarquee from "@/components/PartnersMarquee";
+import MetricsBox from "@/components/MetricsBox";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { formatCurrency, convertToUSD } from "@/lib/currency";
 import projectsData from "@/data/projects.json";
 
 const Projects = () => {
@@ -202,20 +205,15 @@ const Projects = () => {
                             </div>
                             
                             {/* Metrics */}
-                            <div className="bg-white rounded-lg p-4 mb-6 border border-navy/10">
-                              <div className="grid grid-cols-2 gap-4">
-                                {project.metrics.slice(0, 2).map((metric, idx) => (
-                                  <div key={idx} className="text-center">
-                                    <div className="text-lg font-bold text-green-600 mb-1">
-                                      {metric.value}
-                                    </div>
-                                    <div className="text-xs text-navy">
-                                      {metric.label}
-                                    </div>
-                                  </div>
-                                ))}
-                              </div>
-                            </div>
+                            <MetricsBox
+                              metrics={project.metrics as any}
+                              valueOriginal={(project as any).value_original}
+                              valueOriginalLocal={(project as any).value_original_local}
+                              valueUsd={(project as any).value_usd}
+                              tenderValue={(project as any).tender_value_original}
+                              tenderValueUsd={(project as any).tender_value_usd}
+                              className="mb-6"
+                            />
                             
                             <div className="flex flex-col sm:flex-row gap-4">
                               <Button 
@@ -256,8 +254,11 @@ const Projects = () => {
                 <h2 className="text-3xl md:text-4xl font-serif font-bold text-navy mb-4">
                   Additional Projects
                 </h2>
-                <p className="text-xl text-navy/70 max-w-3xl mx-auto">
+                <p className="text-xl text-navy/70 max-w-3xl mx-auto mb-4">
                   Our broader portfolio of successful engagements across diverse sectors and geographies
+                </p>
+                <p className="text-sm text-navy/50 max-w-2xl mx-auto">
+                  Note: metrics shown as 'Estimated' are conservative projections prepared for website demonstration and are editable in the content data file.
                 </p>
               </div>
               
@@ -277,6 +278,32 @@ const Projects = () => {
                       {project.summary}
                     </p>
                     
+                    {/* Key Metric */}
+                    {project.metrics && project.metrics.length > 0 && (
+                      <div className="mb-4 p-3 bg-cream rounded-lg">
+                        <div className="text-center">
+                          <div className="text-sm font-bold text-green-600 mb-1">
+                            {project.metrics[0].value}
+                          </div>
+                          <div className="text-xs text-navy/70">
+                            {project.metrics[0].label}
+                          </div>
+                          {(project.metrics[0] as any).type && (
+                            <Badge 
+                              variant="secondary" 
+                              className={`text-xs mt-1 ${
+                                (project.metrics[0] as any).type === "Reported" ? "bg-green-100 text-green-800" :
+                                (project.metrics[0] as any).type === "Estimated" ? "bg-blue-100 text-blue-800" :
+                                "bg-purple-100 text-purple-800"
+                              }`}
+                            >
+                              {(project.metrics[0] as any).type}
+                            </Badge>
+                          )}
+                        </div>
+                      </div>
+                    )}
+
                     {/* Partners */}
                     <div className="mb-4">
                       <div className="flex flex-wrap gap-1">

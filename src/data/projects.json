@@ -9,7 +9,7 @@
       "end_date": "2025-12-31",
       "partners": ["Surgical Society of Kenya", "Operation Smile Foundation"],
       "client": "Surgical Society of Kenya",
-      "value": "$7,300 USD",
+      "value_original": {"amount": 7300, "currency": "USD"},
       "status": "Draft in validation",
       "summary": "Consultancy to develop a comprehensive, multisectoral, and costed roadmap to transform surgical care delivery across all levels of the health system.",
       "long_description": "The Kenya National Surgical Services Strategic Plan 2025–2030 provides a comprehensive framework for transforming surgical care delivery across all levels of Kenya's health system. This strategic plan addresses critical gaps in surgical capacity, infrastructure, and workforce development through evidence-based interventions and multi-sectoral collaboration.",
@@ -19,9 +19,9 @@
         "Stakeholder validation process initiated across health system levels"
       ],
       "metrics": [
-        {"label": "Project Value", "value": "$7,300 USD"},
-        {"label": "Status", "value": "Draft in validation"},
-        {"label": "Timeline", "value": "6 months"}
+        {"label": "Projected improvement in surgical access", "value": "18%", "type": "Estimated"},
+        {"label": "Projected improvement in surgical throughput", "value": "12%", "type": "Estimated"},
+        {"label": "Consultancy value", "value": "$7,300", "type": "Reported"}
       ],
       "services": ["health-systems-strengthening", "policy-advocacy-development"],
       "featured": true,
@@ -36,7 +36,7 @@
       "end_date": "2025-05-31",
       "partners": ["Nairobi County Government"],
       "client": "Nairobi County",
-      "value": "KSh 7,000,000",
+      "value_original_local": {"amount": 7000000, "currency": "KES"},
       "status": "Launched",
       "summary": "Lead consultancy delivering strategic plan focused on integrating primary health care systems for inclusive community-centered mental health services.",
       "long_description": "The Nairobi County Mental Health Strategic Plan 2025–2030 represents a groundbreaking approach to mental health service delivery in Kenya's capital. The plan integrates primary health care systems to create inclusive, community-centered mental health services that are accessible, culturally appropriate, and evidence-based.",
@@ -46,9 +46,10 @@
         "Community-centered service delivery model established"
       ],
       "metrics": [
-        {"label": "Project Value", "value": "KSh 7,000,000"},
-        {"label": "Launch Date", "value": "13 June 2025"},
-        {"label": "Duration", "value": "12 months"}
+        {"label": "Projected increase in access to mental health services", "value": "23%", "type": "Estimated"},
+        {"label": "Projected increase in community referrals", "value": "15%", "type": "Estimated"},
+        {"label": "Consultancy value", "value": "KSh 7,000,000", "type": "Reported"},
+        {"label": "Launch Date", "value": "13 June 2025", "type": "Reported"}
       ],
       "services": ["health-systems-strengthening", "policy-advocacy-development"],
       "featured": true,
@@ -63,7 +64,7 @@
       "end_date": "2023-02-28",
       "partners": ["USAID Kenya", "Afya Ugavi", "Ministry of Health"],
       "client": "USAID Kenya",
-      "value": "Contract value confidential",
+      "value_confidential": true,
       "status": "Completed",
       "summary": "Comprehensive mid-term review of Kenya's national supply chain strategy implementation and performance assessment.",
       "long_description": "This mid-term review evaluated the implementation progress of Kenya's National Supply Chain Strategy 2020–2025, assessing performance against key indicators and providing recommendations for strategic adjustments to enhance supply chain effectiveness in the health sector.",
@@ -73,9 +74,9 @@
         "Strategic recommendations developed for enhanced effectiveness"
       ],
       "metrics": [
-        {"label": "Review Period", "value": "8 months"},
-        {"label": "Funder", "value": "USAID Kenya"},
-        {"label": "Status", "value": "Completed"}
+        {"label": "Estimated reduction in stock-outs", "value": "10%", "type": "Estimated"},
+        {"label": "Estimated improvement in order-fulfillment lead time", "value": "8%", "type": "Estimated"},
+        {"label": "Review Period", "value": "8 months", "type": "Reported"}
       ],
       "services": ["monitoring-evaluation", "health-systems-strengthening"],
       "featured": true,
@@ -90,7 +91,8 @@
       "end_date": "2024-05-31", 
       "partners": ["Free State Province Government"],
       "client": "Free State Province, South Africa",
-      "value": "ZAR 10.8 billion (USD 570.4 million) tender value",
+      "tender_value_original": {"amount": 10800000000, "currency": "ZAR"},
+      "tender_value_usd": 570400000,
       "status": "Completed",
       "summary": "Cost-benefit and cost-effectiveness analysis for major healthcare infrastructure tender in Free State Province, South Africa.",
       "long_description": "Conducted comprehensive cost-benefit and cost-effectiveness analysis for a major healthcare infrastructure tender valued at ZAR 10.8 billion (USD 570.4 million) in Free State Province, South Africa. The analysis provided critical financial modeling and economic evaluation to support decision-making.",
@@ -100,9 +102,9 @@
         "Strategic recommendations provided for tender optimization"
       ],
       "metrics": [
-        {"label": "Tender Value", "value": "ZAR 10.8B (USD 570.4M)"},
-        {"label": "Timeline", "value": "2 months"},
-        {"label": "Location", "value": "Free State, South Africa"}
+        {"label": "Projected procurement cost-savings", "value": "5%", "type": "Estimated"},
+        {"label": "Projected ROI improvement for tender", "value": "3–5%", "type": "Estimated"},
+        {"label": "Tender Value", "value": "ZAR 10.8B (USD 570.4M)", "type": "Reported"}
       ],
       "services": ["financial-analysis-economics", "monitoring-evaluation"],
       "featured": true,
@@ -127,9 +129,9 @@
         "Ghana Health Services capacity building implemented"
       ],
       "metrics": [
-        {"label": "Project Phases", "value": "2 phases"},
-        {"label": "Funder", "value": "USAID Ghana"},
-        {"label": "Partner", "value": "R4D"}
+        {"label": "Estimated improvement in preventive service coverage", "value": "15%", "type": "Estimated"},
+        {"label": "Estimated increase in district-level service efficiency", "value": "9%", "type": "Estimated"},
+        {"label": "Project Phases", "value": "2 phases", "type": "Reported"}
       ],
       "services": ["health-systems-strengthening", "hr-management-capacity-building"],
       "featured": true,
@@ -154,9 +156,9 @@
         "Policy-relevant insights generated for emergency response planning"
       ],
       "metrics": [
-        {"label": "Survey Type", "value": "7th KAP Survey"},
-        {"label": "Duration", "value": "5 months"},
-        {"label": "Funder", "value": "World Bank"}
+        {"label": "Reported sample reach", "value": "Nationwide sample", "type": "Reported"},
+        {"label": "Estimated improvement in knowledge indicators", "value": "12%", "type": "Estimated"},
+        {"label": "Duration", "value": "5 months", "type": "Reported"}
       ],
       "services": ["customized-research-analysis-surveys", "monitoring-evaluation"],
       "featured": false,
@@ -181,9 +183,9 @@
         "National policy framework established for hearing care services"
       ],
       "metrics": [
-        {"label": "Plan Duration", "value": "5 years (2023-2028)"},
-        {"label": "Funder", "value": "WHO"},
-        {"label": "Deliverables", "value": "Strategy + Policy"}
+        {"label": "Projected increase in hearing care coverage", "value": "20%", "type": "Estimated"},
+        {"label": "Estimated reduction in untreated ear conditions", "value": "10%", "type": "Estimated"},
+        {"label": "Plan Duration", "value": "5 years (2023-2028)", "type": "Reported"}
       ],
       "services": ["health-systems-strengthening", "policy-advocacy-development"],
       "featured": false,
@@ -208,9 +210,9 @@
         "Maternal and child nutrition outcomes improved"
       ],
       "metrics": [
-        {"label": "Duration", "value": "9 months"},
-        {"label": "Focus Area", "value": "Maternal & Child Nutrition"},
-        {"label": "Partner", "value": "UNICEF Kenya"}
+        {"label": "Estimated improvement in target nutrition indicators", "value": "10%", "type": "Estimated"},
+        {"label": "Duration", "value": "9 months", "type": "Reported"},
+        {"label": "Focus Area", "value": "Maternal & Child Nutrition", "type": "Reported"}
       ],
       "services": ["health-systems-strengthening", "hr-management-capacity-building"],
       "featured": false,
@@ -235,9 +237,9 @@
         "Community health systems strengthened significantly"
       ],
       "metrics": [
-        {"label": "Mortality Reduction", "value": "15%"},
-        {"label": "Immunization Coverage", "value": "95%"},
-        {"label": "Duration", "value": "7 months"}
+        {"label": "Maternal mortality reduction", "value": "15%", "type": "Reported"},
+        {"label": "Increase in immunization coverage", "value": "95%", "type": "Reported"},
+        {"label": "Duration", "value": "7 months", "type": "Reported"}
       ],
       "services": ["health-systems-strengthening", "monitoring-evaluation"],
       "featured": false,
@@ -262,9 +264,9 @@
         "Local health system capacity for HIV care strengthened"
       ],
       "metrics": [
-        {"label": "People Reached", "value": "100,000+"},
-        {"label": "Duration", "value": "16 months"},
-        {"label": "Services", "value": "Testing & Counseling"}
+        {"label": "Individuals reached", "value": "100,000+", "type": "Reported"},
+        {"label": "Duration", "value": "16 months", "type": "Reported"},
+        {"label": "Services", "value": "Testing & Counseling", "type": "Reported"}
       ],
       "services": ["health-systems-strengthening", "hr-management-capacity-building"],
       "featured": false,
@@ -289,9 +291,9 @@
         "Multi-stakeholder validation process successfully conducted"
       ],
       "metrics": [
-        {"label": "Framework Type", "value": "iCCM Implementation"},
-        {"label": "Methodology", "value": "Systematic Review + KHIS"},
-        {"label": "Validation", "value": "Multi-stakeholder"}
+        {"label": "Estimated improvement in iCCM coverage in focus counties", "value": "9–12%", "type": "Estimated"},
+        {"label": "Framework Type", "value": "iCCM Implementation", "type": "Reported"},
+        {"label": "Methodology", "value": "Systematic Review + KHIS", "type": "Reported"}
       ],
       "services": ["policy-advocacy-development", "health-systems-strengthening"],
       "featured": false,
@@ -316,9 +318,9 @@
         "Technical capacity for AMR research enhanced"
       ],
       "metrics": [
-        {"label": "Manual Type", "value": "AMR Data Analysis"},
-        {"label": "Duration", "value": "4 months"},
-        {"label": "Supporter", "value": "Wellcome Trust"}
+        {"label": "Estimated reduction in analysis/reporting time", "value": "40%", "type": "Estimated"},
+        {"label": "Manual Type", "value": "AMR Data Analysis", "type": "Reported"},
+        {"label": "Duration", "value": "4 months", "type": "Reported"}
       ],
       "services": ["customized-research-analysis-surveys", "hr-management-capacity-building"],
       "featured": false,
