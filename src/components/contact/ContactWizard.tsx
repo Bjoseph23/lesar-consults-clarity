@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { ArrowLeft, ArrowRight, Plane } from "lucide-react";
+import { Link } from "react-router-dom"; // ⬅️ import Link
 import { Button } from "@/components/ui/button";
 import ProgressBar from "./ProgressBar";
 import StepOne from "./steps/StepOne";
@@ -156,12 +157,16 @@ const ContactWizard = ({ onSubmit, preselectedService }: ContactWizardProps) => 
       {/* Back to Home Button */}
       <div className="flex justify-start mb-6">
         <Button
+          asChild
           variant="ghost"
-          onClick={() => window.location.href = '/'}
           className="group flex items-center space-x-2 text-muted-foreground"
         >
-          <ArrowLeft className="h-4 w-4 text-muted-foreground group-hover:text-white transition-colors" />
-          <span className="group-hover:text-white transition-colors">Back to Home</span>
+          <Link to="/">
+            <ArrowLeft className="h-4 w-4 text-muted-foreground group-hover:text-white transition-colors" />
+            <span className="group-hover:text-white transition-colors">
+              Back to Home
+            </span>
+          </Link>
         </Button>
       </div>
 
