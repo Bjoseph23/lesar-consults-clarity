@@ -121,7 +121,7 @@ const Services = () => {
                           
                           {/* Metrics */}
                           <div className="bg-white rounded-lg p-4 mb-6 border border-navy/10">
-                            <div className="text-2xl font-bold text-dark-red mb-1">
+                            <div className="text-2xl font-bold text-green-600 mb-1">
                               {service.metrics.value}
                             </div>
                             <div className="text-sm text-navy">
