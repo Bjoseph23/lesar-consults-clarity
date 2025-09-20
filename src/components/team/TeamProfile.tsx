@@ -90,10 +90,10 @@ const TeamProfile = ({ member }: TeamProfileProps) => {
               <Button 
                 asChild
               variant="outline"
-              className="bg-blue-800 hover:bg-blue-900 text-white border-blue-800 hover:border-blue-900"
+              className="bg-blue-800 hover:bg-blue-900 text-white border-blue-800 hover:border-blue-900 cta-glisten"
               >
                 <a 
-                  href="https://linkedin.com/in/japheth-athanasio"
+                  href={member.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -253,10 +253,10 @@ const TeamProfile = ({ member }: TeamProfileProps) => {
             <Button 
               asChild
               variant="outline"
-              className="bg-blue-800 hover:bg-blue-900 text-white border-blue-800 hover:border-blue-900 w-full sm:w-auto"
+              className="bg-blue-800 hover:bg-blue-900 text-white border-blue-800 hover:border-blue-900 cta-glisten w-full sm:w-auto"
             >
               <a 
-                href="https://linkedin.com/in/japheth-athanasio"
+                href={member.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
               >
