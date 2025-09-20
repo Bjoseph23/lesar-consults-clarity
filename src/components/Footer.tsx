@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Mail, Phone, MapPin, ExternalLink } from "lucide-react";
+import { Mail, Phone, MapPin } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   const navigation = {
@@ -9,7 +10,7 @@ const Footer = () => {
       { name: "About", href: "/about" },
       { name: "Team", href: "/team" },
       { name: "Services", href: "/services" },
-      { name: "Resources", href: "#resources" },
+      { name: "Resources", href: "/resources" },
       { name: "Projects", href: "/projects" },
     ],
     services: [
@@ -20,17 +21,11 @@ const Footer = () => {
       { name: "HR & Capacity Building", href: "/services/hr-management-capacity-building" },
       { name: "Policy & Advocacy", href: "/services/policy-advocacy-development" },
       { name: "Project Management", href: "/services/project-management" }
-    ],
-    legal: [
-      { name: "Privacy Policy", href: "#privacy" },
-      { name: "Terms & Conditions", href: "#terms" },
-      { name: "Cookie Policy", href: "#cookies" },
     ]
   };
 
   const handleNewsletterSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Newsletter signup functionality would be implemented here
     alert("Thank you for subscribing to our newsletter!");
   };
 
@@ -55,7 +50,7 @@ const Footer = () => {
               +254 710 715 132
             </div>
             <Button
-              onClick={() => window.location.href = '/contact'}
+              onClick={() => (window.location.href = "/contact")}
               variant="secondary"
               className="bg-white text-accent hover:bg-white/90 cta-glisten"
             >
@@ -80,9 +75,11 @@ const Footer = () => {
                 className="h-8 w-auto mb-4 brightness-0 invert"
               />
               <p className="text-sm text-primary-foreground/80 mb-6 leading-relaxed">
-                Premier data, research and analytics consultancy firm serving as a hub of innovation and excellence to demystify opinions across East Africa and beyond.
+                Premier data, research and analytics consultancy firm serving as a hub of
+                innovation and excellence to demystify opinions across East Africa and
+                beyond.
               </p>
-              
+
               {/* Contact Information */}
               <div className="space-y-3">
                 <div className="flex items-start">
@@ -117,12 +114,12 @@ const Footer = () => {
               <ul className="space-y-2">
                 {navigation.main.map((item) => (
                   <li key={item.name}>
-                    <a
-                      href={item.href}
+                    <Link
+                      to={item.href}
                       className="text-sm text-primary-foreground/80 hover:text-primary-foreground transition-colors"
                     >
                       {item.name}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -134,12 +131,12 @@ const Footer = () => {
               <ul className="space-y-2">
                 {navigation.services.map((item) => (
                   <li key={item.name}>
-                    <a
-                      href={item.href}
+                    <Link
+                      to={item.href}
                       className="text-sm text-primary-foreground/80 hover:text-primary-foreground transition-colors"
                     >
                       {item.name}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -178,18 +175,6 @@ const Footer = () => {
             <p className="text-sm text-primary-foreground/60 mb-4 md:mb-0">
               © 2025 Lesar Consults Ltd. All rights reserved.
             </p>
-            
-            <div className="flex space-x-6">
-              {navigation.legal.map((item) => (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  className="text-sm text-primary-foreground/60 hover:text-primary-foreground/80 transition-colors"
-                >
-                  {item.name}
-                </a>
-              ))}
-            </div>
           </div>
         </div>
       </div>
