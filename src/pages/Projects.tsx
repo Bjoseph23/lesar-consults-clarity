@@ -255,8 +255,8 @@ const Projects = () => {
                 </h2>
                 <p className="text-xl text-navy/70 max-w-3xl mx-auto mb-4">
                   Our broader portfolio of successful engagements across diverse sectors and geographies
-               {/* </p>
-                 <p className="text-sm text-navy/50 max-w-2xl mx-auto">
+               </p>
+                {/* <p className="text-sm text-navy/50 max-w-2xl mx-auto">
                   Note: metrics shown as 'Estimated' are conservative projections prepared for website demonstration and are editable in the content data file.
                 </p> */}
               </div>
