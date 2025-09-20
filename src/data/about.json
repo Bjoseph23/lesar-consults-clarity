@@ -1,0 +1,124 @@
+{
+  "hero": {
+    "headline": "Demystifying opinions in health systems, economics and analytics",
+    "subhead": "Premier data, research and analytics consultancy firm serving as a hub of innovation and excellence across East Africa and beyond",
+    "primaryCTA": {
+      "text": "Talk to an Expert",
+      "link": "/contact"
+    },
+    "secondaryCTA": {
+      "text": "View Our Partners",
+      "anchor": "#partners"
+    }
+  },
+  "whoWeAre": {
+    "title": "Who We Are",
+    "paragraphs": [
+      "Lesar Consults is a premier data, research and analytics consultancy firm dedicated to transforming health systems across East Africa and beyond through evidence-based solutions and innovative approaches.",
+      "We specialize in health systems strengthening, financial analysis, monitoring and evaluation, and research surveys that drive meaningful impact in communities we serve.",
+      "Our multidisciplinary team combines deep technical expertise with local knowledge to deliver solutions that are both globally informed and contextually relevant.",
+      "Since our establishment, we have partnered with leading international organizations, government agencies, and development partners to advance health outcomes and economic development across the region."
+    ]
+  },
+  "values": [
+    {
+      "title": "Integrity",
+      "description": "We uphold the highest ethical standards in all our work, ensuring transparency and accountability in every engagement.",
+      "icon": "Shield"
+    },
+    {
+      "title": "Excellence",
+      "description": "We strive for the highest quality in our research, analysis, and recommendations, delivering solutions that exceed expectations.",
+      "icon": "Award"
+    },
+    {
+      "title": "Collaboration", 
+      "description": "We work closely with our clients and partners, fostering inclusive relationships that drive sustainable outcomes.",
+      "icon": "Users"
+    },
+    {
+      "title": "Innovation",
+      "description": "We embrace cutting-edge methodologies and technologies to provide forward-thinking solutions to complex challenges.",
+      "icon": "Lightbulb"
+    },
+    {
+      "title": "Impact",
+      "description": "We measure our success by the positive, lasting change we create in the communities and systems we serve.",
+      "icon": "Target"
+    }
+  ],
+  "approach": {
+    "title": "Our Approach",
+    "subtitle": "How We Work",
+    "steps": [
+      {
+        "title": "Discover",
+        "description": "Comprehensive assessment of current systems and challenges",
+        "detail": "We conduct thorough stakeholder analysis and situational assessments to understand the full context",
+        "icon": "Search"
+      },
+      {
+        "title": "Design",
+        "description": "Evidence-based solution development and planning",
+        "detail": "Our team designs tailored interventions based on best practices and local contexts",
+        "icon": "PenTool"
+      },
+      {
+        "title": "Deploy",
+        "description": "Implementation with continuous monitoring and support",
+        "detail": "We provide hands-on implementation support with real-time monitoring and adaptive management",
+        "icon": "Rocket"
+      },
+      {
+        "title": "Monitor",
+        "description": "Data-driven tracking of progress and outcomes",
+        "detail": "Rigorous monitoring and evaluation systems ensure accountability and learning",
+        "icon": "BarChart"
+      },
+      {
+        "title": "Scale",
+        "description": "Sustainable expansion and knowledge transfer",
+        "detail": "We facilitate sustainable scaling through capacity building and knowledge transfer",
+        "icon": "TrendingUp"
+      }
+    ]
+  },
+  "qualityAssurance": {
+    "title": "Quality Assurance & Ethics",
+    "description": "Our commitment to excellence is reflected in our rigorous quality assurance processes and adherence to international ethical standards.",
+    "points": [
+      "Peer-reviewed methodologies and publications",
+      "Registered with Tax Compliance Certificate (TCC)",
+      "Kenya Revenue Authority (KRA) compliance",
+      "WHO collaborative partnerships",
+      "International development standards adherence",
+      "Continuous professional development programs"
+    ]
+  },
+  "carousel": [
+    {
+      "id": 1,
+      "title": "Health Systems Research",
+      "caption": "Comprehensive health systems assessments and strengthening programs",
+      "image": "/logo.png"
+    },
+    {
+      "id": 2,
+      "title": "Data Analytics",
+      "caption": "Advanced analytics solutions for evidence-based decision making",
+      "image": "/logo.png"
+    },
+    {
+      "id": 3,
+      "title": "Monitoring & Evaluation",
+      "caption": "Robust M&E frameworks for program assessment and improvement",
+      "image": "/logo.png"
+    },
+    {
+      "id": 4,
+      "title": "Financial Analysis",
+      "caption": "Economic evaluation and financial sustainability planning",
+      "image": "/logo.png"
+    }
+  ]
+}

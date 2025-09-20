@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -68,8 +69,8 @@ const Navbar = () => {
   ];
 
   const navigation = [
-    { name: "Home", href: "#home" },
-    { name: "About", href: "#about" },
+    { name: "Home", href: "/" },
+    { name: "About", href: "/about" },
     { name: "Team", href: "#team" },
     { name: "Services", href: "#services", isDropdown: true },
     { name: "Resources", href: "#resources" },
@@ -112,7 +113,11 @@ const Navbar = () => {
                 );
               }
 
-              return (
+              return item.href.startsWith('/') ? (
+                <Link key={item.name} to={item.href} className="nav-link text-sm font-medium">
+                  {item.name}
+                </Link>
+              ) : (
                 <a key={item.name} href={item.href} className="nav-link text-sm font-medium">
                   {item.name}
                 </a>
@@ -174,7 +179,11 @@ const Navbar = () => {
                 );
               }
 
-              return (
+              return item.href.startsWith('/') ? (
+                <Link key={item.name} to={item.href} className="block text-base font-medium text-gray-900 hover:text-primary transition-colors" onClick={() => setIsOpen(false)}>
+                  {item.name}
+                </Link>
+              ) : (
                 <a key={item.name} href={item.href} className="block text-base font-medium text-gray-900 hover:text-primary transition-colors" onClick={() => setIsOpen(false)}>
                   {item.name}
                 </a>
