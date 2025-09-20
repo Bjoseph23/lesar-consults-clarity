@@ -102,7 +102,7 @@ const ServiceDetail = () => {
       <main className="min-h-screen overflow-hidden">{/* Add overflow-hidden to prevent horizontal scroll */}
         {/* Hero Section */}
         <section 
-          ref={heroRef as React.RefObject<HTMLElement>}
+          ref={heroRef as any}
           className={`py-16 bg-background transition-all duration-1000 ${heroVisible ? 'animate-fade-in' : 'opacity-0'}`}
         >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
