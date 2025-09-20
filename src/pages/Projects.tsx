@@ -76,7 +76,8 @@ const Projects = () => {
         </div>
       </div>
       
-      <main className="min-h-screen">
+      {/* NOTE: added overflow-x-hidden here to prevent page horizontal scroll on mobile */}
+      <main className="min-h-screen overflow-x-hidden">
         {/* Hero Section */}
         <section 
           ref={heroRef as any}
@@ -140,6 +141,7 @@ const Projects = () => {
                   <AnimatedSection key={project.id}>
                     <div className={`${bgClass} py-16`}>
                       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        {/* Ensure grid children can shrink on small screens (min-w-0) */}
                         <div className={`grid lg:grid-cols-2 gap-12 items-center ${isEven ? '' : 'lg:grid-flow-col-dense'}`}>
                           {/* Image */}
                           <div className={`${isEven ? '' : 'lg:col-start-2'} group min-w-0`}>
@@ -155,7 +157,7 @@ const Projects = () => {
                           
                           {/* Content */}
                           <div className={`${isEven ? '' : 'lg:col-start-1 lg:row-start-1'} min-w-0`}>
-                            <div className="flex items-center gap-2 mb-4 min-w-0">
+                            <div className="flex items-center gap-2 mb-4">
                               <Calendar className="w-4 h-4 text-navy" />
                               <span className="text-sm font-medium text-navy">{project.date_range}</span>
                               <span className={`px-2 py-1 rounded-full text-xs font-medium ${
@@ -171,7 +173,8 @@ const Projects = () => {
                               {project.title}
                             </h3>
                             
-                            <p className="text-navy text-lg leading-relaxed mb-6 whitespace-normal break-words">
+                            {/* Constrain paragraph to wrap inside card */}
+                            <p className="text-navy text-lg leading-relaxed mb-6 break-words">
                               {project.summary}
                             </p>
                             
@@ -183,7 +186,7 @@ const Projects = () => {
                               </div>
                               <div className="flex flex-wrap gap-2">
                                 {project.partners.map((partner, idx) => (
-                                  <span key={idx} className="px-3 py-1 bg-navy text-white text-xs rounded-full">
+                                  <span key={idx} className="px-3 py-1 bg-navy text-white text-xs rounded-full break-words">
                                     {partner}
                                   </span>
                                 ))}
@@ -214,7 +217,7 @@ const Projects = () => {
                               className="mb-6"
                             />
                             
-                            <div className="flex flex-wrap sm:flex-nowrap gap-4">
+                            <div className="flex flex-col sm:flex-row gap-4">
                               <Button 
                                 className="bg-dark-red hover:bg-dark-red/90 text-white"
                                 asChild
@@ -268,7 +271,7 @@ const Projects = () => {
                     className="bg-white rounded-lg p-6 shadow-card group hover:shadow-elegant transition-all duration-300 overflow-hidden min-w-0"
                   >
                     <div className="flex items-center gap-2 mb-3">
-                      <Calendar className="w-4 h-4 text-navy" />
+                      <Calendar className="w-4 h-4 text-navy flex-shrink-0" />
                       <span className="text-sm font-medium text-navy">{project.date_range}</span>
                     </div>
                     
@@ -276,7 +279,7 @@ const Projects = () => {
                       {project.title}
                     </h3>
                     
-                    <p className="text-navy/70 text-sm mb-4 leading-relaxed whitespace-normal break-words">
+                    <p className="text-navy/70 text-sm mb-4 leading-relaxed break-words">
                       {project.summary}
                     </p>
                     
@@ -287,7 +290,7 @@ const Projects = () => {
                           <div className="text-sm font-bold text-green-600 mb-1">
                             {project.metrics[0].value}
                           </div>
-                          <div className="text-xs text-navy/70">
+                          <div className="text-xs text-navy/70 break-words">
                             {project.metrics[0].label}
                           </div>
                           {(project.metrics[0] as any).type && (
@@ -310,7 +313,7 @@ const Projects = () => {
                     <div className="mb-4">
                       <div className="flex flex-wrap gap-1">
                         {project.partners.slice(0, 2).map((partner, idx) => (
-                          <span key={idx} className="px-2 py-1 bg-navy/10 text-navy text-xs rounded">
+                          <span key={idx} className="px-2 py-1 bg-navy/10 text-navy text-xs rounded break-words">
                             {partner}
                           </span>
                         ))}
