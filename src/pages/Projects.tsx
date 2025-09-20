@@ -237,7 +237,7 @@ const Projects = () => {
 
                             {/* Conditional centered download button for Nairobi Mental Health Plan */}
                             {project.id === "nairobi-mental-health-plan" && (
-                              <div className="mt-4 flex justify-center">
+                              <div className="mt-4 flex">
                                 <Button
                                   className="bg-blue-800 hover:bg-blue-900 text-white px-6 py-3 rounded-md inline-flex items-center justify-center w-full sm:w-auto"
                                   // no onClick handler per instruction (button does nothing for now)
