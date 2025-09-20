@@ -1,0 +1,328 @@
+{
+  "projects": [
+    {
+      "id": "kenya-surgical-services-plan",
+      "slug": "kenya-surgical-services-plan",
+      "title": "Kenya National Surgical Services Strategic Plan 2025–2030",
+      "date_range": "July 2025 – Present",
+      "start_date": "2025-07-01",
+      "end_date": "2025-12-31",
+      "partners": ["Surgical Society of Kenya", "Operation Smile Foundation"],
+      "client": "Surgical Society of Kenya",
+      "value": "$7,300 USD",
+      "status": "Draft in validation",
+      "summary": "Consultancy to develop a comprehensive, multisectoral, and costed roadmap to transform surgical care delivery across all levels of the health system.",
+      "long_description": "The Kenya National Surgical Services Strategic Plan 2025–2030 provides a comprehensive framework for transforming surgical care delivery across all levels of Kenya's health system. This strategic plan addresses critical gaps in surgical capacity, infrastructure, and workforce development through evidence-based interventions and multi-sectoral collaboration.",
+      "key_achievements": [
+        "Comprehensive multi-sectoral strategic framework developed",
+        "Costed roadmap for surgical care transformation created",
+        "Stakeholder validation process initiated across health system levels"
+      ],
+      "metrics": [
+        {"label": "Project Value", "value": "$7,300 USD"},
+        {"label": "Status", "value": "Draft in validation"},
+        {"label": "Timeline", "value": "6 months"}
+      ],
+      "services": ["health-systems-strengthening", "policy-advocacy-development"],
+      "featured": true,
+      "image": "/placeholder.svg"
+    },
+    {
+      "id": "nairobi-mental-health-plan",
+      "slug": "nairobi-mental-health-plan", 
+      "title": "Nairobi County Mental Health Strategic Plan 2025–2030",
+      "date_range": "June 2024 – May 2025",
+      "start_date": "2024-06-01",
+      "end_date": "2025-05-31",
+      "partners": ["Nairobi County Government"],
+      "client": "Nairobi County",
+      "value": "KSh 7,000,000",
+      "status": "Launched",
+      "summary": "Lead consultancy delivering strategic plan focused on integrating primary health care systems for inclusive community-centered mental health services.",
+      "long_description": "The Nairobi County Mental Health Strategic Plan 2025–2030 represents a groundbreaking approach to mental health service delivery in Kenya's capital. The plan integrates primary health care systems to create inclusive, community-centered mental health services that are accessible, culturally appropriate, and evidence-based.",
+      "key_achievements": [
+        "Successfully launched comprehensive mental health strategic plan",
+        "Integrated primary health care approach developed",
+        "Community-centered service delivery model established"
+      ],
+      "metrics": [
+        {"label": "Project Value", "value": "KSh 7,000,000"},
+        {"label": "Launch Date", "value": "13 June 2025"},
+        {"label": "Duration", "value": "12 months"}
+      ],
+      "services": ["health-systems-strengthening", "policy-advocacy-development"],
+      "featured": true,
+      "image": "/placeholder.svg"
+    },
+    {
+      "id": "supply-chain-review",
+      "slug": "supply-chain-review",
+      "title": "Mid-term Review of the National Supply Chain Strategy 2020–2025",
+      "date_range": "July 2022 – February 2023",
+      "start_date": "2022-07-01", 
+      "end_date": "2023-02-28",
+      "partners": ["USAID Kenya", "Afya Ugavi", "Ministry of Health"],
+      "client": "USAID Kenya",
+      "value": "Contract value confidential",
+      "status": "Completed",
+      "summary": "Comprehensive mid-term review of Kenya's national supply chain strategy implementation and performance assessment.",
+      "long_description": "This mid-term review evaluated the implementation progress of Kenya's National Supply Chain Strategy 2020–2025, assessing performance against key indicators and providing recommendations for strategic adjustments to enhance supply chain effectiveness in the health sector.",
+      "key_achievements": [
+        "Comprehensive strategy implementation assessment completed",
+        "Key performance indicators evaluated and benchmarked",
+        "Strategic recommendations developed for enhanced effectiveness"
+      ],
+      "metrics": [
+        {"label": "Review Period", "value": "8 months"},
+        {"label": "Funder", "value": "USAID Kenya"},
+        {"label": "Status", "value": "Completed"}
+      ],
+      "services": ["monitoring-evaluation", "health-systems-strengthening"],
+      "featured": true,
+      "image": "/placeholder.svg"
+    },
+    {
+      "id": "south-africa-tender-analysis",
+      "slug": "south-africa-tender-analysis",
+      "title": "Cost Benefit Analysis for ZAR 10.8B South African Tender",
+      "date_range": "April – May 2024",
+      "start_date": "2024-04-01",
+      "end_date": "2024-05-31", 
+      "partners": ["Free State Province Government"],
+      "client": "Free State Province, South Africa",
+      "value": "ZAR 10.8 billion (USD 570.4 million) tender value",
+      "status": "Completed",
+      "summary": "Cost-benefit and cost-effectiveness analysis for major healthcare infrastructure tender in Free State Province, South Africa.",
+      "long_description": "Conducted comprehensive cost-benefit and cost-effectiveness analysis for a major healthcare infrastructure tender valued at ZAR 10.8 billion (USD 570.4 million) in Free State Province, South Africa. The analysis provided critical financial modeling and economic evaluation to support decision-making.",
+      "key_achievements": [
+        "Complex financial modeling for multi-billion rand tender completed",
+        "Cost-effectiveness analysis delivered within tight timeline",
+        "Strategic recommendations provided for tender optimization"
+      ],
+      "metrics": [
+        {"label": "Tender Value", "value": "ZAR 10.8B (USD 570.4M)"},
+        {"label": "Timeline", "value": "2 months"},
+        {"label": "Location", "value": "Free State, South Africa"}
+      ],
+      "services": ["financial-analysis-economics", "monitoring-evaluation"],
+      "featured": true,
+      "image": "/placeholder.svg"
+    },
+    {
+      "id": "r4d-ghana-project",
+      "slug": "r4d-ghana-project",
+      "title": "R4D Health Systems Strengthening Project Ghana",
+      "date_range": "November 2023 & March 2024",
+      "start_date": "2023-11-01",
+      "end_date": "2024-03-31",
+      "partners": ["USAID Ghana", "R4D", "Ghana Health Services"],
+      "client": "USAID Ghana / R4D",
+      "value": "Contract value confidential", 
+      "status": "Completed",
+      "summary": "Strengthening primary health service delivery and community health systems within Ghana Health Services framework.",
+      "long_description": "This project focused on strengthening primary health service delivery and community health systems within the Ghana Health Services framework. The intervention aimed to improve health service quality, accessibility, and community engagement through evidence-based health systems strengthening approaches.",
+      "key_achievements": [
+        "Primary health service delivery systems strengthened",
+        "Community health engagement mechanisms enhanced", 
+        "Ghana Health Services capacity building implemented"
+      ],
+      "metrics": [
+        {"label": "Project Phases", "value": "2 phases"},
+        {"label": "Funder", "value": "USAID Ghana"},
+        {"label": "Partner", "value": "R4D"}
+      ],
+      "services": ["health-systems-strengthening", "hr-management-capacity-building"],
+      "featured": true,
+      "image": "/placeholder.svg"
+    },
+    {
+      "id": "cherp-kap-survey",
+      "slug": "cherp-kap-survey",
+      "title": "Kenya COVID-19 Health Emergency Response Project 7th KAP Survey",
+      "date_range": "January 2023 – May 2023",
+      "start_date": "2023-01-01",
+      "end_date": "2023-05-31",
+      "partners": ["World Bank", "Ministry of Health Kenya"],
+      "client": "World Bank/MoH Kenya",
+      "value": "Contract value confidential",
+      "status": "Completed", 
+      "summary": "Lead consultancy for the 7th Knowledge, Attitude, and Practice survey under Kenya's COVID-19 health emergency response framework.",
+      "long_description": "Led the implementation of the 7th Knowledge, Attitude, and Practice (KAP) survey as part of Kenya's COVID-19 Health Emergency Response Project (CHERP), providing critical insights into public health behaviors and informing policy decisions.",
+      "key_achievements": [
+        "Comprehensive KAP survey methodology developed and implemented",
+        "High-quality data collection across multiple regions achieved",
+        "Policy-relevant insights generated for emergency response planning"
+      ],
+      "metrics": [
+        {"label": "Survey Type", "value": "7th KAP Survey"},
+        {"label": "Duration", "value": "5 months"},
+        {"label": "Funder", "value": "World Bank"}
+      ],
+      "services": ["customized-research-analysis-surveys", "monitoring-evaluation"],
+      "featured": false,
+      "image": "/placeholder.svg"
+    },
+    {
+      "id": "ear-hearing-strategic-plan",
+      "slug": "ear-hearing-strategic-plan", 
+      "title": "National Ear & Hearing Care Strategic Plan 2023–2028",
+      "date_range": "October 2022 – February 2023",
+      "start_date": "2022-10-01",
+      "end_date": "2023-02-28",
+      "partners": ["WHO", "Ministry of Health Kenya"],
+      "client": "WHO",
+      "value": "Contract value confidential",
+      "status": "Completed",
+      "summary": "Development of costed National Ear & Hearing Care Strategic Plan and Policy for Kenya, funded by WHO.",
+      "long_description": "Developed a comprehensive, costed National Ear & Hearing Care Strategic Plan 2023–2028 and accompanying policy framework for Kenya, addressing critical gaps in ear and hearing care services across the health system.",
+      "key_achievements": [
+        "Comprehensive strategic plan for ear and hearing care developed",
+        "Detailed costing framework for implementation created",
+        "National policy framework established for hearing care services"
+      ],
+      "metrics": [
+        {"label": "Plan Duration", "value": "5 years (2023-2028)"},
+        {"label": "Funder", "value": "WHO"},
+        {"label": "Deliverables", "value": "Strategy + Policy"}
+      ],
+      "services": ["health-systems-strengthening", "policy-advocacy-development"],
+      "featured": false,
+      "image": "/placeholder.svg"
+    },
+    {
+      "id": "unicef-nutrition-project",
+      "slug": "unicef-nutrition-project",
+      "title": "UNICEF Nutrition Improvement Project",
+      "date_range": "April 2022 – December 2022", 
+      "start_date": "2022-04-01",
+      "end_date": "2022-12-31",
+      "partners": ["UNICEF Kenya"],
+      "client": "UNICEF Kenya",
+      "value": "Contract value confidential",
+      "status": "Completed",
+      "summary": "Comprehensive nutrition improvement initiative focusing on maternal and child nutrition outcomes in Kenya.",
+      "long_description": "Implemented comprehensive nutrition improvement strategies focusing on maternal and child nutrition outcomes, working with UNICEF Kenya to strengthen nutrition service delivery and community-based nutrition programs.",
+      "key_achievements": [
+        "Nutrition service delivery systems enhanced",
+        "Community-based nutrition programs strengthened",
+        "Maternal and child nutrition outcomes improved"
+      ],
+      "metrics": [
+        {"label": "Duration", "value": "9 months"},
+        {"label": "Focus Area", "value": "Maternal & Child Nutrition"},
+        {"label": "Partner", "value": "UNICEF Kenya"}
+      ],
+      "services": ["health-systems-strengthening", "hr-management-capacity-building"],
+      "featured": false,
+      "image": "/placeholder.svg"
+    },
+    {
+      "id": "maternal-child-health-initiative",
+      "slug": "maternal-child-health-initiative",
+      "title": "Maternal & Child Health Initiative Project",
+      "date_range": "August 2021 – February 2022",
+      "start_date": "2021-08-01", 
+      "end_date": "2022-02-28",
+      "partners": ["Regional Health Partners"],
+      "client": "Regional Health Authority",
+      "value": "Contract value confidential",
+      "status": "Completed",
+      "summary": "Associate consultancy delivering significant improvements in maternal mortality rates and immunization coverage across target regions.",
+      "long_description": "This maternal and child health initiative achieved remarkable results, reducing maternal mortality rates by 15% and increasing immunization coverage to 95% in target regions through evidence-based interventions and community engagement strategies.",
+      "key_achievements": [
+        "Maternal mortality rate reduced by 15% in target regions",
+        "Immunization coverage increased to 95%",
+        "Community health systems strengthened significantly"
+      ],
+      "metrics": [
+        {"label": "Mortality Reduction", "value": "15%"},
+        {"label": "Immunization Coverage", "value": "95%"},
+        {"label": "Duration", "value": "7 months"}
+      ],
+      "services": ["health-systems-strengthening", "monitoring-evaluation"],
+      "featured": false,
+      "image": "/placeholder.svg"
+    },
+    {
+      "id": "dfid-hiv-aids-project",
+      "slug": "dfid-hiv-aids-project",
+      "title": "DFID HIV/AIDS Prevention Project",
+      "date_range": "March 2018 – June 2019",
+      "start_date": "2018-03-01",
+      "end_date": "2019-06-30",
+      "partners": ["DFID", "Local Health Partners"],
+      "client": "DFID",
+      "value": "Contract value confidential",
+      "status": "Completed",
+      "summary": "Large-scale HIV/AIDS prevention initiative reaching over 100,000 individuals with testing and counseling services.",
+      "long_description": "Implemented comprehensive HIV/AIDS prevention strategies under DFID funding, successfully reaching over 100,000 individuals with testing and counseling services while strengthening local health system capacity for HIV prevention and care.",
+      "key_achievements": [
+        "Reached 100,000+ individuals with testing and counseling",
+        "HIV prevention strategies successfully implemented",
+        "Local health system capacity for HIV care strengthened"
+      ],
+      "metrics": [
+        {"label": "People Reached", "value": "100,000+"},
+        {"label": "Duration", "value": "16 months"},
+        {"label": "Services", "value": "Testing & Counseling"}
+      ],
+      "services": ["health-systems-strengthening", "hr-management-capacity-building"],
+      "featured": false,
+      "image": "/placeholder.svg"
+    },
+    {
+      "id": "iccm-framework-development",
+      "slug": "iccm-framework-development",
+      "title": "Kenya iCCM Implementation Framework and Policy Development",
+      "date_range": "2022–2023 FY",
+      "start_date": "2022-07-01",
+      "end_date": "2023-06-30",
+      "partners": ["Ministry of Health Kenya", "Development Partners"],
+      "client": "Ministry of Health Kenya", 
+      "value": "Contract value confidential",
+      "status": "Completed",
+      "summary": "Associate consultancy developing integrated Community Case Management framework through systematic review and stakeholder validation.",
+      "long_description": "Contributed to the development of Kenya's integrated Community Case Management (iCCM) Implementation Framework and Policy Plan of Action through comprehensive systematic review, KHIS analysis, and extensive stakeholder validation processes.",
+      "key_achievements": [
+        "Comprehensive iCCM implementation framework developed",
+        "Systematic review and KHIS analysis completed", 
+        "Multi-stakeholder validation process successfully conducted"
+      ],
+      "metrics": [
+        {"label": "Framework Type", "value": "iCCM Implementation"},
+        {"label": "Methodology", "value": "Systematic Review + KHIS"},
+        {"label": "Validation", "value": "Multi-stakeholder"}
+      ],
+      "services": ["policy-advocacy-development", "health-systems-strengthening"],
+      "featured": false,
+      "image": "/placeholder.svg"
+    },
+    {
+      "id": "amr-data-analysis",
+      "slug": "amr-data-analysis",
+      "title": "AMR Data Analysis Manual Development",
+      "date_range": "April 2022 – July 2022",
+      "start_date": "2022-04-01",
+      "end_date": "2022-07-31",
+      "partners": ["Wellcome Trust"],
+      "client": "Wellcome Trust",
+      "value": "Contract value confidential",
+      "status": "Completed",
+      "summary": "Associate consultancy for antimicrobial resistance data analysis manual development under Wellcome Trust-supported project.",
+      "long_description": "Developed comprehensive data analysis manual for antimicrobial resistance (AMR) research and surveillance as part of a Wellcome Trust-supported project, providing standardized methodologies for AMR data collection, analysis, and interpretation.",
+      "key_achievements": [
+        "Comprehensive AMR data analysis manual developed",
+        "Standardized methodologies for AMR surveillance established",
+        "Technical capacity for AMR research enhanced"
+      ],
+      "metrics": [
+        {"label": "Manual Type", "value": "AMR Data Analysis"},
+        {"label": "Duration", "value": "4 months"},
+        {"label": "Supporter", "value": "Wellcome Trust"}
+      ],
+      "services": ["customized-research-analysis-surveys", "hr-management-capacity-building"],
+      "featured": false,
+      "image": "/placeholder.svg"
+    }
+  ]
+}
