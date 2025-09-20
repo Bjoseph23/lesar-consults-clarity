@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { ArrowRight } from "lucide-react";
 
@@ -66,7 +67,9 @@ const Hero = () => {
                 size="lg"
                 aria-label="View our work - scrolls to projects section"
               >
+                <Link to="/projects">
                 View Our Work
+                </Link>
               </Button>
             </div>
           </div>
