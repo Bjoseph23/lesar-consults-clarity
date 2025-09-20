@@ -176,7 +176,7 @@ const About = () => {
                 </p>
               </div>
             </div>
-            <PartnersMarquee />
+            <PartnersMarquee hideTitle={true} />
           </section>
         </AnimatedSection>
       </main>

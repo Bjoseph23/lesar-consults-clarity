@@ -1,6 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 
-const PartnersMarquee = () => {
+interface PartnersMarqueeProps {
+  hideTitle?: boolean;
+}
+
+const PartnersMarquee = ({ hideTitle = false }: PartnersMarqueeProps = {}) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const marqueeRef = useRef<HTMLDivElement | null>(null);
 
@@ -233,9 +237,11 @@ const PartnersMarquee = () => {
 
   return (
     <>
-      <div className="text-center mb-8">
-        <h2 className="text-2xl md:text-3xl font-serif font-semibold text-primary">Our Partners:</h2>
-      </div>
+      {!hideTitle && (
+        <div className="text-center mb-8">
+          <h2 className="text-2xl md:text-3xl font-serif font-semibold text-primary">Our Partners:</h2>
+        </div>
+      )}
 
       <section className="bg-cream/60 py-12" aria-label="Our partners and funders">
         <div className="relative max-w-7xl mx-auto">
