@@ -98,8 +98,10 @@ const Navbar = () => {
               if (item.isDropdown) {
                 return (
                   <DropdownMenu key={item.name}>
-                    <DropdownMenuTrigger className="flex items-center nav-link text-sm font-medium">
-                      {item.name} <ChevronDown className="ml-1 h-4 w-4" />
+                    <DropdownMenuTrigger asChild>
+                      <Link to={item.href} className="flex items-center navbar-link text-sm font-medium transition-all duration-200">
+                        {item.name} <ChevronDown className="ml-1 h-4 w-4" />
+                      </Link>
                     </DropdownMenuTrigger>
                      <DropdownMenuContent className="w-80 bg-white border border-border shadow-sm z-50">
                        {services.map((service) => (

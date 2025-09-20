@@ -1,4 +1,5 @@
 import { useParams, Link } from "react-router-dom";
+import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Download, CheckCircle, Target, Lightbulb, TrendingUp, Users, BarChart3, Briefcase, FileText, Settings } from "lucide-react";
@@ -8,12 +9,25 @@ import AnimatedSection from "@/components/AnimatedSection";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import servicesData from "@/data/services.json";
 import ScrollTop from "@/components/ScrollTop";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
 const ServiceDetail = () => {
   const { slug } = useParams<{ slug: string }>();
   const { elementRef: heroRef, isVisible: heroVisible } = useScrollAnimation();
   
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [slug]);
+  
+  
   const service = servicesData.services.find(s => s.slug === slug);
+
+  const breadcrumbs = [
+    { label: "Home", href: "/" },
+    { label: "Services", href: "/services" },
+    { label: service?.title || "Service" }
+  ];
 
   if (!service) {
     return (
@@ -78,11 +92,18 @@ const ServiceDetail = () => {
 
       <Navbar />
       
-      <main className="min-h-screen">
+      {/* Breadcrumbs */}
+      <div className="pt-20 pb-4 bg-background">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <Breadcrumbs items={breadcrumbs} />
+        </div>
+      </div>
+      
+      <main className="min-h-screen overflow-hidden">{/* Add overflow-hidden to prevent horizontal scroll */}
         {/* Hero Section */}
         <section 
           ref={heroRef as React.RefObject<HTMLElement>}
-          className={`pt-20 pb-16 bg-background transition-all duration-1000 ${heroVisible ? 'animate-fade-in' : 'opacity-0'}`}
+          className={`py-16 bg-background transition-all duration-1000 ${heroVisible ? 'animate-fade-in' : 'opacity-0'}`}
         >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -152,7 +173,7 @@ const ServiceDetail = () => {
               </h2>
               <div className="grid md:grid-cols-5 gap-8">
                 {processSteps.map((step, index) => (
-                  <div key={index} className="text-center">
+                  <div key={index} className="text-center relative">{/* Add relative positioning */}
                     <div className="w-16 h-16 bg-dark-red rounded-full flex items-center justify-center mx-auto mb-4">
                       <step.icon className="w-8 h-8 text-white" />
                     </div>
@@ -162,9 +183,7 @@ const ServiceDetail = () => {
                     <p className="text-sm text-navy/70">
                       {step.description}
                     </p>
-                    {index < processSteps.length - 1 && (
-                      <div className="hidden md:block absolute top-8 left-1/2 w-full h-0.5 bg-navy/20 transform translate-x-8" />
-                    )}
+                    {/* Remove the absolute positioned arrow that might cause overflow */}
                   </div>
                 ))}
               </div>
@@ -234,15 +253,15 @@ const ServiceDetail = () => {
         {/* Mini Services */}
         <AnimatedSection>
           <section className="py-20 bg-background">
-            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 overflow-hidden">{/* Add overflow-hidden */}
               <h2 className="text-3xl font-serif font-bold text-navy mb-12 text-center">
                 Specific Services
               </h2>
-              <div className="grid md:grid-cols-2 gap-4">
+              <div className="grid md:grid-cols-2 gap-4 overflow-hidden">{/* Add overflow-hidden to grid */}
                 {service.miniServices.map((item, index) => (
-                  <div key={index} className="flex items-center p-4 bg-white rounded-lg shadow-sm border border-navy/10">
+                  <div key={index} className="flex items-center p-4 bg-white rounded-lg shadow-sm border border-navy/10 break-words">{/* Add break-words */}
                     <CheckCircle className="w-5 h-5 text-dark-red mr-3 flex-shrink-0" />
-                    <span className="text-navy font-medium">{item}</span>
+                    <span className="text-navy font-medium text-sm break-words">{item}</span>{/* Add text-sm and break-words */}
                   </div>
                 ))}
               </div>

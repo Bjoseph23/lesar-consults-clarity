@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -7,9 +8,15 @@ import Footer from "@/components/Footer";
 import AnimatedSection from "@/components/AnimatedSection";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import servicesData from "@/data/services.json";
+import ScrollTop from "@/components/ScrollTop";
 
 const Services = () => {
   const { elementRef: heroRef, isVisible: heroVisible } = useScrollAnimation();
+
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const serviceIcons = {
     "health-systems-strengthening": Users,
@@ -37,7 +44,7 @@ const Services = () => {
       <main className="min-h-screen">
         {/* Hero Section */}
         <section 
-          ref={heroRef as React.RefObject<HTMLElement>}
+          ref={heroRef as any}
           className={`pt-20 pb-16 bg-background transition-all duration-1000 ${heroVisible ? 'animate-fade-in' : 'opacity-0'}`}
         >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -151,6 +158,7 @@ const Services = () => {
         </section>
       </main>
 
+      <ScrollTop />
       <Footer />
     </>
   );
