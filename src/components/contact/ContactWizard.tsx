@@ -29,9 +29,10 @@ interface FormData {
 
 interface ContactWizardProps {
   onSubmit: (data: FormData) => void;
+  preselectedService?: string | null;
 }
 
-const ContactWizard = ({ onSubmit }: ContactWizardProps) => {
+const ContactWizard = ({ onSubmit, preselectedService }: ContactWizardProps) => {
   const [currentStep, setCurrentStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -43,7 +44,7 @@ const ContactWizard = ({ onSubmit }: ContactWizardProps) => {
     email: "",
     phone: "",
     countryCode: "+254",
-    services: [],
+    services: preselectedService ? [preselectedService] : [],
     otherService: "",
     description: "",
     budget: "",

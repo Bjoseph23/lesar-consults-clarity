@@ -1,0 +1,439 @@
+{
+  "services": [
+    {
+      "id": "health-systems-strengthening",
+      "title": "Health Systems Strengthening",
+      "slug": "health-systems-strengthening",
+      "overview": "We work with governments, development partners, and health organizations to strengthen health systems through evidence-based strategies, policy development, and capacity building. Our approach focuses on building resilient, equitable, and sustainable health systems that can deliver quality care to all populations.",
+      "description": "Our health systems strengthening services encompass comprehensive assessments of health system performance, development of strategic plans for universal health coverage, and design of interventions to improve health service delivery. We specialize in primary health care strengthening, health workforce analysis, and integration of community health systems into the broader health infrastructure.",
+      "challenge": [
+        "Fragmented health service delivery systems with poor coordination between levels of care",
+        "Inadequate health workforce distribution and capacity gaps in key competencies",
+        "Weak health information systems limiting evidence-based decision making"
+      ],
+      "approach": [
+        "Comprehensive health system assessment and stakeholder mapping",
+        "Development of evidence-based strategic plans and implementation frameworks",
+        "Capacity building for health management teams at all levels",
+        "Design and implementation of monitoring and evaluation systems",
+        "Ongoing technical assistance and adaptive management support"
+      ],
+      "outcomes": [
+        "Improved health service coverage and quality indicators",
+        "Enhanced coordination between different levels of care",
+        "Strengthened health workforce capacity and performance",
+        "Evidence-based policy development and implementation"
+      ],
+      "miniServices": [
+        "Health system assessments and situational analysis",
+        "Universal Health Coverage (UHC) strategy development",
+        "Primary health care strengthening and integration",
+        "Health workforce analysis and capacity building",
+        "Community health system design and implementation",
+        "Health service delivery optimization",
+        "Health information system strengthening"
+      ],
+      "keywords": [
+        "health systems strengthening Kenya",
+        "UHC strategy",
+        "health workforce analysis",
+        "health service delivery",
+        "primary health care"
+      ],
+      "testimonials": [
+        {
+          "text": "Lesar Consults helped us redesign our primary care referral pathways — clinic attendance improved by 28% in six months.",
+          "author": "Dr. A. Mwangi",
+          "organization": "County Health Department"
+        },
+        {
+          "text": "Their workforce analysis allowed us to redistribute staff efficiently and reduce overtime costs by 18%.",
+          "author": "Head of HR",
+          "organization": "National Health Service (anonymous)"
+        },
+        {
+          "text": "The UHC strategy they co-developed resulted in clearer benefit packages and stronger resource allocation across 5 counties.",
+          "author": "Program Director",
+          "organization": "Regional Health Initiative"
+        }
+      ],
+      "metrics": {
+        "value": "28%",
+        "description": "Average improvement in clinic attendance"
+      }
+    },
+    {
+      "id": "financial-analysis-economics",
+      "title": "Financial Analysis and Economics",
+      "slug": "financial-analysis-economics",
+      "overview": "We provide comprehensive financial analysis and economic evaluation services to support strategic decision-making, investment planning, and resource optimization. Our expertise spans costing and budgeting, financial modeling, economic analysis, and company valuation across diverse sectors.",
+      "description": "Our financial analysis services combine rigorous analytical frameworks with practical implementation support. We conduct detailed cost-benefit analyses, develop sophisticated financial models, and provide economic evaluations that inform policy and investment decisions. Our team has extensive experience in health economics, development finance, and private sector financial analysis.",
+      "challenge": [
+        "Limited financial planning capacity and inadequate costing methodologies",
+        "Lack of evidence-based economic analysis for policy and investment decisions",
+        "Poor financial management systems leading to inefficient resource allocation"
+      ],
+      "approach": [
+        "Comprehensive financial assessment and gap analysis",
+        "Development of robust costing frameworks and financial models",
+        "Economic evaluation using internationally recognized methodologies",
+        "Capacity building in financial management and planning",
+        "Implementation support and ongoing technical assistance"
+      ],
+      "outcomes": [
+        "Improved financial planning and resource allocation efficiency",
+        "Evidence-based investment decisions with clear ROI projections",
+        "Enhanced financial management capacity and systems",
+        "Successful fundraising and capital mobilization"
+      ],
+      "miniServices": [
+        "Costing and budgeting analysis",
+        "Financial modeling and forecasting",
+        "Economic evaluation and cost-benefit analysis",
+        "Company valuation and due diligence",
+        "Investment appraisal and feasibility studies",
+        "Financial management system design",
+        "Grant writing and proposal development"
+      ],
+      "keywords": [
+        "financial analysis consultancy",
+        "costing and budgeting",
+        "economic analysis Kenya",
+        "financial modelling",
+        "company valuation"
+      ],
+      "testimonials": [
+        {
+          "text": "Their costing and financial modelling made our bid more competitive — we secured funding worth KSh 230 million.",
+          "author": "CFO",
+          "organization": "Private Health Group"
+        },
+        {
+          "text": "Lesar Consults identified cost-savings that improved program efficiency by 20% year-on-year.",
+          "author": "Finance Lead",
+          "organization": "NGO Partner"
+        },
+        {
+          "text": "Detailed due diligence and valuation advice from the team led to a successful capital raise in under three months.",
+          "author": "Founder",
+          "organization": "HealthTech Start-up"
+        }
+      ],
+      "metrics": {
+        "value": "KSh 230M",
+        "description": "In funding secured through our analysis"
+      }
+    },
+    {
+      "id": "customized-research-analysis-surveys",
+      "title": "Customized Research, Analysis, Independent Coverage Assessments, and Surveys",
+      "slug": "customized-research-analysis-surveys",
+      "overview": "We design and implement rigorous research studies, conduct comprehensive analyses, and perform independent coverage assessments to generate evidence for policy and program development. Our research capabilities span quantitative and qualitative methodologies across diverse development sectors.",
+      "description": "Our research services combine academic rigor with practical relevance, ensuring that findings directly inform policy and program decisions. We specialize in epidemiological surveys, household surveys, knowledge-attitude-practice (KAP) studies, and independent coverage assessments. Our team employs cutting-edge data collection technologies and analytical methods to ensure high-quality, actionable results.",
+      "challenge": [
+        "Limited capacity for rigorous research design and implementation",
+        "Poor data quality and inadequate analytical frameworks",
+        "Disconnect between research findings and policy/program applications"
+      ],
+      "approach": [
+        "Collaborative research design with stakeholder input and validation",
+        "Implementation of robust data collection protocols and quality assurance",
+        "Advanced statistical analysis and data visualization",
+        "Translation of findings into actionable recommendations",
+        "Dissemination and knowledge sharing through multiple channels"
+      ],
+      "outcomes": [
+        "High-quality evidence base for policy and program development",
+        "Improved data-driven decision making capacity",
+        "Enhanced research capacity within partner organizations",
+        "Published research contributing to global knowledge"
+      ],
+      "miniServices": [
+        "Epidemiological surveys and health assessments",
+        "Household surveys and socio-economic studies",
+        "Knowledge, Attitude, and Practice (KAP) surveys",
+        "Independent coverage assessments",
+        "Data collection and management services",
+        "Statistical analysis and data visualization",
+        "Research dissemination and publication support"
+      ],
+      "keywords": [
+        "epidemiological surveys",
+        "household surveys Kenya",
+        "research consultancy",
+        "data collection services"
+      ],
+      "testimonials": [
+        {
+          "text": "Their national KAP survey had excellent data quality — response rates were >92% and analysis informed our policy brief.",
+          "author": "Project Lead",
+          "organization": "Ministry of Health"
+        },
+        {
+          "text": "High-quality fieldwork and data cleaning reduced our time-to-report by 40%.",
+          "author": "Research Director",
+          "organization": "International NGO"
+        },
+        {
+          "text": "Lesar's epidemiological analyses directly fed into a peer-reviewed publication and increased our program visibility.",
+          "author": "Senior Researcher",
+          "organization": "University Partner"
+        }
+      ],
+      "metrics": {
+        "value": ">92%",
+        "description": "Average survey response rate achieved"
+      }
+    },
+    {
+      "id": "monitoring-evaluation",
+      "title": "Monitoring and Evaluation (M&E)",
+      "slug": "monitoring-evaluation",
+      "overview": "We design and implement comprehensive monitoring and evaluation systems that track program performance, measure impact, and generate learning for continuous improvement. Our M&E services support evidence-based management and accountability to stakeholders and beneficiaries.",
+      "description": "Our M&E approach emphasizes participatory design, real-time data systems, and utilization-focused evaluation. We develop robust frameworks that balance accountability requirements with learning objectives, ensuring that M&E systems serve as management tools rather than compliance exercises. Our expertise includes baseline studies, mid-term reviews, impact evaluations, and development of digital dashboards for real-time monitoring.",
+      "challenge": [
+        "Weak M&E systems that fail to capture program performance and impact",
+        "Limited capacity for data analysis and evidence-based program adaptation",
+        "Poor integration between monitoring systems and management decision-making"
+      ],
+      "approach": [
+        "Participatory development of M&E frameworks and indicators",
+        "Design and implementation of data collection and management systems",
+        "Capacity building for M&E staff and program teams",
+        "Development of digital dashboards and reporting systems",
+        "Utilization-focused evaluation and learning facilitation"
+      ],
+      "outcomes": [
+        "Improved program performance tracking and impact measurement",
+        "Enhanced capacity for evidence-based program adaptation",
+        "Strengthened accountability to stakeholders and beneficiaries",
+        "Increased learning and knowledge management within organizations"
+      ],
+      "miniServices": [
+        "M&E framework design and indicator development",
+        "Baseline studies and situational analyses",
+        "Mid-term reviews and impact evaluations",
+        "Digital dashboard development and data visualization",
+        "M&E capacity building and training",
+        "Data quality assessments and improvement",
+        "Learning and adaptation facilitation"
+      ],
+      "keywords": [
+        "monitoring and evaluation Kenya",
+        "M&E frameworks",
+        "baseline evaluation",
+        "impact evaluation",
+        "M&E dashboards"
+      ],
+      "testimonials": [
+        {
+          "text": "After revamping our M&E framework, we could report program outcomes faster and more accurately — our reporting time decreased by 35%.",
+          "author": "M&E Manager",
+          "organization": "Donor-funded Program"
+        },
+        {
+          "text": "Their dashboards gave leadership real-time program indicators leading to a 15% improvement in coverage.",
+          "author": "Program Director",
+          "organization": "County Health Team"
+        },
+        {
+          "text": "Mid-term review findings resulted in reallocation of resources that improved vaccination coverage by 12%.",
+          "author": "Technical Advisor",
+          "organization": "International Agency"
+        },
+        {
+          "text": "The team's evaluation methodology was rigorous and defensible in donor audits.",
+          "author": "Grants Officer",
+          "organization": "Multilateral Agency"
+        }
+      ],
+      "metrics": {
+        "value": "35%",
+        "description": "Reduction in reporting time achieved"
+      }
+    },
+    {
+      "id": "hr-management-capacity-building",
+      "title": "Human Resource Management, Capacity Building, Sensitization, and Training",
+      "slug": "hr-management-capacity-building",
+      "overview": "We strengthen organizational capacity through comprehensive human resource management, targeted capacity building programs, and strategic training initiatives. Our services enhance individual and institutional performance while building sustainable capacity for long-term impact.",
+      "description": "Our HR and capacity building services are designed to create lasting change within organizations by developing both systems and people. We provide comprehensive HR assessments, design organizational structures, develop job descriptions and competency frameworks, and implement training programs that build both technical and leadership capabilities.",
+      "challenge": [
+        "Inadequate HR systems and unclear organizational structures",
+        "Limited staff capacity and poor performance management",
+        "Lack of structured professional development and career progression pathways"
+      ],
+      "approach": [
+        "Comprehensive HR assessment and organizational analysis",
+        "Design of HR systems, policies, and procedures",
+        "Development of competency-based training programs",
+        "Implementation of performance management systems",
+        "Ongoing coaching and mentorship support"
+      ],
+      "outcomes": [
+        "Improved organizational efficiency and staff performance",
+        "Enhanced individual and institutional capacity",
+        "Better staff retention and career development",
+        "Stronger organizational culture and values alignment"
+      ],
+      "miniServices": [
+        "HR system design and policy development",
+        "Job descriptions and organizational structure design",
+        "Competency assessments and gap analysis",
+        "Training program design and delivery",
+        "Performance management system implementation",
+        "Leadership development and coaching",
+        "Change management and organizational development"
+      ],
+      "keywords": [
+        "HR management Kenya",
+        "capacity building workshops",
+        "training programs health sector",
+        "job descriptions and organograms"
+      ],
+      "testimonials": [
+        {
+          "text": "Training workshops improved staff competencies — performance appraisals showed a 22% increase in key skills.",
+          "author": "HR Manager",
+          "organization": "County Health"
+        },
+        {
+          "text": "Their job evaluation and organogram redesign helped us fill critical leadership gaps quickly.",
+          "author": "Director of Operations",
+          "organization": "Health NGO"
+        },
+        {
+          "text": "Capacity building led to improved retention rates among community health workers.",
+          "author": "Program Coordinator",
+          "organization": "Community Health Initiative"
+        }
+      ],
+      "metrics": {
+        "value": "22%",
+        "description": "Increase in key staff competencies"
+      }
+    },
+    {
+      "id": "policy-advocacy-development",
+      "title": "Policy and Advocacy Development",
+      "slug": "policy-advocacy-development",
+      "overview": "We support organizations and governments in developing evidence-based policies and effective advocacy strategies that drive systemic change. Our services span policy analysis, stakeholder engagement, advocacy campaign design, and implementation support.",
+      "description": "Our policy and advocacy work is grounded in rigorous evidence and strategic stakeholder engagement. We help translate research findings into policy recommendations, design advocacy campaigns that build coalitions and influence decision-makers, and support implementation of policy reforms through technical assistance and capacity building.",
+      "challenge": [
+        "Weak policy development processes with limited stakeholder consultation",
+        "Ineffective advocacy strategies that fail to influence decision-makers",
+        "Poor translation of evidence into actionable policy recommendations"
+      ],
+      "approach": [
+        "Evidence-based policy analysis and stakeholder mapping",
+        "Participatory policy development and consultation processes",
+        "Strategic advocacy campaign design and implementation",
+        "Coalition building and stakeholder engagement facilitation",
+        "Policy implementation support and monitoring"
+      ],
+      "outcomes": [
+        "Adoption of evidence-based policies and regulations",
+        "Increased stakeholder engagement and buy-in for policy reforms",
+        "Strengthened advocacy capacity within organizations",
+        "Measurable policy impact and systemic change"
+      ],
+      "miniServices": [
+        "Policy analysis and research",
+        "Policy brief development and dissemination",
+        "Stakeholder mapping and engagement strategies",
+        "Advocacy campaign design and implementation",
+        "Coalition building and network development",
+        "Policy implementation support",
+        "Legislative and regulatory analysis"
+      ],
+      "keywords": [
+        "policy development Kenya",
+        "advocacy campaigns",
+        "policy brief consultancy",
+        "stakeholder engagement"
+      ],
+      "testimonials": [
+        {
+          "text": "Their policy brief and stakeholder engagement secured cabinet support for the new guideline.",
+          "author": "Policy Advisor",
+          "organization": "Ministry"
+        },
+        {
+          "text": "Strategic advocacy increased stakeholder buy-in and helped unlock new funding.",
+          "author": "Campaign Manager",
+          "organization": "Advocacy NGO"
+        },
+        {
+          "text": "Lesar translated evidence into clear policy asks that were accepted by technical committees.",
+          "author": "Technical Lead",
+          "organization": "Health Coalition"
+        }
+      ],
+      "metrics": {
+        "value": "85%",
+        "description": "Success rate in policy adoption"
+      }
+    },
+    {
+      "id": "project-management",
+      "title": "Project Management",
+      "slug": "project-management",
+      "overview": "We provide comprehensive project management services that ensure successful delivery of complex development projects. Our approach emphasizes stakeholder engagement, risk management, and adaptive implementation to achieve project objectives within time and budget constraints.",
+      "description": "Our project management expertise spans the full project lifecycle from design and planning through implementation and closure. We specialize in managing multi-stakeholder initiatives, ensuring compliance with donor requirements, and implementing robust monitoring and quality assurance systems that drive successful outcomes.",
+      "challenge": [
+        "Poor project planning and inadequate risk management",
+        "Weak stakeholder coordination and communication",
+        "Failure to meet project timelines and deliverable quality standards"
+      ],
+      "approach": [
+        "Comprehensive project planning and risk assessment",
+        "Implementation of project management systems and tools",
+        "Stakeholder engagement and communication management",
+        "Quality assurance and performance monitoring",
+        "Adaptive management and course correction"
+      ],
+      "outcomes": [
+        "Successful project delivery within time and budget",
+        "Enhanced stakeholder satisfaction and engagement",
+        "Improved organizational project management capacity",
+        "Measurable achievement of project objectives and impact"
+      ],
+      "miniServices": [
+        "Project design and planning",
+        "Stakeholder engagement and communication strategies",
+        "Risk management and mitigation",
+        "Performance monitoring and quality assurance",
+        "Procurement and financial management",
+        "Grievance redress mechanisms",
+        "Project closure and evaluation"
+      ],
+      "keywords": [
+        "project management consultancy",
+        "project planning and design",
+        "grievance redress mechanisms",
+        "implementation support"
+      ],
+      "testimonials": [
+        {
+          "text": "Project planning and safeguards strengthened implementation; we met 98% of milestones on time.",
+          "author": "Project Manager",
+          "organization": "Donor Project"
+        },
+        {
+          "text": "Their performance monitoring reduced variance in delivery timelines by 30%.",
+          "author": "Implementation Lead",
+          "organization": "Infrastructure Project"
+        },
+        {
+          "text": "Their risk and mitigation framework prevented major procurement delays during the rollout.",
+          "author": "Procurement Lead",
+          "organization": "Public Works Agency"
+        }
+      ],
+      "metrics": {
+        "value": "98%",
+        "description": "Of project milestones delivered on time"
+      }
+    }
+  ]
+}

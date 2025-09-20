@@ -60,20 +60,20 @@ const Navbar = () => {
   }, [isOpen]);
 
   const services = [
-    { name: "Health Systems Strengthening", href: "#services" },
-    { name: "Financial Analysis & Economics", href: "#services" },
-    { name: "Customized Research & Surveys", href: "#services" },
-    { name: "Monitoring & Evaluation (M&E)", href: "#services" },
-    { name: "Human Resource Management & Capacity Building", href: "#services" },
-    { name: "Policy & Advocacy Development", href: "#services" },
-    { name: "Project Management", href: "#services" },
+    { name: "Health Systems Strengthening", href: "/services/health-systems-strengthening", teaser: "Evidence-based strategies for health system transformation" },
+    { name: "Financial Analysis & Economics", href: "/services/financial-analysis-economics", teaser: "Comprehensive financial modeling and economic evaluation" },
+    { name: "Research & Surveys", href: "/services/customized-research-analysis-surveys", teaser: "Rigorous research and independent coverage assessments" },
+    { name: "Monitoring & Evaluation", href: "/services/monitoring-evaluation", teaser: "Comprehensive M&E systems and impact evaluation" },
+    { name: "HR & Capacity Building", href: "/services/hr-management-capacity-building", teaser: "Human resource management and strategic training" },
+    { name: "Policy & Advocacy", href: "/services/policy-advocacy-development", teaser: "Evidence-based policy development and advocacy campaigns" },
+    { name: "Project Management", href: "/services/project-management", teaser: "Comprehensive project management and delivery" },
   ];
 
   const navigation = [
     { name: "Home", href: "/" },
     { name: "About", href: "/about" },
     { name: "Team", href: "/team" },
-    { name: "Services", href: "#services", isDropdown: true },
+    { name: "Services", href: "/services", isDropdown: true },
     { name: "Resources", href: "#resources" },
     { name: "Projects", href: "#projects" },
   ];
@@ -101,14 +101,19 @@ const Navbar = () => {
                     <DropdownMenuTrigger className="flex items-center nav-link text-sm font-medium">
                       {item.name} <ChevronDown className="ml-1 h-4 w-4" />
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent className="w-80 bg-white border border-border shadow-sm">
-                      {services.map((service) => (
-                        <DropdownMenuItem key={service.name} asChild>
-                          <a href={service.href} className="flex items-center px-4 py-3 text-sm hover:bg-gray-100 transition-colors">
-                            {service.name}
-                          </a>
-                        </DropdownMenuItem>
-                      ))}
+                     <DropdownMenuContent className="w-80 bg-white border border-border shadow-sm z-50">
+                       {services.map((service) => (
+                         <DropdownMenuItem key={service.name} asChild>
+                           <Link to={service.href} className="flex flex-col px-4 py-3 text-sm hover:bg-gray-50 transition-colors">
+                             <div className="font-medium text-navy hover:text-dark-red transition-colors">
+                               {service.name}
+                             </div>
+                             <div className="text-xs text-navy/70 mt-1">
+                               {service.teaser}
+                             </div>
+                           </Link>
+                         </DropdownMenuItem>
+                       ))}
                     </DropdownMenuContent>
                   </DropdownMenu>
                 );

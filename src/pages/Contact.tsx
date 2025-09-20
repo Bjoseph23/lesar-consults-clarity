@@ -1,12 +1,16 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import ContactWizard from "@/components/contact/ContactWizard";
 import SuccessOptions from "@/components/contact/SuccessOptions";
 import { Plane, ArrowLeft } from "lucide-react";
 const Contact = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [showSuccessToast, setShowSuccessToast] = useState(false);
+  const [searchParams] = useSearchParams();
   const navigate = useNavigate();
+  
+  // Get service from URL parameters for prefilling
+  const preselectedService = searchParams.get('service');
   const handleFormSubmit = (formData: any) => {
     // Log form data for development (remove in production)
     console.log("Form submitted:", formData);
@@ -44,7 +48,7 @@ const Contact = () => {
       {/* Main Content */}
       <main className="relative z-10 px-4 sm:px-6 lg:px-8 pb-12">
         <div className="max-w-4xl mx-auto">
-          {!isSubmitted ? <ContactWizard onSubmit={handleFormSubmit} /> : <SuccessOptions onNewRequest={handleNewRequest} />}
+          {!isSubmitted ? <ContactWizard onSubmit={handleFormSubmit} preselectedService={preselectedService} /> : <SuccessOptions onNewRequest={handleNewRequest} />}
         </div>
       </main>
 
