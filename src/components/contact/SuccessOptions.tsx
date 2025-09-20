@@ -57,7 +57,7 @@ const SuccessOptions = ({ onNewRequest }: SuccessOptionsProps) => {
               className="w-full hover-scale text-sm sm:text-base bg-[#8B1E1E] text-white hover:bg-[#731818] hover:text-white"
             >
               <ExternalLink className="h-4 w-4" />
-              <span>Let's Talk - Book a meeting</span>
+              <span>Let's Talk - Book a  Virtual meeting</span>
             </Button>
           </div>
         </div>
