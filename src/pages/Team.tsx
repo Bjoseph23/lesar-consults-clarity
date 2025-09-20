@@ -48,15 +48,8 @@ const Team = () => {
             <div className="container mx-auto px-4">
               <div className="max-w-4xl mx-auto text-center">
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif text-foreground mb-6">
-                  Meet the Team
+                  Meet our team
                 </h1>
-                <div className="w-32 h-32 md:w-48 md:h-48 mx-auto mb-8 rounded-full bg-muted overflow-hidden">
-                  <img 
-                    src="/placeholder.svg" 
-                    alt="Lesar Consults Team" 
-                    className="w-full h-full object-cover"
-                  />
-                </div>
                 <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-3xl mx-auto">
                   Our multidisciplinary team of economists, epidemiologists, and researchers brings 
                   decades of combined experience in evidence-based research and strategic advisory 
