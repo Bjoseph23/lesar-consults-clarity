@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 import { useStaggeredAnimation } from "@/hooks/useScrollAnimation";
 import { Heart, TrendingUp, BarChart3, Search } from "lucide-react";
 
@@ -10,25 +11,25 @@ const ServicesStrip = () => {
       icon: Heart,
       title: "Health Systems Strengthening",
       description: "Comprehensive health workforce development, care financing strategies, and universal health care service delivery consultancies.",
-      href: "#services"
+      linkto: "/services/health-systems-strengthening"
     },
     {
       icon: TrendingUp,
       title: "Financial Analysis & Economics",
       description: "Corporate financial modeling, capital raising, investment case development, and program-based budgeting solutions.",
-      href: "#services"
+      linkto: "/services/financial-analysis-economics"
     },
     {
       icon: BarChart3,
       title: "Monitoring & Evaluation",
       description: "Program evaluation, quality impact assessments, baseline and end-term evaluations with interactive dashboards.",
-      href: "#services"
+      linkto: "/services/monitoring-evaluation"
     },
     {
       icon: Search,
       title: "Customized Research & Surveys",
       description: "Epidemiological studies, risk analysis, household surveys, and publications in peer-reviewed journals.",
-      href: "#services"
+      linkto: "/services/customized-research-analysis-surveys"
     }
   ];
 
@@ -88,8 +89,10 @@ const ServicesStrip = () => {
                     className=" btn-secondary duration-300"
                     asChild
                   >
-                    <a href={service.href}>
-                      Learn more →
+                    <a>
+                    <Link to= {service.link}to"">
+                      Learn more →                  
+                    </Link>
                     </a>
                   </Button>
                 </div>
