@@ -50,10 +50,8 @@ const FeaturedCase = () => {
             <div className="flex flex-col sm:flex-row gap-4">
               <Button className="btn-primary">
                 <Link to="/services/monitoring-evaluation" className="inline-flex items-center gap-2">
-      Explore Our Approach — M&E
-      {/* icon is decorative here — mark aria-hidden */}
-      <ExternalLink className="ml-2 h-4 w-4" aria-hidden="true" />
-    </Link>
+                  Explore Our Approach — M&E
+                </Link>
                 <ExternalLink className="ml-2 h-4 w-4" />
               </Button>
               <Button variant="outline" className="btn-secondary">
