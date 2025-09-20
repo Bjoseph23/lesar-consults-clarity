@@ -126,7 +126,7 @@ const Image3DCarousel = ({ slides, autoPlayInterval = 4000 }: Image3DCarouselPro
         };
       case 'right':
         return {
-          transform: 'translateX(48%) scale(0.85)',
+          transform: 'translateX(30%) scale(0.85)',
           zIndex: 20,
           opacity: 0.9,
           pointerEvents: 'auto' as const,
@@ -134,7 +134,7 @@ const Image3DCarousel = ({ slides, autoPlayInterval = 4000 }: Image3DCarouselPro
         };
       case 'left':
         return {
-          transform: 'translateX(-48%) scale(0.85)',
+          transform: 'translateX(-30%) scale(0.85)',
           zIndex: 20,
           opacity: 0.9,
           pointerEvents: 'auto' as const,
@@ -174,7 +174,7 @@ const Image3DCarousel = ({ slides, autoPlayInterval = 4000 }: Image3DCarouselPro
         </div>
 
         {/* Carousel container with navigation */}
-        <div className="relative w-full max-w-4xl mx-auto px-4 sm:px-8">
+        <div className="relative w-full max-w-4xl mx-auto px-4 sm:px-8 overflow-hidden">
           {/* Navigation arrows - inside container */}
           <Button
             variant="outline"
@@ -198,7 +198,7 @@ const Image3DCarousel = ({ slides, autoPlayInterval = 4000 }: Image3DCarouselPro
 
           {/* Carousel content */}
           <div 
-            className="relative mx-auto overflow-visible px-8 sm:px-12" // <-- overflow-visible so side peeks show
+            className="relative mx-auto overflow-hidden px-8 sm:px-12" // <-- overflow-hidden to prevent side slides from extending
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             onFocus={handleMouseEnter}
