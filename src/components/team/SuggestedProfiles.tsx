@@ -30,7 +30,11 @@ const SuggestedProfiles = ({ members }: SuggestedProfilesProps) => {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {members.map((member) => (
-          <div key={member.slug} className="card-elevated group hover:-translate-y-2">
+          <Link 
+            key={member.slug} 
+            to={`/team/${member.slug}`}
+            className="card-elevated group hover:-translate-y-2 block cursor-pointer"
+          >
             {/* Profile Image */}
             <div className="relative w-full h-48 overflow-hidden rounded-t-lg bg-muted">
               <img 
@@ -55,19 +59,12 @@ const SuggestedProfiles = ({ members }: SuggestedProfilesProps) => {
                 {member.expertise}
               </p>
               
-              <Button 
-                asChild
-                variant="outline"
-                size="sm"
-                className="w-full group-hover:bg-primary group-hover:text-primary-foreground transition-colors duration-200"
-              >
-                <Link to={`/team/${member.slug}`}>
-                  View Profile
-                  <ExternalLink className="ml-2 h-3 w-3" />
-                </Link>
-              </Button>
+              <div className="w-full py-2 px-4 border border-border rounded-md text-center text-sm font-medium group-hover:bg-primary group-hover:text-primary-foreground transition-colors duration-200 flex items-center justify-center">
+                View Profile
+                <ExternalLink className="ml-2 h-3 w-3" />
+              </div>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
       
