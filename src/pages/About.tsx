@@ -131,7 +131,7 @@ const About = () => {
                 className="relative transition-all duration-1000 animate-fade-in-right"
               >
                 <div className="aspect-square bg-placeholder-200 rounded-2xl p-8 flex items-center justify-center">
-                  <div className="w-32 h-32 bg-placeholder-400 rounded-xl animate-pulse"></div>
+                  <img src="/placeholder.svg" alt="About us illustration" className="w-full h-full object-contain" />
                 </div>
               </AnimatedSection>
             </div>
