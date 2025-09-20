@@ -88,7 +88,7 @@ const Navbar = () => {
           {/* Logo */}
           <div className="flex items-center">
             <a href="/" onClick={() => window.location.reload()} className="flex items-center" aria-label="Lesar Consults home">
-              <img src="/lesar-logoo.png" alt="Lesar Consults" className="h-12 w-auto" />
+              <img src="/lesar-logoo.png" alt="Lesar Consults" className="h-10 w-auto" />
             </a>
           </div>
 
