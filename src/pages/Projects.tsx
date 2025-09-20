@@ -153,8 +153,8 @@ const Projects = () => {
                             </div>
                           </div>
                           
-                          {/* Content - ensure min-w-0 so flex children can shrink on mobile */}
-                          <div className={`${isEven ? '' : 'lg:col-start-1 lg:row-start-1'} min-w-0`}>
+                          {/* Content */}
+                          <div className={`${isEven ? '' : 'lg:col-start-1 lg:row-start-1'}`}>
                             <div className="flex items-center gap-2 mb-4">
                               <Calendar className="w-4 h-4 text-navy" />
                               <span className="text-sm font-medium text-navy">{project.date_range}</span>
@@ -167,11 +167,11 @@ const Projects = () => {
                               </span>
                             </div>
                             
-                            <h3 className="text-2xl md:text-3xl font-serif font-bold text-navy mb-4 break-words">
+                            <h3 className="text-2xl md:text-3xl font-serif font-bold text-navy mb-4">
                               {project.title}
                             </h3>
                             
-                            <p className="text-navy text-lg leading-relaxed mb-6 break-words">
+                            <p className="text-navy text-lg leading-relaxed mb-6">
                               {project.summary}
                             </p>
                             
@@ -216,21 +216,20 @@ const Projects = () => {
                             
                             <div className="flex flex-col sm:flex-row gap-4">
                               <Button 
-                                className="bg-dark-red hover:bg-dark-red/90 text-white w-full sm:w-auto"
+                                className="bg-dark-red hover:bg-dark-red/90 text-white"
                                 asChild
                               >
-                                {/* make link wrap and not force wide width */}
-                                <Link to={`/services/${primaryService}`} className="inline-flex flex-wrap items-center gap-2 max-w-full break-words">
-                                  Explore our {getServiceTitle(primaryService)} approach
+                                <Link to={`/services/${primaryService}`} className="inline-flex items-center gap-2">
+                                  Explore our approach
                                   <ArrowRight className="w-4 h-4" />
                                 </Link>
                               </Button>
                               <Button 
                                 variant="outline"
-                                className="border-navy text-navy hover:bg-navy hover:text-white w-full sm:w-auto"
+                                className="border-navy text-navy hover:bg-navy hover:text-white"
                                 asChild
                               >
-                                <Link to="/contact" className="max-w-full break-words">
+                                <Link to="/contact">
                                   Get in touch
                                 </Link>
                               </Button>
@@ -264,17 +263,17 @@ const Projects = () => {
               
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {otherProjects.map((project) => (
-                  <div key={project.id} className="bg-white rounded-lg p-6 shadow-card group hover:shadow-elegant transition-all duration-300 overflow-hidden">
+                  <div key={project.id} className="bg-white rounded-lg p-6 shadow-card group hover:shadow-elegant transition-all duration-300">
                     <div className="flex items-center gap-2 mb-3">
                       <Calendar className="w-4 h-4 text-navy" />
                       <span className="text-sm font-medium text-navy">{project.date_range}</span>
                     </div>
                     
-                    <h3 className="text-lg font-serif font-semibold text-navy mb-3 group-hover:text-navy/80 transition-colors break-words">
+                    <h3 className="text-lg font-serif font-semibold text-navy mb-3 group-hover:text-navy/80 transition-colors">
                       {project.title}
                     </h3>
                     
-                    <p className="text-navy/70 text-sm mb-4 leading-relaxed break-words">
+                    <p className="text-navy/70 text-sm mb-4 leading-relaxed">
                       {project.summary}
                     </p>
                     
@@ -335,7 +334,7 @@ const Projects = () => {
                         className="text-dark-red hover:text-dark-red/80 p-0 h-auto font-medium group"
                         asChild
                       >
-                        <Link to={`/services/${project.services[0]}`} className="flex items-center max-w-full break-words">
+                        <Link to={`/services/${project.services[0]}`} className="flex items-center">
                           View details
                           <ExternalLink className="ml-1 h-3 w-3 group-hover:translate-x-1 transition-transform" />
                         </Link>
