@@ -121,15 +121,6 @@ const Image3DCarousel = ({ slides, autoPlayInterval = 4000 }: Image3DCarouselPro
           </p>
         </div>
 
-        {/* Progress bar */}
-        <div className="w-full max-w-md mx-auto mb-8">
-          <div className="h-1 bg-border rounded-full overflow-hidden">
-            <div 
-              className="h-full bg-primary transition-all duration-75 ease-linear"
-              style={{ width: `${progress}%` }}
-            />
-          </div>
-        </div>
 
         {/* Carousel container */}
         <div 
