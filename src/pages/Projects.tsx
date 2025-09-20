@@ -76,8 +76,7 @@ const Projects = () => {
         </div>
       </div>
       
-      {/* NOTE: added overflow-x-hidden here to prevent page horizontal scroll on mobile */}
-      <main className="min-h-screen overflow-x-hidden">
+      <main className="min-h-screen">
         {/* Hero Section */}
         <section 
           ref={heroRef as any}
@@ -141,21 +140,20 @@ const Projects = () => {
                   <AnimatedSection key={project.id}>
                     <div className={`${bgClass} py-16`}>
                       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                        {/* Ensure grid children can shrink on small screens (min-w-0) */}
                         <div className={`grid lg:grid-cols-2 gap-12 items-center ${isEven ? '' : 'lg:grid-flow-col-dense'}`}>
                           {/* Image */}
-                          <div className={`${isEven ? '' : 'lg:col-start-2'} group min-w-0`}>
-                            <div className="relative overflow-hidden rounded-lg">
+                          <div className={`${isEven ? '' : 'lg:col-start-2'} group`}>
+                            <div className="relative">
                               <img 
                                 src={project.image} 
                                 alt={project.title}
                                 className="w-full h-80 object-cover rounded-lg shadow-elegant transition-transform duration-300 group-hover:scale-105"
                               />
-                              <div className="absolute inset-0 bg-navy/10 rounded-lg pointer-events-none"></div>
+                              <div className="absolute inset-0 bg-navy/10 rounded-lg"></div>
                             </div>
                           </div>
                           
-                          {/* Content */}
+                          {/* Content - ensure min-w-0 so flex children can shrink on mobile */}
                           <div className={`${isEven ? '' : 'lg:col-start-1 lg:row-start-1'} min-w-0`}>
                             <div className="flex items-center gap-2 mb-4">
                               <Calendar className="w-4 h-4 text-navy" />
@@ -173,7 +171,6 @@ const Projects = () => {
                               {project.title}
                             </h3>
                             
-                            {/* Constrain paragraph to wrap inside card */}
                             <p className="text-navy text-lg leading-relaxed mb-6 break-words">
                               {project.summary}
                             </p>
@@ -186,7 +183,7 @@ const Projects = () => {
                               </div>
                               <div className="flex flex-wrap gap-2">
                                 {project.partners.map((partner, idx) => (
-                                  <span key={idx} className="px-3 py-1 bg-navy text-white text-xs rounded-full break-words">
+                                  <span key={idx} className="px-3 py-1 bg-navy text-white text-xs rounded-full">
                                     {partner}
                                   </span>
                                 ))}
@@ -198,7 +195,7 @@ const Projects = () => {
                               <h4 className="text-lg font-serif font-semibold text-navy mb-3">Key Achievements:</h4>
                               <ul className="space-y-2">
                                 {project.key_achievements.map((achievement, idx) => (
-                                  <li key={idx} className="flex items-start text-navy break-words">
+                                  <li key={idx} className="flex items-start text-navy">
                                     <span className="w-2 h-2 bg-dark-red rounded-full mt-2 mr-3 flex-shrink-0"></span>
                                     <span className="text-sm">{achievement}</span>
                                   </li>
@@ -219,20 +216,21 @@ const Projects = () => {
                             
                             <div className="flex flex-col sm:flex-row gap-4">
                               <Button 
-                                className="bg-dark-red hover:bg-dark-red/90 text-white"
+                                className="bg-dark-red hover:bg-dark-red/90 text-white w-full sm:w-auto"
                                 asChild
                               >
-                                <Link to={`/services/${primaryService}`} className="inline-flex items-center gap-2">
+                                {/* make link wrap and not force wide width */}
+                                <Link to={`/services/${primaryService}`} className="inline-flex flex-wrap items-center gap-2 max-w-full break-words">
                                   Explore our {getServiceTitle(primaryService)} approach
                                   <ArrowRight className="w-4 h-4" />
                                 </Link>
                               </Button>
                               <Button 
                                 variant="outline"
-                                className="border-navy text-navy hover:bg-navy hover:text-white"
+                                className="border-navy text-navy hover:bg-navy hover:text-white w-full sm:w-auto"
                                 asChild
                               >
-                                <Link to="/contact">
+                                <Link to="/contact" className="max-w-full break-words">
                                   Get in touch
                                 </Link>
                               </Button>
@@ -266,12 +264,9 @@ const Projects = () => {
               
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {otherProjects.map((project) => (
-                  <div
-                    key={project.id}
-                    className="bg-white rounded-lg p-6 shadow-card group hover:shadow-elegant transition-all duration-300 overflow-hidden min-w-0"
-                  >
+                  <div key={project.id} className="bg-white rounded-lg p-6 shadow-card group hover:shadow-elegant transition-all duration-300 overflow-hidden">
                     <div className="flex items-center gap-2 mb-3">
-                      <Calendar className="w-4 h-4 text-navy flex-shrink-0" />
+                      <Calendar className="w-4 h-4 text-navy" />
                       <span className="text-sm font-medium text-navy">{project.date_range}</span>
                     </div>
                     
@@ -290,7 +285,7 @@ const Projects = () => {
                           <div className="text-sm font-bold text-green-600 mb-1">
                             {project.metrics[0].value}
                           </div>
-                          <div className="text-xs text-navy/70 break-words">
+                          <div className="text-xs text-navy/70">
                             {project.metrics[0].label}
                           </div>
                           {(project.metrics[0] as any).type && (
@@ -313,7 +308,7 @@ const Projects = () => {
                     <div className="mb-4">
                       <div className="flex flex-wrap gap-1">
                         {project.partners.slice(0, 2).map((partner, idx) => (
-                          <span key={idx} className="px-2 py-1 bg-navy/10 text-navy text-xs rounded break-words">
+                          <span key={idx} className="px-2 py-1 bg-navy/10 text-navy text-xs rounded">
                             {partner}
                           </span>
                         ))}
@@ -340,7 +335,7 @@ const Projects = () => {
                         className="text-dark-red hover:text-dark-red/80 p-0 h-auto font-medium group"
                         asChild
                       >
-                        <Link to={`/services/${project.services[0]}`} className="flex items-center">
+                        <Link to={`/services/${project.services[0]}`} className="flex items-center max-w-full break-words">
                           View details
                           <ExternalLink className="ml-1 h-3 w-3 group-hover:translate-x-1 transition-transform" />
                         </Link>
