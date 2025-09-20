@@ -32,7 +32,7 @@ const StepSix = ({ formData, updateFormData }: StepSixProps) => {
             id="consent"
             checked={formData.consent}
             onCheckedChange={(checked) => updateFormData("consent", checked)}
-            className="mt-1"
+            className="mt-1 w-5 h-5"
           />
           <Label htmlFor="consent" className="text-sm leading-relaxed cursor-pointer">
             I agree to be contacted by Lesar Consults to proceed with my request.
