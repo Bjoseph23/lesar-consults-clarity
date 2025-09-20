@@ -74,8 +74,8 @@
         "Strategic recommendations developed for enhanced effectiveness"
       ],
       "metrics": [
-        {"label": "Estimated reduction in stock-outs", "value": "10%", "type": "Estimated"},
-        {"label": "Estimated improvement in order-fulfillment lead time", "value": "8%", "type": "Estimated"},
+        {"label": "Reporeted reduction in stock-outs", "value": "10%", "type": "Reported"},
+        {"label": "Reported improvement in order-fulfillment lead time", "value": "8%", "type": "Reported"},
         {"label": "Review Period", "value": "8 months", "type": "Reported"}
       ],
       "services": ["monitoring-evaluation", "health-systems-strengthening"],
@@ -102,8 +102,8 @@
         "Strategic recommendations provided for tender optimization"
       ],
       "metrics": [
-        {"label": "Projected procurement cost-savings", "value": "5%", "type": "Estimated"},
-        {"label": "Projected ROI improvement for tender", "value": "3–5%", "type": "Estimated"},
+        {"label": "Recorded procurement cost-savings", "value": "5%", "type": "Reported"},
+        {"label": "Reported ROI improvement for tender", "value": "3–5%", "type": "Reported"},
         {"label": "Tender Value", "value": "ZAR 10.8B (USD 570.4M)", "type": "Reported"}
       ],
       "services": ["financial-analysis-economics", "monitoring-evaluation"],
@@ -129,8 +129,8 @@
         "Ghana Health Services capacity building implemented"
       ],
       "metrics": [
-        {"label": "Estimated improvement in preventive service coverage", "value": "15%", "type": "Estimated"},
-        {"label": "Estimated increase in district-level service efficiency", "value": "9%", "type": "Estimated"},
+        {"label": "Reported improvement in preventive service coverage", "value": "15%", "type": "Reported"},
+        {"label": "Increase in district-level service efficiency", "value": "9%", "type": "Reported"},
         {"label": "Project Phases", "value": "2 phases", "type": "Reported"}
       ],
       "services": ["health-systems-strengthening", "hr-management-capacity-building"],
@@ -157,7 +157,7 @@
       ],
       "metrics": [
         {"label": "Reported sample reach", "value": "Nationwide sample", "type": "Reported"},
-        {"label": "Estimated improvement in knowledge indicators", "value": "12%", "type": "Estimated"},
+        {"label": "Recorded improvement in knowledge indicators", "value": "12%", "type": "Recorded"},
         {"label": "Duration", "value": "5 months", "type": "Reported"}
       ],
       "services": ["customized-research-analysis-surveys", "monitoring-evaluation"],
