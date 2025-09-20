@@ -13,10 +13,13 @@ const Footer = () => {
       { name: "Projects", href: "/projects" },
     ],
     services: [
-      { name: "Health Systems Strengthening", href: "/services" },
-      { name: "Financial Analysis & Economics", href: "/services" },
-      { name: "Monitoring & Evaluation", href: "/services" },
-      { name: "Research & Surveys", href: "/services" },
+      { name: "Health Systems Strengthening", href: "/services/health-systems-strengthening" },
+      { name: "Financial Analysis & Economics", href: "/services/financial-analysis-economics" },
+      { name: "Monitoring & Evaluation", href: "/services/monitoring-evaluation" },
+      { name: "Research & Surveys", href: "/services/customized-research-analysis-surveys" },
+      { name: "HR & Capacity Building", href: "/services/hr-management-capacity-building" },
+      { name: "Policy & Advocacy", href: "/services/policy-advocacy-development" },
+      { name: "Project Management", href: "/services/project-management" }
     ],
     legal: [
       { name: "Privacy Policy", href: "#privacy" },
