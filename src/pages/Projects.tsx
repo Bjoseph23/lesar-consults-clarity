@@ -331,7 +331,7 @@ const Projects = () => {
                       <Button
                         variant="ghost"
                         size="sm"
-                        className="text-dark-red hover:text-dark-red/80 p-0 h-auto font-medium group"
+                        className="text-dark-red hover:bg-dark-red/10 hover:text-dark-red transition-colors rounded-md px-2 py-1 font-medium group"
                         asChild
                       >
                         <Link to={`/services/${project.services[0]}`} className="flex items-center">
