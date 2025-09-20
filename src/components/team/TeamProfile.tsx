@@ -88,15 +88,20 @@ const TeamProfile = ({ member }: TeamProfileProps) => {
             {/* Social Links */}
             <div className="flex items-center gap-3 mb-6">
               {member.linkedin && (
-                <a 
-                  href={member.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2 rounded-full bg-secondary hover:bg-primary hover:text-primary-foreground transition-colors duration-200"
-                  aria-label={`${member.name}'s LinkedIn profile`}
+                <Button 
+                  asChild
+                  className="bg-[#0A66C2] hover:bg-[#004182] text-white"
                 >
-                  <Linkedin className="h-5 w-5" />
-                </a>
+                  <a 
+                    href={member.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${member.name}'s LinkedIn profile`}
+                  >
+                    <Linkedin className="mr-2 h-4 w-4" />
+                    LinkedIn
+                  </a>
+                </Button>
               )}
               <Button 
                 asChild
@@ -248,15 +253,20 @@ const TeamProfile = ({ member }: TeamProfileProps) => {
           {/* Social Links */}
           <div className="flex justify-center items-center gap-3 mb-6">
             {member.linkedin && (
-              <a 
-                href={member.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2 rounded-full bg-secondary hover:bg-primary hover:text-primary-foreground transition-colors duration-200"
-                aria-label={`${member.name}'s LinkedIn profile`}
+              <Button 
+                asChild
+                className="bg-[#0A66C2] hover:bg-[#004182] text-white"
               >
-                <Linkedin className="h-5 w-5" />
-              </a>
+                <a 
+                  href={member.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${member.name}'s LinkedIn profile`}
+                >
+                  <Linkedin className="mr-2 h-4 w-4" />
+                  LinkedIn
+                </a>
+              </Button>
             )}
           </div>
           
