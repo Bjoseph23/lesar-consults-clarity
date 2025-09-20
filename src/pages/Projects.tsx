@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ArrowRight, ExternalLink, Calendar, MapPin, Users, DollarSign } from "lucide-react";
+import { ArrowRight, ExternalLink, Calendar, Users } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import AnimatedSection from "@/components/AnimatedSection";
@@ -12,7 +12,6 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import PartnersMarquee from "@/components/PartnersMarquee";
 import MetricsBox from "@/components/MetricsBox";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import { formatCurrency, convertToUSD } from "@/lib/currency";
 import projectsData from "@/data/projects.json";
 
 const Projects = () => {
@@ -34,7 +33,7 @@ const Projects = () => {
   const getServiceTitle = (serviceSlug: string) => {
     const serviceMap: { [key: string]: string } = {
       "health-systems-strengthening": "Health Systems Strengthening",
-      "financial-analysis-economics": "Financial Analysis & Economics", 
+      "financial-analysis-economics": "Financial Analysis & Economics",
       "customized-research-analysis-surveys": "Research & Surveys",
       "monitoring-evaluation": "Monitoring & Evaluation",
       "hr-management-capacity-building": "HR & Capacity Building",
@@ -48,9 +47,9 @@ const Projects = () => {
     <>
       <Helmet>
         <title>Projects — Lesar Consults: Selected Engagement Highlights</title>
-        <meta 
-          name="description" 
-          content="Explore our portfolio of successful projects across health systems strengthening, financial analysis, research, and policy development in Kenya and East Africa." 
+        <meta
+          name="description"
+          content="Explore our portfolio of successful projects across health systems strengthening, financial analysis, research, and policy development in Kenya and East Africa."
         />
         <meta name="keywords" content="health systems projects Kenya, policy development, financial analysis, research projects, monitoring evaluation" />
         <script type="application/ld+json">
@@ -69,21 +68,22 @@ const Projects = () => {
       </Helmet>
 
       <Navbar />
-      
+
       {/* Breadcrumbs */}
-      <div className="pt-20 pb-4 bg-background">
+      <div className="pt-20 pb-4 bg-background overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Breadcrumbs items={breadcrumbs} />
         </div>
       </div>
-      
-      <main className="min-h-screen">
+
+      {/* NOTE: the important fix is `overflow-x-hidden` on the main container to prevent horizontal overflow on mobile */}
+      <main className="min-h-screen overflow-x-hidden">
         {/* Hero Section */}
-        <section 
+        <section
           ref={heroRef as any}
           className={`py-16 bg-background transition-all duration-1000 ${heroVisible ? 'animate-fade-in' : 'opacity-0'}`}
         >
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 overflow-hidden">
             <div className="text-center">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-navy mb-6">
                 Projects & Impact — Selected engagement highlights
@@ -92,8 +92,8 @@ const Projects = () => {
                 Transforming health systems, strengthening organizations, and delivering measurable impact across Kenya and beyond through evidence-based consultancy
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button 
-                  size="lg" 
+                <Button
+                  size="lg"
                   className="bg-dark-red hover:bg-dark-red/90 text-white"
                   asChild
                 >
@@ -102,8 +102,8 @@ const Projects = () => {
                     <ArrowRight className="w-4 h-4" />
                   </Link>
                 </Button>
-                <Button 
-                  variant="outline" 
+                <Button
+                  variant="outline"
                   size="lg"
                   className="border-navy text-navy hover:bg-navy hover:text-white"
                   asChild
@@ -119,7 +119,7 @@ const Projects = () => {
 
         {/* Featured Projects */}
         <section className="py-20">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 overflow-hidden">
             <AnimatedSection>
               <div className="text-center mb-16">
                 <h2 className="text-3xl md:text-4xl font-serif font-bold text-navy mb-4">
@@ -136,46 +136,47 @@ const Projects = () => {
                 const isEven = index % 2 === 0;
                 const bgClass = isEven ? 'bg-cream' : 'bg-background';
                 const primaryService = project.services[0];
-                
+
                 return (
                   <AnimatedSection key={project.id}>
-                    <div className={`${bgClass} py-16`}>
-                      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className={`${bgClass} py-16 overflow-hidden`}>
+                      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 overflow-hidden">
                         <div className={`grid lg:grid-cols-2 gap-12 items-center ${isEven ? '' : 'lg:grid-flow-col-dense'}`}>
                           {/* Image */}
                           <div className={`${isEven ? '' : 'lg:col-start-2'} group`}>
-                            <div className="relative">
-                              <img 
-                                src={project.image} 
+                            <div className="relative overflow-hidden rounded-lg">
+                              <img
+                                src={project.image}
                                 alt={project.title}
-                                className="w-full h-80 object-cover rounded-lg shadow-elegant transition-transform duration-300 group-hover:scale-105"
+                                className="w-full h-80 object-cover rounded-lg shadow-elegant transition-transform duration-300 group-hover:scale-105 block"
+                                loading="lazy"
                               />
-                              <div className="absolute inset-0 bg-navy/10 rounded-lg"></div>
+                              <div className="absolute inset-0 bg-navy/10 rounded-lg pointer-events-none"></div>
                             </div>
                           </div>
-                          
+
                           {/* Content */}
                           <div className={`${isEven ? '' : 'lg:col-start-1 lg:row-start-1'}`}>
-                            <div className="flex items-center gap-2 mb-4">
+                            <div className="flex items-center gap-2 mb-4 flex-wrap">
                               <Calendar className="w-4 h-4 text-navy" />
                               <span className="text-sm font-medium text-navy">{project.date_range}</span>
                               <span className={`px-2 py-1 rounded-full text-xs font-medium ${
                                 project.status === 'Completed' ? 'bg-green-100 text-green-800' :
-                                project.status === 'Launched' ? 'bg-blue-100 text-blue-800' :
-                                'bg-yellow-100 text-yellow-800'
+                                  project.status === 'Launched' ? 'bg-blue-100 text-blue-800' :
+                                  'bg-yellow-100 text-yellow-800'
                               }`}>
                                 {project.status}
                               </span>
                             </div>
-                            
-                            <h3 className="text-2xl md:text-3xl font-serif font-bold text-navy mb-4">
+
+                            <h3 className="text-2xl md:text-3xl font-serif font-bold text-navy mb-4 break-words">
                               {project.title}
                             </h3>
-                            
-                            <p className="text-navy text-lg leading-relaxed mb-6">
+
+                            <p className="text-navy text-lg leading-relaxed mb-6 break-words">
                               {project.summary}
                             </p>
-                            
+
                             {/* Partners */}
                             <div className="mb-6">
                               <div className="flex items-center gap-2 mb-2">
@@ -184,13 +185,13 @@ const Projects = () => {
                               </div>
                               <div className="flex flex-wrap gap-2">
                                 {project.partners.map((partner, idx) => (
-                                  <span key={idx} className="px-3 py-1 bg-navy text-white text-xs rounded-full">
+                                  <span key={idx} className="px-3 py-1 bg-navy text-white text-xs rounded-full whitespace-nowrap">
                                     {partner}
                                   </span>
                                 ))}
                               </div>
                             </div>
-                            
+
                             {/* Key Achievements */}
                             <div className="mb-6">
                               <h4 className="text-lg font-serif font-semibold text-navy mb-3">Key Achievements:</h4>
@@ -198,12 +199,12 @@ const Projects = () => {
                                 {project.key_achievements.map((achievement, idx) => (
                                   <li key={idx} className="flex items-start text-navy">
                                     <span className="w-2 h-2 bg-dark-red rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                                    <span className="text-sm">{achievement}</span>
+                                    <span className="text-sm break-words">{achievement}</span>
                                   </li>
                                 ))}
                               </ul>
                             </div>
-                            
+
                             {/* Metrics */}
                             <MetricsBox
                               metrics={project.metrics as any}
@@ -214,18 +215,18 @@ const Projects = () => {
                               tenderValueUsd={(project as any).tender_value_usd}
                               className="mb-6"
                             />
-                            
+
                             <div className="flex flex-col sm:flex-row gap-4">
-                              <Button 
+                              <Button
                                 className="bg-dark-red hover:bg-dark-red/90 text-white"
                                 asChild
                               >
-                                <Link to={`/services/${primaryService}`} className="inline-flex items-center gap-2">
+                                <Link to={`/services/${primaryService}`} className="inline-flex items-center gap-2 whitespace-nowrap">
                                   Explore our {getServiceTitle(primaryService)} approach
                                   <ArrowRight className="w-4 h-4" />
                                 </Link>
                               </Button>
-                              <Button 
+                              <Button
                                 variant="outline"
                                 className="border-navy text-navy hover:bg-navy hover:text-white"
                                 asChild
@@ -249,7 +250,7 @@ const Projects = () => {
         {/* Other Projects */}
         <AnimatedSection>
           <section className="py-20 bg-cream">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 overflow-hidden">
               <div className="text-center mb-16">
                 <h2 className="text-3xl md:text-4xl font-serif font-bold text-navy mb-4">
                   Additional Projects
@@ -261,40 +262,40 @@ const Projects = () => {
                   Note: metrics shown as 'Estimated' are conservative projections prepared for website demonstration and are editable in the content data file.
                 </p>
               </div>
-              
+
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {otherProjects.map((project) => (
-                  <div key={project.id} className="bg-white rounded-lg p-6 shadow-card group hover:shadow-elegant transition-all duration-300">
+                  <div key={project.id} className="bg-white rounded-lg p-6 shadow-card group hover:shadow-elegant transition-all duration-300 overflow-hidden">
                     <div className="flex items-center gap-2 mb-3">
                       <Calendar className="w-4 h-4 text-navy" />
                       <span className="text-sm font-medium text-navy">{project.date_range}</span>
                     </div>
-                    
-                    <h3 className="text-lg font-serif font-semibold text-navy mb-3 group-hover:text-navy/80 transition-colors">
+
+                    <h3 className="text-lg font-serif font-semibold text-navy mb-3 group-hover:text-navy/80 transition-colors break-words">
                       {project.title}
                     </h3>
-                    
-                    <p className="text-navy/70 text-sm mb-4 leading-relaxed">
+
+                    <p className="text-navy/70 text-sm mb-4 leading-relaxed break-words">
                       {project.summary}
                     </p>
-                    
+
                     {/* Key Metric */}
                     {project.metrics && project.metrics.length > 0 && (
                       <div className="mb-4 p-3 bg-cream rounded-lg">
                         <div className="text-center">
-                          <div className="text-sm font-bold text-green-600 mb-1">
+                          <div className="text-sm font-bold text-green-600 mb-1 break-words">
                             {project.metrics[0].value}
                           </div>
-                          <div className="text-xs text-navy/70">
+                          <div className="text-xs text-navy/70 break-words">
                             {project.metrics[0].label}
                           </div>
                           {(project.metrics[0] as any).type && (
-                            <Badge 
-                              variant="secondary" 
+                            <Badge
+                              variant="secondary"
                               className={`text-xs mt-1 ${
                                 (project.metrics[0] as any).type === "Reported" ? "bg-green-100 text-green-800" :
-                                (project.metrics[0] as any).type === "Estimated" ? "bg-blue-100 text-blue-800" :
-                                "bg-purple-100 text-purple-800"
+                                  (project.metrics[0] as any).type === "Estimated" ? "bg-blue-100 text-blue-800" :
+                                  "bg-purple-100 text-purple-800"
                               }`}
                             >
                               {(project.metrics[0] as any).type}
@@ -308,7 +309,7 @@ const Projects = () => {
                     <div className="mb-4">
                       <div className="flex flex-wrap gap-1">
                         {project.partners.slice(0, 2).map((partner, idx) => (
-                          <span key={idx} className="px-2 py-1 bg-navy/10 text-navy text-xs rounded">
+                          <span key={idx} className="px-2 py-1 bg-navy/10 text-navy text-xs rounded whitespace-nowrap">
                             {partner}
                           </span>
                         ))}
@@ -319,23 +320,23 @@ const Projects = () => {
                         )}
                       </div>
                     </div>
-                    
+
                     <div className="flex items-center justify-between">
                       <span className={`px-2 py-1 rounded-full text-xs font-medium ${
                         project.status === 'Completed' ? 'bg-green-100 text-green-800' :
-                        project.status === 'Launched' ? 'bg-blue-100 text-blue-800' :
-                        'bg-yellow-100 text-yellow-800'
+                          project.status === 'Launched' ? 'bg-blue-100 text-blue-800' :
+                          'bg-yellow-100 text-yellow-800'
                       }`}>
                         {project.status}
                       </span>
-                      
+
                       <Button
                         variant="ghost"
                         size="sm"
                         className="text-dark-red hover:text-dark-red/80 p-0 h-auto font-medium group"
                         asChild
                       >
-                        <Link to={`/services/${project.services[0]}`} className="flex items-center">
+                        <Link to={`/services/${project.services[0]}`} className="flex items-center whitespace-nowrap">
                           View details
                           <ExternalLink className="ml-1 h-3 w-3 group-hover:translate-x-1 transition-transform" />
                         </Link>
@@ -351,7 +352,7 @@ const Projects = () => {
         {/* Partners Section */}
         <AnimatedSection>
           <section className="py-20 bg-background">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 overflow-hidden">
               <div className="text-center mb-12">
                 <h2 className="text-3xl font-serif font-bold text-navy mb-4">
                   Trusted by Leading Organizations
