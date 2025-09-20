@@ -1,10 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Linkedin, FileText, Mail, GraduationCap, Award, Target, Briefcase, ChevronDown, ChevronUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import QuickFacts from "./QuickFacts";
-import { cn } from "@/lib/utils";
 
 interface TeamMember {
   slug: string;
@@ -36,7 +35,6 @@ interface TeamProfileProps {
 const TeamProfile = ({ member }: TeamProfileProps) => {
   const [activeTab, setActiveTab] = useState("overview");
   const [expandedEducation, setExpandedEducation] = useState<number[]>([]);
-  const [isMobile, setIsMobile] = useState(false);
 
   const quickFacts = [
     { label: "Education", value: typeof member.education[0] === 'string' ? member.education[0] : member.education[0].degree, icon: GraduationCap },
@@ -44,30 +42,6 @@ const TeamProfile = ({ member }: TeamProfileProps) => {
     { label: "Experience", value: "10+ Years", icon: Award },
     { label: "Projects", value: `${member.projects.length}+ Completed`, icon: Briefcase }
   ];
-
-  // Check if mobile and set default expanded state
-  useEffect(() => {
-    const checkMobile = () => {
-      const mobile = window.innerWidth < 1024;
-      setIsMobile(mobile);
-      
-      // Set default expanded state based on screen size
-      if (!mobile) {
-        // Desktop: expand all education items by default
-        const detailedIndexes = member.education
-          .map((item, index) => typeof item === 'object' ? index : null)
-          .filter(index => index !== null) as number[];
-        setExpandedEducation(detailedIndexes);
-      } else {
-        // Mobile: collapse all by default
-        setExpandedEducation([]);
-      }
-    };
-
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, [member.education]);
 
   const toggleEducationExpansion = (index: number) => {
     setExpandedEducation(prev => 
@@ -183,49 +157,21 @@ const TeamProfile = ({ member }: TeamProfileProps) => {
                 <div className="space-y-4">
                   {member.education.map((item, index) => {
                     const isDetailed = typeof item === 'object';
-                    const isExpanded = expandedEducation.includes(index);
                     return (
-                      <div key={index} className="bg-secondary/20 rounded-lg border border-border overflow-hidden">
-                        <button
-                          onClick={() => isDetailed && toggleEducationExpansion(index)}
-                          className={cn(
-                            "w-full p-4 text-left flex items-center justify-between",
-                            isDetailed && "hover:bg-secondary/30 transition-colors"
-                          )}
-                          disabled={!isDetailed}
-                        >
-                          <div className="flex items-start">
-                            <GraduationCap className="h-5 w-5 text-primary mr-3 mt-0.5 flex-shrink-0" />
-                            <h4 className="font-semibold text-foreground">
+                      <div key={index} className="p-4 bg-secondary/20 rounded-lg border border-border">
+                        <div className="flex items-start">
+                          <GraduationCap className="h-5 w-5 text-primary mr-3 mt-0.5 flex-shrink-0" />
+                          <div className="flex-1">
+                            <h4 className="font-semibold text-foreground mb-2">
                               {isDetailed ? item.degree : item}
                             </h4>
-                          </div>
-                          {isDetailed && (
-                            <div className="ml-3 flex-shrink-0">
-                              {isExpanded ? (
-                                <ChevronUp className="h-5 w-5 text-muted-foreground" />
-                              ) : (
-                                <ChevronDown className="h-5 w-5 text-muted-foreground" />
-                              )}
-                            </div>
-                          )}
-                        </button>
-                        {isDetailed && (
-                          <div className={cn(
-                            "overflow-hidden transition-all duration-200",
-                            isExpanded ? "animate-accordion-down" : "animate-accordion-up"
-                          )}>
-                            {isExpanded && (
-                              <div className="px-4 pb-4">
-                                <div className="pl-8">
-                                  <p className="text-sm text-muted-foreground leading-relaxed">
-                                    {item.description}
-                                  </p>
-                                </div>
-                              </div>
+                            {isDetailed && (
+                              <p className="text-sm text-muted-foreground leading-relaxed">
+                                {item.description}
+                              </p>
                             )}
                           </div>
-                        )}
+                        </div>
                       </div>
                     );
                   })}
