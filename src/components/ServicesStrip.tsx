@@ -43,7 +43,7 @@ const ServicesStrip = () => {
       </div>
       
       {/* Decorative dots pattern */}
-      <div className="absolute inset-0 opacity-20">
+      <div className="absolute inset-0 opacity-20 pointer-events-none">
         <div className="absolute top-20 right-20 w-2 h-2 bg-primary rounded-full animate-pulse"></div>
         <div className="absolute top-40 left-20 w-1 h-1 bg-secondary rounded-full animate-pulse" style={{ animationDelay: '0.5s' }}></div>
         <div className="absolute bottom-32 left-1/3 w-1.5 h-1.5 bg-accent rounded-full animate-pulse" style={{ animationDelay: '1s' }}></div>
@@ -62,15 +62,16 @@ const ServicesStrip = () => {
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {services.map((service, index) => {
+            const Icon = service.icon;
             return (
               <div
                 key={service.title}
-                className={`card-service group transition-all duration-400 flex flex-col h-full ${visibleItems.includes(index) ? 'animate-fade-in' : 'opacity-0 translate-y-8'}`}
+                className={`card-service group transition-all duration-300 flex flex-col h-full ${visibleItems.includes(index) ? 'animate-fade-in' : 'opacity-0 translate-y-8'}`}
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <div className="mb-4">
                   <div className="w-12 h-12 bg-muted rounded-lg flex items-center justify-center">
-                    <service.icon className="w-6 h-6 text-primary" />
+                    <Icon className="w-6 h-6 text-primary" />
                   </div>
                 </div>
                 
@@ -86,14 +87,12 @@ const ServicesStrip = () => {
                   <Button
                     variant="ghost"
                     size="sm"
-                    className=" btn-secondary duration-300"
+                    className="btn-secondary duration-300"
                     asChild
                   >
-                    <a>
-                    <Link to= {service.link}to"">
-                      Learn more →                  
+                    <Link to={service.linkto} className="inline-flex items-center">
+                      Learn more &rarr;
                     </Link>
-                    </a>
                   </Button>
                 </div>
               </div>
