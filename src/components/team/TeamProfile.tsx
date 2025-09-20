@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Linkedin, FileText, Mail, GraduationCap, Award, Target, Briefcase } from "lucide-react";
+import { Linkedin, FileText, Mail, GraduationCap, Award, Target, Briefcase, ChevronDown, ChevronUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
@@ -34,6 +34,7 @@ interface TeamProfileProps {
 
 const TeamProfile = ({ member }: TeamProfileProps) => {
   const [activeTab, setActiveTab] = useState("overview");
+  const [expandedEducation, setExpandedEducation] = useState<number[]>([]);
 
   const quickFacts = [
     { label: "Education", value: typeof member.education[0] === 'string' ? member.education[0] : member.education[0].degree, icon: GraduationCap },
@@ -41,6 +42,14 @@ const TeamProfile = ({ member }: TeamProfileProps) => {
     { label: "Experience", value: "10+ Years", icon: Award },
     { label: "Projects", value: `${member.projects.length}+ Completed`, icon: Briefcase }
   ];
+
+  const toggleEducationExpansion = (index: number) => {
+    setExpandedEducation(prev => 
+      prev.includes(index) 
+        ? prev.filter(i => i !== index)
+        : [...prev, index]
+    );
+  };
 
   return (
     <div className="max-w-6xl mx-auto">
@@ -276,21 +285,41 @@ const TeamProfile = ({ member }: TeamProfileProps) => {
             <div className="space-y-3">
               {member.education.map((item, index) => {
                 const isDetailed = typeof item === 'object';
+                const isExpanded = expandedEducation.includes(index);
                 return (
-                  <div key={index} className="p-3 bg-secondary/20 rounded-lg border border-border">
-                    <div className="flex items-start">
-                      <GraduationCap className="h-4 w-4 text-primary mr-3 mt-0.5 flex-shrink-0" />
-                      <div className="flex-1">
-                        <h4 className="font-medium text-foreground text-sm mb-1">
+                  <div key={index} className="bg-secondary/20 rounded-lg border border-border overflow-hidden">
+                    <button
+                      onClick={() => isDetailed && toggleEducationExpansion(index)}
+                      className={`w-full p-3 text-left flex items-center justify-between ${
+                        isDetailed ? 'hover:bg-secondary/30 transition-colors' : ''
+                      }`}
+                      disabled={!isDetailed}
+                    >
+                      <div className="flex items-start">
+                        <GraduationCap className="h-4 w-4 text-primary mr-3 mt-0.5 flex-shrink-0" />
+                        <h4 className="font-medium text-foreground text-sm">
                           {isDetailed ? item.degree : item}
                         </h4>
-                        {isDetailed && (
+                      </div>
+                      {isDetailed && (
+                        <div className="ml-2 flex-shrink-0">
+                          {isExpanded ? (
+                            <ChevronUp className="h-4 w-4 text-muted-foreground" />
+                          ) : (
+                            <ChevronDown className="h-4 w-4 text-muted-foreground" />
+                          )}
+                        </div>
+                      )}
+                    </button>
+                    {isDetailed && isExpanded && (
+                      <div className="px-3 pb-3">
+                        <div className="pl-7">
                           <p className="text-xs text-muted-foreground leading-relaxed">
                             {item.description}
                           </p>
-                        )}
+                        </div>
                       </div>
-                    </div>
+                    )}
                   </div>
                 );
               })}
