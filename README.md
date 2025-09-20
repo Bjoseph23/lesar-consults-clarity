@@ -12,6 +12,21 @@ The contact page features a multi-step wizard form at `/contact`. To configure:
 2. **Contact Details**: Edit `src/data/contact-seed.ts` for contact info and form options  
 3. **Backend**: Add API calls in `ContactWizard.tsx` handleSubmit function for form processing
 
+## About Page Carousel Images
+
+To add custom images to the carousel on the About page:
+
+1. **Add Images**: Place your carousel images in the `public/images/carousel/` directory
+2. **Supported Formats**: Use .jpg, .png, or .webp format for best performance
+3. **Recommended Size**: Images should be 600x400px for optimal display
+4. **Update Data**: Modify `src/data/about.json` carousel section to use your image paths:
+   ```json
+   {
+     "image": "/images/carousel/your-image-name.jpg"
+   }
+   ```
+5. **Image Names**: Use descriptive names like `health-systems-research.jpg` or `data-analytics.jpg`
+
 ## How can I edit this code?
 
 There are several ways of editing your application.

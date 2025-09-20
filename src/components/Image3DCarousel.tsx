@@ -18,6 +18,18 @@ const Image3DCarousel = ({ slides, autoPlayInterval = 4000 }: Image3DCarouselPro
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [progress, setProgress] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Check if mobile
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const nextSlide = useCallback(() => {
     setCurrentSlide((prev) => (prev + 1) % slides.length);
@@ -80,7 +92,25 @@ const Image3DCarousel = ({ slides, autoPlayInterval = 4000 }: Image3DCarouselPro
     return 'hidden';
   };
 
-  const getSlideStyle = (position: string) => {
+  const getSlideStyle = (position: string, isMobile: boolean = false) => {
+    if (isMobile) {
+      // On mobile, only show center slide
+      switch (position) {
+        case 'center':
+          return {
+            transform: 'translateX(0%) scale(1)',
+            zIndex: 30,
+            opacity: 1,
+          };
+        default:
+          return {
+            transform: 'translateX(100%) scale(0.8)',
+            zIndex: 0,
+            opacity: 0,
+          };
+      }
+    }
+    
     switch (position) {
       case 'center':
         return {
@@ -90,13 +120,13 @@ const Image3DCarousel = ({ slides, autoPlayInterval = 4000 }: Image3DCarouselPro
         };
       case 'right':
         return {
-          transform: 'translateX(60%) scale(0.85)',
+          transform: 'translateX(50%) scale(0.85)',
           zIndex: 10,
           opacity: 0.7,
         };
       case 'left':
         return {
-          transform: 'translateX(-60%) scale(0.85)',
+          transform: 'translateX(-50%) scale(0.85)',
           zIndex: 10,
           opacity: 0.7,
         };
@@ -133,7 +163,7 @@ const Image3DCarousel = ({ slides, autoPlayInterval = 4000 }: Image3DCarouselPro
 
         {/* Carousel container */}
         <div 
-          className="relative max-w-4xl mx-auto"
+          className="relative max-w-4xl mx-auto overflow-hidden"
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
           onFocus={handleMouseEnter}
@@ -142,16 +172,18 @@ const Image3DCarousel = ({ slides, autoPlayInterval = 4000 }: Image3DCarouselPro
           aria-label="Image carousel"
           aria-live="polite"
         >
-          <div className="relative h-80 md:h-96 overflow-visible">
+          <div className="relative h-80 md:h-96">
             <div className="relative w-full h-full flex items-center justify-center">
               {slides.map((slide, index) => {
                 const position = getSlidePosition(index);
-                const slideStyle = getSlideStyle(position);
+                const slideStyle = getSlideStyle(position, isMobile);
                 
                 return (
                   <div
                     key={slide.id}
-                    className="absolute w-full h-full transition-all duration-700 ease-out"
+                    className={`absolute transition-all duration-700 ease-out ${
+                      isMobile ? 'w-full max-w-sm' : 'w-full max-w-md'
+                    } h-full`}
                     style={{
                       ...slideStyle,
                       willChange: 'transform, opacity',
@@ -166,7 +198,7 @@ const Image3DCarousel = ({ slides, autoPlayInterval = 4000 }: Image3DCarouselPro
                       }}
                     >
                       <img
-                        src={slide.image}
+                        src="/placeholder.svg"
                         alt={slide.title}
                         className="w-full h-full object-cover"
                         loading="lazy"

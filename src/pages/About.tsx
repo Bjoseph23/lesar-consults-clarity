@@ -96,15 +96,17 @@ const About = () => {
 
       <main>
         {/* Hero Section */}
-        <div className="relative overflow-hidden">
-          {/* Blurred background graphics */}
-          <div className="absolute inset-0 opacity-10">
-            <div className="absolute top-20 left-10 w-64 h-64 bg-gradient-to-br from-primary to-accent rounded-full blur-3xl"></div>
-            <div className="absolute top-40 right-20 w-48 h-48 bg-gradient-to-br from-accent to-secondary rounded-full blur-2xl"></div>
-            <div className="absolute bottom-20 left-1/3 w-56 h-56 bg-gradient-to-br from-secondary to-primary rounded-full blur-3xl"></div>
+        <AnimatedSection>
+          <div className="relative overflow-hidden">
+            {/* Blurred background graphics */}
+            <div className="absolute inset-0 opacity-10">
+              <div className="absolute top-20 left-10 w-64 h-64 bg-gradient-to-br from-primary to-accent rounded-full blur-3xl"></div>
+              <div className="absolute top-40 right-20 w-48 h-48 bg-gradient-to-br from-accent to-secondary rounded-full blur-2xl"></div>
+              <div className="absolute bottom-20 left-1/3 w-56 h-56 bg-gradient-to-br from-secondary to-primary rounded-full blur-3xl"></div>
+            </div>
+            <AboutHero {...aboutData.hero} />
           </div>
-          <AboutHero {...aboutData.hero} />
-        </div>
+        </AnimatedSection>
 
         {/* Who We Are Section */}
         <section className="py-16 bg-background">
