@@ -35,17 +35,13 @@ const StepSix = ({ formData, updateFormData }: StepSixProps) => {
             className="mt-1"
           />
           <Label htmlFor="consent" className="text-sm leading-relaxed cursor-pointer">
-            I agree to be contacted and to Lesar Consults' 
-            <a href="/privacy-policy" className="text-primary hover:underline mx-1">
-              privacy policy
-            </a>
-            to proceed with my request. *
+            I agree to be contacted by Lesar Consults to proceed with my request.
           </Label>
         </div>
 
         {!formData.consent && (
           <p className="text-sm text-destructive ml-6">
-            Please accept the privacy policy to continue.
+            Please tick the box to continue.
           </p>
         )}
 
