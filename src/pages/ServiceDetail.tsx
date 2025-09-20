@@ -24,7 +24,6 @@ const ServiceDetail = () => {
   const service = servicesData.services.find(s => s.slug === slug);
 
   const breadcrumbs = [
-    { label: "Home", href: "/" },
     { label: "Services", href: "/services" },
     { label: service?.title || "Service" }
   ];
