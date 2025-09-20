@@ -71,14 +71,6 @@ const AboutHero = ({ headline, subhead, primaryCTA, secondaryCTA }: AboutHeroPro
               </Link>
             </Button>
             
-            <Button 
-              variant="ghost"
-              size="lg"
-              onClick={() => scrollToSection(secondaryCTA.anchor)}
-              className="text-muted-foreground hover:text-primary px-8 py-4"
-            >
-              {secondaryCTA.text}
-            </Button>
           </div>
 
           {/* Decorative Elements */}
