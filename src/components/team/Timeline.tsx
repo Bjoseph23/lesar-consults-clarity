@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Building, Globe, Shield, Map, Cpu, Handshake } from "lucide-react";
+import { Building, Globe, Shield, Map, Cpu, Handshake, ArrowRight } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 interface Milestone {
@@ -41,10 +41,15 @@ const Timeline = ({ milestones }: TimelineProps) => {
       <div className="hidden md:block">
         <div className="relative">
           {/* Timeline Line */}
-          <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-border transform -translate-y-1/2" />
+          <div className="absolute top-6 left-6 right-6 h-0.5 bg-border" />
+          
+          {/* Arrow at the end */}
+          <div className="absolute top-3 right-0 text-border">
+            <ArrowRight className="h-6 w-6" />
+          </div>
           
           {/* Timeline Items */}
-          <div className="relative flex justify-between items-start pt-8">
+          <div className="relative flex justify-between items-start">
             {milestones.map((milestone, index) => {
               const Icon = iconMap[milestone.icon as keyof typeof iconMap] || Building;
               
@@ -57,7 +62,7 @@ const Timeline = ({ milestones }: TimelineProps) => {
                   style={{ animationDelay: `${index * 200}ms` }}
                 >
                   {/* Timeline Node */}
-                  <div className="w-12 h-12 rounded-full border-4 border-primary bg-primary text-primary-foreground flex items-center justify-center mb-4">
+                  <div className="w-12 h-12 rounded-full border-4 border-primary bg-primary text-primary-foreground flex items-center justify-center mb-4 relative z-10">
                     <Icon className="h-5 w-5" />
                   </div>
 
