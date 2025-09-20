@@ -1,4 +1,5 @@
 import { useParams, Navigate } from "react-router-dom";
+import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -6,12 +7,18 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import TeamProfile from "@/components/team/TeamProfile";
 import SuggestedProfiles from "@/components/team/SuggestedProfiles";
 import AnimatedSection from "@/components/AnimatedSection";
+import ScrollTop from "@/components/ScrollTop";
 import teamData from "@/data/team.json";
 
 const TeamMember = () => {
   const { slug } = useParams<{ slug: string }>();
   
   const member = teamData.find(m => m.slug === slug);
+
+  // Scroll to top when component mounts or slug changes
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [slug]);
   
   if (!member) {
     return <Navigate to="/team" replace />;
@@ -81,6 +88,7 @@ const TeamMember = () => {
           </AnimatedSection>
         </main>
 
+        <ScrollTop />
         <Footer />
       </div>
     </>

@@ -12,7 +12,10 @@ interface TeamMember {
   photo: string;
   expertise: string;
   summary: string;
-  education: string[];
+  education: Array<{
+    degree: string;
+    description: string;
+  }> | string[];
   competencies: string[];
   contributions: string[];
   projects: Array<{
@@ -33,7 +36,7 @@ const TeamProfile = ({ member }: TeamProfileProps) => {
   const [activeTab, setActiveTab] = useState("overview");
 
   const quickFacts = [
-    { label: "Education", value: member.education[0], icon: GraduationCap },
+    { label: "Education", value: typeof member.education[0] === 'string' ? member.education[0] : member.education[0].degree, icon: GraduationCap },
     { label: "Specialization", value: member.expertise.split(" ").slice(0, 3).join(" "), icon: Target },
     { label: "Experience", value: "10+ Years", icon: Award },
     { label: "Projects", value: `${member.projects.length}+ Completed`, icon: Briefcase }
@@ -47,7 +50,7 @@ const TeamProfile = ({ member }: TeamProfileProps) => {
         <div className="lg:col-span-4">
           <div className="sticky top-24 space-y-6">
             {/* Portrait */}
-            <div className="aspect-[3/4] w-full bg-muted rounded-lg overflow-hidden">
+            <div className="aspect-[3/4] w-full bg-muted rounded-lg overflow-hidden border border-border shadow-sm">
               <img 
                 src={member.photo}
                 alt={`${member.name} - ${member.title}`}
@@ -142,13 +145,27 @@ const TeamProfile = ({ member }: TeamProfileProps) => {
                   <GraduationCap className="mr-2 h-5 w-5 text-primary" />
                   Education & Certifications
                 </h3>
-                <div className="space-y-3">
-                  {member.education.map((item, index) => (
-                    <div key={index} className="flex items-center p-3 bg-secondary/50 rounded-lg">
-                      <GraduationCap className="h-4 w-4 text-primary mr-3" />
-                      <span className="text-foreground">{item}</span>
-                    </div>
-                  ))}
+                <div className="space-y-4">
+                  {member.education.map((item, index) => {
+                    const isDetailed = typeof item === 'object';
+                    return (
+                      <div key={index} className="p-4 bg-secondary/20 rounded-lg border border-border">
+                        <div className="flex items-start">
+                          <GraduationCap className="h-5 w-5 text-primary mr-3 mt-0.5 flex-shrink-0" />
+                          <div className="flex-1">
+                            <h4 className="font-semibold text-foreground mb-2">
+                              {isDetailed ? item.degree : item}
+                            </h4>
+                            {isDetailed && (
+                              <p className="text-sm text-muted-foreground leading-relaxed">
+                                {item.description}
+                              </p>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             </TabsContent>
@@ -199,7 +216,7 @@ const TeamProfile = ({ member }: TeamProfileProps) => {
       {/* Mobile Layout */}
       <div className="lg:hidden space-y-8">
         {/* Portrait */}
-        <div className="aspect-[3/4] max-w-sm mx-auto bg-muted rounded-lg overflow-hidden">
+        <div className="aspect-[3/4] max-w-sm mx-auto bg-muted rounded-lg overflow-hidden border border-border shadow-sm">
           <img 
             src={member.photo}
             alt={`${member.name} - ${member.title}`}
@@ -256,13 +273,27 @@ const TeamProfile = ({ member }: TeamProfileProps) => {
 
           <div>
             <h3 className="text-lg font-serif text-foreground mb-3">Education & Certifications</h3>
-            <div className="space-y-2">
-              {member.education.map((item, index) => (
-                <div key={index} className="flex items-center p-3 bg-secondary/50 rounded-lg">
-                  <GraduationCap className="h-4 w-4 text-primary mr-3" />
-                  <span className="text-foreground text-sm">{item}</span>
-                </div>
-              ))}
+            <div className="space-y-3">
+              {member.education.map((item, index) => {
+                const isDetailed = typeof item === 'object';
+                return (
+                  <div key={index} className="p-3 bg-secondary/20 rounded-lg border border-border">
+                    <div className="flex items-start">
+                      <GraduationCap className="h-4 w-4 text-primary mr-3 mt-0.5 flex-shrink-0" />
+                      <div className="flex-1">
+                        <h4 className="font-medium text-foreground text-sm mb-1">
+                          {isDetailed ? item.degree : item}
+                        </h4>
+                        {isDetailed && (
+                          <p className="text-xs text-muted-foreground leading-relaxed">
+                            {item.description}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
 

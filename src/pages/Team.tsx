@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import TeamGrid from "@/components/team/TeamGrid";
 import Timeline from "@/components/team/Timeline";
-import CTASection from "@/components/team/CTASection";
+import ScrollTop from "@/components/ScrollTop";
 import AnimatedSection from "@/components/AnimatedSection";
 import teamData from "@/data/team.json";
 import milestonesData from "@/data/milestones.json";
@@ -75,6 +75,7 @@ const Team = () => {
 
         </main>
 
+        <ScrollTop />
         <Footer />
       </div>
     </>

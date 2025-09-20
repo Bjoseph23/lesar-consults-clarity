@@ -7,17 +7,38 @@
     "expertise": "PhD Economist specializing in health economics and statistical analysis",
     "summary": "Eliud brings extensive expertise in economics research and operations management. With a PhD in Economics and advanced skills in statistical analysis, he leads operational excellence and strategic economic initiatives for Lesar Consults.",
     "education": [
-      "PhD in Economics",
-      "MSc Applied Statistics", 
-      "Advanced Certificate in Project Management"
+      {
+        "degree": "PhD in Economics",
+        "description": "With a Doctorate of Philosophy (PhD) in Economics from the University of Nairobi (Kenya), he has over 14 years in economic research and experience. His background enables him to demystify socio-economic modeling, forecasting, and strategic planning."
+      },
+      {
+        "degree": "Master of Arts (M.A.) Economics", 
+        "description": "Department of Economics from the University of Nairobi (Kenya) which is an enabler to demystify social economic modeling, forecasting opinions, and planning methodologies."
+      },
+      {
+        "degree": "Bachelor of Economics & Statistics",
+        "description": "From the University of Nairobi (Kenya) which makes him an all-around economist with strong foundation in statistical analysis and economic theory."
+      },
+      {
+        "degree": "Advanced Certificate in Project Management",
+        "description": "Professional certification in project management methodologies and best practices for complex research and development initiatives."
+      }
     ],
     "competencies": [
-      "Health Economics",
-      "Statistical Analysis (R, STATA, Python)",
-      "Project Management",
-      "Operations Strategy",
-      "Research Design",
-      "Data Analytics"
+      "Health Economics & Policy Analysis",
+      "Advanced Statistical Analysis (R, STATA, Python, SPSS)",
+      "Econometric Modeling & Forecasting", 
+      "Project Management & Operations Strategy",
+      "Research Design & Methodology",
+      "Data Analytics & Visualization",
+      "Cost-Effectiveness Analysis",
+      "Economic Impact Assessment",
+      "Financial Modeling & Analysis",
+      "Policy Evaluation & Development",
+      "Stakeholder Engagement",
+      "Academic Research & Publication",
+      "Training & Capacity Building",
+      "Strategic Planning & Implementation"
     ],
     "contributions": [
       "Led economic impact assessments for major healthcare initiatives",
@@ -50,17 +71,34 @@
     "expertise": "PhD Candidate in Health Systems Strengthening & Financing",
     "summary": "Japheth is a visionary leader with deep expertise in health systems strengthening and financing. As CEO, he guides Lesar Consults' strategic direction while maintaining hands-on involvement in critical healthcare policy and financing initiatives.",
     "education": [
-      "PhD (Candidate) in Health Systems Strengthening & Financing",
-      "MSc in Health Policy and Management",
-      "BSc in Public Health"
+      {
+        "degree": "PhD (Candidate) in Health Systems Strengthening & Financing",
+        "description": "Currently pursuing a PhD focusing on innovative approaches to health systems strengthening and sustainable financing mechanisms across developing countries, with emphasis on African health systems."
+      },
+      {
+        "degree": "MSc in Health Policy and Management",
+        "description": "Advanced degree in health policy development and management from leading institution, providing expertise in health system governance, policy analysis, and strategic health management."
+      },
+      {
+        "degree": "BSc in Public Health", 
+        "description": "Comprehensive foundation in public health principles, epidemiology, health promotion, and community health approaches, forming the basis for advanced health systems work."
+      }
     ],
     "competencies": [
-      "Health Systems Strengthening",
-      "Healthcare Financing",
-      "Strategic Leadership",
-      "Policy Development",
-      "Stakeholder Engagement",
-      "Program Management"
+      "Health Systems Strengthening & Design",
+      "Healthcare Financing & Economics", 
+      "Strategic Leadership & Vision",
+      "Health Policy Development & Analysis",
+      "Stakeholder Engagement & Partnerships",
+      "Program Management & Implementation",
+      "Health Governance & Regulation",
+      "Universal Health Coverage Design",
+      "Health Insurance Mechanisms",
+      "Public-Private Partnerships",
+      "International Development Cooperation",
+      "Change Management & Innovation",
+      "Resource Mobilization",
+      "Performance Management Systems"
     ],
     "contributions": [
       "Founded Lesar Consults and grew it to a leading advisory firm",
@@ -93,18 +131,38 @@
     "expertise": "PhD Epidemiologist with expertise in disease surveillance and public health research",
     "summary": "Jamlick is a seasoned epidemiologist with a PhD and extensive experience in disease surveillance, outbreak investigation, and public health research. He leads epidemiological studies and provides technical expertise on health security initiatives.",
     "education": [
-      "PhD in Epidemiology",
-      "MSc in Public Health",
-      "Certificate in Disease Surveillance",
-      "Advanced Training in Outbreak Investigation"
+      {
+        "degree": "PhD in Epidemiology",
+        "description": "Doctor of Philosophy in Epidemiology with specialization in infectious disease epidemiology, disease surveillance systems, and public health emergency preparedness from a leading research institution."
+      },
+      {
+        "degree": "MSc in Public Health",
+        "description": "Master's degree in Public Health with concentration in epidemiological methods, biostatistics, and population health research, providing strong foundation for advanced epidemiological work."
+      },
+      {
+        "degree": "Certificate in Disease Surveillance",
+        "description": "Specialized certification in disease surveillance systems, outbreak detection, and epidemiological intelligence for public health security and emergency response."
+      },
+      {
+        "degree": "Advanced Training in Outbreak Investigation",
+        "description": "Intensive training in outbreak investigation methodologies, field epidemiology, and rapid response protocols for infectious disease emergencies."
+      }
     ],
     "competencies": [
-      "Epidemiological Analysis",
-      "Disease Surveillance",
-      "Outbreak Investigation", 
-      "Statistical Modeling",
-      "Public Health Research",
-      "Data Visualization"
+      "Advanced Epidemiological Analysis & Methods",
+      "Disease Surveillance & Early Warning Systems",
+      "Outbreak Investigation & Response", 
+      "Statistical Modeling & Inference",
+      "Public Health Research & Evaluation",
+      "Data Visualization & Communication",
+      "Infectious Disease Epidemiology",
+      "Environmental Health Assessment",
+      "Biostatistics & Analytical Methods",
+      "Health Emergency Preparedness",
+      "Field Epidemiology & Rapid Assessment",
+      "Risk Assessment & Management",
+      "Public Health Informatics",
+      "Training & Capacity Development"
     ],
     "contributions": [
       "Led epidemiological investigations for major disease outbreaks",
@@ -137,18 +195,38 @@
     "expertise": "Senior economist specializing in financial analysis and economic policy",
     "summary": "Wairimu is a distinguished economist and financial analyst with deep expertise in economic policy analysis, financial modeling, and development economics. She leads economic assessments and provides strategic financial guidance for complex development projects.",
     "education": [
-      "MSc in Economics",
-      "BSc in Finance and Economics",
-      "Chartered Financial Analyst (CFA) Level II",
-      "Certificate in Development Economics"
+      {
+        "degree": "MSc in Economics",
+        "description": "Master of Science in Economics with specialization in development economics, econometric analysis, and policy evaluation from a prestigious institution, providing advanced analytical capabilities."
+      },
+      {
+        "degree": "BSc in Finance and Economics", 
+        "description": "Bachelor's degree combining finance and economics, providing comprehensive understanding of financial markets, economic theory, and quantitative analysis methods."
+      },
+      {
+        "degree": "Chartered Financial Analyst (CFA) Level II",
+        "description": "Advanced professional certification in investment analysis, portfolio management, and financial valuation, demonstrating expertise in financial analysis and investment decision-making."
+      },
+      {
+        "degree": "Certificate in Development Economics",
+        "description": "Specialized certification in development economics focusing on emerging markets, poverty analysis, and sustainable development strategies for developing countries."
+      }
     ],
     "competencies": [
-      "Economic Analysis",
-      "Financial Modeling",
-      "Development Economics",
-      "Policy Analysis",
-      "Risk Assessment",
-      "Investment Analysis"
+      "Advanced Economic Analysis & Modeling",
+      "Financial Modeling & Valuation",
+      "Development Economics & Policy",
+      "Investment Analysis & Portfolio Management",
+      "Risk Assessment & Management",
+      "Econometric Analysis & Forecasting",
+      "Cost-Benefit Analysis",
+      "Financial Planning & Strategy",
+      "Market Research & Analysis",
+      "Project Finance & Evaluation",
+      "Impact Assessment & Evaluation",
+      "Quantitative Research Methods",
+      "Economic Policy Analysis",
+      "Financial Risk Management"
     ],
     "contributions": [
       "Conducted economic impact assessments for major infrastructure projects",
@@ -181,18 +259,38 @@
     "expertise": "GIS specialist with advanced expertise in spatial analysis and geospatial technologies",
     "summary": "Benjamin is a highly skilled GIS specialist with extensive experience in spatial analysis, mapping, and geospatial technology applications. He leads spatial analysis projects and provides technical expertise on location-based research and planning initiatives.",
     "education": [
-      "MSc in Geographic Information Systems",
-      "BSc in Geography and Spatial Planning",
-      "Certificate in Remote Sensing",
-      "Advanced GIS Certification"
+      {
+        "degree": "MSc in Geographic Information Systems",
+        "description": "Master of Science in Geographic Information Systems with advanced training in spatial analysis, geospatial technologies, and location intelligence for research and development applications."
+      },
+      {
+        "degree": "BSc in Geography and Spatial Planning",
+        "description": "Bachelor's degree in Geography and Spatial Planning providing foundation in geographical analysis, land use planning, and spatial development strategies."
+      },
+      {
+        "degree": "Certificate in Remote Sensing",
+        "description": "Specialized certification in remote sensing technologies, satellite imagery analysis, and earth observation applications for environmental and development monitoring."
+      },
+      {
+        "degree": "Advanced GIS Certification",
+        "description": "Professional certification in advanced GIS applications, spatial modeling, and geospatial database management for complex analytical projects."
+      }
     ],
     "competencies": [
-      "GIS Analysis",
-      "Spatial Modeling",
-      "Remote Sensing",
-      "Cartography",
+      "Advanced GIS Analysis & Modeling",
+      "Spatial Data Analysis & Visualization",
+      "Remote Sensing & Image Analysis",
+      "Cartographic Design & Production",
       "Geospatial Database Management",
-      "GPS Technology"
+      "GPS Technology & Field Mapping",
+      "Spatial Statistics & Modeling",
+      "Web GIS Development",
+      "Location Intelligence & Analytics",
+      "Environmental Monitoring",
+      "Urban Planning & Land Use Analysis",
+      "Health Geography & Spatial Epidemiology",
+      "Transportation Planning",
+      "Disaster Risk Mapping & Management"
     ],
     "contributions": [
       "Developed GIS solutions for health facility mapping and planning",

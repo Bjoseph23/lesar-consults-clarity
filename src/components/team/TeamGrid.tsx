@@ -8,7 +8,10 @@ interface TeamMember {
   photo: string;
   expertise: string;
   summary: string;
-  education: string[];
+  education: Array<{
+    degree: string;
+    description: string;
+  }> | string[];
   competencies: string[];
   contributions: string[];
   projects: Array<{
