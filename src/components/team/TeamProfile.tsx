@@ -202,7 +202,7 @@ const TeamProfile = ({ member }: TeamProfileProps) => {
               <div>
                 <h3 className="text-lg font-serif text-foreground mb-4 flex items-center">
                   <Briefcase className="mr-2 h-5 w-5 text-primary" />
-                  Recent Projects
+                  Recent Company Projects
                 </h3>
                 <div className="space-y-4">
                   {member.projects.map((project, index) => (
