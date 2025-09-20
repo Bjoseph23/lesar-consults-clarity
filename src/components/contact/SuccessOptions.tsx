@@ -78,7 +78,7 @@ const SuccessOptions = ({ onNewRequest }: SuccessOptionsProps) => {
             <Button
               size="lg"
               className="btn-primary w-full hover-scale text-sm sm:text-base"
-              onClick={() => (window.location.href = "/#resources")}
+              onClick={() => (window.location.href = "/resources")}
             >
               Go to Resources
             </Button>
