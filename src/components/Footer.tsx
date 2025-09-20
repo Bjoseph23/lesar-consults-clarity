@@ -5,7 +5,7 @@ import { Mail, Phone, MapPin, ExternalLink } from "lucide-react";
 const Footer = () => {
   const navigation = {
     main: [
-      { name: "Home", href: "/home" },
+      { name: "Home", href: "/" },
       { name: "About", href: "/about" },
       { name: "Team", href: "/team" },
       { name: "Services", href: "/services" },
