@@ -325,41 +325,6 @@ const ServiceDetail = () => {
           </section>
         </AnimatedSection>
 
-        {/* CTA Strip */}
-        <AnimatedSection>
-          <section className="py-16 bg-navy">
-            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-              <h2 className="text-3xl md:text-4xl font-serif font-bold text-white mb-4">
-                Ready to Get Started?
-              </h2>
-              <p className="text-xl text-white/90 mb-8">
-                Let's discuss how we can support your {service.title.toLowerCase()} needs
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button 
-                  size="lg" 
-                  className="bg-dark-red hover:bg-dark-red/90 text-white"
-                  asChild
-                >
-                  <Link to={`/contact?service=${service.slug}`} className="inline-flex items-center gap-2">
-                    Request a Proposal
-                    <ArrowRight className="w-4 h-4" />
-                  </Link>
-                </Button>
-                <Button 
-                  variant="outline" 
-                  size="lg"
-                  className="border-white text-white hover:bg-white hover:text-navy"
-                  asChild
-                >
-                  <Link to="/resources">
-                    View Resources
-                  </Link>
-                </Button>
-              </div>
-            </div>
-          </section>
-        </AnimatedSection>
       </main>
 
       <ScrollTop />
