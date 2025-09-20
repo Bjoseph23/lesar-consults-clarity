@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ArrowRight, ExternalLink, Calendar, MapPin, Users, DollarSign } from "lucide-react";
+import { ArrowRight, ExternalLink, Calendar, MapPin, Users, DollarSign, Download } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import AnimatedSection from "@/components/AnimatedSection";
@@ -234,6 +234,19 @@ const Projects = () => {
                                 </Link>
                               </Button>
                             </div>
+
+                            {/* Conditional centered download button for Nairobi Mental Health Plan */}
+                            {project.id === "nairobi-mental-health-plan" && (
+                              <div className="mt-4 flex justify-center">
+                                <Button
+                                  className="bg-blue-800 hover:bg-blue-900 text-white px-6 py-3 rounded-md inline-flex items-center justify-center w-full sm:w-auto"
+                                  // no onClick handler per instruction (button does nothing for now)
+                                >
+                                  <Download className="mr-2 h-4 w-4" />
+                                  Download Document
+                                </Button>
+                              </div>
+                            )}
                           </div>
                         </div>
                       </div>
@@ -256,9 +269,6 @@ const Projects = () => {
                 <p className="text-xl text-navy/70 max-w-3xl mx-auto mb-4">
                   Our broader portfolio of successful engagements across diverse sectors and geographies
                </p>
-                {/* <p className="text-sm text-navy/50 max-w-2xl mx-auto">
-                  Note: metrics shown as 'Estimated' are conservative projections prepared for website demonstration and are editable in the content data file.
-                </p> */}
               </div>
               
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
