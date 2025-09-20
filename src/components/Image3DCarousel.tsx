@@ -161,72 +161,13 @@ const Image3DCarousel = ({ slides, autoPlayInterval = 4000 }: Image3DCarouselPro
           </div>
         </div>
 
-        {/* Carousel container */}
-        <div 
-          className="relative max-w-4xl mx-auto overflow-hidden"
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
-          onFocus={handleMouseEnter}
-          onBlur={handleMouseLeave}
-          role="region"
-          aria-label="Image carousel"
-          aria-live="polite"
-        >
-          <div className="relative h-80 md:h-96">
-            <div className="relative w-full h-full flex items-center justify-center">
-              {slides.map((slide, index) => {
-                const position = getSlidePosition(index);
-                const slideStyle = getSlideStyle(position, isMobile);
-                
-                return (
-                  <div
-                    key={slide.id}
-                    className={`absolute transition-all duration-700 ease-out ${
-                      isMobile ? 'w-full max-w-sm' : 'w-full max-w-md'
-                    } h-full`}
-                    style={{
-                      ...slideStyle,
-                      willChange: 'transform, opacity',
-                    }}
-                  >
-                    <div 
-                      className={`relative w-full h-full rounded-2xl overflow-hidden ${
-                        position === 'center' ? 'shadow-2xl' : 'shadow-lg'
-                      }`}
-                      style={{
-                        filter: position !== 'center' ? 'brightness(0.8) saturate(0.8)' : 'none',
-                      }}
-                    >
-                      <img
-                        src="/placeholder.svg"
-                        alt={slide.title}
-                        className="w-full h-full object-cover"
-                        loading="lazy"
-                        decoding="async"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-                      {position === 'center' && (
-                        <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                          <h3 className="text-xl md:text-2xl font-serif font-bold mb-2">
-                            {slide.title}
-                          </h3>
-                          <p className="text-sm md:text-base opacity-90">
-                            {slide.caption}
-                          </p>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Navigation arrows */}
+        {/* Carousel container with navigation */}
+        <div className="relative max-w-6xl mx-auto">
+          {/* Navigation arrows - outside carousel */}
           <Button
             variant="outline"
             size="icon"
-            className="absolute left-4 top-1/2 -translate-y-1/2 z-40 bg-white/90 hover:bg-white"
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-40 bg-white/90 hover:bg-white shadow-lg"
             onClick={prevSlide}
             aria-label="Previous slide"
           >
@@ -236,12 +177,74 @@ const Image3DCarousel = ({ slides, autoPlayInterval = 4000 }: Image3DCarouselPro
           <Button
             variant="outline"
             size="icon"
-            className="absolute right-4 top-1/2 -translate-y-1/2 z-40 bg-white/90 hover:bg-white"
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-40 bg-white/90 hover:bg-white shadow-lg"
             onClick={nextSlide}
             aria-label="Next slide"
           >
             <ChevronRight className="h-5 w-5" />
           </Button>
+
+          {/* Carousel content */}
+          <div 
+            className="relative max-w-4xl mx-auto overflow-hidden px-12"
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            onFocus={handleMouseEnter}
+            onBlur={handleMouseLeave}
+            role="region"
+            aria-label="Image carousel"
+            aria-live="polite"
+          >
+            <div className="relative h-80 md:h-96">
+              <div className="relative w-full h-full flex items-center justify-center">
+                {slides.map((slide, index) => {
+                  const position = getSlidePosition(index);
+                  const slideStyle = getSlideStyle(position, isMobile);
+                  
+                  return (
+                    <div
+                      key={slide.id}
+                      className={`absolute transition-all duration-700 ease-out ${
+                        isMobile ? 'w-full max-w-sm' : 'w-full max-w-lg'
+                      } h-full`}
+                      style={{
+                        ...slideStyle,
+                        willChange: 'transform, opacity',
+                      }}
+                    >
+                      <div 
+                        className={`relative w-full h-full rounded-2xl overflow-hidden ${
+                          position === 'center' ? 'shadow-2xl' : 'shadow-lg'
+                        }`}
+                        style={{
+                          filter: position !== 'center' ? 'brightness(0.8) saturate(0.8)' : 'none',
+                        }}
+                      >
+                        <img
+                          src="/placeholder.svg"
+                          alt={slide.title}
+                          className="w-full h-full object-cover"
+                          loading="lazy"
+                          decoding="async"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                        {position === 'center' && (
+                          <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                            <h3 className="text-xl md:text-2xl font-serif font-bold mb-2">
+                              {slide.title}
+                            </h3>
+                            <p className="text-sm md:text-base opacity-90">
+                              {slide.caption}
+                            </p>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Dot indicators */}
