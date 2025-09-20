@@ -177,9 +177,6 @@ const ContactWizard = ({ onSubmit, preselectedService }: ContactWizardProps) => 
           <h1 className="text-4xl sm:text-5xl font-serif font-bold text-navy mb-4">
             Let's discuss your project
           </h1>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Tell us about your needs and we'll get back within 2 business days.
-          </p>
         </div>
 
         {/* Form Steps Container */}
