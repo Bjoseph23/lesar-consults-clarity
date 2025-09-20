@@ -86,17 +86,6 @@ const TeamProfile = ({ member }: TeamProfileProps) => {
                   <Linkedin className="h-5 w-5" />
                 </a>
               )}
-              {member.cv && (
-                <a 
-                  href={member.cv}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2 rounded-full bg-secondary hover:bg-accent hover:text-accent-foreground transition-colors duration-200"
-                  aria-label={`Download ${member.name}'s CV`}
-                >
-                  <FileText className="h-5 w-5" />
-                </a>
-              )}
               <Button 
                 asChild
                 className="ml-auto"
@@ -241,17 +230,6 @@ const TeamProfile = ({ member }: TeamProfileProps) => {
                 aria-label={`${member.name}'s LinkedIn profile`}
               >
                 <Linkedin className="h-5 w-5" />
-              </a>
-            )}
-            {member.cv && (
-              <a 
-                href={member.cv}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2 rounded-full bg-secondary hover:bg-accent hover:text-accent-foreground transition-colors duration-200"
-                aria-label={`Download ${member.name}'s CV`}
-              >
-                <FileText className="h-5 w-5" />
               </a>
             )}
           </div>
