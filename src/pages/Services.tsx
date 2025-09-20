@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Users, TrendingUp, Target, BarChart3, Briefcase, FileText, Settings } from "lucide-react";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import AnimatedSection from "@/components/AnimatedSection";
@@ -40,6 +41,12 @@ const Services = () => {
       </Helmet>
 
       <Navbar />
+
+      <div className="pt-20 pb-4 bg-background">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <Breadcrumbs items={breadcrumbs} />
+        </div>
+      </div>
       
       <main className="min-h-screen">
         {/* Hero Section */}
