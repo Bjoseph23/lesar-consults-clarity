@@ -158,10 +158,6 @@ const About = () => {
           <QASection {...aboutData.qualityAssurance} />
         </AnimatedSection>
 
-        {/* CTA Section */}
-        <AnimatedSection delay={100}>
-          <CTAInline variant="accent" />
-        </AnimatedSection>
 
         {/* Partners Section */}
         <AnimatedSection>
