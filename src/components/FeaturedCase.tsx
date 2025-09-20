@@ -52,7 +52,9 @@ const FeaturedCase = () => {
                 <ExternalLink className="ml-2 h-4 w-4" />
               </Button>
               <Button variant="outline" className="btn-secondary">
-                View All Projects
+                <Link to="/projects">
+                    View all projects
+                  </Link>
               </Button>
             </div>
           </div>
