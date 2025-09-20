@@ -51,7 +51,7 @@ const FeaturedCase = () => {
                 Explore Our Approach — M&E
                 <ExternalLink className="ml-2 h-4 w-4" />
               </Button>
-              <Button href="/projects" variant="outline" className="btn-secondary">
+              <Button onClick={() => window.location.href = '/projects'}" variant="outline" className="btn-secondary">
                 View All Projects
               </Button>
             </div>
