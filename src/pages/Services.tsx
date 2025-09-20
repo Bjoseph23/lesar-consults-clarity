@@ -19,6 +19,10 @@ const Services = () => {
     window.scrollTo(0, 0);
   }, []);
 
+   const breadcrumbs = [
+    { label: "Services" }
+  ];
+
   const serviceIcons = {
     "health-systems-strengthening": Users,
     "financial-analysis-economics": TrendingUp,
