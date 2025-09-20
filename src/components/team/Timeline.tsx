@@ -47,30 +47,39 @@ const Timeline = ({ milestones }: TimelineProps) => {
           <div className="relative flex justify-between items-center">
             {milestones.map((milestone, index) => {
               const Icon = iconMap[milestone.icon as keyof typeof iconMap] || Building;
+              const isActive = activeIndex === index;
               
               return (
                 <div
                   key={index}
-                  className={`relative transition-all duration-300 ${
+                  className={`relative cursor-pointer group transition-all duration-300 ${
                     isVisible ? 'animate-fade-in' : 'opacity-0'
                   }`}
                   style={{ animationDelay: `${index * 200}ms` }}
+                  onMouseEnter={() => setActiveIndex(index)}
+                  onMouseLeave={() => setActiveIndex(null)}
                 >
                   {/* Timeline Node */}
-                  <div className="w-12 h-12 rounded-full border-4 border-primary bg-primary text-primary-foreground flex items-center justify-center">
+                  <div className={`w-12 h-12 rounded-full border-4 bg-background flex items-center justify-center transition-all duration-300 ${
+                    isActive ? 'border-primary bg-primary text-primary-foreground scale-110' : 'border-border hover:border-primary'
+                  }`}>
                     <Icon className="h-5 w-5" />
                   </div>
 
                   {/* Year Label */}
                   <div className="absolute top-16 left-1/2 transform -translate-x-1/2">
-                    <span className="text-sm font-medium px-2 py-1 rounded bg-primary text-primary-foreground">
+                    <span className={`text-sm font-medium px-2 py-1 rounded transition-colors duration-300 ${
+                      isActive ? 'bg-primary text-primary-foreground' : 'bg-secondary text-secondary-foreground'
+                    }`}>
                       {milestone.year}
                     </span>
                   </div>
 
-                  {/* Milestone Details - Always Visible */}
+                  {/* Milestone Details */}
                   <div className={`absolute ${index % 2 === 0 ? 'top-24' : 'bottom-24'} left-1/2 transform -translate-x-1/2 
-                    w-64 p-4 bg-card border border-border rounded-lg shadow-card`}>
+                    w-64 p-4 bg-card border border-border rounded-lg shadow-card transition-all duration-300 ${
+                    isActive ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'
+                  }`}>
                     <h4 className="font-serif text-foreground font-semibold mb-2">
                       {milestone.title}
                     </h4>
