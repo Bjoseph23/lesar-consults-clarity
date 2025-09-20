@@ -14,6 +14,14 @@ import AnimatedSection from "@/components/AnimatedSection";
 import aboutData from "@/data/about.json";
 
 const About = () => {
+  // Ensure page loads scrolled to top on mount
+  useEffect(() => {
+    // Use instant/auto scroll to top on component mount to avoid preserved scroll position
+    if (typeof window !== "undefined") {
+      window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    }
+  }, []);
+
   // SEO optimization
   useEffect(() => {
     document.title = "About Us - Lesar Consults | Premier Health Analytics Firm East Africa";
@@ -95,7 +103,7 @@ const About = () => {
         </div>
       </div>
 
-      <main>
+      <main id="main-content">
         {/* Hero Section */}
         <AnimatedSection>
           <div className="relative overflow-hidden">
