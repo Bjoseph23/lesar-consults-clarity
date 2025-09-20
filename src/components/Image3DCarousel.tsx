@@ -14,7 +14,7 @@ interface Image3DCarouselProps {
   autoPlayInterval?: number;
 }
 
-const Image3DCarousel = ({ slides, autoPlayInterval = 8000 }: Image3DCarouselProps) => {
+const Image3DCarousel = ({ slides, autoPlayInterval = 4000 }: Image3DCarouselProps) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [progress, setProgress] = useState(0);
