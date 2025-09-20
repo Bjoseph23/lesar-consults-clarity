@@ -24,7 +24,6 @@ const Projects = () => {
   }, []);
 
   const breadcrumbs = [
-    { label: "Home", href: "/" },
     { label: "Projects" }
   ];
 
