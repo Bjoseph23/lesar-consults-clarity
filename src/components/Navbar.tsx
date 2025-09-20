@@ -135,8 +135,11 @@ const Navbar = () => {
               );
             })}
 
-            <Button onClick={() => (window.location.href = "/contact")} className="btn-primary cta-glisten">
-              Request a Proposal
+            {/* Request a Proposal - desktop: use Link as child to keep styles and avoid full page reload */}
+            <Button asChild className="btn-primary cta-glisten">
+              <Link to="/contact">
+                Request a Proposal
+              </Link>
             </Button>
           </div>
 
@@ -205,9 +208,12 @@ const Navbar = () => {
             })}
 
             <div className="mt-4">
-            <Button onClick={() => { window.location.href = "/contact"; setIsOpen(false); }} className="btn-primary cta-glisten w-full">
-              Request a Proposal
-            </Button>
+              {/* Request a Proposal - mobile: Link as child to preserve styling and close drawer on click */}
+              <Button asChild className="btn-primary cta-glisten w-full">
+                <Link to="/contact" onClick={() => setIsOpen(false)}>
+                  Request a Proposal
+                </Link>
+              </Button>
             </div>
 
             <div className="pt-6 border-t border-gray-200 text-sm text-gray-500">
