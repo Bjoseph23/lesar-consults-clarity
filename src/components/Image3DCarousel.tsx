@@ -25,10 +25,9 @@ const Image3DCarousel = ({ slides, autoPlayInterval = 4000 }: Image3DCarouselPro
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768);
     };
-    
     checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
   const nextSlide = useCallback(() => {
@@ -55,7 +54,7 @@ const Image3DCarousel = ({ slides, autoPlayInterval = 4000 }: Image3DCarouselPro
         if (prev >= 100) {
           return 0;
         }
-        return prev + (100 / (autoPlayInterval / 50));
+        return prev + 100 / (autoPlayInterval / 50);
       });
     }, 50);
 
@@ -74,79 +73,72 @@ const Image3DCarousel = ({ slides, autoPlayInterval = 4000 }: Image3DCarouselPro
   // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowLeft') prevSlide();
-      if (e.key === 'ArrowRight') nextSlide();
+      if (e.key === "ArrowLeft") prevSlide();
+      if (e.key === "ArrowRight") nextSlide();
     };
 
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, [nextSlide, prevSlide]);
 
   const getSlidePosition = (index: number) => {
     const diff = index - currentSlide;
     const total = slides.length;
-    
-    if (diff === 0) return 'center';
-    if (diff === 1 || diff === -(total - 1)) return 'right';
-    if (diff === -1 || diff === (total - 1)) return 'left';
-    return 'hidden';
+
+    if (diff === 0) return "center";
+    if (diff === 1 || diff === -(total - 1)) return "right";
+    if (diff === -1 || diff === (total - 1)) return "left";
+    return "hidden";
   };
 
   const getSlideStyle = (position: string, isMobile: boolean = false) => {
     if (isMobile) {
-      // On mobile, only show center slide
+      // On mobile, hide all except center completely (no overflow)
       switch (position) {
-        case 'center':
+        case "center":
           return {
-            transform: 'translateX(0%) scale(1)',
+            transform: "translateX(0%) scale(1)",
             zIndex: 30,
             opacity: 1,
-            pointerEvents: 'auto' as const,
-            cursor: 'default',
+            pointerEvents: "auto" as const,
+            cursor: "default",
+            display: "block",
           };
         default:
           return {
-            transform: 'translateX(100%) scale(0.8)',
-            zIndex: 0,
-            opacity: 0,
-            pointerEvents: 'none' as const,
-            cursor: 'default',
+            display: "none",
           };
       }
     }
-    
+
     switch (position) {
-      case 'center':
+      case "center":
         return {
-          transform: 'translateX(0%) scale(1)',
+          transform: "translateX(0%) scale(1)",
           zIndex: 30,
           opacity: 1,
-          pointerEvents: 'auto' as const,
-          cursor: 'default',
+          pointerEvents: "auto" as const,
+          cursor: "default",
         };
-      case 'right':
+      case "right":
         return {
-          transform: 'translateX(30%) scale(0.85)',
+          transform: "translateX(30%) scale(0.85)",
           zIndex: 20,
           opacity: 0.9,
-          pointerEvents: 'auto' as const,
-          cursor: 'pointer',
+          pointerEvents: "auto" as const,
+          cursor: "pointer",
         };
-      case 'left':
+      case "left":
         return {
-          transform: 'translateX(-30%) scale(0.85)',
+          transform: "translateX(-30%) scale(0.85)",
           zIndex: 20,
           opacity: 0.9,
-          pointerEvents: 'auto' as const,
-          cursor: 'pointer',
+          pointerEvents: "auto" as const,
+          cursor: "pointer",
         };
       default:
         return {
-          transform: 'translateX(100%) scale(0.8)',
-          zIndex: 0,
-          opacity: 0,
-          pointerEvents: 'none' as const,
-          cursor: 'default',
+          display: "none",
         };
     }
   };
@@ -166,7 +158,7 @@ const Image3DCarousel = ({ slides, autoPlayInterval = 4000 }: Image3DCarouselPro
         {/* Progress bar */}
         <div className="w-full max-w-md mx-auto mb-8">
           <div className="h-1 bg-border rounded-full overflow-hidden">
-            <div 
+            <div
               className="h-full bg-primary transition-all duration-75 ease-linear"
               style={{ width: `${progress}%` }}
             />
@@ -175,7 +167,7 @@ const Image3DCarousel = ({ slides, autoPlayInterval = 4000 }: Image3DCarouselPro
 
         {/* Carousel container with navigation */}
         <div className="relative w-full max-w-4xl mx-auto px-4 sm:px-8 overflow-hidden">
-          {/* Navigation arrows - inside container */}
+          {/* Navigation arrows */}
           <Button
             variant="outline"
             size="icon"
@@ -197,8 +189,8 @@ const Image3DCarousel = ({ slides, autoPlayInterval = 4000 }: Image3DCarouselPro
           </Button>
 
           {/* Carousel content */}
-          <div 
-            className="relative mx-auto overflow-hidden px-8 sm:px-12" // <-- overflow-hidden to prevent side slides from extending
+          <div
+            className="relative mx-auto overflow-hidden px-8 sm:px-12"
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             onFocus={handleMouseEnter}
@@ -212,40 +204,64 @@ const Image3DCarousel = ({ slides, autoPlayInterval = 4000 }: Image3DCarouselPro
                 {slides.map((slide, index) => {
                   const position = getSlidePosition(index);
                   const slideStyle = getSlideStyle(position, isMobile);
-                  
-                  // decide whether this slide should be interactive (left/right) on desktop
-                  const isInteractive = !isMobile && (position === 'left' || position === 'right');
+
+                  const isInteractive =
+                    !isMobile && (position === "left" || position === "right");
 
                   return (
-                     <div
-                       key={slide.id}
-                       className={`absolute transition-all duration-700 ease-out ${isMobile ? 'w-full max-w-xs mx-auto' : 'w-2/3 max-w-lg'} h-full`}
+                    <div
+                      key={slide.id}
+                      className={`absolute transition-all duration-700 ease-out ${
+                        isMobile
+                          ? "w-full max-w-xs mx-auto"
+                          : "w-2/3 max-w-lg"
+                      } h-full`}
                       style={{
                         ...slideStyle,
-                        willChange: 'transform, opacity',
+                        willChange: "transform, opacity",
                       }}
                     >
-                      <div 
-                        // make the whole slide clickable if it's a side slide
-                        onClick={() => { if (isInteractive) goToSlide(index); }}
-                        onKeyDown={(e) => { if (isInteractive && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); goToSlide(index); } }}
-                        role={isInteractive ? 'button' : undefined}
+                      <div
+                        onClick={() => {
+                          if (isInteractive) goToSlide(index);
+                        }}
+                        onKeyDown={(e) => {
+                          if (
+                            isInteractive &&
+                            (e.key === "Enter" || e.key === " ")
+                          ) {
+                            e.preventDefault();
+                            goToSlide(index);
+                          }
+                        }}
+                        role={isInteractive ? "button" : undefined}
                         tabIndex={isInteractive ? 0 : -1}
-                        aria-label={isInteractive ? `Activate slide ${index + 1}` : undefined}
-                        className={`relative w-full h-full rounded-2xl overflow-hidden ${position === 'center' ? 'shadow-2xl' : 'shadow-lg'} ${isInteractive ? 'cursor-pointer' : ''}`}
+                        aria-label={
+                          isInteractive
+                            ? `Activate slide ${index + 1}`
+                            : undefined
+                        }
+                        className={`relative w-full h-full rounded-2xl overflow-hidden ${
+                          position === "center"
+                            ? "shadow-2xl"
+                            : "shadow-lg"
+                        } ${isInteractive ? "cursor-pointer" : ""}`}
                         style={{
-                          filter: position !== 'center' ? 'brightness(0.85) saturate(0.9)' : 'none',
+                          filter:
+                            position !== "center"
+                              ? "brightness(0.85) saturate(0.9)"
+                              : "none",
                         }}
                       >
                         <img
-                          src="/placeholder.svg"
+                          src={slide.image || "/placeholder.svg"}
                           alt={slide.title}
                           className="w-full h-full object-cover"
                           loading="lazy"
                           decoding="async"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent"></div>
-                        {position === 'center' && (
+                        {position === "center" && (
                           <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
                             <h3 className="text-xl md:text-2xl font-serif font-bold mb-2">
                               {slide.title}
@@ -270,9 +286,9 @@ const Image3DCarousel = ({ slides, autoPlayInterval = 4000 }: Image3DCarouselPro
             <button
               key={index}
               className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                index === currentSlide 
-                  ? 'bg-primary scale-125' 
-                  : 'bg-border hover:bg-muted-foreground'
+                index === currentSlide
+                  ? "bg-primary scale-125"
+                  : "bg-border hover:bg-muted-foreground"
               }`}
               onClick={() => goToSlide(index)}
               aria-label={`Go to slide ${index + 1}`}
