@@ -26,7 +26,7 @@ const Contact = () => {
     setTimeout(() => {
       setShowSuccessToast(false);
       setIsSubmitted(true);
-    }, 6000);
+    }, 4000);
   };
 
   // Lock body scroll while toast is visible and restore afterwards
