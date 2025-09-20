@@ -44,46 +44,37 @@ const Timeline = ({ milestones }: TimelineProps) => {
           <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-border transform -translate-y-1/2" />
           
           {/* Timeline Items */}
-          <div className="relative flex justify-between items-center">
+          <div className="relative flex justify-between items-start pt-8">
             {milestones.map((milestone, index) => {
               const Icon = iconMap[milestone.icon as keyof typeof iconMap] || Building;
-              const isActive = activeIndex === index;
               
               return (
                 <div
                   key={index}
-                  className={`relative cursor-pointer group transition-all duration-300 ${
+                  className={`relative flex flex-col items-center max-w-xs transition-all duration-300 ${
                     isVisible ? 'animate-fade-in' : 'opacity-0'
                   }`}
                   style={{ animationDelay: `${index * 200}ms` }}
-                  onMouseEnter={() => setActiveIndex(index)}
-                  onMouseLeave={() => setActiveIndex(null)}
                 >
                   {/* Timeline Node */}
-                  <div className={`w-12 h-12 rounded-full border-4 bg-background flex items-center justify-center transition-all duration-300 ${
-                    isActive ? 'border-primary bg-primary text-primary-foreground scale-110' : 'border-border hover:border-primary'
-                  }`}>
+                  <div className="w-12 h-12 rounded-full border-4 border-primary bg-primary text-primary-foreground flex items-center justify-center mb-4">
                     <Icon className="h-5 w-5" />
                   </div>
 
-                  {/* Year Label */}
-                  <div className="absolute top-16 left-1/2 transform -translate-x-1/2">
-                    <span className={`text-sm font-medium px-2 py-1 rounded transition-colors duration-300 ${
-                      isActive ? 'bg-primary text-primary-foreground' : 'bg-secondary text-secondary-foreground'
-                    }`}>
+                  {/* Content directly below icon */}
+                  <div className="text-center space-y-2">
+                    {/* Year */}
+                    <span className="text-lg font-semibold text-foreground">
                       {milestone.year}
                     </span>
-                  </div>
-
-                  {/* Milestone Details */}
-                  <div className={`absolute ${index % 2 === 0 ? 'top-24' : 'bottom-24'} left-1/2 transform -translate-x-1/2 
-                    w-64 p-4 bg-card border border-border rounded-lg shadow-card transition-all duration-300 ${
-                    isActive ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'
-                  }`}>
-                    <h4 className="font-serif text-foreground font-semibold mb-2">
+                    
+                    {/* Title */}
+                    <h4 className="font-serif text-foreground font-semibold text-sm leading-tight">
                       {milestone.title}
                     </h4>
-                    <p className="text-sm text-muted-foreground">
+                    
+                    {/* Description */}
+                    <p className="text-xs text-muted-foreground leading-relaxed">
                       {milestone.description}
                     </p>
                   </div>
