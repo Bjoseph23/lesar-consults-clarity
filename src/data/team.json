@@ -1,0 +1,220 @@
+[
+  {
+    "slug": "eliud-khayo",
+    "name": "Eliud Khayo",
+    "title": "Director & Head of Operations",
+    "photo": "/placeholder.svg",
+    "expertise": "PhD Economist specializing in health economics and statistical analysis",
+    "summary": "Eliud brings extensive expertise in economics research and operations management. With a PhD in Economics and advanced skills in statistical analysis, he leads operational excellence and strategic economic initiatives for Lesar Consults.",
+    "education": [
+      "PhD in Economics",
+      "MSc Applied Statistics", 
+      "Advanced Certificate in Project Management"
+    ],
+    "competencies": [
+      "Health Economics",
+      "Statistical Analysis (R, STATA, Python)",
+      "Project Management",
+      "Operations Strategy",
+      "Research Design",
+      "Data Analytics"
+    ],
+    "contributions": [
+      "Led economic impact assessments for major healthcare initiatives",
+      "Developed statistical frameworks for policy evaluation",
+      "Streamlined operational processes improving efficiency by 40%",
+      "Published research on healthcare economics in peer-reviewed journals"
+    ],
+    "projects": [
+      {
+        "title": "Healthcare Economic Impact Study",
+        "year": "2024",
+        "slug": "healthcare-impact-study",
+        "impact": "Informed policy decisions affecting 2M+ beneficiaries"
+      },
+      {
+        "title": "Statistical Framework Development",
+        "year": "2023", 
+        "slug": "statistical-framework",
+        "impact": "Standardized evaluation methodologies across 15+ projects"
+      }
+    ],
+    "linkedin": "",
+    "cv": "/cv/eliud-khayo.pdf"
+  },
+  {
+    "slug": "japheth-athanasio",
+    "name": "Japheth Athanasio",
+    "title": "Director & CEO",
+    "photo": "/placeholder.svg",
+    "expertise": "PhD Candidate in Health Systems Strengthening & Financing",
+    "summary": "Japheth is a visionary leader with deep expertise in health systems strengthening and financing. As CEO, he guides Lesar Consults' strategic direction while maintaining hands-on involvement in critical healthcare policy and financing initiatives.",
+    "education": [
+      "PhD (Candidate) in Health Systems Strengthening & Financing",
+      "MSc in Health Policy and Management",
+      "BSc in Public Health"
+    ],
+    "competencies": [
+      "Health Systems Strengthening",
+      "Healthcare Financing",
+      "Strategic Leadership",
+      "Policy Development",
+      "Stakeholder Engagement",
+      "Program Management"
+    ],
+    "contributions": [
+      "Founded Lesar Consults and grew it to a leading advisory firm",
+      "Advised on health financing reforms across multiple countries",
+      "Led strategic partnerships with international development organizations",
+      "Championed evidence-based approaches to health systems strengthening"
+    ],
+    "projects": [
+      {
+        "title": "National Health Financing Strategy",
+        "year": "2024",
+        "slug": "health-financing-strategy", 
+        "impact": "Designed sustainable financing model for national health system"
+      },
+      {
+        "title": "Multi-Country Health Systems Assessment",
+        "year": "2023",
+        "slug": "health-systems-assessment",
+        "impact": "Evaluated health systems across 8 African countries"
+      }
+    ],
+    "linkedin": "",
+    "cv": "/cv/japheth-athanasio.pdf"
+  },
+  {
+    "slug": "jamlick-karumbi",
+    "name": "Jamlick Karumbi",
+    "title": "Lead Consultant, Epidemiologist",
+    "photo": "/placeholder.svg",
+    "expertise": "PhD Epidemiologist with expertise in disease surveillance and public health research",
+    "summary": "Jamlick is a seasoned epidemiologist with a PhD and extensive experience in disease surveillance, outbreak investigation, and public health research. He leads epidemiological studies and provides technical expertise on health security initiatives.",
+    "education": [
+      "PhD in Epidemiology",
+      "MSc in Public Health",
+      "Certificate in Disease Surveillance",
+      "Advanced Training in Outbreak Investigation"
+    ],
+    "competencies": [
+      "Epidemiological Analysis",
+      "Disease Surveillance",
+      "Outbreak Investigation", 
+      "Statistical Modeling",
+      "Public Health Research",
+      "Data Visualization"
+    ],
+    "contributions": [
+      "Led epidemiological investigations for major disease outbreaks",
+      "Developed surveillance systems for infectious disease monitoring",
+      "Published extensively on epidemiological methods and findings",
+      "Trained public health professionals across the region"
+    ],
+    "projects": [
+      {
+        "title": "Regional Disease Surveillance System",
+        "year": "2024",
+        "slug": "surveillance-system",
+        "impact": "Enhanced early warning capabilities across 12 health facilities"
+      },
+      {
+        "title": "COVID-19 Epidemiological Assessment",
+        "year": "2022-2023",
+        "slug": "covid-assessment", 
+        "impact": "Informed national pandemic response strategies"
+      }
+    ],
+    "linkedin": "",
+    "cv": "/cv/jamlick-karumbi.pdf"
+  },
+  {
+    "slug": "wairimu-maina",
+    "name": "Wairimu Maina",
+    "title": "Lead Consultant, Economist & Financial Analyst",
+    "photo": "/placeholder.svg",
+    "expertise": "Senior economist specializing in financial analysis and economic policy",
+    "summary": "Wairimu is a distinguished economist and financial analyst with deep expertise in economic policy analysis, financial modeling, and development economics. She leads economic assessments and provides strategic financial guidance for complex development projects.",
+    "education": [
+      "MSc in Economics",
+      "BSc in Finance and Economics",
+      "Chartered Financial Analyst (CFA) Level II",
+      "Certificate in Development Economics"
+    ],
+    "competencies": [
+      "Economic Analysis",
+      "Financial Modeling",
+      "Development Economics",
+      "Policy Analysis",
+      "Risk Assessment",
+      "Investment Analysis"
+    ],
+    "contributions": [
+      "Conducted economic impact assessments for major infrastructure projects",
+      "Developed financial models for sustainable development initiatives",
+      "Advised on economic policy reforms and fiscal strategies",
+      "Led cost-benefit analyses for international development programs"
+    ],
+    "projects": [
+      {
+        "title": "Infrastructure Economic Impact Study",
+        "year": "2024",
+        "slug": "infrastructure-impact",
+        "impact": "Guided $50M+ infrastructure investment decisions"
+      },
+      {
+        "title": "Economic Policy Reform Analysis",
+        "year": "2023",
+        "slug": "policy-reform-analysis",
+        "impact": "Informed national economic policy reforms"
+      }
+    ],
+    "linkedin": "",
+    "cv": "/cv/wairimu-maina.pdf"
+  },
+  {
+    "slug": "benjamin-mutuku",
+    "name": "Benjamin Mutuku",
+    "title": "Lead Consultant, GIS & Spatial Analysis",
+    "photo": "/placeholder.svg",
+    "expertise": "GIS specialist with advanced expertise in spatial analysis and geospatial technologies",
+    "summary": "Benjamin is a highly skilled GIS specialist with extensive experience in spatial analysis, mapping, and geospatial technology applications. He leads spatial analysis projects and provides technical expertise on location-based research and planning initiatives.",
+    "education": [
+      "MSc in Geographic Information Systems",
+      "BSc in Geography and Spatial Planning",
+      "Certificate in Remote Sensing",
+      "Advanced GIS Certification"
+    ],
+    "competencies": [
+      "GIS Analysis",
+      "Spatial Modeling",
+      "Remote Sensing",
+      "Cartography",
+      "Geospatial Database Management",
+      "GPS Technology"
+    ],
+    "contributions": [
+      "Developed GIS solutions for health facility mapping and planning",
+      "Led spatial analysis for disease distribution and risk mapping",
+      "Created interactive mapping platforms for stakeholder engagement",
+      "Trained teams on GIS applications in public health and development"
+    ],
+    "projects": [
+      {
+        "title": "Health Facility Catchment Analysis",
+        "year": "2024",
+        "slug": "facility-catchment-analysis",
+        "impact": "Optimized healthcare access for 500K+ population"
+      },
+      {
+        "title": "Disease Risk Mapping Platform",
+        "year": "2023",
+        "slug": "disease-risk-mapping",
+        "impact": "Enhanced surveillance and response planning capabilities"
+      }
+    ],
+    "linkedin": "",
+    "cv": "/cv/benjamin-mutuku.pdf"
+  }
+]

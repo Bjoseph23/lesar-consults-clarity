@@ -1,0 +1,38 @@
+[
+  {
+    "year": "2016",
+    "title": "Lesar Consults Founded",
+    "description": "Established as a specialized research and advisory firm",
+    "icon": "building"
+  },
+  {
+    "year": "2018", 
+    "title": "First Major International Project",
+    "description": "Expanded operations with multi-country health systems assessment",
+    "icon": "globe"
+  },
+  {
+    "year": "2020",
+    "title": "COVID-19 Response Leadership",
+    "description": "Led critical epidemiological assessments during the pandemic",
+    "icon": "shield"
+  },
+  {
+    "year": "2022",
+    "title": "Regional Expansion",
+    "description": "Extended services across East and Central Africa",
+    "icon": "map"
+  },
+  {
+    "year": "2024",
+    "title": "Innovation in Health Tech",
+    "description": "Launched digital health platforms and data analytics solutions",
+    "icon": "cpu"
+  },
+  {
+    "year": "2025",
+    "title": "Strategic Partnerships",
+    "description": "Formed key alliances with international development organizations",
+    "icon": "handshake"
+  }
+]
