@@ -13,7 +13,7 @@ const PartnersMarquee = () => {
   const userInteractingRef = useRef<boolean>(false);
   const resumeTimerRef = useRef<number | null>(null);
 
-  // speed: seconds per single set width loop (lower = faster). Reduced slightly to 28s for a bit faster scroll.
+  // speed: seconds per single set width loop (lower = faster).
   const [loopSeconds] = useState<number>(28);
 
   const partners = [
@@ -29,7 +29,7 @@ const PartnersMarquee = () => {
     { name: "University of Nairobi", file: "uon-logo.png", featured: true },
   ];
 
-  // Preload images (first renders) so next logos are ready when arrows scroll
+  // Preload images
   useEffect(() => {
     partners.forEach(p => {
       const img = new Image();
@@ -37,7 +37,6 @@ const PartnersMarquee = () => {
     });
   }, [partners]);
 
-  // compute width of a single repeated set
   const computeSetWidth = () => {
     const marquee = marqueeRef.current;
     if (!marquee) return 0;
@@ -46,7 +45,6 @@ const PartnersMarquee = () => {
     return Math.round(firstSet.getBoundingClientRect().width);
   };
 
-  // normalize scrollLeft into [0, setWidth)
   const normalizeScroll = (setWidth: number) => {
     const container = containerRef.current;
     if (!container || !setWidth) return;
@@ -55,7 +53,6 @@ const PartnersMarquee = () => {
     container.scrollLeft = mod;
   };
 
-  // schedule resume auto-loop shortly after interaction
   const scheduleResume = (delay = 300) => {
     if (resumeTimerRef.current) {
       clearTimeout(resumeTimerRef.current);
@@ -70,14 +67,11 @@ const PartnersMarquee = () => {
     }, delay);
   };
 
-  // arrow scroll helper — uses smooth scroll and prevents long stall
   const scrollByAmount = (delta: number) => {
     const container = containerRef.current;
     if (!container) return;
     userInteractingRef.current = true;
-    // smooth scroll by delta px
     container.scrollBy({ left: delta, behavior: "smooth" });
-    // resume auto loop shortly after smooth scroll finishes
     scheduleResume(600);
   };
 
@@ -86,25 +80,25 @@ const PartnersMarquee = () => {
     const marquee = marqueeRef.current;
     if (!container || !marquee) return;
 
-    // respect reduced motion preference
+    // prefers-reduced-motion
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
     let prefersReduced = mq.matches;
-    const handleReduced = () => {
-      prefersReduced = mq.matches;
-      if (prefersReduced) {
-        if (rafRef.current) {
-          cancelAnimationFrame(rafRef.current);
-          rafRef.current = null;
-        }
-      } else {
-        // reset lastTsRef so RAF delta doesn't jump
+
+    // helpers to manage RAF lifecycle
+    const startRAF = () => {
+      if (rafRef.current == null) {
         lastTsRef.current = null;
-        if (!rafRef.current) {
-          rafRef.current = requestAnimationFrame(loop);
-        }
+        rafRef.current = requestAnimationFrame(loop);
       }
     };
-    // the loop function declared later — hoist via let binding
+    const stopRAF = () => {
+      if (rafRef.current != null) {
+        cancelAnimationFrame(rafRef.current);
+        rafRef.current = null;
+      }
+      lastTsRef.current = null;
+    };
+
     // prepare set width and normalize scroll pos
     const applySetWidth = () => {
       const w = computeSetWidth();
@@ -114,20 +108,17 @@ const PartnersMarquee = () => {
 
     applySetWidth();
 
-    // RAF step (declared here so handleReduced can reference it)
+    // RAF loop defined BEFORE any handler that might reference it
     const loop = (ts: number) => {
       if (!lastTsRef.current) lastTsRef.current = ts;
       const dt = ts - lastTsRef.current;
       lastTsRef.current = ts;
 
-      // safety guard
       const setW = setWidthRef.current;
       if (!prefersReduced && !userInteractingRef.current && setW > 0) {
-        // px per ms to complete one set in loopSeconds
         const pxPerMs = setW / (loopSeconds * 1000);
         let next = container.scrollLeft + pxPerMs * dt;
 
-        // when we pass TWO set widths (we render 3 sets), subtract ONE set width
         const threshold = setW * 2;
         if (next >= threshold) {
           next = next - setW;
@@ -135,7 +126,6 @@ const PartnersMarquee = () => {
           next = next + setW;
         }
 
-        // apply
         if (!Number.isNaN(next) && isFinite(next)) {
           container.scrollLeft = next;
         }
@@ -144,45 +134,46 @@ const PartnersMarquee = () => {
       rafRef.current = requestAnimationFrame(loop);
     };
 
-    // start RAF if not reduced motion
-    if (!prefersReduced && !rafRef.current) {
-      rafRef.current = requestAnimationFrame(loop);
-    }
+    // start RAF if allowed
+    if (!prefersReduced) startRAF();
 
-    // visibilitychange handling: pause when hidden, resume when visible
+    // reduced-motion handler
+    const handleReduced = (ev?: MediaQueryListEvent) => {
+      prefersReduced = ev ? ev.matches : mq.matches;
+      if (prefersReduced) {
+        stopRAF();
+      } else {
+        applySetWidth();
+        startRAF();
+      }
+    };
+
+    // visibility handling
     const handleVisibility = () => {
       if (document.hidden) {
-        if (rafRef.current) {
-          cancelAnimationFrame(rafRef.current);
-          rafRef.current = null;
-        }
-        lastTsRef.current = null;
+        stopRAF();
       } else {
-        // recalc width (in case layout changed while hidden)
         applySetWidth();
-        lastTsRef.current = null;
-        if (!prefersReduced && !rafRef.current) {
-          rafRef.current = requestAnimationFrame(loop);
-        }
+        startRAF();
       }
     };
     document.addEventListener("visibilitychange", handleVisibility);
 
-    // handle resize (debounced)
+    // resize handling (debounced)
     let resizeTimer: number | null = null;
     const handleResize = () => {
       if (resizeTimer) window.clearTimeout(resizeTimer);
       resizeTimer = window.setTimeout(() => {
         const oldW = setWidthRef.current || 1;
         applySetWidth();
-        const ratio = container.scrollLeft / oldW;
+        const ratio = (container.scrollLeft || 0) / oldW;
         container.scrollLeft = ratio * setWidthRef.current;
         resizeTimer = null;
       }, 120);
     };
     window.addEventListener("resize", handleResize);
 
-    // interactions: pointer/touch/wheel set userInteracting and schedule resume
+    // interactions
     const onPointerDown = () => {
       userInteractingRef.current = true;
       if (resumeTimerRef.current) {
@@ -202,7 +193,7 @@ const PartnersMarquee = () => {
     container.addEventListener("touchstart", onPointerDown, { passive: true });
     container.addEventListener("touchend", onPointerUp);
 
-    // attach mq change listener
+    // mq listener
     if (typeof mq.addEventListener === "function") {
       mq.addEventListener("change", handleReduced);
     } else if (typeof (mq as any).addListener === "function") {
@@ -210,10 +201,7 @@ const PartnersMarquee = () => {
     }
 
     return () => {
-      // cleanup RAF and listeners
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
-      rafRef.current = null;
-      lastTsRef.current = null;
+      stopRAF();
       document.removeEventListener("visibilitychange", handleVisibility);
       window.removeEventListener("resize", handleResize);
       container.removeEventListener("pointerdown", onPointerDown);
@@ -239,7 +227,7 @@ const PartnersMarquee = () => {
       const w = computeSetWidth();
       setWidthRef.current = Math.max(1, w);
       normalizeScroll(setWidthRef.current);
-    }, 220);
+    }, 250);
     return () => clearTimeout(t);
   }, [partners.length]);
 
@@ -256,7 +244,7 @@ const PartnersMarquee = () => {
           {/* Left Arrow */}
           <button
             onClick={() => scrollByAmount(-250)}
-            className="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-white/80 rounded-full p-2 shadow-md transition-all duration-200 hidden md:inline-flex"
+            className="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-white/90 rounded-full p-2 transition-all duration-200 hidden md:inline-flex"
             aria-label="Scroll logos left"
             type="button"
           >
@@ -268,7 +256,7 @@ const PartnersMarquee = () => {
           {/* Right Arrow */}
           <button
             onClick={() => scrollByAmount(250)}
-            className="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-white/80 rounded-full p-2 shadow-md transition-all duration-200 hidden md:inline-flex"
+            className="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-white/90 rounded-full p-2 transition-all duration-200 hidden md:inline-flex"
             aria-label="Scroll logos right"
             type="button"
           >
@@ -278,9 +266,12 @@ const PartnersMarquee = () => {
           </button>
 
           <div className="px-16">
-            <div ref={containerRef} className="overflow-x-auto overflow-y-hidden -mx-4 px-4">
+            <div
+              ref={containerRef}
+              className="overflow-x-auto overflow-y-hidden -mx-4 px-4"
+              style={{ WebkitOverflowScrolling: "touch" }}
+            >
               <div ref={marqueeRef} className="flex will-change-transform">
-                {/* render three sets to provide buffer for seamless wrap */}
                 {[0, 1, 2].map(setIndex => (
                   <div key={setIndex} className="flex items-center gap-12 min-w-max justify-start">
                     {partners.map((partner, i) => (
@@ -310,7 +301,7 @@ const PartnersMarquee = () => {
           .overflow-x-auto::-webkit-scrollbar {
             display: none; /* Safari/WebKit */
           }
-          
+
           @media (max-width: 768px) {
             .px-16 {
               padding-left: 1rem;
