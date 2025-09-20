@@ -85,19 +85,22 @@ const TeamProfile = ({ member }: TeamProfileProps) => {
               {member.title}
             </p>
             
-            {/* Social Links */}
+            {/* Action Buttons */}
             <div className="flex items-center gap-3 mb-6">
-              {member.linkedin && (
+              <Button 
+                asChild
+                variant="outline"
+                className="bg-blue-600 hover:bg-blue-700 text-white border-blue-600 hover:border-blue-700"
+              >
                 <a 
-                  href={member.linkedin}
+                  href="https://linkedin.com/in/japheth-athanasio"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2 rounded-full bg-secondary hover:bg-primary hover:text-primary-foreground transition-colors duration-200"
-                  aria-label={`${member.name}'s LinkedIn profile`}
                 >
-                  <Linkedin className="h-5 w-5" />
+                  <Linkedin className="mr-2 h-4 w-4" />
+                  LinkedIn
                 </a>
-              )}
+              </Button>
               <Button 
                 asChild
                 className="ml-auto"
@@ -245,27 +248,29 @@ const TeamProfile = ({ member }: TeamProfileProps) => {
             {member.title}
           </p>
           
-          {/* Social Links */}
-          <div className="flex justify-center items-center gap-3 mb-6">
-            {member.linkedin && (
+          {/* Action Buttons */}
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-3 mb-6">
+            <Button 
+              asChild
+              variant="outline"
+              className="bg-blue-600 hover:bg-blue-700 text-white border-blue-600 hover:border-blue-700 w-full sm:w-auto"
+            >
               <a 
-                href={member.linkedin}
+                href="https://linkedin.com/in/japheth-athanasio"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 rounded-full bg-secondary hover:bg-primary hover:text-primary-foreground transition-colors duration-200"
-                aria-label={`${member.name}'s LinkedIn profile`}
               >
-                <Linkedin className="h-5 w-5" />
+                <Linkedin className="mr-2 h-4 w-4" />
+                LinkedIn
               </a>
-            )}
+            </Button>
+            <Button asChild className="w-full sm:w-auto">
+              <a href={`/contact?consultant=${member.slug}`}>
+                <Mail className="mr-2 h-4 w-4" />
+                Engage {member.name.split(' ')[0]}
+              </a>
+            </Button>
           </div>
-          
-          <Button asChild className="w-full sm:w-auto">
-            <a href={`/contact?consultant=${member.slug}`}>
-              <Mail className="mr-2 h-4 w-4" />
-              Engage {member.name.split(' ')[0]}
-            </a>
-          </Button>
         </div>
 
         {/* Quick Facts */}
