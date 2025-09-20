@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ExternalLink } from "lucide-react";
+import { Link } from "react-router-dom";
 import { useScrollAnimation, useStaggeredAnimation } from "@/hooks/useScrollAnimation";
 
 const FeaturedCase = () => {
