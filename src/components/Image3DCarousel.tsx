@@ -254,7 +254,7 @@ const Image3DCarousel = ({ slides, autoPlayInterval = 4000 }: Image3DCarouselPro
                         }}
                       >
                         <img
-                          src={slide.image || "/placeholder.svg"}
+                          src="/placeholder.svg"
                           alt={slide.title}
                           className="w-full h-full object-cover"
                           loading="lazy"
