@@ -72,7 +72,7 @@ const SuccessOptions = ({ onNewRequest }: SuccessOptionsProps) => {
               Explore More Resources
             </h3>
             <p className="text-sm sm:text-base text-muted-foreground mb-4 sm:mb-6">
-              Learn more about our services, case studies, and insights while you
+              Learn more about our case studies, articles and insights while you
               wait for our response.
             </p>
             <Button
