@@ -174,12 +174,12 @@ const Image3DCarousel = ({ slides, autoPlayInterval = 4000 }: Image3DCarouselPro
         </div>
 
         {/* Carousel container with navigation */}
-        <div className="relative max-w-6xl mx-auto">
-          {/* Navigation arrows - outside carousel */}
+        <div className="relative w-full max-w-4xl mx-auto px-4 sm:px-8">
+          {/* Navigation arrows - inside container */}
           <Button
             variant="outline"
             size="icon"
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-40 bg-white/90 hover:bg-white shadow"
+            className="absolute left-2 top-1/2 -translate-y-1/2 z-40 bg-white/90 hover:bg-white shadow"
             onClick={prevSlide}
             aria-label="Previous slide"
           >
@@ -189,7 +189,7 @@ const Image3DCarousel = ({ slides, autoPlayInterval = 4000 }: Image3DCarouselPro
           <Button
             variant="outline"
             size="icon"
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-40 bg-white/90 hover:bg-white shadow"
+            className="absolute right-2 top-1/2 -translate-y-1/2 z-40 bg-white/90 hover:bg-white shadow"
             onClick={nextSlide}
             aria-label="Next slide"
           >
@@ -198,7 +198,7 @@ const Image3DCarousel = ({ slides, autoPlayInterval = 4000 }: Image3DCarouselPro
 
           {/* Carousel content */}
           <div 
-            className="relative max-w-4xl mx-auto overflow-visible px-12" // <-- overflow-visible so side peeks show
+            className="relative mx-auto overflow-visible px-8 sm:px-12" // <-- overflow-visible so side peeks show
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             onFocus={handleMouseEnter}
@@ -217,9 +217,9 @@ const Image3DCarousel = ({ slides, autoPlayInterval = 4000 }: Image3DCarouselPro
                   const isInteractive = !isMobile && (position === 'left' || position === 'right');
 
                   return (
-                    <div
-                      key={slide.id}
-                      className={`absolute transition-all duration-700 ease-out ${isMobile ? 'w-full max-w-sm' : 'w-3/4 max-w-2xl'} h-full`}
+                     <div
+                       key={slide.id}
+                       className={`absolute transition-all duration-700 ease-out ${isMobile ? 'w-full max-w-xs mx-auto' : 'w-2/3 max-w-lg'} h-full`}
                       style={{
                         ...slideStyle,
                         willChange: 'transform, opacity',
