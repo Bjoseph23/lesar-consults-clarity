@@ -89,8 +89,8 @@ const TeamProfile = ({ member }: TeamProfileProps) => {
             <div className="flex items-center gap-3 mb-6">
               <Button 
                 asChild
-                variant="outline"
-                className="bg-blue-600 hover:bg-blue-700 text-white border-blue-600 hover:border-blue-700"
+              variant="outline"
+              className="bg-blue-800 hover:bg-blue-900 text-white border-blue-800 hover:border-blue-900"
               >
                 <a 
                   href="https://linkedin.com/in/japheth-athanasio"
@@ -253,7 +253,7 @@ const TeamProfile = ({ member }: TeamProfileProps) => {
             <Button 
               asChild
               variant="outline"
-              className="bg-blue-600 hover:bg-blue-700 text-white border-blue-600 hover:border-blue-700 w-full sm:w-auto"
+              className="bg-blue-800 hover:bg-blue-900 text-white border-blue-800 hover:border-blue-900 w-full sm:w-auto"
             >
               <a 
                 href="https://linkedin.com/in/japheth-athanasio"
