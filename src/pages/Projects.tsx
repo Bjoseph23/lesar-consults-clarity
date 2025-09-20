@@ -239,7 +239,7 @@ const Projects = () => {
                             {project.id === "nairobi-mental-health-plan" && (
                               <div className="mt-4 flex justify-center">
                                 <Button
-                                  className="bg-blue-800 hover:bg-blue-900 text-white px-6 py-3 rounded-md inline-flex items-center w-full sm:w-auto"
+                                  className="bg-blue-800 hover:bg-blue-900 text-white px-6 py-3 rounded-md inline-flex items-center justify-center w-full sm:w-auto"
                                   // no onClick handler per instruction (button does nothing for now)
                                 >
                                   <Download className="mr-2 h-4 w-4" />
