@@ -161,6 +161,19 @@
   .animate-counter {
     animation: counter 2s ease-out;
   }
+
+  /* Placeholder colors */
+  .bg-placeholder-200 {
+    background-color: hsl(var(--muted));
+  }
+  
+  .bg-placeholder-300 {
+    background-color: hsl(var(--border));
+  }
+  
+  .bg-placeholder-400 {
+    background-color: hsl(var(--muted-foreground) / 0.2);
+  }
 }
 
 @layer utilities {

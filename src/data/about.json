@@ -100,25 +100,25 @@
       "id": 1,
       "title": "Health Systems Research",
       "caption": "Comprehensive health systems assessments and strengthening programs",
-      "image": "/logo.png"
+      "image": "https://via.placeholder.com/600x400/6366f1/ffffff?text=Health+Systems+Research"
     },
     {
       "id": 2,
       "title": "Data Analytics",
       "caption": "Advanced analytics solutions for evidence-based decision making",
-      "image": "/logo.png"
+      "image": "https://via.placeholder.com/600x400/8b5cf6/ffffff?text=Data+Analytics"
     },
     {
       "id": 3,
       "title": "Monitoring & Evaluation",
       "caption": "Robust M&E frameworks for program assessment and improvement",
-      "image": "/logo.png"
+      "image": "https://via.placeholder.com/600x400/06b6d4/ffffff?text=Monitoring+%26+Evaluation"
     },
     {
       "id": 4,
       "title": "Financial Analysis",
       "caption": "Economic evaluation and financial sustainability planning",
-      "image": "/logo.png"
+      "image": "https://via.placeholder.com/600x400/10b981/ffffff?text=Financial+Analysis"
     }
   ]
 }

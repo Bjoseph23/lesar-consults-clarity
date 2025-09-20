@@ -84,10 +84,14 @@ const About = () => {
       {/* SEO optimized header */}
       <header>
         <Navbar />
+      </header>
+
+      {/* Breadcrumbs - positioned below navbar */}
+      <div className="pt-16 bg-secondary/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Breadcrumbs items={breadcrumbItems} />
         </div>
-      </header>
+      </div>
 
       <main>
         {/* Hero Section */}
@@ -111,12 +115,8 @@ const About = () => {
               </div>
               
               <div className="relative">
-                <div className="aspect-square bg-gradient-subtle rounded-2xl p-8 flex items-center justify-center">
-                  <img 
-                    src="/logo.png" 
-                    alt="Lesar Consults team working on health systems research" 
-                    className="w-full h-full object-contain"
-                  />
+                <div className="aspect-square bg-placeholder-200 rounded-2xl p-8 flex items-center justify-center">
+                  <div className="w-32 h-32 bg-placeholder-400 rounded-xl animate-pulse"></div>
                 </div>
               </div>
             </div>

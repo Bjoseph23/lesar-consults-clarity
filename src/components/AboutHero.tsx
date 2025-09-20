@@ -24,54 +24,70 @@ const AboutHero = ({ headline, subhead, primaryCTA, secondaryCTA }: AboutHeroPro
   };
 
   return (
-    <section className="py-16 md:py-24 bg-gradient-subtle">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <div className="space-y-8">
-            <div className="space-y-6">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-primary leading-tight">
-                {headline}
-              </h1>
-              <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl">
-                {subhead}
-              </p>
-            </div>
-            
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Button 
-                asChild
-                size="lg"
-                className="btn-primary group"
-              >
-                <Link to={primaryCTA.link}>
-                  <Phone className="h-5 w-5 mr-2" />
-                  {primaryCTA.text}
-                  <ArrowRight className="h-5 w-5 ml-2 transition-transform group-hover:translate-x-1" />
-                </Link>
-              </Button>
-              
-              <Button 
-                variant="outline"
-                size="lg"
-                onClick={() => scrollToSection(secondaryCTA.anchor)}
-                className="btn-secondary"
-              >
-                {secondaryCTA.text}
-              </Button>
-            </div>
+    <section className="relative py-20 md:py-32 overflow-hidden">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 bg-gradient-to-br from-secondary via-background to-cream opacity-60"></div>
+      <div className="absolute inset-0" style={{
+        backgroundImage: `radial-gradient(circle at 20% 50%, hsl(var(--primary)) 0%, transparent 50%), 
+                         radial-gradient(circle at 80% 20%, hsl(var(--accent)) 0%, transparent 50%)`,
+        opacity: 0.1
+      }}></div>
+      
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center space-y-8">
+          {/* Main Content */}
+          <div className="max-w-4xl mx-auto space-y-6">
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif font-bold text-primary leading-tight">
+              {headline}
+            </h1>
+            <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed max-w-3xl mx-auto">
+              {subhead}
+            </p>
           </div>
           
-          <div className="relative">
-            <div className="aspect-square bg-gradient-primary rounded-3xl p-8 flex items-center justify-center">
-              <img 
-                src="/logo.png" 
-                alt="Lesar Consults - Data Analytics Visualization" 
-                className="w-full h-full object-contain opacity-20"
-              />
-              <div className="absolute inset-0 bg-gradient-to-r from-navy/20 to-dark-red/20 rounded-3xl"></div>
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <Button 
+              asChild
+              size="lg"
+              className="btn-primary group px-8 py-4"
+            >
+              <Link to={primaryCTA.link}>
+                <Phone className="h-5 w-5 mr-2" />
+                {primaryCTA.text}
+                <ArrowRight className="h-5 w-5 ml-2 transition-transform group-hover:translate-x-1" />
+              </Link>
+            </Button>
+            
+            <Button 
+              asChild
+              variant="outline"
+              size="lg"
+              className="btn-secondary px-8 py-4"
+            >
+              <Link to="/team">
+                Meet our Team
+                <ArrowRight className="h-5 w-5 ml-2 transition-transform group-hover:translate-x-1" />
+              </Link>
+            </Button>
+            
+            <Button 
+              variant="ghost"
+              size="lg"
+              onClick={() => scrollToSection(secondaryCTA.anchor)}
+              className="text-muted-foreground hover:text-primary px-8 py-4"
+            >
+              {secondaryCTA.text}
+            </Button>
+          </div>
+
+          {/* Decorative Elements */}
+          <div className="relative mt-16">
+            <div className="flex justify-center items-center space-x-8">
+              <div className="w-32 h-32 bg-placeholder-400 rounded-2xl opacity-40 animate-pulse"></div>
+              <div className="w-40 h-40 bg-placeholder-300 rounded-3xl opacity-60 animate-pulse delay-100"></div>
+              <div className="w-32 h-32 bg-placeholder-400 rounded-2xl opacity-40 animate-pulse delay-200"></div>
             </div>
-            <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-accent rounded-2xl opacity-80"></div>
-            <div className="absolute -top-6 -left-6 w-16 h-16 bg-secondary rounded-xl opacity-60"></div>
           </div>
         </div>
       </div>
