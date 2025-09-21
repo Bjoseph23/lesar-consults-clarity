@@ -151,8 +151,12 @@ const Navbar = () => {
               onClick={() => setIsOpen((prev) => !prev)}
               aria-label={isOpen ? "Close menu" : "Open menu"}
               aria-expanded={isOpen}
+              className="p-3"
             >
-              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              <div className="relative w-8 h-8 flex items-center justify-center">
+                <Menu className={`h-7 w-7 absolute transition-all duration-300 transform ${isOpen ? 'rotate-90 scale-0 opacity-0' : 'rotate-0 scale-100 opacity-100'}`} />
+                <X className={`h-7 w-7 absolute transition-all duration-300 transform ${isOpen ? 'rotate-0 scale-100 opacity-100' : '-rotate-90 scale-0 opacity-0'}`} />
+              </div>
             </Button>
           </div>
         </div>
@@ -171,8 +175,8 @@ const Navbar = () => {
         <aside className={`pointer-events-auto absolute top-0 right-0 h-full w-full sm:max-w-md bg-white transform transition-transform duration-300 ${isOpen ? "translate-x-0" : "translate-x-full"}`}>
           <div className="flex items-center justify-between px-4 py-4 border-b border-gray-200">
             <img src="/lesar-logoo.png" alt="Lesar Consults" className="h-10 w-auto" />
-            <Button variant="ghost" size="icon" onClick={() => setIsOpen(false)} aria-label="Close menu">
-              <X className="h-6 w-6" />
+            <Button variant="ghost" size="icon" onClick={() => setIsOpen(false)} aria-label="Close menu" className="p-3">
+              <X className="h-7 w-7" />
             </Button>
           </div>
 
@@ -184,7 +188,7 @@ const Navbar = () => {
                     <p className="text-base font-semibold mb-2">{item.name}</p>
                     <div className="space-y-2 pl-2">
                       {services.map((service) => (
-                        <a key={service.name} href={service.href} className="block text-sm text-gray-700 hover:text-primary transition-colors py-2" onClick={() => setIsOpen(false)}>
+                        <a key={service.name} href={service.href} className="block text-sm text-gray-700 hover:text-primary transition-colors py-2 px-3 rounded-md border border-border/20 hover:bg-muted/30" onClick={() => setIsOpen(false)}>
                           {service.name}
                         </a>
                       ))}
@@ -194,7 +198,7 @@ const Navbar = () => {
               }
 
               const isActive = item.href.startsWith('/') && location.pathname === item.href;
-              const mobileLinkClasses = `block text-base font-medium transition-colors navbar-link ${isActive ? 'navbar-link-active text-primary' : 'text-gray-900 hover:text-primary'}`;
+              const mobileLinkClasses = `block text-base font-medium transition-colors py-3 px-4 rounded-lg border border-border/30 ${isActive ? 'text-primary bg-primary/5 border-primary/20' : 'text-gray-900 hover:text-primary hover:bg-muted/50'}`;
               
               return item.href.startsWith('/') ? (
                 <Link key={item.name} to={item.href} className={mobileLinkClasses} onClick={() => setIsOpen(false)}>
