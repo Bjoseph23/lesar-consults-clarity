@@ -113,12 +113,12 @@ const Navbar = () => {
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-8">
+          <div className="hidden lg:flex items-center space-x-6">
             {navigation.map(item => {
             if (item.isDropdown) {
               return <DropdownMenu key={item.name}>
                     <DropdownMenuTrigger asChild>
-                      <Link to={item.href} className="flex items-center navbar-link text-sm font-medium transition-all duration-200">
+                      <Link to={item.href} className="flex items-center navbar-link text-base font-medium transition-all duration-200">
                         {item.name} <ChevronDown className="ml-1 h-4 w-4" />
                       </Link>
                     </DropdownMenuTrigger>
@@ -137,7 +137,7 @@ const Navbar = () => {
                   </DropdownMenu>;
             }
             const isActive = item.href.startsWith('/') && location.pathname === item.href;
-            const linkClasses = `navbar-link text-sm font-medium transition-all duration-200 ${isActive ? 'navbar-link-active' : ''}`;
+            const linkClasses = `navbar-link text-base font-medium transition-all duration-200 ${isActive ? 'navbar-link-active' : ''}`;
             return item.href.startsWith('/') ? <Link key={item.name} to={item.href} className={linkClasses}>
                   {item.name}
                 </Link> : <a key={item.name} href={item.href} className={linkClasses}>
