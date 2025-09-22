@@ -35,7 +35,7 @@ const PartnersMarquee = ({ hideTitle = false }: PartnersMarqueeProps = {}) => {
 
   // Preload images
   useEffect(() => {
-    partners.forEach(p => {
+    partners.forEach((p) => {
       const img = new Image();
       img.src = `/logos/${p.file}`;
     });
@@ -45,8 +45,14 @@ const PartnersMarquee = ({ hideTitle = false }: PartnersMarqueeProps = {}) => {
     const marquee = marqueeRef.current;
     if (!marquee) return 0;
     const firstSet = marquee.children[0] as HTMLElement | undefined;
-    if (!firstSet) return 0;
-    return Math.round(firstSet.getBoundingClientRect().width);
+    if (firstSet) {
+      const w = Math.round(firstSet.getBoundingClientRect().width);
+      if (w > 0) return w;
+    }
+    // fallback: if firstSet width is 0 (images not loaded yet or chrome quirk),
+    // use marquee.scrollWidth / number_of_repeats (3)
+    const fallback = Math.round(marquee.scrollWidth / 3) || 0;
+    return fallback;
   };
 
   const normalizeScroll = (setWidth: number) => {
@@ -75,7 +81,13 @@ const PartnersMarquee = ({ hideTitle = false }: PartnersMarqueeProps = {}) => {
     const container = containerRef.current;
     if (!container) return;
     userInteractingRef.current = true;
-    container.scrollBy({ left: delta, behavior: "smooth" });
+    // prefer instant jump on small viewports, else smooth
+    try {
+      container.scrollBy({ left: delta, behavior: "smooth" });
+    } catch {
+      // fallback for older browsers
+      container.scrollLeft += delta;
+    }
     scheduleResume(600);
   };
 
@@ -277,9 +289,11 @@ const PartnersMarquee = ({ hideTitle = false }: PartnersMarqueeProps = {}) => {
               className="overflow-x-auto overflow-y-hidden -mx-4 px-4"
               style={{ WebkitOverflowScrolling: "touch" }}
             >
-              <div ref={marqueeRef} className="flex will-change-transform">
-                {[0, 1, 2].map(setIndex => (
-                  <div key={setIndex} className="flex items-center gap-12 min-w-max justify-start">
+              {/* marqueeref rendered as inline-flex to ensure consistent scrollWidth in Chrome */}
+              <div ref={marqueeRef} className="inline-flex will-change-transform">
+                {[0, 1, 2].map((setIndex) => (
+                  // each set is inline-flex and has min-w-max so its width is measured reliably
+                  <div key={setIndex} className="inline-flex items-center gap-12 min-w-max justify-start">
                     {partners.map((partner, i) => (
                       <div key={`s${setIndex}-${i}`} className="flex-shrink-0" aria-label={`${partner.name} logo`}>
                         <img
