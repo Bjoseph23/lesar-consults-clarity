@@ -21,10 +21,10 @@ const TeamMember = () => {
     setIsLoading(true);
     window.scrollTo({ top: 0, behavior: 'smooth' });
     
-    // Small delay to allow scroll to complete before showing content
+    // Longer delay to allow smooth transition and scroll completion
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 100);
+    }, 600);
     
     return () => clearTimeout(timer);
   }, [slug]);
@@ -77,32 +77,44 @@ const TeamMember = () => {
         <Navbar />
         
         <main className="pt-20">
-          {/* Breadcrumbs */}
+          {/* Breadcrumbs - Always visible */}
           <div className="container mx-auto px-4">
             <Breadcrumbs items={breadcrumbItems} />
           </div>
 
-          {/* Team Member Profile */}
-          <AnimatedSection 
-            className="py-8" 
-            delay={isLoading ? 200 : 0}
-            threshold={0.05}
-          >
-            <div className="container mx-auto px-4">
-              <TeamProfile member={member} key={slug} />
+          {/* Loading state or content */}
+          {isLoading ? (
+            <div className="py-32 text-center">
+              <div className="animate-pulse">
+                <div className="h-8 bg-secondary/30 rounded w-64 mx-auto mb-4"></div>
+                <div className="h-4 bg-secondary/20 rounded w-48 mx-auto"></div>
+              </div>
             </div>
-          </AnimatedSection>
+          ) : (
+            <>
+              {/* Team Member Profile */}
+              <AnimatedSection 
+                className="py-8" 
+                delay={100}
+                threshold={0.05}
+              >
+                <div className="container mx-auto px-4">
+                  <TeamProfile member={member} key={slug} />
+                </div>
+              </AnimatedSection>
 
-          {/* Suggested Profiles */}
-          <AnimatedSection 
-            className="py-16 bg-secondary/20" 
-            delay={isLoading ? 400 : 100}
-            threshold={0.1}
-          >
-            <div className="container mx-auto px-4">
-              <SuggestedProfiles members={suggestedMembers} />
-            </div>
-          </AnimatedSection>
+              {/* Suggested Profiles */}
+              <AnimatedSection 
+                className="py-16 bg-secondary/20" 
+                delay={200}
+                threshold={0.1}
+              >
+                <div className="container mx-auto px-4">
+                  <SuggestedProfiles members={suggestedMembers} />
+                </div>
+              </AnimatedSection>
+            </>
+          )}
         </main>
 
         <ScrollTop />
