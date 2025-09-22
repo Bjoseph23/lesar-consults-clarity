@@ -67,7 +67,7 @@ const TeamProfile = ({ member }: TeamProfileProps) => {
         <div className="lg:col-span-4">
           <div className="sticky top-24 space-y-6">
             {/* Portrait */}
-            <AnimatedSection delay={0} threshold={0.2}>
+            <AnimatedSection threshold={0.2}>
               <div className="aspect-[3/4] w-full bg-muted rounded-lg overflow-hidden border border-border shadow-sm">
                 <img 
                   src={member.photo}
@@ -81,7 +81,7 @@ const TeamProfile = ({ member }: TeamProfileProps) => {
             </AnimatedSection>
 
             {/* Quick Facts */}
-            <AnimatedSection delay={2} threshold={0.2}>
+            <AnimatedSection threshold={0.2}>
               <QuickFacts facts={quickFacts} />
             </AnimatedSection>
           </div>
@@ -89,7 +89,7 @@ const TeamProfile = ({ member }: TeamProfileProps) => {
 
         {/* Right Column - Content */}
         <div className="lg:col-span-8">
-          <AnimatedSection delay={200} threshold={0.1}>
+          <AnimatedSection threshold={0.1}>
             <div className="mb-8">
               <h1 className="text-3xl md:text-4xl font-serif text-foreground mb-2">
                 {member.name}
@@ -128,7 +128,7 @@ const TeamProfile = ({ member }: TeamProfileProps) => {
           </AnimatedSection>
 
           {/* Tabbed Content */}
-          <AnimatedSection delay={300} threshold={0.1}>
+          <AnimatedSection threshold={0.1}>
             <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
               <TabsList className="grid w-full grid-cols-4">
                 <TabsTrigger value="overview">Overview</TabsTrigger>
@@ -254,7 +254,7 @@ const TeamProfile = ({ member }: TeamProfileProps) => {
       {/* Mobile Layout */}
       <div className="lg:hidden space-y-8">
         {/* Portrait */}
-        <AnimatedSection delay={0} threshold={0.2}>
+        <AnimatedSection threshold={0.2}>
           <div className="aspect-[3/4] max-w-sm mx-auto bg-muted rounded-lg overflow-hidden border border-border shadow-sm">
             <img 
               src={member.photo}
@@ -268,7 +268,7 @@ const TeamProfile = ({ member }: TeamProfileProps) => {
         </AnimatedSection>
 
         {/* Header Info */}
-        <AnimatedSection delay={100} threshold={0.1}>
+        <AnimatedSection threshold={0.1}>
           <div className="text-center">
             <h1 className="text-3xl font-serif text-foreground mb-2">
               {member.name}
@@ -304,13 +304,13 @@ const TeamProfile = ({ member }: TeamProfileProps) => {
         </AnimatedSection>
 
         {/* Quick Facts */}
-        <AnimatedSection delay={200} threshold={0.1}>
+        <AnimatedSection threshold={0.1}>
           <QuickFacts facts={quickFacts} />
         </AnimatedSection>
 
         {/* Mobile Content - Accordion Style */}
         <div className="space-y-6">
-          <AnimatedSection delay={300} threshold={0.1}>
+          <AnimatedSection threshold={0.1}>
             <div>
               <h3 className="text-lg font-serif text-foreground mb-3">Professional Summary</h3>
               <p className="text-muted-foreground leading-relaxed">
@@ -319,7 +319,7 @@ const TeamProfile = ({ member }: TeamProfileProps) => {
             </div>
           </AnimatedSection>
 
-          <AnimatedSection delay={400} threshold={0.1}>
+          <AnimatedSection threshold={0.1}>
             <div>
               <h3 className="text-lg font-serif text-foreground mb-3">Education & Certifications</h3>
               <div className="space-y-3">
@@ -367,7 +367,7 @@ const TeamProfile = ({ member }: TeamProfileProps) => {
             </div>
           </AnimatedSection>
 
-          <AnimatedSection delay={500} threshold={0.1}>
+          <AnimatedSection threshold={0.1}>
             <div>
               <h3 className="text-lg font-serif text-foreground mb-3">Core Competencies</h3>
               <div className="flex flex-wrap gap-2">
@@ -380,7 +380,7 @@ const TeamProfile = ({ member }: TeamProfileProps) => {
             </div>
           </AnimatedSection>
 
-          <AnimatedSection delay={600} threshold={0.1}>
+          <AnimatedSection threshold={0.1}>
             <div>
               <h3 className="text-lg font-serif text-foreground mb-3">Recent Projects</h3>
               <div className="space-y-3">
