@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Linkedin, FileText, Mail, GraduationCap, Award, Target, Briefcase, ChevronDown, ChevronUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -37,6 +37,12 @@ const TeamProfile = ({ member }: TeamProfileProps) => {
   const [activeTab, setActiveTab] = useState("overview");
   const [expandedEducation, setExpandedEducation] = useState<number[]>([]);
 
+  // Reset tab to overview when member changes
+  useEffect(() => {
+    setActiveTab("overview");
+    setExpandedEducation([]);
+  }, [member.slug]);
+
   const quickFacts = [
     { label: "Education", value: typeof member.education[0] === 'string' ? member.education[0] : member.education[0].degree, icon: GraduationCap },
     { label: "Specialization", value: member.expertise.split(" ").slice(0, 3).join(" "), icon: Target },
@@ -55,9 +61,9 @@ const TeamProfile = ({ member }: TeamProfileProps) => {
   return (
     <div className="max-w-6xl mx-auto">
       {/* Desktop Layout */}
-      <div className="hidden lg:grid lg:grid-cols-12 gap-8">
-        {/* Left Column - Photo & Quick Facts */}
-        <div className="lg:col-span-4">
+      <div className="hidden lg:grid lg:grid-cols-12 gap-8 animate-fade-in">
+        {/* Left Column - Animated */}
+        <div className="lg:col-span-4 animate-fade-in" style={{ animationDelay: '100ms' }}>
           <div className="sticky top-24 space-y-6">
             {/* Portrait */}
             <div className="aspect-[3/4] w-full bg-muted rounded-lg overflow-hidden border border-border shadow-sm">
@@ -77,7 +83,7 @@ const TeamProfile = ({ member }: TeamProfileProps) => {
         </div>
 
         {/* Right Column - Content */}
-        <div className="lg:col-span-8">
+        <div className="lg:col-span-8 animate-fade-in" style={{ animationDelay: '200ms' }}>
           <div className="mb-8">
             <h1 className="text-3xl md:text-4xl font-serif text-foreground mb-2">
               {member.name}
@@ -237,7 +243,7 @@ const TeamProfile = ({ member }: TeamProfileProps) => {
       </div>
 
       {/* Mobile Layout */}
-      <div className="lg:hidden space-y-8">
+      <div className="lg:hidden space-y-8 animate-fade-in">
         {/* Portrait */}
         <div className="aspect-[3/4] max-w-sm mx-auto bg-muted rounded-lg overflow-hidden border border-border shadow-sm">
           <img 

@@ -1,5 +1,5 @@
 import { useParams, Navigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -12,12 +12,21 @@ import teamData from "@/data/team.json";
 
 const TeamMember = () => {
   const { slug } = useParams<{ slug: string }>();
+  const [isLoading, setIsLoading] = useState(true);
   
   const member = teamData.find(m => m.slug === slug);
 
-  // Scroll to top when component mounts or slug changes
+  // Scroll to top and reset loading state when slug changes
   useEffect(() => {
+    setIsLoading(true);
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    
+    // Small delay to allow scroll to complete before showing content
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 100);
+    
+    return () => clearTimeout(timer);
   }, [slug]);
   
   if (!member) {
@@ -74,14 +83,22 @@ const TeamMember = () => {
           </div>
 
           {/* Team Member Profile */}
-          <AnimatedSection className="py-8">
+          <AnimatedSection 
+            className="py-8" 
+            delay={isLoading ? 200 : 0}
+            threshold={0.05}
+          >
             <div className="container mx-auto px-4">
-              <TeamProfile member={member} />
+              <TeamProfile member={member} key={slug} />
             </div>
           </AnimatedSection>
 
           {/* Suggested Profiles */}
-          <AnimatedSection className="py-16 bg-secondary/20">
+          <AnimatedSection 
+            className="py-16 bg-secondary/20" 
+            delay={isLoading ? 400 : 100}
+            threshold={0.1}
+          >
             <div className="container mx-auto px-4">
               <SuggestedProfiles members={suggestedMembers} />
             </div>
