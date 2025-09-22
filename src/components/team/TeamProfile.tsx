@@ -61,9 +61,9 @@ const TeamProfile = ({ member }: TeamProfileProps) => {
   return (
     <div className="max-w-6xl mx-auto">
       {/* Desktop Layout */}
-      <div className="hidden lg:grid lg:grid-cols-12 gap-8 animate-fade-in">
-        {/* Left Column - Animated */}
-        <div className="lg:col-span-4 animate-fade-in" style={{ animationDelay: '100ms' }}>
+      <div className="hidden lg:grid lg:grid-cols-12 gap-8">
+        {/* Left Column - Photo & Quick Facts */}
+        <div className="lg:col-span-4">
           <div className="sticky top-24 space-y-6">
             {/* Portrait */}
             <div className="aspect-[3/4] w-full bg-muted rounded-lg overflow-hidden border border-border shadow-sm">
@@ -83,7 +83,7 @@ const TeamProfile = ({ member }: TeamProfileProps) => {
         </div>
 
         {/* Right Column - Content */}
-        <div className="lg:col-span-8 animate-fade-in" style={{ animationDelay: '200ms' }}>
+        <div className="lg:col-span-8">
           <div className="mb-8">
             <h1 className="text-3xl md:text-4xl font-serif text-foreground mb-2">
               {member.name}
@@ -243,7 +243,7 @@ const TeamProfile = ({ member }: TeamProfileProps) => {
       </div>
 
       {/* Mobile Layout */}
-      <div className="lg:hidden space-y-8 animate-fade-in">
+      <div className="lg:hidden space-y-8">
         {/* Portrait */}
         <div className="aspect-[3/4] max-w-sm mx-auto bg-muted rounded-lg overflow-hidden border border-border shadow-sm">
           <img 
