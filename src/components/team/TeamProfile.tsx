@@ -81,7 +81,7 @@ const TeamProfile = ({ member }: TeamProfileProps) => {
             </AnimatedSection>
 
             {/* Quick Facts */}
-            <AnimatedSection delay={100} threshold={0.2}>
+            <AnimatedSection delay={2} threshold={0.2}>
               <QuickFacts facts={quickFacts} />
             </AnimatedSection>
           </div>
