@@ -12,7 +12,7 @@ interface BreadcrumbsProps {
 
 const Breadcrumbs = ({ items }: BreadcrumbsProps) => {
   return (
-    <nav aria-label="Breadcrumb" className="py-4 mt-16 md:mt-20">
+    <nav aria-label="Breadcrumb" className="py-4 mt-6 md:mt-8">
       <ol className="flex items-center space-x-2 text-sm text-muted-foreground">
         <li>
           <Link 
