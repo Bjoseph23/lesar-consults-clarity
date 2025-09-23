@@ -89,101 +89,97 @@ const ResourceCard = ({ resource, index }: ResourceCardProps) => {
   };
 
   return (
-    <article 
-      className={cn(
-        "group bg-background border border-border rounded-lg shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden h-full flex flex-col",
-        "transform transition-all duration-700",
-        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-      )}
+    <Link 
+      to={`/resources/${resource.slug}`}
+      className="group block h-full"
     >
-      {/* Thumbnail */}
-      <div className="relative aspect-[16/9] bg-muted overflow-hidden">
-        {resource.thumbnail_url ? (
-          <img 
-            src={resource.thumbnail_url} 
-            alt={resource.title}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-            loading="lazy"
-          />
-        ) : (
-          <div className="w-full h-full flex items-center justify-center bg-gradient-subtle">
-            <div className="text-muted-foreground text-sm">Resource Thumbnail</div>
-          </div>
+      <article 
+        className={cn(
+          "bg-background border border-border rounded-lg shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden h-full flex flex-col cursor-pointer",
+          "transform transition-all duration-700",
+          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
         )}
-        
-        {/* Type Badge Overlay */}
-        <div className="absolute top-3 left-3">
-          <Badge 
-            variant="secondary" 
-            className={cn("text-xs font-medium shadow-sm", getTypeColor(resource.type))}
-          >
-            {getTypeLabel(resource.type)}
-          </Badge>
-        </div>
-      </div>
-
-      {/* Content */}
-      <div className="p-6 flex-1 flex flex-col">
-        {/* Category Badge */}
-        {resource.categories.length > 0 && (
-          <div className="mb-3">
+      >
+        {/* Thumbnail */}
+        <div className="relative aspect-[16/9] bg-muted overflow-hidden">
+          {resource.thumbnail_url ? (
+            <img 
+              src={resource.thumbnail_url} 
+              alt={resource.title}
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              loading="lazy"
+            />
+          ) : (
+            <div className="w-full h-full flex items-center justify-center bg-gradient-subtle">
+              <div className="text-muted-foreground text-sm">Resource Thumbnail</div>
+            </div>
+          )}
+          
+          {/* Type Badge Overlay */}
+          <div className="absolute top-3 left-3">
             <Badge 
-              variant="outline" 
-              className={cn("text-xs font-medium", getCategoryColor(resource.categories[0]))}
+              variant="secondary" 
+              className={cn("text-xs font-medium shadow-sm", getTypeColor(resource.type))}
             >
-              {resource.categories[0]}
+              {getTypeLabel(resource.type)}
             </Badge>
           </div>
-        )}
+        </div>
 
-        {/* Title */}
-        <h3 className="text-lg font-serif font-semibold text-foreground mb-3 group-hover:text-primary transition-colors line-clamp-2">
-          <Link to={`/resources/${resource.slug}`} className="hover:underline">
+        {/* Content */}
+        <div className="p-6 flex-1 flex flex-col">
+          {/* Category Badge */}
+          {resource.categories.length > 0 && (
+            <div className="mb-3">
+              <Badge 
+                variant="outline" 
+                className={cn("text-xs font-medium", getCategoryColor(resource.categories[0]))}
+              >
+                {resource.categories[0]}
+              </Badge>
+            </div>
+          )}
+
+          {/* Title */}
+          <h3 className="text-lg font-serif font-semibold text-foreground mb-3 group-hover:text-primary transition-colors line-clamp-2">
             {resource.title}
-          </Link>
-        </h3>
+          </h3>
 
-        {/* Summary */}
-        {resource.summary && (
-          <p className="text-muted-foreground text-sm mb-4 line-clamp-2 leading-relaxed flex-1">
-            {resource.summary}
-          </p>
-        )}
+          {/* Summary */}
+          {resource.summary && (
+            <p className="text-muted-foreground text-sm mb-4 line-clamp-2 leading-relaxed flex-1">
+              {resource.summary}
+            </p>
+          )}
 
-        {/* Meta & CTA */}
-        <div className="flex items-center justify-between mt-auto">
-          {/* Date & Author */}
-          <div className="flex items-center text-xs text-muted-foreground">
-            <Calendar className="h-3 w-3 mr-1" />
-            <span>
-              {new Date(resource.published_at).toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'short'
-              })}
-            </span>
-            {resource.author && (
-              <>
-                <span className="mx-2">•</span>
-                <span className="truncate max-w-24">{resource.author}</span>
-              </>
-            )}
-          </div>
-          
-          {/* Read More CTA */}
-          <Button
-            variant="ghost"
-            size="sm"
-            className="text-primary hover:text-primary/80 p-0 h-auto font-medium group/btn"
-            asChild
-          >
-            <Link to={`/resources/${resource.slug}`} className="flex items-center">
+          {/* Meta & CTA */}
+          <div className="flex items-center justify-between mt-auto">
+            {/* Date & Author */}
+            <div className="flex items-center text-xs text-muted-foreground">
+              <Calendar className="h-3 w-3 mr-1" />
+              <span>
+                {new Date(resource.published_at).toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'short'
+                })}
+              </span>
+              {resource.author && (
+                <>
+                  <span className="mx-2">•</span>
+                  <span className="truncate max-w-24">{resource.author}</span>
+                </>
+              )}
+            </div>
+            
+            {/* Read More CTA */}
+            <div className="text-primary hover:text-primary/80 text-sm font-medium group/btn flex items-center">
               Read more
               <ArrowRight className="ml-1 h-3 w-3 group-hover/btn:translate-x-1 transition-transform" />
-            </Link>
-          </Button>
+            </div>
+          </div>
         </div>
-      </div>
-    </article>
+      </article>
+    </Link>
   );
 };
 
