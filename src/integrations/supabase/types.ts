@@ -35,6 +35,102 @@ export type Database = {
         }
         Relationships: []
       }
+      leads: {
+        Row: {
+          created_at: string | null
+          email: string
+          id: string
+          interested_in: string | null
+          message: string | null
+          name: string
+          organization: string | null
+          resource_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          email: string
+          id?: string
+          interested_in?: string | null
+          message?: string | null
+          name: string
+          organization?: string | null
+          resource_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          email?: string
+          id?: string
+          interested_in?: string | null
+          message?: string | null
+          name?: string
+          organization?: string | null
+          resource_id?: string | null
+        }
+        Relationships: []
+      }
+      resources: {
+        Row: {
+          author: string | null
+          author_id: string | null
+          categories: string[] | null
+          content_html: string | null
+          created_at: string | null
+          featured: boolean | null
+          file_url: string | null
+          id: string
+          published_at: string | null
+          seo: Json | null
+          slug: string
+          summary: string | null
+          tags: string[] | null
+          thumbnail_url: string | null
+          title: string
+          type: string
+          updated_at: string | null
+          year: number | null
+        }
+        Insert: {
+          author?: string | null
+          author_id?: string | null
+          categories?: string[] | null
+          content_html?: string | null
+          created_at?: string | null
+          featured?: boolean | null
+          file_url?: string | null
+          id: string
+          published_at?: string | null
+          seo?: Json | null
+          slug: string
+          summary?: string | null
+          tags?: string[] | null
+          thumbnail_url?: string | null
+          title: string
+          type: string
+          updated_at?: string | null
+          year?: number | null
+        }
+        Update: {
+          author?: string | null
+          author_id?: string | null
+          categories?: string[] | null
+          content_html?: string | null
+          created_at?: string | null
+          featured?: boolean | null
+          file_url?: string | null
+          id?: string
+          published_at?: string | null
+          seo?: Json | null
+          slug?: string
+          summary?: string | null
+          tags?: string[] | null
+          thumbnail_url?: string | null
+          title?: string
+          type?: string
+          updated_at?: string | null
+          year?: number | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

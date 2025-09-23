@@ -89,6 +89,9 @@ const Navbar = () => {
     name: "Team",
     href: "/team"
   }, {
+    name: "Resources",
+    href: "/resources"
+  }, {
     name: "Services",
     href: "/services",
     isDropdown: true
