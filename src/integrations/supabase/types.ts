@@ -14,27 +14,6 @@ export type Database = {
   }
   public: {
     Tables: {
-      admins: {
-        Row: {
-          created_at: string | null
-          id: string
-          password: string
-          username: string
-        }
-        Insert: {
-          created_at?: string | null
-          id?: string
-          password: string
-          username: string
-        }
-        Update: {
-          created_at?: string | null
-          id?: string
-          password?: string
-          username?: string
-        }
-        Relationships: []
-      }
       leads: {
         Row: {
           budget: string | null
@@ -105,7 +84,7 @@ export type Database = {
           created_at?: string | null
           email?: string | null
           full_name?: string | null
-          id: string
+          id?: string
           is_admin?: boolean | null
           updated_at?: string | null
         }

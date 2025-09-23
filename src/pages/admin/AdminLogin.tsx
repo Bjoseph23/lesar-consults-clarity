@@ -94,7 +94,7 @@ const AdminLogin = () => {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="admin@lesarconsults.com"
+                  placeholder="admin@gmail.com"
                   required
                   disabled={isSubmitting}
                 />
@@ -149,7 +149,7 @@ const AdminLogin = () => {
             <div className="mt-6 pt-4 border-t border-border">
               <p className="text-xs text-muted-foreground text-center">
                 Demo credentials:<br />
-                <code className="bg-muted px-1 rounded">admin@lesarconsults.com</code><br />
+                <code className="bg-muted px-1 rounded">admin@gmail.com</code><br />
                 <code className="bg-muted px-1 rounded">password</code>
               </p>
             </div>
