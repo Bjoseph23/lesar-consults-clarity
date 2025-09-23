@@ -37,34 +37,85 @@ export type Database = {
       }
       leads: {
         Row: {
+          budget: string | null
+          consent: boolean | null
+          country_code: string | null
           created_at: string | null
           email: string
+          file_path: string | null
           id: string
           interested_in: string | null
           message: string | null
           name: string
           organization: string | null
+          other_service: string | null
+          phone: string | null
           resource_id: string | null
+          role: string | null
+          timeframe: string | null
         }
         Insert: {
+          budget?: string | null
+          consent?: boolean | null
+          country_code?: string | null
           created_at?: string | null
           email: string
+          file_path?: string | null
           id?: string
           interested_in?: string | null
           message?: string | null
           name: string
           organization?: string | null
+          other_service?: string | null
+          phone?: string | null
           resource_id?: string | null
+          role?: string | null
+          timeframe?: string | null
         }
         Update: {
+          budget?: string | null
+          consent?: boolean | null
+          country_code?: string | null
           created_at?: string | null
           email?: string
+          file_path?: string | null
           id?: string
           interested_in?: string | null
           message?: string | null
           name?: string
           organization?: string | null
+          other_service?: string | null
+          phone?: string | null
           resource_id?: string | null
+          role?: string | null
+          timeframe?: string | null
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string | null
+          email: string | null
+          full_name: string | null
+          id: string
+          is_admin: boolean | null
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          email?: string | null
+          full_name?: string | null
+          id: string
+          is_admin?: boolean | null
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          email?: string | null
+          full_name?: string | null
+          id?: string
+          is_admin?: boolean | null
+          updated_at?: string | null
         }
         Relationships: []
       }
@@ -136,7 +187,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      is_admin: {
+        Args: { user_id: string }
+        Returns: boolean
+      }
     }
     Enums: {
       [_ in never]: never
