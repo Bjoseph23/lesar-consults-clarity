@@ -66,11 +66,11 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
       <div className="min-h-screen bg-background hidden lg:flex">
         {/* Sidebar */}
         <div className={cn(
-          "bg-white border-r border-border transition-all duration-300 flex flex-col",
+          "bg-slate-800 border-r border-border transition-all duration-300 flex flex-col",
           collapsed ? "w-16" : "w-64"
         )}>
           {/* Header */}
-          <div className="p-4 border-b border-border">
+          <div className="p-4 border-b border-slate-700">
             <div className="flex items-center justify-between">
               {!collapsed && (
                 <Link to="/admin/dashboard" className="flex items-center">
@@ -81,7 +81,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
                 variant="ghost"
                 size="icon"
                 onClick={() => setCollapsed(!collapsed)}
-                className="h-8 w-8"
+                className="h-8 w-8 text-white hover:bg-slate-700"
               >
                 {collapsed ? <ChevronRight className="h-4 w-4" /> : <ChevronLeft className="h-4 w-4" />}
               </Button>
@@ -96,31 +96,48 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
                   key={item.name}
                   to={item.href}
                   className={cn(
-                    "flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors",
+                    "flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors relative group",
+                    collapsed ? "justify-center" : "",
                     isActive(item.href) 
-                      ? "bg-primary text-primary-foreground" 
-                      : "text-muted-foreground hover:text-foreground hover:bg-accent"
+                      ? "bg-slate-700 text-white" 
+                      : "text-slate-300 hover:text-white hover:bg-slate-700"
                   )}
+                  title={collapsed ? item.name : undefined}
                 >
                   <item.icon className={cn("h-4 w-4", collapsed ? "" : "mr-3")} />
                   {!collapsed && <span>{item.name}</span>}
+                  
+                  {/* Tooltip for collapsed state */}
+                  {collapsed && (
+                    <div className="absolute left-full ml-2 px-2 py-1 bg-slate-900 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-50">
+                      {item.name}
+                    </div>
+                  )}
                 </Link>
               ))}
             </div>
           </nav>
 
           {/* Footer */}
-          <div className="p-4 border-t border-border">
+          <div className="p-4 border-t border-slate-700">
             <Button
               variant="ghost"
               onClick={handleLogout}
               className={cn(
-                "w-full justify-start text-muted-foreground hover:text-foreground",
-                collapsed && "px-3"
+                "w-full justify-start text-slate-300 hover:text-white hover:bg-slate-700 group relative",
+                collapsed && "px-3 justify-center"
               )}
+              title={collapsed ? "Logout" : undefined}
             >
               <LogOut className={cn("h-4 w-4", collapsed ? "" : "mr-3")} />
               {!collapsed && <span>Logout</span>}
+              
+              {/* Tooltip for collapsed state */}
+              {collapsed && (
+                <div className="absolute left-full ml-2 px-2 py-1 bg-slate-900 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-50">
+                  Logout
+                </div>
+              )}
             </Button>
           </div>
         </div>

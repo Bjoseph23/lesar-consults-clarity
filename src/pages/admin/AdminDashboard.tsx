@@ -116,14 +116,14 @@ const AdminDashboard = () => {
           {/* Stats Grid */}
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             {statCards.map((stat) => (
-              <Card key={stat.title} className="bg-white/95 border-white/20">
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <Card key={stat.title} className="bg-orange-50/80 border-orange-100/50">
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 bg-orange-50/60">
                   <CardTitle className="text-sm font-medium">
                     {stat.title}
                   </CardTitle>
                   <stat.icon className={`h-4 w-4 ${stat.color}`} />
                 </CardHeader>
-                <CardContent>
+                <CardContent className="bg-orange-50/40">
                   <div className="text-2xl font-bold">
                     {loading ? "..." : stat.value}
                   </div>
@@ -137,14 +137,14 @@ const AdminDashboard = () => {
 
           {/* Quick Actions */}
           <div className="grid gap-4 md:grid-cols-2">
-            <Card className="bg-white/95 border-white/20">
-              <CardHeader>
+            <Card className="bg-orange-50/80 border-orange-100/50">
+              <CardHeader className="bg-orange-50/60">
                 <CardTitle>Recent Activity</CardTitle>
                 <CardDescription>
                   Latest updates to your resources and leads
                 </CardDescription>
               </CardHeader>
-              <CardContent>
+              <CardContent className="bg-orange-50/40">
                 <div className="space-y-3">
                   <div className="flex items-center space-x-2">
                     <div className="w-2 h-2 bg-green-500 rounded-full"></div>
@@ -168,14 +168,14 @@ const AdminDashboard = () => {
               </CardContent>
             </Card>
 
-            <Card className="bg-white/95 border-white/20">
-              <CardHeader>
+            <Card className="bg-orange-50/80 border-orange-100/50">
+              <CardHeader className="bg-orange-50/60">
                 <CardTitle>Quick Actions</CardTitle>
                 <CardDescription>
                   Common tasks and shortcuts
                 </CardDescription>
               </CardHeader>
-              <CardContent className="space-y-2">
+              <CardContent className="space-y-2 bg-orange-50/40">
                 <a 
                   href="/admin/resources"
                   className="block w-full text-left p-2 rounded-md hover:bg-accent transition-colors text-sm"
