@@ -81,7 +81,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
                 variant="ghost"
                 size="icon"
                 onClick={() => setCollapsed(!collapsed)}
-                className="h-8 w-8 text-white hover:bg-slate-700"
+                className="h-8 w-8 bg-slate-700 text-white hover:bg-red-600 hover:text-white"
               >
                 {collapsed ? <ChevronRight className="h-4 w-4" /> : <ChevronLeft className="h-4 w-4" />}
               </Button>
