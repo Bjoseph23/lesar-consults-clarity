@@ -98,9 +98,6 @@ const Navbar = () => {
   }, {
     name: "Projects",
     href: "/projects"
-  }, {
-    name: "Resources",
-    href: "#resources"
   }];
 
   // Nav background when scrolled or open
