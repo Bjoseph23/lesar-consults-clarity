@@ -260,14 +260,14 @@ const ResourceDetail = () => {
       <div className="min-h-screen bg-background">
         <Navbar />
         
-        <main>
+        <main className="pt-16 md:pt-20">
           <article className="py-8">
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
               {/* Breadcrumbs */}
               <Breadcrumbs items={breadcrumbItems} />
 
               {/* Article Header */}
-              <header ref={contentRef} className={`mb-8 transition-all duration-1000 ${isVisible ? 'animate-fade-in' : 'opacity-0'}`}>
+              <header className={`mb-8 transition-all duration-1000 ${isVisible ? 'animate-fade-in' : 'opacity-0 translate-y-4'}`}>
                 {/* Type Badge */}
                 <div className="mb-4">
                   <Badge variant="secondary" className="text-xs font-medium">
@@ -333,7 +333,7 @@ const ResourceDetail = () => {
 
               {/* Thumbnail */}
               {resource.thumbnail_url && (
-                <div className="mb-8">
+                <div className="mb-8" ref={contentRef}>
                   <img 
                     src={resource.thumbnail_url} 
                     alt={resource.title}
