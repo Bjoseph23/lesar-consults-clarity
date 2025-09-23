@@ -70,7 +70,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
           collapsed ? "w-16" : "w-64"
         )}>
           {/* Header */}
-          <div className="p-4 border-b border-slate-700">
+          <div className="p-4 border-b border-slate-700 bg-white">
             <div className="flex items-center justify-between">
               {!collapsed && (
                 <Link to="/admin/dashboard" className="flex items-center">
