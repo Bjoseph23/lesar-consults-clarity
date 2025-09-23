@@ -89,15 +89,15 @@ const Navbar = () => {
     name: "Team",
     href: "/team"
   }, {
-    name: "Resources",
-    href: "/resources"
-  }, {
     name: "Services",
     href: "/services",
     isDropdown: true
   }, {
     name: "Projects",
     href: "/projects"
+  }, {
+    name: "Resources",
+    href: "/resources"
   }];
 
   // Nav background when scrolled or open
