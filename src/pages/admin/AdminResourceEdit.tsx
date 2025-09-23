@@ -1,31 +1,36 @@
 import { Helmet } from "react-helmet-async";
+import { useParams } from "react-router-dom";
 import AdminLayout from "@/components/admin/AdminLayout";
+import { ResourceEditor } from "@/components/admin/ResourceEditor";
+import ProtectedRoute from "@/components/admin/ProtectedRoute";
 
 const AdminResourceEdit = () => {
+  const { slug } = useParams<{ slug: string }>();
+
+  if (!slug) {
+    return (
+      <AdminLayout>
+        <div className="flex items-center justify-center min-h-screen">
+          <div className="text-center">
+            <h2 className="text-2xl font-bold mb-4">Invalid Resource</h2>
+            <p className="text-muted-foreground">No resource slug provided</p>
+          </div>
+        </div>
+      </AdminLayout>
+    );
+  }
+
   return (
-    <>
+    <ProtectedRoute requireAdmin>
       <Helmet>
         <title>Edit Resource | Admin - Lesar Consults</title>
         <meta name="robots" content="noindex, nofollow" />
       </Helmet>
 
       <AdminLayout>
-        <div className="space-y-6">
-          <div>
-            <h1 className="text-3xl font-bold text-foreground">Edit Resource</h1>
-            <p className="text-muted-foreground">
-              Resource editor is in development
-            </p>
-          </div>
-          
-          <div className="bg-muted/30 border border-border rounded-lg p-8 text-center">
-            <p className="text-muted-foreground">
-              The resource editor with WYSIWYG functionality will be implemented here.
-            </p>
-          </div>
-        </div>
+        <ResourceEditor resourceId={slug} />
       </AdminLayout>
-    </>
+    </ProtectedRoute>
   );
 };
 
