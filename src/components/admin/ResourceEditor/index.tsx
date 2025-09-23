@@ -216,7 +216,6 @@ export const ResourceEditor = ({ resourceId }: ResourceEditorProps) => {
     try {
       setSaving(true);
       const content_html = editor.getHTML();
-      const content_json = editor.getJSON();
       
       // Generate ID and slug for new resources
       let updateData = { ...resource };
@@ -237,7 +236,6 @@ export const ResourceEditor = ({ resourceId }: ResourceEditorProps) => {
         title: updateData.title,
         summary: updateData.summary || '',
         content_html,
-        content_json: JSON.stringify(content_json),
         categories: updateData.categories || [],
         tags: updateData.tags || [],
         type: updateData.type,
