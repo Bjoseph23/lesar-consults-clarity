@@ -130,10 +130,34 @@ export const ResourceEditor = ({ resourceId }: ResourceEditorProps) => {
   const loadResource = useCallback(async () => {
     try {
       setLoading(true);
+      
+      // Handle "new" resource creation
+      if (resourceId === 'new') {
+        const newResource: ResourceData = {
+          id: `new-${Date.now()}`,
+          slug: '',
+          title: '',
+          summary: '',
+          content_html: '',
+          categories: [],
+          tags: [],
+          type: 'article',
+          author: 'Lesar Consults',
+          featured: false,
+          seo: {},
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString()
+        };
+        setResource(newResource);
+        editor?.commands.setContent('');
+        setLoading(false);
+        return;
+      }
+
       const { data, error } = await supabase
         .from('resources')
         .select('*')
-        .eq('slug', resourceId)
+        .eq('id', resourceId)
         .maybeSingle();
 
       if (error) {
@@ -187,18 +211,30 @@ export const ResourceEditor = ({ resourceId }: ResourceEditorProps) => {
       const content_html = editor.getHTML();
       const content_json = editor.getJSON();
       
-      const updateData = {
-        ...resource,
+      // Generate ID and slug for new resources
+      let updateData = { ...resource };
+      if (resourceId === 'new') {
+        updateData.id = `resource-${Date.now()}`;
+        if (!updateData.slug) {
+          updateData.slug = updateData.title.toLowerCase()
+            .replace(/[^a-z0-9\s-]/g, '')
+            .replace(/\s+/g, '-')
+            .substring(0, 50);
+        }
+      }
+
+      updateData = {
+        ...updateData,
         content_html,
         content_json,
         updated_at: new Date().toISOString(),
-        ...(shouldPublish && !resource.published_at ? { published_at: new Date().toISOString() } : {}),
+        ...(shouldPublish && !updateData.published_at ? { published_at: new Date().toISOString() } : {}),
       };
 
       const { error } = await supabase
         .from('resources')
         .upsert(updateData)
-        .eq('id', resource.id);
+        .eq('id', updateData.id);
 
       if (error) {
         console.error('Supabase: Error saving resource:', error);
@@ -208,6 +244,12 @@ export const ResourceEditor = ({ resourceId }: ResourceEditorProps) => {
           variant: "destructive",
         });
         return false;
+      }
+
+      // Update local state for new resources
+      if (resourceId === 'new' && updateData.id !== resource.id) {
+        setResource(updateData);
+        navigate(`/admin/resources/${updateData.id}/edit`, { replace: true });
       }
 
       setLastSaved(new Date());

@@ -5,15 +5,15 @@ import { ResourceEditor } from "@/components/admin/ResourceEditor";
 import ProtectedRoute from "@/components/admin/ProtectedRoute";
 
 const AdminResourceEdit = () => {
-  const { slug } = useParams<{ slug: string }>();
+  const { id } = useParams<{ id: string }>();
 
-  if (!slug) {
+  if (!id) {
     return (
       <AdminLayout>
         <div className="flex items-center justify-center min-h-screen">
           <div className="text-center">
             <h2 className="text-2xl font-bold mb-4">Invalid Resource</h2>
-            <p className="text-muted-foreground">No resource slug provided</p>
+            <p className="text-muted-foreground">No resource ID provided</p>
           </div>
         </div>
       </AdminLayout>
@@ -28,7 +28,7 @@ const AdminResourceEdit = () => {
       </Helmet>
 
       <AdminLayout>
-        <ResourceEditor resourceId={slug} />
+        <ResourceEditor resourceId={id} />
       </AdminLayout>
     </ProtectedRoute>
   );
