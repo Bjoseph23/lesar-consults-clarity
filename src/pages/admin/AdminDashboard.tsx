@@ -116,7 +116,7 @@ const AdminDashboard = () => {
           {/* Stats Grid */}
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             {statCards.map((stat) => (
-              <Card key={stat.title}>
+              <Card key={stat.title} className="bg-white/95 border-white/20">
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-sm font-medium">
                     {stat.title}
@@ -137,7 +137,7 @@ const AdminDashboard = () => {
 
           {/* Quick Actions */}
           <div className="grid gap-4 md:grid-cols-2">
-            <Card>
+            <Card className="bg-white/95 border-white/20">
               <CardHeader>
                 <CardTitle>Recent Activity</CardTitle>
                 <CardDescription>
@@ -168,7 +168,7 @@ const AdminDashboard = () => {
               </CardContent>
             </Card>
 
-            <Card>
+            <Card className="bg-white/95 border-white/20">
               <CardHeader>
                 <CardTitle>Quick Actions</CardTitle>
                 <CardDescription>

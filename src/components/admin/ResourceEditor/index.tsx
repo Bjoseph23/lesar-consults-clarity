@@ -44,6 +44,7 @@ interface ResourceData {
   thumbnail_url?: string;
   file_url?: string;
   author: string;
+  author_id?: string;
   published_at?: string;
   year?: number;
   featured: boolean;
@@ -71,6 +72,7 @@ const RESOURCE_TYPES = [
 
 export const ResourceEditor = ({ resourceId }: ResourceEditorProps) => {
   const [resource, setResource] = useState<ResourceData | null>(null);
+  const [originalResource, setOriginalResource] = useState<ResourceData | null>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [lastSaved, setLastSaved] = useState<Date | null>(null);
@@ -79,17 +81,26 @@ export const ResourceEditor = ({ resourceId }: ResourceEditorProps) => {
   const [showSaveModal, setShowSaveModal] = useState(false);
   const [showPublishModal, setShowPublishModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [showDiscardModal, setShowDiscardModal] = useState(false);
   const [wordCount, setWordCount] = useState(0);
   
   const { toast } = useToast();
   const navigate = useNavigate();
 
-  // Supabase: TipTap editor configuration with extensions
+  // Supabase: TipTap editor configuration with extensions (fixed duplicate Link issue)
   const editor = useEditor({
     extensions: [
       StarterKit.configure({
-        heading: {
-          levels: [1, 2, 3, 4],
+        heading: { levels: [1, 2, 3, 4] },
+        // Remove Link from StarterKit to avoid duplicate
+        link: false,
+      }),
+      Link.configure({
+        openOnClick: false,
+        linkOnPaste: true,
+        HTMLAttributes: { 
+          rel: 'noopener noreferrer',
+          class: 'editor-link',
         },
       }),
       Image.configure({
@@ -102,12 +113,6 @@ export const ResourceEditor = ({ resourceId }: ResourceEditorProps) => {
       }),
       Placeholder.configure({
         placeholder: 'Start writing your content...',
-      }),
-      Link.configure({
-        openOnClick: false,
-        HTMLAttributes: {
-          class: 'editor-link',
-        },
       }),
       Highlight.configure({
         multicolor: true,
@@ -180,10 +185,12 @@ export const ResourceEditor = ({ resourceId }: ResourceEditorProps) => {
         return;
       }
 
-      setResource({
+      const resourceData = {
         ...data,
         seo: typeof data.seo === 'string' ? JSON.parse(data.seo) : (data.seo as any) || {}
-      });
+      };
+      setResource(resourceData);
+      setOriginalResource(resourceData);
       editor?.commands.setContent(data.content_html || '');
       setLastSaved(new Date(data.updated_at));
     } catch (error) {
@@ -202,9 +209,9 @@ export const ResourceEditor = ({ resourceId }: ResourceEditorProps) => {
     loadResource();
   }, [loadResource]);
 
-  // Supabase: Save resource to database
+  // Supabase: Save resource to database with standardized payload
   const saveResource = async (shouldPublish = false) => {
-    if (!resource || !editor) return;
+    if (!resource || !editor) return false;
 
     try {
       setSaving(true);
@@ -223,47 +230,68 @@ export const ResourceEditor = ({ resourceId }: ResourceEditorProps) => {
         }
       }
 
-      updateData = {
-        ...updateData,
+      // Supabase: Standardize payload shape to match resources table exactly
+      const payload = {
+        id: updateData.id,
+        slug: updateData.slug,
+        title: updateData.title,
+        summary: updateData.summary || '',
         content_html,
-        content_json,
+        content_json: JSON.stringify(content_json),
+        categories: updateData.categories || [],
+        tags: updateData.tags || [],
+        type: updateData.type,
+        thumbnail_url: updateData.thumbnail_url || null,
+        file_url: updateData.file_url || null,
+        author: updateData.author || 'Lesar Consults',
+        author_id: updateData.author_id || null,
+        published_at: shouldPublish ? (updateData.published_at || new Date().toISOString()) : updateData.published_at,
+        year: updateData.year || new Date().getFullYear(),
+        featured: !!updateData.featured,
+        seo: updateData.seo || {},
         updated_at: new Date().toISOString(),
-        ...(shouldPublish && !updateData.published_at ? { published_at: new Date().toISOString() } : {}),
       };
 
-      const { error } = await supabase
+      console.log('Supabase: Saving resource payload:', payload);
+
+      const { data, error } = await supabase
         .from('resources')
-        .upsert(updateData)
-        .eq('id', updateData.id);
+        .upsert([payload]);
 
       if (error) {
         console.error('Supabase: Error saving resource:', error);
         toast({
-          title: "Error",
-          description: "Failed to save resource",
+          title: "Error saving resource",
+          description: `${error.message} - ${error.details || ''}`,
           variant: "destructive",
         });
         return false;
       }
 
       // Update local state for new resources
-      if (resourceId === 'new' && updateData.id !== resource.id) {
-        setResource(updateData);
-        navigate(`/admin/resources/${updateData.id}/edit`, { replace: true });
+      if (resourceId === 'new' && payload.id !== resource.id) {
+        const newResourceData = { ...updateData, ...payload };
+        setResource(newResourceData);
+        setOriginalResource(newResourceData);
+        navigate(`/admin/resources/${payload.id}/edit`, { replace: true });
+      } else {
+        const updatedResource = { ...updateData, ...payload };
+        setResource(updatedResource);
+        setOriginalResource(updatedResource);
       }
 
       setLastSaved(new Date());
       setHasUnsavedChanges(false);
       toast({
-        title: "Success",
-        description: shouldPublish ? "Resource published" : "Resource saved",
+        title: shouldPublish ? "Resource published" : "Resource saved",
+        description: shouldPublish ? "Resource published successfully" : "Resource saved as draft",
       });
       return true;
-    } catch (error) {
-      console.error('Error saving resource:', error);
+    } catch (error: any) {
+      console.error('Supabase: Error saving resource:', error);
       toast({
-        title: "Error",
-        description: "Failed to save resource",
+        title: "Error saving resource",
+        description: error.message || "Failed to save resource",
         variant: "destructive",
       });
       return false;
@@ -277,6 +305,7 @@ export const ResourceEditor = ({ resourceId }: ResourceEditorProps) => {
     if (!resource) return;
 
     try {
+      // Supabase: Delete resource from database
       const { error } = await supabase
         .from('resources')
         .delete()
@@ -285,23 +314,80 @@ export const ResourceEditor = ({ resourceId }: ResourceEditorProps) => {
       if (error) {
         console.error('Supabase: Error deleting resource:', error);
         toast({
-          title: "Error",
-          description: "Failed to delete resource",
+          title: "Error deleting resource",
+          description: error.message,
           variant: "destructive",
         });
         return;
       }
 
+      // TODO: Add server endpoint to delete storage files using SUPABASE_SERVICE_ROLE_KEY
+      // POST /api/admin/delete-files { thumbnail_url, file_url, resource_id }
+
       toast({
-        title: "Success",
-        description: "Resource deleted",
+        title: "Resource deleted",
+        description: "Resource deleted successfully",
       });
       navigate('/admin/resources');
-    } catch (error) {
-      console.error('Error deleting resource:', error);
+    } catch (error: any) {
+      console.error('Supabase: Error deleting resource:', error);
       toast({
-        title: "Error",
-        description: "Failed to delete resource",
+        title: "Error deleting resource",
+        description: error.message || "Failed to delete resource",
+        variant: "destructive",
+      });
+    }
+  };
+
+  // Handle cancel edit - revert to last saved state and navigate back
+  const handleCancelEdit = () => {
+    if (originalResource) {
+      setResource(originalResource);
+      editor?.commands.setContent(originalResource.content_html || '');
+      setHasUnsavedChanges(false);
+    }
+    navigate('/admin/resources');
+  };
+
+  // Handle discard changes - reload from DB and reset editor
+  const handleDiscardChanges = async () => {
+    if (!resource?.id || resourceId === 'new') return;
+
+    try {
+      const { data, error } = await supabase
+        .from('resources')
+        .select('*')
+        .eq('id', resource.id)
+        .maybeSingle();
+
+      if (error) {
+        toast({
+          title: "Failed to reload",
+          description: error.message,
+          variant: "destructive",
+        });
+        return;
+      }
+
+      if (data) {
+        const resourceData = {
+          ...data,
+          seo: typeof data.seo === 'string' ? JSON.parse(data.seo) : (data.seo as any) || {}
+        };
+        setResource(resourceData);
+        setOriginalResource(resourceData);
+        editor?.commands.setContent(data.content_html || '');
+        setHasUnsavedChanges(false);
+        toast({
+          title: "Changes discarded",
+          description: "Reverted to last saved state",
+        });
+      }
+    } catch (error: any) {
+      console.error('Supabase: Error reloading resource:', error);
+      toast({
+        title: "Failed to reload",
+        description: error.message || "Failed to reload resource",
         variant: "destructive",
       });
     }
@@ -408,6 +494,19 @@ export const ResourceEditor = ({ resourceId }: ResourceEditorProps) => {
           <Button variant="outline" size="sm">
             <Eye className="w-4 h-4 mr-2" />
             Preview
+          </Button>
+          <Button 
+            variant="outline" 
+            onClick={handleCancelEdit}
+          >
+            Cancel Edit
+          </Button>
+          <Button 
+            variant="outline" 
+            onClick={() => setShowDiscardModal(true)}
+            disabled={!hasUnsavedChanges}
+          >
+            Discard Changes
           </Button>
           <Button 
             variant="outline" 
@@ -690,6 +789,19 @@ export const ResourceEditor = ({ resourceId }: ResourceEditorProps) => {
           setShowDeleteModal(false);
         }}
         resourceTitle={resource.title}
+      />
+
+      {/* Discard Changes Modal */}
+      <SaveConfirmModal
+        open={showDiscardModal}
+        onClose={() => setShowDiscardModal(false)}
+        onConfirm={() => {
+          handleDiscardChanges();
+          setShowDiscardModal(false);
+        }}
+        title="Discard Changes"
+        description="Are you sure you want to discard all unsaved changes? This action cannot be undone."
+        confirmText="Discard Changes"
       />
     </div>
   );

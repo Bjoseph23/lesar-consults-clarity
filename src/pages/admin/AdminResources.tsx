@@ -173,7 +173,7 @@ const AdminResources = () => {
           ) : resources.length > 0 ? (
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
               {resources.map((resource) => (
-                <Card key={resource.id} className="group">
+                <Card key={resource.id} className="group bg-white/95 border-white/20">
                   <CardHeader className="pb-3">
                     <div className="flex items-start justify-between">
                       <div className="flex-1 min-w-0">
@@ -264,7 +264,7 @@ const AdminResources = () => {
               ))}
             </div>
           ) : (
-            <Card>
+            <Card className="bg-white/95 border-white/20">
               <CardContent className="flex flex-col items-center justify-center py-12">
                 <FileText className="h-12 w-12 text-muted-foreground mb-4" />
                 <h3 className="text-lg font-semibold text-foreground mb-2">No Resources Yet</h3>
