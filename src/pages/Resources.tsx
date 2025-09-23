@@ -2,6 +2,7 @@ import { Helmet } from "react-helmet-async";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollTop from "@/components/ScrollTop";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import ResourcesHero from "@/components/resources/ResourcesHero";
 import CategoryScroller from "@/components/resources/CategoryScroller";
 import ResourceFilters from "@/components/resources/ResourceFilters";
@@ -183,7 +184,12 @@ const Resources = () => {
       <div className="min-h-screen bg-background">
         <Navbar />
         
-        <main>
+        <main className="pt-16 md:pt-20">
+          {/* Breadcrumbs */}
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <Breadcrumbs items={[{ label: 'Resources' }]} />
+          </div>
+
           {/* Hero Section */}
           <ResourcesHero 
             searchQuery={searchQuery}

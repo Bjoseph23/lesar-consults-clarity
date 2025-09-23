@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { ArrowLeft, ArrowRight, Plane } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import ProgressBar from "./ProgressBar";
 import StepOne from "./steps/StepOne";
@@ -36,6 +36,7 @@ interface ContactWizardProps {
 }
 
 const ContactWizard = ({ onSubmit, preselectedService }: ContactWizardProps) => {
+  const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -190,21 +191,27 @@ const ContactWizard = ({ onSubmit, preselectedService }: ContactWizardProps) => 
     }
   }, [currentStep]);
 
+  const handleGoBack = () => {
+    if (window.history.length > 1) {
+      navigate(-1);
+    } else {
+      navigate('/');
+    }
+  };
+
   return (
     <div className="relative">
-      {/* Back to Home Button */}
+      {/* Back Button */}
       <div className="flex justify-start mb-6">
         <Button
-          asChild
           variant="ghost"
+          onClick={handleGoBack}
           className="group flex items-center space-x-2 text-muted-foreground"
         >
-          <Link to="/">
-            <ArrowLeft className="h-4 w-4 text-muted-foreground group-hover:text-white transition-colors" />
-            <span className="group-hover:text-white transition-colors">
-              Back to Home
-            </span>
-          </Link>
+          <ArrowLeft className="h-4 w-4 text-muted-foreground group-hover:text-white transition-colors" />
+          <span className="group-hover:text-white transition-colors">
+            Back
+          </span>
         </Button>
       </div>
 
