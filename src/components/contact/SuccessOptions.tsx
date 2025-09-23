@@ -32,10 +32,10 @@ const SuccessOptions = ({ onNewRequest }: SuccessOptionsProps) => {
         </p>
       </div>
 
-      {/* Two Column Options */}
-      <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 max-w-6xl mx-auto lg:divide-x lg:divide-border">
-        {/* Left Column - Schedule Demo */}
-        <div className="bg-white rounded-xl sm:rounded-2xl shadow-card p-6 sm:p-8 lg:pr-12 flex flex-col justify-center">
+      {/* Options - Mobile Stacked, Desktop Side by Side */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 max-w-6xl mx-auto lg:divide-x lg:divide-border px-4 sm:px-6">
+        {/* Schedule Demo Card */}
+        <div className="bg-white rounded-xl sm:rounded-2xl shadow-card p-6 sm:p-8 lg:pr-12 flex flex-col justify-center min-h-[280px]">
           <div className="text-center mb-4 sm:mb-6">
             <div className="w-12 h-12 sm:w-16 sm:h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
               <Calendar className="h-6 w-6 sm:h-8 sm:w-8 text-accent" />
@@ -48,7 +48,7 @@ const SuccessOptions = ({ onNewRequest }: SuccessOptionsProps) => {
             </p>
           </div>
 
-          <div className="flex justify-center">
+          <div className="flex justify-center mt-auto">
             <Button
               size="lg"
               onClick={() =>
@@ -57,13 +57,13 @@ const SuccessOptions = ({ onNewRequest }: SuccessOptionsProps) => {
               className="w-full hover-scale text-sm sm:text-base bg-[#8B1E1E] text-white hover:bg-[#731818] hover:text-white"
             >
               <ExternalLink className="h-4 w-4" />
-              <span>Let's Talk - Book a  Virtual meeting</span>
+              <span>Let's Talk - Book a Virtual meeting</span>
             </Button>
           </div>
         </div>
 
-        {/* Right Column - Resources */}
-        <div className="bg-white rounded-xl sm:rounded-2xl shadow-card p-6 sm:p-8 hover:shadow-elegant transition-all duration-300 lg:pl-12 flex flex-col justify-center">
+        {/* Resources Card */}
+        <div className="bg-white rounded-xl sm:rounded-2xl shadow-card p-6 sm:p-8 hover:shadow-elegant transition-all duration-300 lg:pl-12 flex flex-col justify-center min-h-[280px]">
           <div className="text-center">
             <div className="w-12 h-12 sm:w-16 sm:h-16 bg-cream rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6">
               <FileText className="h-6 w-6 sm:h-8 sm:w-8 text-navy" />
@@ -77,7 +77,7 @@ const SuccessOptions = ({ onNewRequest }: SuccessOptionsProps) => {
             </p>
             <Button
               size="lg"
-              className="btn-primary w-full hover-scale text-sm sm:text-base"
+              className="btn-primary w-full hover-scale text-sm sm:text-base mt-auto"
               onClick={() => (window.location.href = "/resources")}
             >
               Go to Resources

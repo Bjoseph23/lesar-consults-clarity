@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { ArrowLeft, ArrowRight, Plane } from "lucide-react";
-import { Link } from "react-router-dom"; // ⬅️ import Link
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import ProgressBar from "./ProgressBar";
 import StepOne from "./steps/StepOne";
@@ -9,6 +9,8 @@ import StepThree from "./steps/StepThree";
 import StepFour from "./steps/StepFour";
 import StepFive from "./steps/StepFive";
 import StepSix from "./steps/StepSix";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
 
 interface FormData {
@@ -89,6 +91,8 @@ const ContactWizard = ({ onSubmit, preselectedService }: ContactWizardProps) => 
   const nextStep = () => {
     if (isStepValid() && currentStep < totalSteps) {
       setCurrentStep(prev => prev + 1);
+      // Scroll to top smoothly
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
@@ -96,6 +100,8 @@ const ContactWizard = ({ onSubmit, preselectedService }: ContactWizardProps) => 
   const prevStep = () => {
     if (currentStep > 1) {
       setCurrentStep(prev => prev - 1);
+      // Scroll to top smoothly
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
@@ -105,12 +111,44 @@ const ContactWizard = ({ onSubmit, preselectedService }: ContactWizardProps) => 
     
     setIsSubmitting(true);
     
-    // Simulate submission delay
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    setIsSubmitted(true);
-    onSubmit(formData);
-    // Keep isSubmitting true and don't reset it
+    try {
+      // Prepare data for Supabase
+      const leadData = {
+        name: formData.fullName,
+        email: formData.email,
+        organization: formData.organization || null,
+        role: formData.role || null,
+        phone: formData.phone || null,
+        country_code: formData.countryCode || null,
+        interested_in: formData.services.join(', ') || null,
+        other_service: formData.otherService || null,
+        message: formData.description || null,
+        budget: formData.budget || formData.customBudget || null,
+        timeframe: formData.timeframe || null,
+        file_path: formData.file ? formData.file.name : null,
+        consent: formData.consent
+      };
+
+      // Submit to Supabase
+      const { error } = await supabase
+        .from('leads')
+        .insert([leadData]);
+
+      if (error) {
+        console.error('Supabase error:', error);
+        toast.error('Failed to submit form. Please try again.');
+        setIsSubmitting(false);
+        return;
+      }
+
+      toast.success('Form submitted successfully!');
+      setIsSubmitted(true);
+      onSubmit(formData);
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      toast.error('Failed to submit form. Please try again.');
+      setIsSubmitting(false);
+    }
   };
 
   // Render current step
