@@ -125,14 +125,14 @@ const Navbar = () => {
                      <DropdownMenuContent className="w-80 bg-white border border-border shadow-sm z-50">
                        {services.map(service => 
                          <DropdownMenuItem key={service.name} asChild>
-                           <Link to={service.href} className="flex flex-col px-4 py-3 text-sm hover:bg-primary hover:text-white transition-colors">
-                             <div className="font-medium text-navy hover:text-white transition-colors">
-                               {service.name}
-                             </div>
-                             <div className="text-xs text-navy/70 hover:text-white/80 mt-1 transition-colors">
-                               {service.teaser}
-                             </div>
-                           </Link>
+                            <Link to={service.href} className="flex flex-col px-4 py-3 text-sm hover:bg-primary transition-colors group">
+                              <div className="font-medium text-navy group-hover:text-white transition-colors">
+                                {service.name}
+                              </div>
+                              <div className="text-xs text-navy/70 group-hover:text-white/80 mt-1 transition-colors">
+                                {service.teaser}
+                              </div>
+                            </Link>
                          </DropdownMenuItem>
                        )}
                        <DropdownMenuItem asChild>
@@ -193,11 +193,17 @@ const Navbar = () => {
             {navigation.map(item => {
             if (item.isDropdown) {
               return <div key={item.name}>
-                    <p className="text-base font-semibold mb-2">{item.name}</p>
+                    <Link 
+                      to="/services" 
+                      className="block text-base font-semibold mb-2 text-primary hover:text-primary/80 transition-colors"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      {item.name}
+                    </Link>
                     <div className="space-y-2 pl-2">
-                      {services.map(service => <a key={service.name} href={service.href} className="block text-sm text-gray-700 hover:text-primary transition-colors py-2 px-3 rounded-md border border-border/20 hover:bg-muted/30" onClick={() => setIsOpen(false)}>
+                      {services.map(service => <Link key={service.name} to={service.href} className="block text-sm text-gray-700 hover:text-primary transition-colors py-2 px-3 rounded-md border border-border/20 hover:bg-muted/30" onClick={() => setIsOpen(false)}>
                           {service.name}
-                        </a>)}
+                        </Link>)}
                     </div>
                   </div>;
             }
