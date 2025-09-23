@@ -56,7 +56,7 @@ const SortFilterModal = ({
   const handleReset = () => {
     setTempSortBy('newest');
     setTempSelectedCategories([]);
-    setTempSelectedYear('');
+    setTempSelectedYear('all');
   };
 
   const handleApply = () => {
@@ -146,7 +146,7 @@ const SortFilterModal = ({
                 <SelectValue placeholder="All years" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="">All years</SelectItem>
+                <SelectItem value="all">All years</SelectItem>
                 {years.map((year) => (
                   <SelectItem key={year} value={year.toString()}>
                     {year}

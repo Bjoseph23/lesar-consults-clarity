@@ -37,10 +37,10 @@ const ResourceFilters = ({
   const resetFilters = () => {
     setSortBy('newest');
     setSelectedCategories([]);
-    setSelectedYear('');
+    setSelectedYear('all');
   };
 
-  const hasActiveFilters = sortBy !== 'newest' || selectedCategories.length > 0 || selectedYear;
+  const hasActiveFilters = sortBy !== 'newest' || selectedCategories.length > 0 || selectedYear !== 'all';
 
   return (
     <div className="sticky top-24">
@@ -132,7 +132,7 @@ const ResourceFilters = ({
                 <SelectValue placeholder="All years" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="">All years</SelectItem>
+                <SelectItem value="all">All years</SelectItem>
                 {years.map((year) => (
                   <SelectItem key={year} value={year.toString()}>
                     {year}

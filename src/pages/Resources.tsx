@@ -36,7 +36,7 @@ const Resources = () => {
   const [selectedCategory, setSelectedCategory] = useState(searchParams.get('category') || 'All');
   const [selectedType, setSelectedType] = useState(searchParams.get('type') || 'all');
   const [sortBy, setSortBy] = useState(searchParams.get('sort') || 'newest');
-  const [selectedYear, setSelectedYear] = useState(searchParams.get('year') || '');
+  const [selectedYear, setSelectedYear] = useState(searchParams.get('year') || 'all');
   const [selectedCategories, setSelectedCategories] = useState<string[]>(
     searchParams.get('categories')?.split(',').filter(Boolean) || []
   );
@@ -119,7 +119,7 @@ const Resources = () => {
     }
 
     // Year filter
-    if (selectedYear) {
+    if (selectedYear && selectedYear !== 'all') {
       filtered = filtered.filter(resource => resource.year === parseInt(selectedYear));
     }
 
@@ -149,7 +149,7 @@ const Resources = () => {
     if (selectedCategory !== 'All') params.set('category', selectedCategory);
     if (selectedType !== 'all') params.set('type', selectedType);
     if (sortBy !== 'newest') params.set('sort', sortBy);
-    if (selectedYear) params.set('year', selectedYear);
+    if (selectedYear && selectedYear !== 'all') params.set('year', selectedYear);
     if (selectedCategories.length > 0) params.set('categories', selectedCategories.join(','));
     
     setSearchParams(params);

@@ -159,7 +159,7 @@ const ResourcesHero = ({
                   <SelectValue placeholder="All" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="">All</SelectItem>
+                  <SelectItem value="all">All</SelectItem>
                   {years.map((year) => (
                     <SelectItem key={year} value={year.toString()}>
                       {year}
@@ -170,14 +170,14 @@ const ResourcesHero = ({
             </div>
 
             {/* Clear Filters */}
-            {(searchQuery || selectedType !== 'all' || selectedYear) && (
+            {(searchQuery || selectedType !== 'all' || selectedYear !== 'all') && (
               <Button
                 variant="outline"
                 size="sm"
                 onClick={() => {
                   setSearchQuery('');
                   setSelectedType('all');
-                  setSelectedYear('');
+                  setSelectedYear('all');
                 }}
                 className="text-muted-foreground hover:text-foreground"
               >
