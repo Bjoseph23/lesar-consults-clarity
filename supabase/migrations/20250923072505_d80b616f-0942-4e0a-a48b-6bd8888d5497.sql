@@ -1,0 +1,53 @@
+-- Seed sample resources data
+INSERT INTO public.resources (id, slug, title, summary, content_html, categories, tags, type, thumbnail_url, file_url, author, published_at, year, featured, seo) VALUES
+(
+  'nairobi-mental-health-plan',
+  'nairobi-mental-health-plan',
+  'Nairobi County Mental Health Strategic Plan 2025–2030',
+  'Lead consultancy delivering strategic plan focused on integrating primary health care systems for inclusive community-centered mental health services.',
+  '<p>This comprehensive strategic plan represents a groundbreaking approach to mental health service delivery in Nairobi County. Through extensive stakeholder engagement and evidence-based planning, we developed a framework that integrates mental health services into existing primary healthcare systems.</p><h2>Key Achievements</h2><p>The plan addresses critical gaps in mental health service delivery while building on existing strengths within the county''s healthcare infrastructure. Our approach emphasized community-centered care models that prioritize accessibility and cultural sensitivity.</p><h2>Implementation Framework</h2><p>The strategic plan includes detailed implementation guidelines, resource allocation strategies, and monitoring frameworks to ensure sustainable impact across all levels of the health system.</p>',
+  ARRAY['health', 'mental-health'],
+  ARRAY['mental health', 'Nairobi', 'strategic planning', 'healthcare'],
+  'download',
+  '/placeholder.svg',
+  'https://example.com/nairobi-mental-health-plan.pdf',
+  'Lesar Consults',
+  '2025-06-13T00:00:00Z',
+  2025,
+  true,
+  '{"title": "Nairobi County Mental Health Plan 2025–2030", "description": "Strategic plan overview", "canonical": "https://lesarconsults.com/resources/nairobi-mental-health-plan"}'::jsonb
+),
+(
+  'health-systems-strengthening-guide',
+  'health-systems-strengthening-guide',
+  'Health Systems Strengthening in East Africa: A Practical Guide',
+  'Comprehensive guide covering evidence-based approaches to strengthening preventive and promotive service delivery systems across East African contexts.',
+  '<p>This practical guide synthesizes years of experience working with health systems across East Africa. It provides actionable frameworks for strengthening health systems at multiple levels.</p><h2>Core Principles</h2><p>The guide is built on evidence-based principles that have been tested across diverse settings in Kenya, Uganda, Tanzania, and Rwanda.</p>',
+  ARRAY['health', 'monitoring-evaluation'],
+  ARRAY['health systems', 'East Africa', 'strengthening', 'guide'],
+  'report',
+  '/placeholder.svg',
+  null,
+  'Dr. Sarah Kimani',
+  '2024-03-15T00:00:00Z',
+  2024,
+  true,
+  '{"title": "Health Systems Strengthening Guide", "description": "Practical guide for health systems strengthening"}'::jsonb
+),
+(
+  'financial-modeling-healthcare',
+  'financial-modeling-healthcare',
+  'Financial Modeling for Healthcare Interventions',
+  'Advanced financial modeling techniques for evaluating the economic impact and sustainability of healthcare interventions in resource-limited settings.',
+  '<p>This technical resource provides healthcare planners and policymakers with advanced financial modeling techniques specifically designed for resource-limited settings.</p>',
+  ARRAY['finance', 'health'],
+  ARRAY['financial modeling', 'healthcare', 'economics', 'sustainability'],
+  'tool',
+  '/placeholder.svg',
+  null,
+  'Lesar Consults',
+  '2024-01-20T00:00:00Z',
+  2024,
+  false,
+  '{"title": "Financial Modeling for Healthcare", "description": "Advanced financial modeling techniques"}'::jsonb
+);
