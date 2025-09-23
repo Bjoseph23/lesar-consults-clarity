@@ -104,7 +104,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
                   )}
                   title={collapsed ? item.name : undefined}
                 >
-                  <item.icon className={cn("h-4 w-4", collapsed ? "" : "mr-3")} />
+                  <item.icon className={cn(collapsed ? "h-6 w-6" : "h-4 w-4 mr-3")} />
                   {!collapsed && <span>{item.name}</span>}
                   
                   {/* Tooltip for collapsed state */}
