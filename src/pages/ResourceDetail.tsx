@@ -75,21 +75,32 @@ const ResourceDetail = () => {
       if (resourceData) {
         setResource(resourceData as Resource);
 
-        // Fetch suggested resources based on shared tags
-        if (resourceData?.tags?.length > 0) {
-          const { data: suggestedData, error: suggestedError } = await supabase
-            .from('resources')
-            .select('*')
-            .neq('id', resourceData.id)
-            .overlaps('tags', resourceData.tags)
-            .limit(4);
-          
-          if (suggestedError) {
-            console.error('Suggested resources error:', suggestedError);
-          } else {
-            setSuggestedResources((suggestedData || []) as Resource[]);
-          }
+        // Fetch suggested resources - mix of related and diverse content
+        const { data: relatedData, error: relatedError } = await supabase
+          .from('resources')
+          .select('*')
+          .neq('id', resourceData.id)
+          .overlaps('tags', resourceData.tags || [])
+          .limit(8);
+        
+        const { data: moreData, error: moreError } = await supabase
+          .from('resources')
+          .select('*')
+          .neq('id', resourceData.id)
+          .not('id', 'in', `(${relatedData?.map(r => `"${r.id}"`).join(',') || '""'})`)
+          .order('published_at', { ascending: false })
+          .limit(12);
+        
+        if (relatedError) {
+          console.error('Related resources error:', relatedError);
         }
+        if (moreError) {
+          console.error('More resources error:', moreError);
+        }
+        
+        // Combine and shuffle the results
+        const allSuggested = [...(relatedData || []), ...(moreData || [])];
+        setSuggestedResources(allSuggested.slice(0, 20) as Resource[]);
       } else {
         console.log('No resource found for slug:', slug);
       }
@@ -388,24 +399,19 @@ const ResourceDetail = () => {
             </div>
           </article>
 
-          {/* CTA Section */}
-          <CTAInline 
-            title="Interested in Similar Projects?"
-            description="Let's discuss how we can help with your specific needs in health systems and strategic planning."
-            primaryButton={{
-              text: "Start a Conversation",
-              link: "/contact"
-            }}
-            variant="accent"
-          />
 
-          {/* Suggested Resources */}
+          {/* More Resources */}
           {suggestedResources.length > 0 && (
             <section className="py-16 bg-muted/30">
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 className="text-2xl md:text-3xl font-serif font-bold text-foreground mb-8 text-center">
-                  Related Resources
-                </h2>
+                <div className="text-center mb-12">
+                  <h2 className="text-3xl md:text-4xl font-serif font-bold text-foreground mb-4">
+                    Explore More Resources
+                  </h2>
+                  <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                    Discover our comprehensive collection of case studies, research papers, tools, and insights
+                  </p>
+                </div>
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                   {suggestedResources.map((suggestedResource, index) => (
                     <ResourceCard 
@@ -414,6 +420,13 @@ const ResourceDetail = () => {
                       index={index}
                     />
                   ))}
+                </div>
+                <div className="text-center mt-12">
+                  <Button asChild size="lg" className="btn-primary">
+                    <Link to="/resources">
+                      View All Resources
+                    </Link>
+                  </Button>
                 </div>
               </div>
             </section>
