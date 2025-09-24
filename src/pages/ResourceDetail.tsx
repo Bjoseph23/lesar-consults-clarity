@@ -292,12 +292,6 @@ const ResourceDetail = () => {
                 <h1 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-foreground mb-4 leading-tight">
                   {resource?.title || 'No title available'}
                 </h1>
-                {/* Debug info */}
-                {process.env.NODE_ENV === 'development' && (
-                  <div className="bg-red-100 p-2 text-xs">
-                    Debug: Title = "{resource?.title}", Resource ID = "{resource?.id}"
-                  </div>
-                )}
 
                 {/* Summary */}
                 {resource.summary && (
