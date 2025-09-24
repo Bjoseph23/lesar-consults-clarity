@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { ArrowLeft, ArrowRight, Plane } from "lucide-react";
+import { ArrowLeft, ArrowRight, Send } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import ProgressBar from "./ProgressBar";
@@ -278,7 +278,7 @@ const ContactWizard = ({ onSubmit, preselectedService }: ContactWizardProps) => 
             ) : (
               <>
                 <span>Submit Request</span>
-                <Plane className="h-4 w-4" />
+                <Send className="h-4 w-4" />
               </>
             )}
           </Button>
