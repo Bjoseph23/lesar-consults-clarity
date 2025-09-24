@@ -194,6 +194,9 @@ const ServiceDetail = () => {
         <AnimatedSection>
           <section className="py-20 bg-cream">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <h2 className="text-3xl font-serif font-bold text-navy mb-12 text-center">
+                Our Approach
+              </h2>
               <div className="grid lg:grid-cols-3 gap-12">
                 {/* Challenge */}
                 <div className="bg-white rounded-lg p-8 shadow-card">
