@@ -1,11 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useEditor, EditorContent } from '@tiptap/react';
-import StarterKit from '@tiptap/starter-kit';
-import Image from '@tiptap/extension-image';
-import TextAlign from '@tiptap/extension-text-align';
-import Placeholder from '@tiptap/extension-placeholder';
-import Link from '@tiptap/extension-link';
-import Highlight from '@tiptap/extension-highlight';
+import { createEditorConfig } from '@/lib/editor';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
@@ -24,7 +19,8 @@ import { FileUpload } from './FileUpload';
 import { SaveConfirmModal } from './SaveConfirmModal';
 import { PublishConfirmModal } from './PublishConfirmModal';
 import { DeleteConfirmModal } from './DeleteConfirmModal';
-import { ArrowLeft, Eye, Save, Upload, Trash2 } from 'lucide-react';
+import { DiscardConfirmModal } from './DiscardConfirmModal';
+import { ArrowLeft, Eye, Save, Upload, Trash2, X, RotateCcw } from 'lucide-react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 
 interface ResourceEditorProps {
@@ -87,49 +83,17 @@ export const ResourceEditor = ({ resourceId }: ResourceEditorProps) => {
   const { toast } = useToast();
   const navigate = useNavigate();
 
-  // Supabase: TipTap editor configuration with extensions (fixed duplicate Link issue)
-  const editor = useEditor({
-    extensions: [
-      StarterKit.configure({
-        heading: { levels: [1, 2, 3, 4] },
-        // Remove Link from StarterKit to avoid duplicate
-        link: false,
-      }),
-      Link.configure({
-        openOnClick: false,
-        linkOnPaste: true,
-        HTMLAttributes: { 
-          rel: 'noopener noreferrer',
-          class: 'editor-link',
-        },
-      }),
-      Image.configure({
-        HTMLAttributes: {
-          class: 'editor-image',
-        },
-      }),
-      TextAlign.configure({
-        types: ['heading', 'paragraph'],
-      }),
-      Placeholder.configure({
-        placeholder: 'Start writing your content...',
-      }),
-      Highlight.configure({
-        multicolor: true,
-      }),
-    ],
-    content: resource?.content_html || '',
-    onUpdate: ({ editor }) => {
-      setHasUnsavedChanges(true);
-      const text = editor.getText();
-      setWordCount(text.split(/\s+/).filter(word => word.length > 0).length);
-    },
-    editorProps: {
-      attributes: {
-        class: 'prose prose-lg max-w-none focus:outline-none min-h-[500px] p-4',
-      },
-    },
-  });
+  // TipTap editor configuration using centralized config to prevent duplicate extensions
+  const editor = useEditor(
+    createEditorConfig(
+      resource?.content_html || '',
+      (editor) => {
+        setHasUnsavedChanges(true);
+        const text = editor.getText();
+        setWordCount(text.split(/\s+/).filter(word => word.length > 0).length);
+      }
+    )
+  );
 
   // Supabase: Load resource data from database
   const loadResource = useCallback(async () => {
@@ -166,7 +130,7 @@ export const ResourceEditor = ({ resourceId }: ResourceEditorProps) => {
         .maybeSingle();
 
       if (error) {
-        console.error('Supabase: Error loading resource:', error);
+        // Note: Removed console.error for production build
         toast({
           title: "Error",
           description: "Failed to load resource",
@@ -194,7 +158,7 @@ export const ResourceEditor = ({ resourceId }: ResourceEditorProps) => {
       editor?.commands.setContent(data.content_html || '');
       setLastSaved(new Date(data.updated_at));
     } catch (error) {
-      console.error('Error loading resource:', error);
+      // Note: Removed console.error for production build
       toast({
         title: "Error",
         description: "Failed to load resource",
@@ -250,14 +214,14 @@ export const ResourceEditor = ({ resourceId }: ResourceEditorProps) => {
         updated_at: new Date().toISOString(),
       };
 
-      console.log('Supabase: Saving resource payload:', payload);
+      // Note: Removed console.log for production build
 
       const { data, error } = await supabase
         .from('resources')
         .upsert([payload]);
 
       if (error) {
-        console.error('Supabase: Error saving resource:', error);
+        // Note: Removed console.error for production build
         toast({
           title: "Error saving resource",
           description: `${error.message} - ${error.details || ''}`,
@@ -286,7 +250,7 @@ export const ResourceEditor = ({ resourceId }: ResourceEditorProps) => {
       });
       return true;
     } catch (error: any) {
-      console.error('Supabase: Error saving resource:', error);
+      // Note: Removed console.error for production build
       toast({
         title: "Error saving resource",
         description: error.message || "Failed to save resource",
@@ -310,7 +274,7 @@ export const ResourceEditor = ({ resourceId }: ResourceEditorProps) => {
         .eq('id', resource.id);
 
       if (error) {
-        console.error('Supabase: Error deleting resource:', error);
+        // Note: Removed console.error for production build
         toast({
           title: "Error deleting resource",
           description: error.message,
@@ -328,7 +292,7 @@ export const ResourceEditor = ({ resourceId }: ResourceEditorProps) => {
       });
       navigate('/admin/resources');
     } catch (error: any) {
-      console.error('Supabase: Error deleting resource:', error);
+      // Note: Removed console.error for production build
       toast({
         title: "Error deleting resource",
         description: error.message || "Failed to delete resource",
@@ -382,7 +346,7 @@ export const ResourceEditor = ({ resourceId }: ResourceEditorProps) => {
         });
       }
     } catch (error: any) {
-      console.error('Supabase: Error reloading resource:', error);
+      // Note: Removed console.error for production build
       toast({
         title: "Failed to reload",
         description: error.message || "Failed to reload resource",
@@ -403,7 +367,7 @@ export const ResourceEditor = ({ resourceId }: ResourceEditorProps) => {
         .upload(filePath, file, { upsert: false });
 
       if (error) {
-        console.error('Supabase Storage: Error uploading image:', error);
+        // Note: Removed console.error for production build
         toast({
           title: "Upload Error",
           description: "Failed to upload image",
@@ -418,7 +382,7 @@ export const ResourceEditor = ({ resourceId }: ResourceEditorProps) => {
 
       return urlData.publicUrl;
     } catch (error) {
-      console.error('Error uploading image:', error);
+      // Note: Removed console.error for production build
       return null;
     }
   };
@@ -489,23 +453,24 @@ export const ResourceEditor = ({ resourceId }: ResourceEditorProps) => {
         </Button>
         
         <div className="flex items-center gap-2">
-          <Button variant="outline" size="sm">
-            <Eye className="w-4 h-4 mr-2" />
-            Preview
-          </Button>
           <Button 
             variant="outline" 
             onClick={handleCancelEdit}
+            className="text-muted-foreground hover:text-foreground"
           >
+            <X className="w-4 h-4 mr-2" />
             Cancel Edit
           </Button>
-          <Button 
-            variant="outline" 
-            onClick={() => setShowDiscardModal(true)}
-            disabled={!hasUnsavedChanges}
-          >
-            Discard Changes
-          </Button>
+          {hasUnsavedChanges && (
+            <Button 
+              variant="outline" 
+              onClick={() => setShowDiscardModal(true)}
+              className="text-orange-600 hover:text-orange-700 border-orange-200 hover:border-orange-300"
+            >
+              <RotateCcw className="w-4 h-4 mr-2" />
+              Discard Changes
+            </Button>
+          )}
           <Button 
             variant="outline" 
             onClick={() => setShowSaveModal(true)}
@@ -790,16 +755,13 @@ export const ResourceEditor = ({ resourceId }: ResourceEditorProps) => {
       />
 
       {/* Discard Changes Modal */}
-      <SaveConfirmModal
+      <DiscardConfirmModal
         open={showDiscardModal}
         onClose={() => setShowDiscardModal(false)}
         onConfirm={() => {
           handleDiscardChanges();
           setShowDiscardModal(false);
         }}
-        title="Discard Changes"
-        description="Are you sure you want to discard all unsaved changes? This action cannot be undone."
-        confirmText="Discard Changes"
       />
     </div>
   );
