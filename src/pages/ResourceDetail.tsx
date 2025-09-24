@@ -280,7 +280,7 @@ const ResourceDetail = () => {
               <Breadcrumbs items={breadcrumbItems} />
 
               {/* Article Header */}
-              <header ref={contentRef} className={`mb-8 transition-all duration-1000 ${isVisible ? 'animate-fade-in' : 'opacity-0 translate-y-4'}`}>
+              <header ref={contentRef} className={`mb-8 transition-all duration-1000 ${isVisible ? 'animate-fade-in' : ''}`}>
                 {/* Type Badge */}
                 <div className="mb-4">
                   <Badge variant="secondary" className="text-xs font-medium">
