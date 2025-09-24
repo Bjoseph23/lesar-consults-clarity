@@ -63,22 +63,35 @@ const ResourceDetail = () => {
         .from('resources')
         .select('*')
         .eq('slug', slug)
-        .single();
+        .maybeSingle();
       
-      if (resourceError) throw resourceError;
-      setResource(resourceData as Resource);
+      if (resourceError) {
+        console.error('Resource fetch error:', resourceError);
+        throw resourceError;
+      }
+      
+      console.log('Fetched resource data:', resourceData);
+      
+      if (resourceData) {
+        setResource(resourceData as Resource);
 
-      // Fetch suggested resources based on shared tags
-      if (resourceData?.tags?.length > 0) {
-        const { data: suggestedData, error: suggestedError } = await supabase
-          .from('resources')
-          .select('*')
-          .neq('id', resourceData.id)
-          .overlaps('tags', resourceData.tags)
-          .limit(4);
-        
-        if (suggestedError) throw suggestedError;
-        setSuggestedResources((suggestedData || []) as Resource[]);
+        // Fetch suggested resources based on shared tags
+        if (resourceData?.tags?.length > 0) {
+          const { data: suggestedData, error: suggestedError } = await supabase
+            .from('resources')
+            .select('*')
+            .neq('id', resourceData.id)
+            .overlaps('tags', resourceData.tags)
+            .limit(4);
+          
+          if (suggestedError) {
+            console.error('Suggested resources error:', suggestedError);
+          } else {
+            setSuggestedResources((suggestedData || []) as Resource[]);
+          }
+        }
+      } else {
+        console.log('No resource found for slug:', slug);
       }
     } catch (error) {
       console.error('Error fetching resource:', error);
@@ -277,8 +290,14 @@ const ResourceDetail = () => {
 
                 {/* Title */}
                 <h1 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-foreground mb-4 leading-tight">
-                  {resource.title}
+                  {resource?.title || 'No title available'}
                 </h1>
+                {/* Debug info */}
+                {process.env.NODE_ENV === 'development' && (
+                  <div className="bg-red-100 p-2 text-xs">
+                    Debug: Title = "{resource?.title}", Resource ID = "{resource?.id}"
+                  </div>
+                )}
 
                 {/* Summary */}
                 {resource.summary && (
