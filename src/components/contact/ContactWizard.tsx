@@ -191,13 +191,6 @@ const ContactWizard = ({ onSubmit, preselectedService }: ContactWizardProps) => 
     }
   }, [currentStep]);
 
-  const handleGoBack = () => {
-    if (window.history.length > 1) {
-      navigate(-1);
-    } else {
-      navigate('/');
-    }
-  };
 
   return (
     <div className="relative">
@@ -205,12 +198,12 @@ const ContactWizard = ({ onSubmit, preselectedService }: ContactWizardProps) => 
       <div className="flex justify-start mb-6">
         <Button
           variant="ghost"
-          onClick={handleGoBack}
+          onClick={() => navigate('/')}
           className="group flex items-center space-x-2 text-muted-foreground"
         >
           <ArrowLeft className="h-4 w-4 text-muted-foreground group-hover:text-white transition-colors" />
           <span className="group-hover:text-white transition-colors">
-            Back
+            Back to Home
           </span>
         </Button>
       </div>
