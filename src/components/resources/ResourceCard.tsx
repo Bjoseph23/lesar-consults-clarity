@@ -153,28 +153,32 @@ const ResourceCard = ({ resource, index }: ResourceCardProps) => {
           )}
 
           {/* Meta & CTA */}
-          <div className="flex items-center justify-between mt-auto">
-            {/* Date & Author */}
-            <div className="flex items-center text-xs text-muted-foreground">
-              <Calendar className="h-3 w-3 mr-1" />
-              <span>
-                {new Date(resource.published_at).toLocaleDateString('en-US', {
-                  year: 'numeric',
-                  month: 'short'
-                })}
-              </span>
+          <div className="mt-auto space-y-3">
+            {/* Date & Author - Mobile Layout */}
+            <div className="flex items-center justify-between text-xs text-muted-foreground">
+              {/* Date on left */}
+              <div className="flex items-center">
+                <Calendar className="h-3 w-3 mr-1" />
+                <span>
+                  {new Date(resource.published_at).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'short'
+                  })}
+                </span>
+              </div>
+              
+              {/* Author on right */}
               {resource.author && (
-                <>
-                  <span className="mx-2">•</span>
-                  <span className="truncate max-w-24">{resource.author}</span>
-                </>
+                <span className="truncate max-w-32">{resource.author}</span>
               )}
             </div>
             
-            {/* Read More CTA */}
-            <div className="text-primary hover:text-primary/80 text-sm font-medium group/btn flex items-center">
-              Read more
-              <ArrowRight className="ml-1 h-3 w-3 group-hover/btn:translate-x-1 transition-transform" />
+            {/* Read More CTA - Bottom Right */}
+            <div className="flex justify-end">
+              <div className="text-primary hover:text-primary/80 text-sm font-medium group/btn flex items-center">
+                Read more
+                <ArrowRight className="ml-1 h-3 w-3 group-hover/btn:translate-x-1 transition-transform" />
+              </div>
             </div>
           </div>
         </div>
