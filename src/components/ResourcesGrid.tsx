@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Calendar, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import { useScrollAnimation, useStaggeredAnimation } from "@/hooks/useScrollAnimation";
 
 const ResourcesGrid = () => {
@@ -105,7 +106,7 @@ const ResourcesGrid = () => {
         
         <div className="text-center">
           <Button variant="outline" className="btn-secondary">
-            View All Resources
+            <Link to="/resources"> View All Resources</Link>
           </Button>
         </div>
       </div>
