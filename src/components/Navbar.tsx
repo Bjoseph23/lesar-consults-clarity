@@ -189,7 +189,7 @@ const Navbar = () => {
             </Button>
           </div>
 
-          <nav className="px-4 py-6 space-y-6 overflow-y-auto h-full min-h-screen">
+          <nav className="px-4 py-6 pb-20 space-y-6 overflow-y-auto" style={{ height: 'calc(100vh - 80px)' }}>
             {navigation.map(item => {
             if (item.isDropdown) {
               return <div key={item.name}>
