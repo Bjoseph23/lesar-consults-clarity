@@ -178,25 +178,25 @@ const AdminDashboard = () => {
               <CardContent className="space-y-2 bg-orange-50/40">
                 <a 
                   href="/admin/resources"
-                  className="block w-full text-left p-2 rounded-md hover:bg-accent transition-colors text-sm"
+                  className="block w-full text-left p-2 rounded-md hover:bg-accent hover:text-white transition-colors text-sm"
                 >
                   → Manage Resources
                 </a>
                 <a 
                   href="/admin/leads"
-                  className="block w-full text-left p-2 rounded-md hover:bg-accent transition-colors text-sm"
+                  className="block w-full text-left p-2 rounded-md hover:bg-accent hover:text-white transition-colors text-sm"
                 >
                   → View Leads
                 </a>
                 <a 
                   href="/admin/resources/new/edit"
-                  className="block w-full text-left p-2 rounded-md hover:bg-accent transition-colors text-sm"
+                  className="block w-full text-left p-2 rounded-md hover:bg-accent hover:text-white transition-colors text-sm"
                 >
                   → Create New Resource
                 </a>
                 <a 
                   href="/resources"
-                  className="block w-full text-left p-2 rounded-md hover:bg-accent transition-colors text-sm"
+                  className="block w-full text-left p-2 rounded-md hover:bg-accent hover:text-white transition-colors text-sm"
                 >
                   → View Public Site
                 </a>
