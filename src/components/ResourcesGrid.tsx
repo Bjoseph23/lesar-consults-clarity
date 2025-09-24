@@ -105,9 +105,10 @@ const ResourcesGrid = () => {
         </div>
         
         <div className="text-center">
-          <Button variant="outline" className="btn-secondary">
-            <Link to="/resources"> View All Resources</Link>
-          </Button>
+          {/* <Button variant="outline" className="btn-secondary">
+          </Button> */}
+                      <Link className="btn-secondary" to="/resources"> View All Resources</Link>
+
         </div>
       </div>
     </section>
