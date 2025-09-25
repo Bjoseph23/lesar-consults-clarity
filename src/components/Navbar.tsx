@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef } from "react";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { ChevronDown, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link, useLocation } from "react-router-dom";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import HamburgerButton from "./HamburgerButton";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -165,12 +166,10 @@ const Navbar = () => {
 
           {/* Mobile menu button */}
           <div className="lg:hidden">
-            <Button variant="ghost" size="icon" onClick={() => setIsOpen(prev => !prev)} aria-label={isOpen ? "Close menu" : "Open menu"} aria-expanded={isOpen} className="p-3">
-              <div className="relative w-8 h-8 flex items-center justify-center">
-                <Menu className={`h-7 w-7 absolute transition-all duration-300 transform ${isOpen ? 'rotate-90 scale-0 opacity-0' : 'rotate-0 scale-100 opacity-100'}`} />
-                <X className={`h-7 w-7 absolute transition-all duration-300 transform ${isOpen ? 'rotate-0 scale-100 opacity-100' : '-rotate-90 scale-0 opacity-0'}`} />
-              </div>
-            </Button>
+            <HamburgerButton 
+              isOpen={isOpen} 
+              onClick={() => setIsOpen(prev => !prev)} 
+            />
           </div>
         </div>
       </div>
