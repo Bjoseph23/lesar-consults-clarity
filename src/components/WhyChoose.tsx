@@ -1,5 +1,7 @@
 import { CheckCircle, Users, Award, Globe } from "lucide-react";
 import { useScrollAnimation, useStaggeredAnimation } from "@/hooks/useScrollAnimation";
+import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const WhyChoose = () => {
   const { elementRef: sectionRef, isVisible } = useScrollAnimation();
@@ -93,6 +95,13 @@ const WhyChoose = () => {
                 Successfully delivered projects worth millions of USD across multiple countries and sectors
               </p>
             </div>
+          </div>
+          
+          {/* CTA to About Page */}
+          <div className="text-center mt-12">
+            <Button asChild className="btn-primary">
+              <Link to="/about">Learn More About Us</Link>
+            </Button>
           </div>
         </div>
       </div>

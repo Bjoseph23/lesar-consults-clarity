@@ -2,6 +2,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Mail, Phone, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
 const Footer = () => {
   const navigation = {
@@ -24,9 +27,36 @@ const Footer = () => {
     ]
   };
 
-  const handleNewsletterSubmit = (e: React.FormEvent) => {
+  const [email, setEmail] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleNewsletterSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    alert("Thank you for subscribing to our newsletter!");
+    if (!email) return;
+
+    setIsSubmitting(true);
+    try {
+      const { error } = await supabase
+        .from('leads')
+        .insert([
+          {
+            name: 'Newsletter Subscriber',
+            email: email,
+            interested_in: 'Newsletter Subscription',
+            message: 'Subscribed to newsletter'
+          }
+        ]);
+
+      if (error) throw error;
+      
+      toast.success("Thank you for subscribing to our newsletter!");
+      setEmail('');
+    } catch (error) {
+      console.error('Newsletter subscription error:', error);
+      toast.error("Error subscribing to newsletter. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -152,15 +182,18 @@ const Footer = () => {
                 <Input
                   type="email"
                   placeholder="Enter your email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   className="bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground placeholder-primary-foreground/60"
                   required
                 />
                 <Button
                   type="submit"
                   variant="secondary"
-                  className="w-full bg-primary-foreground text-primary hover:bg-primary-foreground/90"
+                  disabled={isSubmitting}
+                  className="w-full bg-primary-foreground text-primary hover:bg-primary-foreground/90 disabled:opacity-50"
                 >
-                  Subscribe
+                  {isSubmitting ? 'Subscribing...' : 'Subscribe'}
                 </Button>
               </form>
             </div>

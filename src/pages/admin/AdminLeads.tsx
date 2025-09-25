@@ -7,7 +7,8 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Search, Download, Calendar, User, Building, MessageSquare, Filter, Eye } from "lucide-react";
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
+import { Search, Download, Calendar, User, Building, MessageSquare, Filter, Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
@@ -38,6 +39,7 @@ const AdminLeads = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [filterType, setFilterType] = useState('all');
   const [selectedLead, setSelectedLead] = useState<Lead | null>(null);
+  const [deletingLead, setDeletingLead] = useState<string | null>(null);
 
   useEffect(() => {
     fetchLeads();
@@ -104,6 +106,26 @@ const AdminLeads = () => {
       hour: '2-digit',
       minute: '2-digit'
     });
+  };
+
+  const handleDeleteLead = async (leadId: string) => {
+    setDeletingLead(leadId);
+    try {
+      const { error } = await supabase
+        .from('leads')
+        .delete()
+        .eq('id', leadId);
+
+      if (error) throw error;
+      
+      toast.success('Lead deleted successfully');
+      fetchLeads(); // Refresh the list
+    } catch (error) {
+      console.error('Error deleting lead:', error);
+      toast.error('Error deleting lead');
+    } finally {
+      setDeletingLead(null);
+    }
   };
 
   return (
@@ -235,16 +257,17 @@ const AdminLeads = () => {
                           </TableCell>
                           <TableCell>{formatDate(lead.created_at)}</TableCell>
                           <TableCell className="text-right">
-                            <Dialog>
-                              <DialogTrigger asChild>
-                                <Button
-                                  variant="ghost"
-                                  size="sm"
-                                  onClick={() => setSelectedLead(lead)}
-                                >
-                                  <Eye className="h-4 w-4" />
-                                </Button>
-                              </DialogTrigger>
+                            <div className="flex items-center gap-2 justify-end">
+                              <Dialog>
+                                <DialogTrigger asChild>
+                                  <Button
+                                    variant="ghost"
+                                    size="sm"
+                                    onClick={() => setSelectedLead(lead)}
+                                  >
+                                    View
+                                  </Button>
+                                </DialogTrigger>
                               <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
                                 <DialogHeader>
                                   <DialogTitle>Lead Details</DialogTitle>
@@ -321,6 +344,38 @@ const AdminLeads = () => {
                                 )}
                               </DialogContent>
                             </Dialog>
+                            
+                            <AlertDialog>
+                              <AlertDialogTrigger asChild>
+                                <Button
+                                  variant="ghost"
+                                  size="sm"
+                                  className="text-destructive hover:text-destructive"
+                                >
+                                  <Trash2 className="h-4 w-4 mr-1" />
+                                  Delete
+                                </Button>
+                              </AlertDialogTrigger>
+                              <AlertDialogContent>
+                                <AlertDialogHeader>
+                                  <AlertDialogTitle>Delete Lead</AlertDialogTitle>
+                                  <AlertDialogDescription>
+                                    Are you sure you want to delete this lead? This action cannot be undone.
+                                  </AlertDialogDescription>
+                                </AlertDialogHeader>
+                                <AlertDialogFooter>
+                                  <AlertDialogCancel>Cancel</AlertDialogCancel>
+                                  <AlertDialogAction
+                                    onClick={() => handleDeleteLead(lead.id)}
+                                    className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+                                    disabled={deletingLead === lead.id}
+                                  >
+                                    {deletingLead === lead.id ? 'Deleting...' : 'Delete'}
+                                  </AlertDialogAction>
+                                </AlertDialogFooter>
+                              </AlertDialogContent>
+                            </AlertDialog>
+                            </div>
                           </TableCell>
                         </TableRow>
                       ))}
