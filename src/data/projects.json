@@ -54,7 +54,7 @@
       "services": ["health-systems-strengthening", "policy-advocacy-development"],
       "featured": true,
       "image": "/placeholder.svg",
-      "file_url": "https://example.com/nairobi-mental-health-plan.pdf"
+      "file_url": "https://tfqwiwdjjflzezzrxqbn.supabase.co/storage/v1/object/public/resources/Mental-Health-Report%20(2).pdf"
     },
     {
       "id": "supply-chain-review",
