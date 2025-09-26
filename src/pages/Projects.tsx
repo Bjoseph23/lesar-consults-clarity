@@ -43,6 +43,15 @@ const Projects = () => {
     return serviceMap[serviceSlug] || "Our Services";
   };
 
+  const handleDownload = (fileUrl?: string) => {
+    if (fileUrl) {
+      // Open file in new tab for download
+      window.open(fileUrl, '_blank');
+    } else {
+      console.warn('No file URL provided for download');
+    }
+  };
+
   return (
     <>
       <Helmet>
@@ -240,7 +249,7 @@ const Projects = () => {
                               <div className="mt-4 flex">
                                 <Button
                                   className="bg-blue-800 hover:bg-blue-900 text-white px-6 py-3 rounded-md inline-flex items-center justify-center w-full sm:w-auto"
-                                  // no onClick handler per instruction (button does nothing for now)
+                                  onClick={() => handleDownload((project as any).file_url)}
                                 >
                                   <Download className="mr-2 h-4 w-4" />
                                   Download Document

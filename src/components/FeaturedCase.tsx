@@ -54,10 +54,10 @@ const FeaturedCase = () => {
                 </Link>
                 <ExternalLink className="ml-2 h-4 w-4" />
               </Button>
-              <Button variant="outline" className="btn-secondary">
+              <Button variant="outline" className="btn-secondary" asChild>
                 <Link to="/projects">
-                    View all projects
-                  </Link>
+                  View all projects
+                </Link>
               </Button>
             </div>
           </div>
