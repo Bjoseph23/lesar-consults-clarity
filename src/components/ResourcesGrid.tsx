@@ -96,15 +96,10 @@ const ResourcesGrid = () => {
           </p>
         </div>
         
-        <div ref={gridRef as React.RefObject<HTMLDivElement>} className="grid md:grid-cols-3 gap-8 mb-12">
+        <div className="grid md:grid-cols-3 gap-8 mb-12">
           {resources.length > 0 ? (
             resources.map((resource, index) => (
-              <div
-                key={resource.id}
-                className={`transition-all duration-1000 ${visibleItems.includes(index) ? 'animate-fade-in' : 'opacity-0 translate-y-8'}`}
-              >
-                <ResourceCard resource={resource} index={index} />
-              </div>
+              <ResourceCard key={resource.id} resource={resource} index={index} />
             ))
           ) : (
             <div className="col-span-3 text-center py-12">
