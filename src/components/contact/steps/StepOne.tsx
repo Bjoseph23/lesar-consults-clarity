@@ -1,5 +1,6 @@
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useDesktopFocus } from "@/hooks/useDesktopFocus";
 
 interface StepOneProps {
   formData: any;
@@ -8,6 +9,8 @@ interface StepOneProps {
 }
 
 const StepOne = ({ formData, updateFormData }: StepOneProps) => {
+  const shouldAutoFocus = useDesktopFocus();
+
   return (
     <div className="space-y-6">
       <div className="text-center mb-8">
@@ -30,7 +33,7 @@ const StepOne = ({ formData, updateFormData }: StepOneProps) => {
           onChange={(e) => updateFormData("fullName", e.target.value)}
           placeholder="Enter your full name"
           className="text-lg py-3 placeholder:text-sm sm:placeholder:text-base"
-          autoFocus
+          autoFocus={shouldAutoFocus}
         />
         {formData.fullName && formData.fullName.length < 2 && (
           <p className="text-sm text-destructive">Please enter your full name.</p>

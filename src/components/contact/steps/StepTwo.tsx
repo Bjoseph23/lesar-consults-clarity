@@ -1,5 +1,6 @@
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useDesktopFocus } from "@/hooks/useDesktopFocus";
 
 interface StepTwoProps {
   formData: any;
@@ -8,6 +9,8 @@ interface StepTwoProps {
 }
 
 const StepTwo = ({ formData, updateFormData }: StepTwoProps) => {
+  const shouldAutoFocus = useDesktopFocus();
+
   return (
     <div className="space-y-6">
       <div className="text-center mb-8">
@@ -31,7 +34,7 @@ const StepTwo = ({ formData, updateFormData }: StepTwoProps) => {
             onChange={(e) => updateFormData("organization", e.target.value)}
             placeholder="Enter your organization name"
             className="text-lg py-3"
-            autoFocus
+            autoFocus={shouldAutoFocus}
           />
           {formData.organization && formData.organization.length < 2 && (
             <p className="text-sm text-destructive">Please enter your organization name.</p>

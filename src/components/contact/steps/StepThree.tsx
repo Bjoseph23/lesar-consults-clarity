@@ -2,6 +2,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { countries, defaultCountry } from "@/data/countries";
+import { useDesktopFocus } from "@/hooks/useDesktopFocus";
 
 interface StepThreeProps {
   formData: any;
@@ -10,6 +11,8 @@ interface StepThreeProps {
 }
 
 const StepThree = ({ formData, updateFormData }: StepThreeProps) => {
+  const shouldAutoFocus = useDesktopFocus();
+
   const isEmailValid = (email: string) => {
     return /\S+@\S+\.\S+/.test(email);
   };
@@ -41,7 +44,7 @@ const StepThree = ({ formData, updateFormData }: StepThreeProps) => {
             onChange={(e) => updateFormData("email", e.target.value)}
             placeholder="your.email@organization.com"
             className="text-lg py-3 placeholder:text-sm sm:placeholder:text-base"
-            autoFocus
+            autoFocus={shouldAutoFocus}
           />
           {formData.email && !isEmailValid(formData.email) && (
             <p className="text-sm text-destructive">Please enter a valid email address.</p>

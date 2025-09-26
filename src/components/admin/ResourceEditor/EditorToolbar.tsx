@@ -24,6 +24,7 @@ import {
   Palette
 } from 'lucide-react';
 import { useState } from 'react';
+import { useDesktopFocus } from '@/hooks/useDesktopFocus';
 
 interface EditorToolbarProps {
   editor: Editor | null;
@@ -33,6 +34,7 @@ interface EditorToolbarProps {
 export const EditorToolbar = ({ editor, onImageUpload }: EditorToolbarProps) => {
   const [showLinkInput, setShowLinkInput] = useState(false);
   const [linkUrl, setLinkUrl] = useState('');
+  const shouldAutoFocus = useDesktopFocus();
 
   if (!editor) return null;
 
@@ -296,7 +298,7 @@ export const EditorToolbar = ({ editor, onImageUpload }: EditorToolbarProps) => 
             onChange={(e) => setLinkUrl(e.target.value)}
             className="flex-1 px-2 py-1 text-sm border rounded"
             onKeyPress={(e) => e.key === 'Enter' && setLink()}
-            autoFocus
+            autoFocus={shouldAutoFocus}
           />
           <Button size="sm" onClick={setLink}>Add</Button>
           <Button size="sm" variant="ghost" onClick={unsetLink}>Remove</Button>

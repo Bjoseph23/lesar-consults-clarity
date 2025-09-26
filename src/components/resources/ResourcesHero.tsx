@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useEffect, useRef, useState } from "react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { useDesktopFocus } from "@/hooks/useDesktopFocus";
 
 interface ResourcesHeroProps {
   searchQuery: string;
@@ -30,6 +31,7 @@ const ResourcesHero = ({
   const [searchSuggestions, setSearchSuggestions] = useState<string[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const { elementRef: heroRef, isVisible } = useScrollAnimation();
+  const shouldAutoFocus = useDesktopFocus();
 
   // Sample keywords for autocomplete
   const keywords = [
@@ -48,12 +50,12 @@ const ResourcesHero = ({
     'stakeholder engagement'
   ];
 
-  // Focus search input on load
+  // Focus search input on load (desktop only)
   useEffect(() => {
-    if (searchInputRef.current) {
+    if (shouldAutoFocus && searchInputRef.current) {
       searchInputRef.current.focus();
     }
-  }, []);
+  }, [shouldAutoFocus]);
 
   // Handle search input with debounced suggestions
   useEffect(() => {
