@@ -14,7 +14,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { EditorToolbar } from './EditorToolbar';
 import { BlockMenu } from './BlockMenu';
-import { ImageUpload } from './ImageUpload';
+import { ImageUploadCard } from './ImageUploadCard';
 import { FileUpload } from './FileUpload';
 import { SaveConfirmModal } from './SaveConfirmModal';
 import { PublishConfirmModal } from './PublishConfirmModal';
@@ -387,6 +387,25 @@ export const ResourceEditor = ({ resourceId }: ResourceEditorProps) => {
     }
   };
 
+  // Handle image update from the ImageUploadCard
+  const handleImageUpdate = async (thumbnailUrl: string, shouldInsertIntoContent?: boolean) => {
+    // Update the thumbnail URL
+    updateField('thumbnail_url', thumbnailUrl);
+    
+    // Insert into content if requested
+    if (shouldInsertIntoContent && editor) {
+      const imageHtml = `<img src="${thumbnailUrl}" alt="Resource image" style="max-width: 100%; height: auto;" />`;
+      editor.commands.insertContent(imageHtml);
+    }
+
+    toast({
+      title: "Success",
+      description: shouldInsertIntoContent 
+        ? "Image uploaded and inserted into content" 
+        : "Image uploaded successfully"
+    });
+  };
+
   const addTag = () => {
     if (newTag.trim() && resource && !resource.tags.includes(newTag.trim())) {
       setResource({
@@ -654,10 +673,11 @@ export const ResourceEditor = ({ resourceId }: ResourceEditorProps) => {
               <CardTitle>Media</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              <ImageUpload
-                currentUrl={resource.thumbnail_url}
-                onUpload={(url) => updateField('thumbnail_url', url)}
-                label="Thumbnail"
+              <ImageUploadCard
+                currentImageUrl={resource.thumbnail_url}
+                resourceId={resourceId}
+                onImageUpdate={handleImageUpdate}
+                onImageRemove={() => updateField('thumbnail_url', '')}
               />
               {resource.type === 'download' && (
                 <FileUpload
