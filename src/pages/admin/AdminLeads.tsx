@@ -8,10 +8,13 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
-import { Search, Download, Calendar, User, Building, MessageSquare, Filter, Trash2 } from "lucide-react";
+import { Search, Download, Calendar, User, Building, MessageSquare, Filter, Trash2, FileDown, ChevronDown } from "lucide-react";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import jsPDF from 'jspdf';
+import * as XLSX from 'xlsx';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 
 interface Lead {
   id: string;
@@ -128,6 +131,76 @@ const AdminLeads = () => {
     }
   };
 
+  const exportToPDF = () => {
+    const doc = new jsPDF();
+    doc.setFontSize(20);
+    doc.text('Leads Report', 20, 20);
+    
+    let yPosition = 40;
+    doc.setFontSize(12);
+    
+    filteredLeads.forEach((lead, index) => {
+      if (yPosition > 250) {
+        doc.addPage();
+        yPosition = 20;
+      }
+      
+      doc.text(`${index + 1}. ${lead.name}`, 20, yPosition);
+      doc.text(`Email: ${lead.email}`, 20, yPosition + 5);
+      doc.text(`Organization: ${lead.organization || 'N/A'}`, 20, yPosition + 10);
+      doc.text(`Type: ${getLeadType(lead)}`, 20, yPosition + 15);
+      doc.text(`Date: ${formatDate(lead.created_at)}`, 20, yPosition + 20);
+      yPosition += 30;
+    });
+    
+    doc.save('leads-report.pdf');
+    toast.success('PDF downloaded successfully');
+  };
+
+  const exportToCSV = () => {
+    const csvData = filteredLeads.map(lead => ({
+      Name: lead.name,
+      Email: lead.email,
+      Organization: lead.organization || '',
+      Role: lead.role || '',
+      Phone: lead.phone ? `${lead.country_code || ''} ${lead.phone}` : '',
+      Type: getLeadType(lead),
+      Interest: lead.interested_in || '',
+      Budget: lead.budget || '',
+      Timeframe: lead.timeframe || '',
+      Message: lead.message || '',
+      Date: formatDate(lead.created_at)
+    }));
+
+    const ws = XLSX.utils.json_to_sheet(csvData);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Leads');
+    XLSX.writeFile(wb, 'leads-report.csv');
+    toast.success('CSV downloaded successfully');
+  };
+
+  const exportToExcel = () => {
+    const excelData = filteredLeads.map(lead => ({
+      Name: lead.name,
+      Email: lead.email,
+      Organization: lead.organization || '',
+      Role: lead.role || '',
+      Phone: lead.phone ? `${lead.country_code || ''} ${lead.phone}` : '',
+      Type: getLeadType(lead),
+      Interest: lead.interested_in || '',
+      Budget: lead.budget || '',
+      Timeframe: lead.timeframe || '',
+      Message: lead.message || '',
+      Date: formatDate(lead.created_at)
+    }));
+
+    const ws = XLSX.utils.json_to_sheet(excelData);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Leads');
+    XLSX.writeFile(wb, 'leads-report.xlsx');
+    toast.success('Excel file downloaded successfully');
+  };
+
   return (
     <>
       <Helmet>
@@ -145,6 +218,29 @@ const AdminLeads = () => {
                 View and manage contact form submissions and resource downloads
               </p>
             </div>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline" className="gap-2">
+                  <FileDown className="h-4 w-4" />
+                  Export
+                  <ChevronDown className="h-4 w-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem onClick={exportToPDF}>
+                  <FileDown className="h-4 w-4 mr-2" />
+                  Export as PDF
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={exportToCSV}>
+                  <FileDown className="h-4 w-4 mr-2" />
+                  Export as CSV
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={exportToExcel}>
+                  <FileDown className="h-4 w-4 mr-2" />
+                  Export as Excel
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
 
           {/* Filters */}
